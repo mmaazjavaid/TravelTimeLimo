@@ -68,7 +68,7 @@ export function PickupInfo() {
 							<Label htmlFor="flight-number">Flight number</Label>
 							<Input
 								id="flight-number"
-								className="bg-gray-50"
+								className="bg-gray-200"
 								placeholder="e.g. LH 202, U24567, BA2490"
 								value={formData.flightNumber}
 								onChange={e => handleInputChange('flightNumber', e.target.value)}
@@ -83,7 +83,7 @@ export function PickupInfo() {
 							<Label htmlFor="pickup-sign">Pickup sign</Label>
 							<Input
 								id="pickup-sign"
-								className="bg-gray-50"
+								className="bg-gray-200"
 								value={formData.pickupSign}
 								onChange={e => handleInputChange('pickupSign', e.target.value)}
 							/>
@@ -99,7 +99,7 @@ export function PickupInfo() {
 								id="notes"
 								value={formData.notes}
 								onChange={e => handleInputChange('notes', e.target.value)}
-								className="min-h-[100px] resize-none bg-gray-50"
+								className="min-h-[100px] resize-none bg-gray-200"
 							/>
 							<p className="text-sm text-muted-foreground">
 								Add special requests, e.g. booking itinerary, number of bags, child seats, etc. Please do not include
@@ -112,7 +112,7 @@ export function PickupInfo() {
 							<Label htmlFor="reference-code">Reference code or cost center</Label>
 							<Input
 								id="reference-code"
-								className="bg-gray-50"
+								className="bg-gray-200"
 								value={formData.referenceCode}
 								onChange={e => handleInputChange('referenceCode', e.target.value)}
 							/>

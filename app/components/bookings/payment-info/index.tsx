@@ -63,7 +63,7 @@ export function PaymentInfo() {
 										nameOnCard: e.target.value,
 									}))
 								}
-								className="bg-gray-50"
+								className="bg-gray-200"
 								required
 							/>
 						</div>
@@ -82,7 +82,7 @@ export function PaymentInfo() {
 											cardNumber: formatCardNumber(e.target.value),
 										}))
 									}
-									className="bg-gray-50"
+									className="bg-gray-200"
 									maxLength={19}
 									required
 								/>
@@ -109,7 +109,7 @@ export function PaymentInfo() {
 											expirationDate: formatExpirationDate(e.target.value),
 										}))
 									}
-									className="bg-gray-50"
+									className="bg-gray-200"
 									maxLength={5}
 									required
 								/>
@@ -128,7 +128,7 @@ export function PaymentInfo() {
 											cvv: e.target.value,
 										}))
 									}
-									className="bg-gray-50"
+									className="bg-gray-200"
 									maxLength={4}
 									required
 								/>

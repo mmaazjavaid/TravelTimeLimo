@@ -36,7 +36,7 @@ export function BookForSomeoneForm() {
 						value={title}
 						onChange={setTitle}
 						placeholder="Select title"
-						className="bg-gray-50"
+						className="bg-gray-200"
 					/>
 				</div>
 
@@ -45,13 +45,13 @@ export function BookForSomeoneForm() {
 						<Label htmlFor="firstName">
 							First name <span className="text-red-500">*</span>
 						</Label>
-						<Input id="firstName" placeholder="First name" className="bg-gray-50" />
+						<Input id="firstName" placeholder="First name" className="bg-gray-200" />
 					</div>
 					<div className="space-y-2">
 						<Label htmlFor="lastName">
 							Last name <span className="text-red-500">*</span>
 						</Label>
-						<Input id="lastName" placeholder="Last name" className="bg-gray-50" />
+						<Input id="lastName" placeholder="Last name" className="bg-gray-200" />
 					</div>
 				</div>
 
@@ -59,7 +59,7 @@ export function BookForSomeoneForm() {
 					<Label htmlFor="email">
 						Email <span className="text-red-500">*</span>
 					</Label>
-					<Input id="email" type="email" placeholder="Email" className="bg-gray-50" />
+					<Input id="email" type="email" placeholder="Email" className="bg-gray-200" />
 				</div>
 
 				<div className="space-y-2 mt-2">
@@ -70,7 +70,7 @@ export function BookForSomeoneForm() {
 						<div className="relative">
 							<select
 								className={cn(
-									'h-9 rounded-l-md border border-r-0 bg-gray-50 px-3 py-1 text-sm',
+									'h-9 rounded-l-md border border-r-0 bg-gray-200 px-3 py-1 text-sm',
 									'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring'
 								)}
 								value={country.code}
@@ -86,7 +86,7 @@ export function BookForSomeoneForm() {
 								))}
 							</select>
 						</div>
-						<Input id="phone" type="tel" className="rounded-l-none bg-gray-50" placeholder="Phone number" />
+						<Input id="phone" type="tel" className="rounded-l-none bg-gray-200" placeholder="Phone number" />
 					</div>
 					<p className="text-sm text-muted-foreground">
 						Please enter the phone number on which the guest would like to receive notifications
