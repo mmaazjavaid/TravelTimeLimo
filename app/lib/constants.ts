@@ -76,7 +76,7 @@ export const NOTES = [
 ];
 
 export const STEPS: Step[] = [
-	{ label: 'Service Class', status: 'current', link: '#' },
+	{ label: 'Service Class', status: 'current', link: '/bookings/service-class' },
 	{ label: 'Pickup Info', status: 'upcoming', link: '#' },
 	{ label: 'Log in', status: 'upcoming', link: '#' },
 	{ label: 'Payment', status: 'upcoming', link: '#' },

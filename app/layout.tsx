@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
 				{/* Fixed Navbar */}
 				<Navbar />
 				{/* Scrollable Content */}
-				<div className="h-[calc(100vh-64px)] overflow-y-auto mt-8">{children}</div>
+				<div className="overflow-y-auto mt-8">{children}</div>
 			</body>
 		</html>
 	);
