@@ -7,8 +7,8 @@ import { FOOTER_NAVIGATIONS, SOCIALS } from '@/lib/constants';
 export function Footer() {
 	return (
 		<footer className="bg-black text-white">
-			<div className="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8">
-				<div className="mb-12 flex items-center justify-between">
+			<div className="mx-auto max-w-7xl p-6 pb-8">
+				<div className="flex items-center justify-between">
 					<div className="flex flex-1 items-center justify-between sm:justify-start">
 						<Link href="/" className="text-xl font-bold">
 							TRAVEL TIME LIMO
@@ -110,32 +110,32 @@ export function Footer() {
 					</div>
 				</div>
 
-				<div className="mt-16 border-t border-white/10 pt-8 sm:mt-20 lg:mt-24">
-					<div className="flex flex-col items-center justify-between gap-y-4 sm:flex-row">
-						<div className="flex space-x-6">
-							<p className="text-xs">© 2024 Travel Time Limo GmbH</p>
-							{FOOTER_NAVIGATIONS.legal.map((item, i) => (
-								<React.Fragment key={item.name}>
-									<Link href={item.href} className="text-xs hover:text-gray-300">
-										{item.name}
-									</Link>
-								</React.Fragment>
-							))}
-						</div>
-						<div className="flex space-x-6">
-							{SOCIALS.map(item => (
-								<Link
-									key={item.name}
-									href={item.href}
-									className="hover:text-gray-300"
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									<span className="sr-only">{item.name}</span>
-									<item.icon className="h-5 w-5" aria-hidden="true" />
+				<div className="mt-5 mb-5 border-t border-white/10" />
+
+				<div className="flex flex-col items-center justify-between gap-y-4 sm:flex-row">
+					<div className="flex space-x-6">
+						<p className="text-xs">© 2024 Travel Time Limo GmbH</p>
+						{FOOTER_NAVIGATIONS.legal.map((item, i) => (
+							<React.Fragment key={item.name}>
+								<Link href={item.href} className="text-xs hover:text-gray-300">
+									{item.name}
 								</Link>
-							))}
-						</div>
+							</React.Fragment>
+						))}
+					</div>
+					<div className="flex space-x-6">
+						{SOCIALS.map(item => (
+							<Link
+								key={item.name}
+								href={item.href}
+								className="hover:text-gray-300"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<span className="sr-only">{item.name}</span>
+								<item.icon className="h-5 w-5" aria-hidden="true" />
+							</Link>
+						))}
 					</div>
 				</div>
 			</div>
