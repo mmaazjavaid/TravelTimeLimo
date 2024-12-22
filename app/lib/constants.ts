@@ -68,16 +68,21 @@ export const AMENITIES: Amenity[] = [
 	},
 ];
 
-export const NOTES = [
+export const SERVICE_CLASS_NOTES = [
 	'Your ride includes 20 km of travel per hour booked. Extra distance or time will result in extra charges.',
 	'By-the-hour bookings must end in the same city or metropolitan area as the pickup location, or an extra vehicle-return charge will apply. If you plan to go from one city to another, please book a one-way ride.',
 	'Guest/luggage capacities must be abided by for safety reasons. If you are unsure, select a larger class as chauffeurs may turn down service when they are exceeded.',
 	'The vehicle images above are examples. You may get a different vehicle of similar quality.',
 ];
 
+export const PICKUP_INFO_NOTES = [
+	'The contact info entered will receive ride updates and booking confirmation.',
+	'Invoices are sent only to the booker, not the guest.',
+];
+
 export const STEPS: Step[] = [
-	{ label: 'Service Class', status: 'current', link: '/bookings/service-class' },
-	{ label: 'Pickup Info', status: 'upcoming', link: '#' },
+	{ label: 'Service Class', status: 'upcoming', link: '/bookings/service-class' },
+	{ label: 'Pickup Info', status: 'current', link: '/bookings/pickup-info' },
 	{ label: 'Log in', status: 'upcoming', link: '#' },
 	{ label: 'Payment', status: 'upcoming', link: '#' },
 	{ label: 'Checkout', status: 'upcoming', link: '#' },

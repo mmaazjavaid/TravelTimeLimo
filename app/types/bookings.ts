@@ -1,3 +1,4 @@
+/* Layout */
 export interface Step {
 	label: string;
 	status: 'completed' | 'current' | 'upcoming';
@@ -8,16 +9,22 @@ export interface StepperProps {
 	steps: Step[];
 }
 
-export interface Amenity {
-	icon: React.ElementType;
-	text: string;
-}
-
 export interface BookingDetailsProps {
 	date: string;
 	location: string;
 	duration: string;
 	distance: string;
+}
+
+/* Service Class */
+
+export interface Amenity {
+	icon: React.ElementType;
+	text: string;
+}
+
+export interface NotesProps {
+	notes: string[];
 }
 
 export interface PriceBreakdownProps {
@@ -44,3 +51,11 @@ export interface ExpandedRide {
 	isExpanded: boolean;
 }
 
+/* Pickup Info */
+export interface PickupData {
+	bookingFor: 'myself' | 'someone-else';
+	flightNumber: string;
+	pickupSign: string;
+	notes: string;
+	referenceCode: string;
+}

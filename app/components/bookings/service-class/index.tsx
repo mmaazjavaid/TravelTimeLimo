@@ -2,6 +2,7 @@ import { JSX } from 'react';
 import Notes from './Notes';
 import RideCard from './RideCard';
 import AmenitiesList from './Amenities';
+import { SERVICE_CLASS_NOTES } from '@/lib/constants';
 
 export default function ServiceClass(): JSX.Element {
 	return (
@@ -15,7 +16,7 @@ export default function ServiceClass(): JSX.Element {
 			<div className="border border-gray-300 rounded-lg mt-8">
 				<div className="divide-y divide-gray-300">
 					<AmenitiesList />
-					<Notes />
+					<Notes notes={SERVICE_CLASS_NOTES} />
 				</div>
 			</div>
 		</>
