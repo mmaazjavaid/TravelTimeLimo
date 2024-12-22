@@ -1,6 +1,18 @@
 import { Amenity, Ride, Step } from '@/types/bookings';
 import { TermsSection } from '@/types/terms';
-import { Clock, Users2, Wifi, Droplet, Trash2, SmartphoneChargingIcon as PhoneCharging } from 'lucide-react';
+import {
+	Clock,
+	Users2,
+	Wifi,
+	Droplet,
+	Trash2,
+	SmartphoneChargingIcon as PhoneCharging,
+	Linkedin,
+	Instagram,
+	Facebook,
+	Twitter,
+	Youtube,
+} from 'lucide-react';
 
 export const RIDES: Ride[] = [
 	{
@@ -89,6 +101,83 @@ export const STEPS: Step[] = [
 	{ label: 'Pickup Info', status: 'current', link: '/bookings/pickup-info' },
 	{ label: 'Payment Info', status: 'current', link: '/bookings/payment-info' },
 	{ label: 'Checkout', status: 'upcoming', link: '#' },
+];
+
+export const FOOTER_NAVIGATIONS = {
+	company: [
+		{ name: 'How Travel Time Limo works', href: '#' },
+		{ name: 'Career', href: '#' },
+		{ name: 'Press', href: '#' },
+		{ name: 'Blog', href: '#' },
+		{ name: 'Green initiatives', href: '#' },
+		{ name: 'Become a chauffeur partner', href: '#' },
+		{ name: 'Influencers', href: '#' },
+	],
+	business: [
+		{ name: 'Overview', href: '#' },
+		{ name: 'Corporations', href: '#' },
+		{ name: 'Travel agencies', href: '#' },
+		{ name: 'Strategic partnerships', href: '#' },
+	],
+	cities: [
+		{ name: 'New York', href: '#' },
+		{ name: 'London', href: '#' },
+		{ name: 'Berlin', href: '#' },
+		{ name: 'Los Angeles', href: '#' },
+		{ name: 'Paris', href: '#' },
+		{ name: 'All cities', href: '#' },
+	],
+	explore: [
+		{ name: 'City-to-city rides', href: '#' },
+		{ name: 'Limousine service', href: '#' },
+		{ name: 'Chauffeur service', href: '#' },
+		{ name: 'Private car service', href: '#' },
+		{ name: 'Ground transportation', href: '#' },
+		{ name: 'Airport transfer', href: '#' },
+		{ name: 'All countries', href: '#' },
+	],
+	cityToCity: [
+		{ name: 'New York - East Hampton', href: '#' },
+		{ name: 'Los Angeles - San Diego', href: '#' },
+		{ name: 'Miami - Palm Beach', href: '#' },
+		{ name: 'London - Bristol', href: '#' },
+		{ name: 'Dubai - Abu Dhabi', href: '#' },
+		{ name: 'Paris - Reims', href: '#' },
+	],
+	legal: [
+		{ name: 'Terms', href: '/terms' },
+		{ name: 'Privacy policy', href: '#' },
+		{ name: 'Legal notice', href: '#' },
+		{ name: 'Accessibility', href: '#' },
+	],
+};
+
+export const SOCIALS = [
+	{
+		name: 'LinkedIn',
+		href: '#',
+		icon: Linkedin,
+	},
+	{
+		name: 'Instagram',
+		href: '#',
+		icon: Instagram,
+	},
+	{
+		name: 'Facebook',
+		href: '#',
+		icon: Facebook,
+	},
+	{
+		name: 'Twitter',
+		href: '#',
+		icon: Twitter,
+	},
+	{
+		name: 'YouTube',
+		href: '#',
+		icon: Youtube,
+	},
 ];
 
 export const TERMS: TermsSection[] = [
