@@ -85,9 +85,9 @@ export const PAYMENT_NOTES = [
 ];
 
 export const STEPS: Step[] = [
-	{ label: 'Service Class', status: 'upcoming', link: '/bookings/service-class' },
+	{ label: 'Service Class', status: 'current', link: '/bookings/service-class' },
 	{ label: 'Pickup Info', status: 'current', link: '/bookings/pickup-info' },
-	{ label: 'Payment Info', status: 'upcoming', link: '/bookings/payment-info' },
+	{ label: 'Payment Info', status: 'current', link: '/bookings/payment-info' },
 	{ label: 'Checkout', status: 'upcoming', link: '#' },
 ];
 
