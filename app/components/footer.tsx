@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { CircleHelp } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { FOOTER_NAVIGATIONS, SOCIALS } from '@/lib/constants';
 
@@ -9,14 +10,13 @@ export function Footer() {
 		<footer className="bg-black text-white">
 			<div className="mx-auto max-w-7xl p-6 pb-8">
 				<div className="flex items-center justify-between">
-					<div className="flex flex-1 items-center justify-between sm:justify-start">
-						<Link href="/" className="text-xl font-bold">
-							TRAVEL TIME LIMO
-						</Link>
-						<Link href="/help" className="ml-8 text-sm hover:text-gray-300">
-							Help
-						</Link>
-					</div>
+					<Link href="/" className="text-xl font-bold">
+						TRAVEL TIME LIMO
+					</Link>
+					<Link href="#" className="flex items-center gap-x-1 text-sm hover:text-gray-300">
+						<CircleHelp fill="#fff" color="#000" className="w-4 h-4" />
+						<span>Help</span>
+					</Link>
 				</div>
 
 				<div className="mt-5 mb-5 border-t border-white/10" />
