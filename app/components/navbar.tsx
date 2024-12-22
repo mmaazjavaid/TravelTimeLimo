@@ -7,7 +7,7 @@ export function Navbar() {
         <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
             <div className="container flex items-center justify-between h-16 px-4">
                 <Link href="/" className="text-xl pl-48 font-bold">
-                    BLACKLANE
+                    TRAVEL TIME LIMO
                 </Link>
 
                 <div className="flex items-center gap-6">

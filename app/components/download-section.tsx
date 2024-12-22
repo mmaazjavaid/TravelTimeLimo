@@ -10,7 +10,7 @@ export function DownloadSection() {
                         Chauffeurs at your fingertips
                     </h2>
                     <p className="text-md mb-8">
-                        Download the Blacklane app to easily book safe, private rides while you&apos;re on the go.
+                        Download the Travel Time Limo app to easily book safe, private rides while you&apos;re on the go.
                     </p>
                     <div className="flex items-center gap-8">
                         <div className="w-32 h-32 bg-white p-2 rounded-lg">
