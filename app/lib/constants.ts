@@ -80,11 +80,14 @@ export const PICKUP_INFO_NOTES = [
 	'Invoices are sent only to the booker, not the guest.',
 ];
 
+export const PAYMENT_NOTES = [
+	'The amount will be held from your selected payment method after the booking. We only charge you after the ride is finished.',
+];
+
 export const STEPS: Step[] = [
 	{ label: 'Service Class', status: 'upcoming', link: '/bookings/service-class' },
 	{ label: 'Pickup Info', status: 'current', link: '/bookings/pickup-info' },
-	{ label: 'Log in', status: 'upcoming', link: '#' },
-	{ label: 'Payment', status: 'upcoming', link: '#' },
+	{ label: 'Payment Info', status: 'upcoming', link: '/bookings/payment-info' },
 	{ label: 'Checkout', status: 'upcoming', link: '#' },
 ];
 
