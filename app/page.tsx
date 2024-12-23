@@ -1,5 +1,8 @@
-import { BookingForm } from '@/components/booking-form';
-import { DownloadSection } from '@/components/download-section';
+import { BookingForm } from '@/components/home/booking-form';
+import { DownloadSection } from '@/components/home/download-section';
+import { ServicesSection } from '@/components/home/services-section';
+import { CityRoutes } from '@/components/home/city-routes';
+import { FeaturesSection } from '@/components/home/features-section';
 
 export default function Home() {
 	return (
@@ -22,6 +25,9 @@ export default function Home() {
 				</section>
 				<DownloadSection />
 			</main>
+			<ServicesSection />
+			<CityRoutes />
+			<FeaturesSection />
 		</>
 	);
 }
