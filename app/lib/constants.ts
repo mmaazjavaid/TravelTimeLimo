@@ -1,4 +1,5 @@
 import { Amenity, Ride, Step } from '@/types/bookings';
+import { Route } from '@/types/city-to-city';
 import { TermsSection } from '@/types/terms';
 import {
 	Clock,
@@ -177,6 +178,80 @@ export const SOCIALS = [
 		name: 'YouTube',
 		href: '#',
 		icon: Youtube,
+	},
+];
+
+export const CITY_TO_CITY_ROUTES: Route[] = [
+	{
+		country: 'United States',
+		routes: [
+			{
+				from: 'New York City',
+				to: 'Atlantic City',
+				duration: '2h 20min',
+				distance: '208km',
+			},
+			{
+				from: 'New York City',
+				to: 'Baltimore',
+				duration: '3h 20min',
+				distance: '306km / 191m',
+			},
+			{
+				from: 'New York City',
+				to: 'Boston',
+				duration: '3h 50min',
+				distance: '349km / 218m',
+			},
+			{
+				from: 'New York City',
+				to: 'East Hampton',
+				duration: '2h 30min',
+				distance: '174km / 109m',
+			},
+			{
+				from: 'New York City',
+				to: 'Greenport',
+				duration: '1h 55min',
+				distance: '162km / 101m',
+			},
+			{
+				from: 'New York City',
+				to: 'Greenwich',
+				duration: '55min',
+				distance: '57km / 35m',
+			},
+			{
+				from: 'New York City',
+				to: 'Montauk',
+				duration: '2h 50min',
+				distance: '191km / 119m',
+			},
+			{
+				from: 'New York City',
+				to: 'New Haven',
+				duration: '1h 30min',
+				distance: '131km / 82m',
+			},
+			{
+				from: 'New York City',
+				to: 'Philadelphia',
+				duration: '1h 50min',
+				distance: '154km / 96mkm',
+			},
+			{
+				from: 'New York City',
+				to: 'Uncasville',
+				duration: '2h 39min',
+				distance: '205km / 128m',
+			},
+			{
+				from: 'New York City',
+				to: 'Washington DC',
+				duration: '4h',
+				distance: ' 368km / 230m',
+			},
+		],
 	},
 ];
 
