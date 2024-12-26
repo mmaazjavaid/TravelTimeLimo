@@ -1,5 +1,5 @@
 import { Amenity, Ride, Step } from '@/types/bookings';
-import { Route } from '@/types/city-to-city';
+import { CountryRoutes } from '@/types/city-to-city';
 import { TermsSection } from '@/types/terms';
 import {
 	Clock,
@@ -181,71 +181,82 @@ export const SOCIALS = [
 	},
 ];
 
-export const CITY_TO_CITY_ROUTES: Route[] = [
+export const CITY_TO_CITY_ROUTES: CountryRoutes[] = [
 	{
 		country: 'United States',
 		routes: [
 			{
+				id: 'new-york-atlantic-city',
 				from: 'New York City',
 				to: 'Atlantic City',
 				duration: '2h 20min',
 				distance: '208km',
 			},
 			{
+				id: 'new-york-baltimore',
 				from: 'New York City',
 				to: 'Baltimore',
 				duration: '3h 20min',
 				distance: '306km / 191m',
 			},
 			{
+				id: 'new-york-boston',
 				from: 'New York City',
 				to: 'Boston',
 				duration: '3h 50min',
 				distance: '349km / 218m',
 			},
 			{
+				id: 'new-york-east-hampton',
 				from: 'New York City',
 				to: 'East Hampton',
 				duration: '2h 30min',
 				distance: '174km / 109m',
 			},
 			{
+				id: 'new-york-greenport',
 				from: 'New York City',
 				to: 'Greenport',
 				duration: '1h 55min',
 				distance: '162km / 101m',
 			},
 			{
+				id: 'new-york-greenwich',
 				from: 'New York City',
 				to: 'Greenwich',
 				duration: '55min',
 				distance: '57km / 35m',
 			},
 			{
+				id: 'new-york-montauk',
 				from: 'New York City',
 				to: 'Montauk',
 				duration: '2h 50min',
 				distance: '191km / 119m',
 			},
 			{
+				id: 'new-york-new-haven',
 				from: 'New York City',
 				to: 'New Haven',
 				duration: '1h 30min',
 				distance: '131km / 82m',
 			},
 			{
+				id: 'new-york-philadelphia',
 				from: 'New York City',
 				to: 'Philadelphia',
 				duration: '1h 50min',
 				distance: '154km / 96mkm',
 			},
 			{
+				id: 'new-york-uncasville',
 				from: 'New York City',
 				to: 'Uncasville',
 				duration: '2h 39min',
 				distance: '205km / 128m',
 			},
 			{
+				id: 'new-york-washington-dc',
 				from: 'New York City',
 				to: 'Washington DC',
 				duration: '4h',
