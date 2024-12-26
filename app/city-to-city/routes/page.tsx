@@ -1,5 +1,5 @@
-import MainSection from '@/components/city-to-city/routes/main-section';
-import InfoSection from '@/components/city-to-city/routes/info-section';
+import MainSection from '@/components/city-to-city/routes/MainSection';
+import InfoSection from '@/components/city-to-city/routes/InfoSection';
 
 export default function RoutesPage() {
 	return (

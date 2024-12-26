@@ -1,7 +1,7 @@
 'use client';
 import { CITY_TO_CITY_ROUTES } from '@/lib/constants';
-import { ContentSection } from './content-section';
-import { RouteList } from './routes-list';
+import { ContentSection } from './ContentSection';
+import { RouteList } from './RoutesList';
 import { useParams } from 'next/navigation';
 
 export default function CitySection() {

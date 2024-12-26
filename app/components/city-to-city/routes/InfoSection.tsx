@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import RouteList from './route-list';
+import RouteListCard from './RouteListCard';
 import { CITY_TO_CITY_ROUTES } from '@/lib/constants';
 
 const InfoSection: React.FC = () => {
@@ -32,7 +32,7 @@ const InfoSection: React.FC = () => {
 			</div>
 			<div className="space-y-8 mt-8">
 				<h2 className="md:text-3xl sm:text-2xl font-bold">Travel Time Limo&apos;s City-to-City routes include:</h2>
-				<RouteList routes={CITY_TO_CITY_ROUTES} />
+				<RouteListCard routes={CITY_TO_CITY_ROUTES} />
 			</div>
 		</section>
 	);

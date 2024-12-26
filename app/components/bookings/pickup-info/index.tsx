@@ -7,7 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { PickupData } from '@/types/bookings';
 import { Card, CardContent } from '@/components/ui/card';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radioButton';
-import { BookForSomeoneForm } from './book-for-someone';
+import { BookForSomeoneForm } from './BookForSomeone';
 import Notes from '../service-class/Notes';
 import { PICKUP_INFO_NOTES } from '@/lib/constants';
 

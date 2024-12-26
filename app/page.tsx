@@ -1,8 +1,8 @@
-import { BookingForm } from '@/components/home/booking-form';
-import { DownloadSection } from '@/components/home/download-section';
-import { ServicesSection } from '@/components/home/services-section';
-import { CityRoutes } from '@/components/home/city-routes';
-import { FeaturesSection } from '@/components/home/features-section';
+import { BookingForm } from '@/components/home/BookingForm';
+import { DownloadSection } from '@/components/home/DownloadSection';
+import { ServicesSection } from '@/components/home/ServicesSection';
+import { CityRoutes } from '@/components/home/CityRoutes';
+import { FeaturesSection } from '@/components/home/FeaturesSection';
 
 export default function Home() {
 	return (

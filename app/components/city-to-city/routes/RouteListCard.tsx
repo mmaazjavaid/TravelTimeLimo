@@ -1,7 +1,7 @@
 import type { RouteListProps } from '@/types/city-to-city';
 import Link from 'next/link';
 
-const RouteList = ({ routes }: RouteListProps) => {
+const RouteListCard = ({ routes }: RouteListProps) => {
 	return (
 		<div className="space-y-12">
 			{routes.map(countryRoutes => (
@@ -33,4 +33,4 @@ const RouteList = ({ routes }: RouteListProps) => {
 	);
 };
 
-export default RouteList;
+export default RouteListCard;
