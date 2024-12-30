@@ -4,6 +4,7 @@ export interface Route {
 	to: string;
 	duration: string;
 	distance: string;
+	image: string;
 }
 
 export interface CountryRoutes {

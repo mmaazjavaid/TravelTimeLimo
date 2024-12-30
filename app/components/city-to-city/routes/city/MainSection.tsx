@@ -21,22 +21,22 @@ const MainSection: React.FC = () => {
 			{/* Mobile */}
 			<div className="relative h-[40vh] md:hidden">
 				<Image
-					src="/new-york-greenport.jpg"
+					src={`${city.image}-mobile.png`}
 					alt="Black Cadillac Escalade with chauffeur service"
 					className="object-cover"
 					fill
-					priority
+					loading="lazy"
 				/>
 			</div>
 
 			{/* Desktop */}
 			<div className="relative hidden h-[50vh] w-full md:block">
 				<Image
-					src="/new-york-greenport.jpg"
+					src={`${city.image}.png`}
 					alt="Black Cadillac Escalade with chauffeur service"
 					className="object-cover"
 					fill
-					priority
+					loading="lazy"
 				/>
 			</div>
 		</section>

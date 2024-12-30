@@ -191,6 +191,7 @@ export const CITY_TO_CITY_ROUTES: CountryRoutes[] = [
 				to: 'Atlantic City',
 				duration: '2h 20min',
 				distance: '208km',
+				image: '/new-york-atlantic-city',
 			},
 			{
 				id: 'new-york-baltimore',
@@ -198,6 +199,7 @@ export const CITY_TO_CITY_ROUTES: CountryRoutes[] = [
 				to: 'Baltimore',
 				duration: '3h 20min',
 				distance: '306km / 191m',
+				image: '/new-york-baltimore',
 			},
 			{
 				id: 'new-york-boston',
@@ -205,6 +207,7 @@ export const CITY_TO_CITY_ROUTES: CountryRoutes[] = [
 				to: 'Boston',
 				duration: '3h 50min',
 				distance: '349km / 218m',
+				image: '/new-york-boston',
 			},
 			{
 				id: 'new-york-east-hampton',
@@ -212,6 +215,7 @@ export const CITY_TO_CITY_ROUTES: CountryRoutes[] = [
 				to: 'East Hampton',
 				duration: '2h 30min',
 				distance: '174km / 109m',
+				image: '/new-york-east-hampton',
 			},
 			{
 				id: 'new-york-greenport',
@@ -219,6 +223,7 @@ export const CITY_TO_CITY_ROUTES: CountryRoutes[] = [
 				to: 'Greenport',
 				duration: '1h 55min',
 				distance: '162km / 101m',
+				image: '/new-york-greenport',
 			},
 			{
 				id: 'new-york-greenwich',
@@ -226,6 +231,7 @@ export const CITY_TO_CITY_ROUTES: CountryRoutes[] = [
 				to: 'Greenwich',
 				duration: '55min',
 				distance: '57km / 35m',
+				image: '/new-york-greenwich',
 			},
 			{
 				id: 'new-york-montauk',
@@ -233,6 +239,7 @@ export const CITY_TO_CITY_ROUTES: CountryRoutes[] = [
 				to: 'Montauk',
 				duration: '2h 50min',
 				distance: '191km / 119m',
+				image: '/new-york-montauk',
 			},
 			{
 				id: 'new-york-new-haven',
@@ -240,6 +247,7 @@ export const CITY_TO_CITY_ROUTES: CountryRoutes[] = [
 				to: 'New Haven',
 				duration: '1h 30min',
 				distance: '131km / 82m',
+				image: '/new-york-new-haven',
 			},
 			{
 				id: 'new-york-philadelphia',
@@ -247,13 +255,7 @@ export const CITY_TO_CITY_ROUTES: CountryRoutes[] = [
 				to: 'Philadelphia',
 				duration: '1h 50min',
 				distance: '154km / 96mkm',
-			},
-			{
-				id: 'new-york-uncasville',
-				from: 'New York City',
-				to: 'Uncasville',
-				duration: '2h 39min',
-				distance: '205km / 128m',
+				image: '/new-york-philadelphia',
 			},
 			{
 				id: 'new-york-washington-dc',
@@ -261,6 +263,7 @@ export const CITY_TO_CITY_ROUTES: CountryRoutes[] = [
 				to: 'Washington DC',
 				duration: '4h',
 				distance: ' 368km / 230m',
+				image: '/new-york-washington-dc',
 			},
 		],
 	},
