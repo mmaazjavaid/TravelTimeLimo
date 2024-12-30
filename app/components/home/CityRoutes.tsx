@@ -93,13 +93,13 @@ const topRoutes: RouteCard[] = [
 
 export function CityRoutes() {
     return (
-        <div className="bg-[#F0F0F0] min-h-screen">
+        <div className="bg-[#F0F0F0]">
             <div className="container mx-auto px-4 py-8">
                 <div className="space-y-8">
                     {/* Top Cities Section */}
                     <div className="flex items-center justify-between">
                         <h2 className="text-2xl font-bold">Top cities</h2>
-                        <Link href="/all-cities" className="text-primary hover:underline">
+                        <Link href="/city-to-city/routes" className="text-primary hover:underline">
                             See all
                         </Link>
                     </div>
@@ -129,7 +129,7 @@ export function CityRoutes() {
                     {/* Top Routes Section */}
                     <div className="flex items-center justify-between">
                         <h2 className="text-2xl font-bold">Top routes</h2>
-                        <Link href="/all-routes" className="text-primary hover:underline">
+                        <Link href="/city-to-city/routes" className="text-primary hover:underline">
                             See all
                         </Link>
                     </div>
