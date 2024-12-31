@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { CircleHelp } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
-import { FOOTER_NAVIGATIONS, SOCIALS } from '@/lib/constants';
+import { CITY_TO_CITY_ROUTES, FOOTER_NAVIGATIONS, SOCIALS } from '@/lib/constants';
 
 export function Footer() {
 	return (
@@ -72,7 +72,7 @@ export function Footer() {
 						<ul role="list" className="mt-6 space-y-4">
 							{FOOTER_NAVIGATIONS.cities.map(item => (
 								<li key={item.name}>
-									<Link href={item.href} className="text-sm hover:text-gray-300">
+									<Link href={'/city-to-city/routes'} className="text-sm hover:text-gray-300">
 										{item.name}
 									</Link>
 								</li>
@@ -99,10 +99,10 @@ export function Footer() {
 							</Badge>
 						</h3>
 						<ul role="list" className="mt-6 space-y-4">
-							{FOOTER_NAVIGATIONS.cityToCity.map(item => (
-								<li key={item.name}>
-									<Link href={item.href} className="text-sm hover:text-gray-300">
-										{item.name}
+							{CITY_TO_CITY_ROUTES[0]?.routes?.slice(0, 6).map(route => (
+								<li key={route.id}>
+									<Link href={`/city-to-city/routes/${route.id}`} className="text-sm hover:text-gray-300">
+										{route.from} - {route.to}
 									</Link>
 								</li>
 							))}
