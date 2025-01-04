@@ -3,16 +3,16 @@ import { Button } from "@/components/ui/button"
 
 export function DownloadSection() {
     return (
-        <div className="relative bg-black text-white py-16">
-            <div className="container relative z-10 pl-48">
-                <div className="max-w-2xl">
-                    <h2 className="text-4xl font-bold mb-4">
+        <div className="relative bg-black text-white py-12 sm:py-16">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div className="max-w-2xl mx-auto lg:mx-0">
+                    <h2 className="text-3xl sm:text-4xl font-bold mb-4">
                         Chauffeurs at your fingertips
                     </h2>
-                    <p className="text-md mb-8">
+                    <p className="text-sm sm:text-md mb-8">
                         Download the Travel Time Limo app to easily book safe, private rides while you&apos;re on the go.
                     </p>
-                    <div className="flex items-center gap-8">
+                    <div className="flex flex-col sm:flex-row items-center gap-8">
                         <div className="w-32 h-32 bg-white p-2 rounded-lg">
                             <Image
                                 src="/app_qrcode.svg"
@@ -22,8 +22,8 @@ export function DownloadSection() {
                                 className="w-full h-full"
                             />
                         </div>
-                        <div className="flex gap-4">
-                            <Button>
+                        <div className="flex flex-col sm:flex-row gap-4">
+                            <Button className="w-full sm:w-auto">
                                 <Image
                                     src="/png-transparent-itunes-app-store-apple-logo-apple-text-rectangle-logo.png"
                                     alt="Download on the App Store"
@@ -32,7 +32,7 @@ export function DownloadSection() {
                                     className="w-auto h-8"
                                 />
                             </Button>
-                            <Button>
+                            <Button className="w-full sm:w-auto">
                                 <Image
                                     src="/png-clipart-google-play-text-google-play-android-app-store-google-play-text-logo.png"
                                     alt="Get it on Google Play"
