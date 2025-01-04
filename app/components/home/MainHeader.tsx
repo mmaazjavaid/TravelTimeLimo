@@ -1,5 +1,5 @@
-import { BookingForm } from "./BookingForm";
-import { DownloadSection } from "./DownloadSection";
+import { BookingForm } from './BookingForm';
+import { DownloadSection } from './DownloadSection';
 
 export default function MainHeader({ heading, showDownloadSection = true, imagePath, showBookingDialog = true }) {
 	return (
@@ -12,7 +12,7 @@ export default function MainHeader({ heading, showDownloadSection = true, imageP
 					<img src={imagePath} alt="Luxury Car Service" className="w-full h-full object-cover" />
 				</div>
 				{showBookingDialog && (
-					<div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-8 lg:py-12">
+					<div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-50 py-8 lg:py-12">
 						<div className="flex flex-col lg:flex-row lg:items-center lg:justify-end">
 							<div className="lg:w-1/2 xl:w-5/12">
 								<BookingForm />
@@ -23,6 +23,5 @@ export default function MainHeader({ heading, showDownloadSection = true, imageP
 			</section>
 			{showDownloadSection && <DownloadSection />}
 		</main>
-	)
+	);
 }
-

@@ -10,7 +10,7 @@ export function BookingForm() {
 	const router = useRouter();
 
 	return (
-		<div className="w-full max-w-md mx-auto bg-white rounded-lg shadow-lg">
+		<div className="w-full max-w-lg mx-auto bg-white rounded-lg shadow-lg">
 			<Tabs defaultValue="one-way" className="w-full">
 				<TabsList className="grid w-full grid-cols-2">
 					<TabsTrigger value="one-way">One way</TabsTrigger>
@@ -71,4 +71,3 @@ export function BookingForm() {
 		</div>
 	);
 }
-
