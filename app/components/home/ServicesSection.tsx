@@ -84,23 +84,23 @@ export function ServicesSection() {
                         <ServiceCard
                             title="City-to-city rides"
                             description="Your stress-free solution for long-distance rides with professional chauffeurs across the globe."
-                            imageSrc="/CTC.jpg?height=300&width=400"
+                            imageSrc="/charleston-black-cab-company (2).jpg"
                         />
                         <ServiceCard
                             title="Chauffeur hailing"
                             description="Enjoy the quality of a traditional chauffeur, with the convenience of riding within minutes of booking."
-                            imageSrc="/CH.jpg?height=300&width=400"
+                            imageSrc="/02f1f7cfe36b0f5f33652b4561dcfe5c.jpg?height=300&width=400"
                             isNew
                         />
                         <ServiceCard
                             title="Airport transfers"
                             description="With additional wait time and flight tracking in case of delays, our service is optimized to make every airport transfer a breeze."
-                            imageSrc="/AT.jpg?height=300&width=400"
+                            imageSrc="/CourtneyMac_Design_an_image_featuring_a_luxury_chauffeur-driven_756e7c04-70b8-4f33-ad0f-cf53402e56a6.jpg?height=300&width=400"
                         />
                         <ServiceCard
                             title="Hourly and full day hire"
                             description="For by-the-hour bookings or daily chauffeur hire, choose one of our tailored services for total flexibility, reliability and comfort."
-                            imageSrc="/Blacklane-London-Social-13_Hourly.jpg?height=300&width=400"
+                            imageSrc="/Executive-Hire.avif?height=300&width=400"
                         />
                     </div>
                 </div>

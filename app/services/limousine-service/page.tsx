@@ -7,7 +7,7 @@ export default function LimousineServicePage() {
         <>
             <MainHeader
                 heading={"Limo Service Around the Globe"}
-                imagePath={"https://images.ctfassets.net/ov8o7v78mnye/5qJoaOH7PQMJHoJVSKJhum/b3902c85c1a99b64fdedc704ad71f2a2/01_Hero.webp?fm=webp"}
+                imagePath={"/s3-1024x576 copy.jpg"}
             />
             <TravelFeatures />
             <BlogsSection />

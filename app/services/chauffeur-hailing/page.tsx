@@ -8,7 +8,7 @@ export default function ChaufferHailingPage() {
             <MainHeader
                 heading={"Say hello to Chauffeur Hailing™!"}
                 showBookingDialog={false}
-                imagePath={"https://images.ctfassets.net/ov8o7v78mnye/2k1HwWsuDXBRFATe3ut6D6/c8daa968a96d801d438b02e1717a09fe/header-hero.png?fm=webp"}
+                imagePath={"/black-car-service-1-1.jpg"}
             />
             <FeaturesGrid />
             <ChauffeurBlog />

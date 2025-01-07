@@ -8,7 +8,7 @@ export default function ChaufferServicePage() {
             <MainHeader
                 heading={"Your professional chauffeur service"}
                 showDownloadSection={false}
-                imagePath={"https://images.ctfassets.net/ov8o7v78mnye/55zUvTExn1W2IMJgggaH0j/4760862fedcb3bf7ca05688e4e4ea796/01_Hero.jpg?fm=webp"}
+                imagePath={"/IMG-20240815-WA0045.jpg"}
             />
             <TravelFeatures />
             <BlogsSection />

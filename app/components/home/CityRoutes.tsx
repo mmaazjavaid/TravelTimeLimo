@@ -21,24 +21,24 @@ const topCities: CityCard[] = [
 	{
 		name: 'New York',
 		image:
-			'https://images.ctfassets.net/ov8o7v78mnye/6RMo2vd8ZO6Q8a28ueWQKy/8f7ab73d521e854d0fd60e04bb2e3dc0/new_york.jpg',
+			'/medium-new-york-skyline-wallpaper-print-on-fine-art-paper-hd-original-imagbukjkbg9rjkn.webp',
 		routeCount: 21,
 	},
 	{
 		name: 'London',
 		image:
-			'https://images.ctfassets.net/ov8o7v78mnye/5yCNBv190AI6oAYWiEiUoY/7ec09bb6e24efb79306b112681f43429/london.jpg',
+			'/premium_photo-1682799116921-de130f76c1d0.jpeg',
 		routeCount: 25,
 	},
 	{
 		name: 'Paris',
 		image:
-			'https://images.ctfassets.net/ov8o7v78mnye/3CPEPDD4negGa4s4Eii4qu/cd924f547e994855f60415343d6b6521/paris.jpg',
+			'/paris.jpg',
 		routeCount: 16,
 	},
 	{
 		name: 'Dubai',
-		image: 'https://images.ctfassets.net/ov8o7v78mnye/I066HOHnciYmIIAWCaIaa/6445a014eac5f045721acbf4d39d9719/dubai.jpg',
+		image: '/dubai-palm-jumeirah-island-shutterstock_1291548640.jpg_3ab124c2b9.jpg',
 		routeCount: 15,
 	},
 ];

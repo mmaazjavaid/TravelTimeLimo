@@ -8,7 +8,7 @@ export default function AirportTransferPage() {
         <>
             <MainHeader
                 heading={"Airport Transfer Service Worldwide"}
-                imagePath={"https://images.ctfassets.net/ov8o7v78mnye/2hQ4Zm5cxvBjZ8kUA2AWOV/f6a7b5f3b3c3acdce3f82172740508f0/Hero_AT__1_.webp?fm=webp&w=3840"}
+                imagePath={"/s-class-v-londone_web (1).jpg"}
             />
             <FeaturesSection />
             <CarService />

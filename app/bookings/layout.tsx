@@ -1,10 +1,10 @@
 'use client';
 import { ReactNode, useState } from 'react';
 import { STEPS } from '@/lib/constants';
-import { Stepper } from '@/components/bookings/Stepper';
-import BookingFooter from '@/components/bookings/Footer';
 import BookingDetails from '@/components/bookings/BookingDetail';
 import { useRouter } from 'next/navigation';
+import BookingFooter from '@/components/bookings/footer';
+import { Stepper } from '@/components/bookings/stepper';
 
 function Layout({ children }: { children: ReactNode }) {
 	const router = useRouter();

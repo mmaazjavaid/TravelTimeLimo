@@ -8,7 +8,7 @@ export default function Home() {
 		<>
 			<MainHeader
 				heading={"Your global chauffeur service"}
-				imagePath={"/Hero_02c.webp"}
+				imagePath={"/car-12.jpg"}
 			/>
 			<ServicesSection />
 			<CityRoutes />

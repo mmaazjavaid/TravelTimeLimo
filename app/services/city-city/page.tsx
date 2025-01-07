@@ -8,7 +8,7 @@ export default function CityToCityPage() {
         <>
             <MainHeader
                 heading={"City-to-City Long Distance Car Service"}
-                imagePath={"https://images.ctfassets.net/ov8o7v78mnye/4k07hkseEOyBAOdkoEnLYu/7eda7d4be70ba875f0b41946e7ec52d4/Hero_01__2_.jpg?fm=webp"}
+                imagePath={"/SD-Blackcar-Del-Mar-Fleet.jpg"}
             />
             <TransportComparison />
             <Testimonials />
