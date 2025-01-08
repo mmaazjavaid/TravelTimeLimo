@@ -36,7 +36,8 @@ export function BookingForm() {
 							onClick={() => {
 								router.push('/bookings/service-class');
 							}}
-							className="w-full bg-[#E85B40] hover:bg-[#D64E35] text-white"
+							className="w-full text-white"
+							variant="gradient"
 						>
 							Search
 						</Button>
@@ -61,7 +62,8 @@ export function BookingForm() {
 							onClick={() => {
 								router.push('/bookings/service-class');
 							}}
-							className="w-full bg-[#E85B40] hover:bg-[#D64E35] text-white"
+							className="w-full text-white"
+							variant="gradient"
 						>
 							Search
 						</Button>

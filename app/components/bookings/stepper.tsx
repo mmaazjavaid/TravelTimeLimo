@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { StepperProps } from '@/types/bookings';
+import { STYLES } from '@/lib/commonStyles';
 
 export const Stepper: React.FC<StepperProps> = ({ steps, activeStep, setActiveStep }) => {
 	return (
@@ -18,9 +19,9 @@ export const Stepper: React.FC<StepperProps> = ({ steps, activeStep, setActiveSt
 							className={`w-[22px] h-[22px] rounded-full z-10 border-[2px] 
                 ${
 									index < activeStep
-										? 'border-orange-600 bg-gradient-to-r from-red-500 to-orange-500 '
+										? `${STYLES.gray_white_gradient.color}`
 										: index === activeStep
-										? ' border-gray-600 bg-gray-600'
+										? `${STYLES.gray_blue_gradient.color}`
 										: 'border-gray-200 bg-gray-100'
 								}`}
 						/>

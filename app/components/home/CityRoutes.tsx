@@ -20,20 +20,17 @@ interface RouteCard {
 const topCities: CityCard[] = [
 	{
 		name: 'New York',
-		image:
-			'/medium-new-york-skyline-wallpaper-print-on-fine-art-paper-hd-original-imagbukjkbg9rjkn.webp',
+		image: '/medium-new-york-skyline-wallpaper-print-on-fine-art-paper-hd-original-imagbukjkbg9rjkn.webp',
 		routeCount: 21,
 	},
 	{
 		name: 'London',
-		image:
-			'/premium_photo-1682799116921-de130f76c1d0.jpeg',
+		image: '/premium_photo-1682799116921-de130f76c1d0.jpeg',
 		routeCount: 25,
 	},
 	{
 		name: 'Paris',
-		image:
-			'/paris.jpg',
+		image: '/paris.jpg',
 		routeCount: 16,
 	},
 	{
@@ -159,7 +156,7 @@ export function CityRoutes() {
 							</div>
 
 							<Link href={'/services/city-city'}>
-								<Button size="lg" className="bg-[#E55C3D] hover:bg-[#D54C2D] text-white">
+								<Button size="lg" variant="gradient" className="text-white">
 									Book a City-to-City ride
 								</Button>
 							</Link>

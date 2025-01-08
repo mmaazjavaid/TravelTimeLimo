@@ -9,7 +9,8 @@ const BookingFooter: React.FC<{ onNextStep: () => void }> = ({ onNextStep }) => 
 			</Link>
 			<Button
 				onClick={onNextStep}
-				className="w-full sm:w-auto text-white text-lg py-6 px-8 rounded-xl bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 transition-all"
+				variant="gradient"
+				className="w-full sm:w-auto text-white text-lg py-6 px-8 rounded-xl"
 			>
 				Continue
 			</Button>
