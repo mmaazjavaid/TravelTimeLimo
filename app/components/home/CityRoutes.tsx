@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { ArrowRight } from 'lucide-react';
+import { STYLES } from '@/lib/commonStyles';
 
 interface CityCard {
 	name: string;
@@ -93,70 +94,87 @@ const topRoutes: RouteCard[] = [
 
 export function CityRoutes() {
 	return (
-		<div className="bg-[#F0F0F0]">
-			<div className="container mx-auto px-4 py-8">
-				<div className="space-y-8">
+		<div className="bg-white">
+			<div className="container mx-auto px-4 py-16">
+				<div className="space-y-16">
 					{/* Top Cities Section */}
-					<div className="flex items-center justify-between">
-						<h2 className="text-2xl font-bold">Top cities</h2>
-						<Link href="/city-to-city/routes" className="text-primary hover:underline">
-							See all
-						</Link>
-					</div>
-					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-						{topCities.map(city => (
-							<Link key={city.name} href={`/city-to-city/routes`}>
-								<Card className="overflow-hidden">
-									<CardContent className="p-0">
-										<div className="relative h-48">
-											<Image src={city.image} alt={`${city.name} cityscape`} fill className="object-cover" />
-										</div>
-										<div className="p-4">
-											<h3 className="font-semibold text-lg">{city.name}</h3>
-											<p className="text-muted-foreground">{city.routeCount} routes to/from this city</p>
-										</div>
-									</CardContent>
-								</Card>
+					<div>
+						<div className="flex items-center justify-between mb-8">
+							<h2 className="text-3xl font-bold text-gray-900">Top cities</h2>
+							<Link
+								href="/city-to-city/routes"
+								className="text-primary hover:text-primary-dark transition-colors duration-300"
+							>
+								See all
 							</Link>
-						))}
+						</div>
+						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+							{topCities.map(city => (
+								<Link key={city.name} href={`/city-to-city/routes`}>
+									<Card className="overflow-hidden transition-transform duration-300 hover:scale-105">
+										<CardContent className="p-0">
+											<div className="relative h-48">
+												<Image src={city.image} alt={`${city.name} cityscape`} fill className="object-cover" />
+												<div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+												<div className="absolute bottom-4 left-4 text-white">
+													<h3 className="font-semibold text-lg">{city.name}</h3>
+													<p className="text-sm">{city.routeCount} routes</p>
+												</div>
+											</div>
+										</CardContent>
+									</Card>
+								</Link>
+							))}
+						</div>
 					</div>
 
 					{/* Top Routes Section */}
-					<div className="flex items-center justify-between">
-						<h2 className="text-2xl font-bold">Top routes</h2>
-						<Link href="/city-to-city/routes" className="text-primary hover:underline">
-							See all
-						</Link>
-					</div>
-					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-						{topRoutes.map(route => (
-							<Link key={`${route.from}-${route.to}`} href={`/city-to-city/routes`}>
-								<Card className="hover:bg-muted/50 transition-colors">
-									<CardContent className="p-4">
-										<div className="flex items-center gap-2 mb-2">
-											<span className="font-medium">{route.from}</span>
-											<ArrowRight className="w-4 h-4 text-muted-foreground" />
-											<span className="font-medium">{route.to}</span>
-										</div>
-										<div className="text-sm text-muted-foreground">
-											{route.duration} · {route.distance}
-										</div>
-									</CardContent>
-								</Card>
+					<div>
+						<div className="flex items-center justify-between mb-8">
+							<h2 className="text-3xl font-bold text-gray-900">Top routes</h2>
+							<Link
+								href="/city-to-city/routes"
+								className="text-primary hover:text-primary-dark transition-colors duration-300"
+							>
+								See all
 							</Link>
-						))}
+						</div>
+						<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-6 py-4">
+							{topRoutes.map(route => (
+								<Link key={`${route.from}-${route.to}`} href={`/city-to-city/routes`} className="block group">
+									<Card className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-white to-gray-50 shadow-lg border-2 border-gray-100 transition-transform duration-300 transform group-hover:scale-105">
+										<div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-indigo-100 to-transparent opacity-10 group-hover:opacity-20 transition-opacity duration-300"></div>
+
+										<CardContent className="relative z-10 p-6 flex flex-col items-start">
+											<div className="flex items-center mb-4">
+												<span className="text-lg font-semibold text-gray-900">{route.from}</span>
+												<ArrowRight className="mx-2 w-6 h-6 text-gray-400" />
+												<span className="text-lg font-semibold text-gray-900">{route.to}</span>
+											</div>
+
+											<div className="text-sm text-gray-600 group-hover:text-gray-800 transition-colors duration-300">
+												{route.duration} · {route.distance}
+											</div>
+										</CardContent>
+										<div
+											className={`absolute top-0 right-0 w-16 h-16 rounded-bl-full ${STYLES.gray_white_gradient.color} ${STYLES.transition} opacity-50 group-hover:opacity-80`}
+										></div>
+									</Card>
+								</Link>
+							))}
+						</div>
 					</div>
 
 					{/* CTA Section */}
-					<Card className="mt-8">
-						<CardContent className="flex flex-col md:flex-row items-center justify-between p-6 gap-4">
+					<Card className="bg-primary text-white">
+						<CardContent className="flex flex-col md:flex-row items-center justify-between p-8 gap-6">
 							<div className="space-y-2">
-								<h3 className="text-xl font-semibold">Have a route in mind?</h3>
-								<p className="text-muted-foreground">Enter your pickup and drop-off locations to see the price.</p>
+								<h3 className="text-2xl font-semibold">Have a route in mind?</h3>
+								<p className="text-primary-foreground">Enter your pickup and drop-off locations to see the price.</p>
 							</div>
 
 							<Link href={'/services/city-city'}>
-								<Button size="lg" variant="gradient" className="text-white">
+								<Button size="lg" variant="gradient" className="w-full md:w-auto">
 									Book a City-to-City ride
 								</Button>
 							</Link>
