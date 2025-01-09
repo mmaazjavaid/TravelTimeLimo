@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { ChevronDown, Menu } from 'lucide-react';
+import { ChevronDown, Menu, User, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
 	DropdownMenu,
@@ -29,162 +29,142 @@ const business = [
 
 export function Navbar() {
 	return (
-		<nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
-			<div className="container flex items-center justify-between h-16 px-4">
-				<Link href="/" className="text-xl font-bold lg:pl-48">
-					TRAVEL TIME LIMO
-				</Link>
+		<nav className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-gray-800 to-gray-900 text-white">
+			<div className="container mx-auto px-4 lg:px-8">
+				<div className="flex items-center justify-between h-20">
+					<Link href="/" className="text-2xl font-bold text-gold">
+						TRAVEL TIME LIMO
+					</Link>
 
-				{/* Mobile Menu */}
-				<div className="lg:hidden">
-					<Sheet>
-						<SheetTrigger asChild>
-							<Button variant="ghost" size="icon">
-								<Menu className="h-6 w-6" />
-								<span className="sr-only">Toggle menu</span>
-							</Button>
-						</SheetTrigger>
-						<SheetContent side="right">
-							<div className="flex flex-col gap-4 mt-4">
-								<DropdownMenu>
-									<DropdownMenuTrigger asChild>
-										<Button variant="ghost" className="w-full justify-start">
-											Our services <ChevronDown className="w-4 h-4 ml-2" />
-										</Button>
-									</DropdownMenuTrigger>
-									<DropdownMenuContent align="start" className="w-56">
-										{services.map(service => (
-											<DropdownMenuItem key={service.name} asChild>
-												<Link href={service.href}>{service.name}</Link>
-											</DropdownMenuItem>
-										))}
-									</DropdownMenuContent>
-								</DropdownMenu>
-
-								<DropdownMenu>
-									<DropdownMenuTrigger asChild>
-										<Button variant="ghost" className="w-full justify-start">
-											For business <ChevronDown className="w-4 h-4 ml-2" />
-										</Button>
-									</DropdownMenuTrigger>
-									<DropdownMenuContent align="start" className="w-56">
-										{business.map(item => (
-											<DropdownMenuItem key={item.name} asChild>
-												<Link href={item.href}>{item.name}</Link>
-											</DropdownMenuItem>
-										))}
-									</DropdownMenuContent>
-								</DropdownMenu>
-
-								<Button variant="ghost" className="justify-start" asChild>
-									<Link href="#">For chauffeurs</Link>
+					{/* Mobile Menu */}
+					<div className="lg:hidden">
+						<Sheet>
+							<SheetTrigger asChild>
+								<Button variant="ghost" size="icon" className="text-white">
+									<Menu className="h-6 w-6" />
+									<span className="sr-only">Toggle menu</span>
 								</Button>
-								<Button variant="ghost" className="justify-start" asChild>
-									<Link href="#">Help</Link>
-								</Button>
-
-								<hr className="my-2" />
-
-								<DropdownMenu>
-									<DropdownMenuTrigger asChild>
-										<Button variant="ghost" className="justify-start">
-											English <ChevronDown className="w-4 h-4 ml-2" />
-										</Button>
-									</DropdownMenuTrigger>
-									<DropdownMenuContent>
-										<DropdownMenuItem>English</DropdownMenuItem>
-										<DropdownMenuItem>Español</DropdownMenuItem>
-										<DropdownMenuItem>Français</DropdownMenuItem>
-									</DropdownMenuContent>
-								</DropdownMenu>
-
-								<DropdownMenu>
-									<DropdownMenuTrigger asChild>
-										<Button variant="ghost" className="justify-start">
-											dani <ChevronDown className="w-4 h-4 ml-2" />
-										</Button>
-									</DropdownMenuTrigger>
-									<DropdownMenuContent>
-										<DropdownMenuItem>Profile</DropdownMenuItem>
-										<DropdownMenuItem>Settings</DropdownMenuItem>
-										<DropdownMenuItem>Logout</DropdownMenuItem>
-									</DropdownMenuContent>
-								</DropdownMenu>
-							</div>
-						</SheetContent>
-					</Sheet>
-				</div>
-
-				{/* Desktop Menu */}
-				<div className="hidden lg:flex items-center gap-6">
-					<div className="flex items-center gap-4">
-						<DropdownMenu>
-							<DropdownMenuTrigger asChild>
-								<Button variant="ghost" className="flex items-center gap-1">
-									Our services <ChevronDown className="w-4 h-4" />
-								</Button>
-							</DropdownMenuTrigger>
-							<DropdownMenuContent>
-								{services.map(service => (
-									<DropdownMenuItem key={service.name} asChild>
-										<Link href={service.href}>{service.name}</Link>
-									</DropdownMenuItem>
-								))}
-							</DropdownMenuContent>
-						</DropdownMenu>
-
-						<DropdownMenu>
-							<DropdownMenuTrigger asChild>
-								<Button variant="ghost" className="flex items-center gap-1">
-									For business <ChevronDown className="w-4 h-4" />
-								</Button>
-							</DropdownMenuTrigger>
-							<DropdownMenuContent>
-								{business.map(item => (
-									<DropdownMenuItem key={item.name} asChild>
-										<Link href={item.href}>{item.name}</Link>
-									</DropdownMenuItem>
-								))}
-							</DropdownMenuContent>
-						</DropdownMenu>
-
-						<Button variant="ghost" asChild>
-							<Link href="#">For chauffeurs</Link>
-						</Button>
-						<Button variant="ghost" asChild>
-							<Link href="#">Help</Link>
-						</Button>
+							</SheetTrigger>
+							<SheetContent side="right" className="w-80 bg-gray-900 text-white p-6">
+								<div className="flex flex-col gap-6 mt-6">
+									<MobileDropdown title="Our services" items={services} />
+									<MobileDropdown title="For business" items={business} />
+									<MobileLink href="#">For chauffeurs</MobileLink>
+									<MobileLink href="#">Help</MobileLink>
+									<hr className="border-gray-700 my-4" />
+									<MobileDropdown
+										title="English"
+										items={[{ name: 'English' }, { name: 'Español' }, { name: 'Français' }]}
+										icon={<Globe className="w-4 h-4 mr-2" />}
+									/>
+									<MobileDropdown
+										title="dani"
+										items={[{ name: 'Profile' }, { name: 'Settings' }, { name: 'Logout' }]}
+										icon={<User className="w-4 h-4 mr-2" />}
+									/>
+								</div>
+							</SheetContent>
+						</Sheet>
 					</div>
 
-					<div className="flex items-center gap-2">
-						<DropdownMenu>
-							<DropdownMenuTrigger asChild>
-								<Button variant="ghost" className="flex items-center gap-1">
-									English <ChevronDown className="w-4 h-4" />
-								</Button>
-							</DropdownMenuTrigger>
-							<DropdownMenuContent>
-								<DropdownMenuItem>English</DropdownMenuItem>
-								<DropdownMenuItem>Español</DropdownMenuItem>
-								<DropdownMenuItem>Français</DropdownMenuItem>
-							</DropdownMenuContent>
-						</DropdownMenu>
+					{/* Desktop Menu */}
+					<div className="hidden lg:flex items-center gap-8">
+						<DesktopDropdown title="Our services" items={services} />
+						<DesktopDropdown title="For business" items={business} />
+						<DesktopLink href="#">For chauffeurs</DesktopLink>
+						<DesktopLink href="#">Help</DesktopLink>
+					</div>
 
-						<DropdownMenu>
-							<DropdownMenuTrigger asChild>
-								<Button variant="ghost" className="flex items-center gap-1">
-									dani <ChevronDown className="w-4 h-4" />
-								</Button>
-							</DropdownMenuTrigger>
-							<DropdownMenuContent>
-								<DropdownMenuItem>Profile</DropdownMenuItem>
-								<DropdownMenuItem>Settings</DropdownMenuItem>
-								<DropdownMenuItem>Logout</DropdownMenuItem>
-							</DropdownMenuContent>
-						</DropdownMenu>
+					<div className="hidden lg:flex items-center gap-4">
+						<DesktopDropdown
+							title="English"
+							items={[{ name: 'English' }, { name: 'Español' }, { name: 'Français' }]}
+							icon={<Globe className="w-4 h-4 mr-2" />}
+						/>
+						<DesktopDropdown
+							title="dani"
+							items={[{ name: 'Profile' }, { name: 'Settings' }, { name: 'Logout' }]}
+							icon={<User className="w-4 h-4 mr-2" />}
+						/>
 					</div>
 				</div>
 			</div>
 		</nav>
+	);
+}
+
+function MobileDropdown({
+	title,
+	items,
+	icon,
+}: {
+	title: string;
+	items: { name: string; href?: string }[];
+	icon?: React.ReactNode;
+}) {
+	return (
+		<DropdownMenu>
+			<DropdownMenuTrigger asChild>
+				<Button variant="ghost" className="w-full justify-start text-white ">
+					{icon}
+					{title} <ChevronDown className="w-4 h-4 ml-2" />
+				</Button>
+			</DropdownMenuTrigger>
+			<DropdownMenuContent className="w-56 bg-gray-800 text-white border-gray-700">
+				{items.map(item => (
+					<DropdownMenuItem key={item.name} asChild className="hover:bg-gray-700">
+						<Link href={item.href || '#'} className="w-full px-4 py-2">
+							{item.name}
+						</Link>
+					</DropdownMenuItem>
+				))}
+			</DropdownMenuContent>
+		</DropdownMenu>
+	);
+}
+
+function MobileLink({ href, children }: { href: string; children: React.ReactNode }) {
+	return (
+		<Link href={href} className="text-white  transition-colors duration-200">
+			{children}
+		</Link>
+	);
+}
+
+function DesktopDropdown({
+	title,
+	items,
+	icon,
+}: {
+	title: string;
+	items: { name: string; href?: string }[];
+	icon?: React.ReactNode;
+}) {
+	return (
+		<DropdownMenu>
+			<DropdownMenuTrigger asChild>
+				<Button variant="ghost" className="text-white ">
+					{icon}
+					{title} <ChevronDown className="w-4 h-4 ml-1" />
+				</Button>
+			</DropdownMenuTrigger>
+			<DropdownMenuContent className="bg-gray-800 text-white border-gray-700">
+				{items.map(item => (
+					<DropdownMenuItem key={item.name} asChild className="hover:bg-gray-700">
+						<Link href={item.href || '#'} className="w-full px-4 py-2">
+							{item.name}
+						</Link>
+					</DropdownMenuItem>
+				))}
+			</DropdownMenuContent>
+		</DropdownMenu>
+	);
+}
+
+function DesktopLink({ href, children }: { href: string; children: React.ReactNode }) {
+	return (
+		<Link href={href} className="text-white transition-colors duration-200">
+			{children}
+		</Link>
 	);
 }
