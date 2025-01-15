@@ -20,23 +20,25 @@ const features = [
 
 export function TravelFeatures() {
     return (
-        <div className="w-full max-w-6xl mx-auto px-4 py-16">
-            <div className="grid md:grid-cols-3 gap-12">
-                {features.map((feature, index) => (
-                    <div key={index} className="flex flex-col items-center text-center">
-                        <div className="mb-6">
-                            <feature.icon className="w-12 h-12 text-red-400 stroke-[1.5]" />
+        <section className="py-20">
+            <div className="container mx-auto px-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    {features.map((feature, index) => (
+                        <div key={index} className="flex flex-col items-center text-center space-y-4">
+                            <div className="mb-6 p-6 bg-[#f5f5f5] rounded-full">
+                                <feature.icon className="w-8 h-8 text-black" />
+                            </div>
+                            <h3 className="text-xl font-bold text-black">
+                                {feature.title}
+                            </h3>
+                            <p className="text-gray-600 max-w-[300px] leading-relaxed">
+                                {feature.description}
+                            </p>
                         </div>
-                        <h3 className="text-xl font-semibold mb-3">
-                            {feature.title}
-                        </h3>
-                        <p className="text-gray-600 leading-relaxed">
-                            {feature.description}
-                        </p>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
-        </div>
+        </section>
     )
 }
 
