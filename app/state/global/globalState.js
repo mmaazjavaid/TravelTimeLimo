@@ -17,12 +17,6 @@ export const globalInitialState = {
             ln: '',
             email: '',
             phoneNum: '',
-        },
-        paymentInfo: {
-            nameOnCard: '',
-            cardNumber: '',
-            expDate: null,
-            cvv: ''
         }
     },
 };

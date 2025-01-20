@@ -40,7 +40,8 @@ export function PaymentInfo() {
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		// onSubmit(formData);
+		// send email with payment data
+
 	};
 
 	return (

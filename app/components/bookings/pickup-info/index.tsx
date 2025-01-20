@@ -15,8 +15,6 @@ export function PickupInfo() {
 
 	const pickUpInfo = stepperValues?.stepperForm?.pickUpInfo;
 
-	console.log(stepperValues?.stepperForm?.pickUpInfo);
-
 	return (
 		<>
 			<div>
