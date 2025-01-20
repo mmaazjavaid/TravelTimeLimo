@@ -37,6 +37,7 @@ export interface PriceBreakdownProps {
 
 export interface Ride {
 	id: number;
+	value: string;
 	title: string;
 	image: string;
 	price: string;

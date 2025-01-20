@@ -1,5 +1,3 @@
-'use client';
-
 import { useState } from 'react';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
@@ -10,22 +8,14 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radioButton';
 import { BookForSomeoneForm } from './BookForSomeone';
 import Notes from '../service-class/Notes';
 import { PICKUP_INFO_NOTES } from '@/lib/constants';
+import { globalStateController } from '@/state/global/globalStateController';
 
 export function PickupInfo() {
-	const [formData, setFormData] = useState<PickupData>({
-		bookingFor: 'myself',
-		flightNumber: '',
-		pickupSign: '',
-		notes: '',
-		referenceCode: '',
-	});
+	const { stepperValues } = globalStateController.useState(['stepperForm'], 'stepperValues');
 
-	const handleInputChange = (field: keyof PickupData, value: string | 'myself' | 'someone-else') => {
-		setFormData(prev => ({
-			...prev,
-			[field]: value,
-		}));
-	};
+	const pickUpInfo = stepperValues?.stepperForm?.pickUpInfo;
+
+	console.log(stepperValues?.stepperForm?.pickUpInfo);
 
 	return (
 		<>
@@ -34,8 +24,16 @@ export function PickupInfo() {
 				<Card>
 					<CardContent className="pt-6">
 						<RadioGroup
-							value={formData.bookingFor}
-							onValueChange={value => handleInputChange('bookingFor', value as 'myself' | 'someone-else')}
+							value={pickUpInfo?.bookFor}
+							onValueChange={value => globalStateController.updateState({
+								stepperForm: {
+									...stepperValues?.stepperForm,
+									pickUpInfo: {
+										...pickUpInfo,
+										bookFor: value
+									}
+								}
+							})}
 							className="space-y-4"
 						>
 							<div className="flex items-center space-x-2">
@@ -52,7 +50,7 @@ export function PickupInfo() {
 			</div>
 
 			{/* Book for someone else */}
-			{formData.bookingFor === 'someone-else' && (
+			{pickUpInfo.bookFor === 'someone-else' && (
 				<div className="mt-8">
 					<BookForSomeoneForm />
 				</div>
@@ -70,8 +68,16 @@ export function PickupInfo() {
 								id="flight-number"
 								className="bg-gray-200"
 								placeholder="e.g. LH 202, U24567, BA2490"
-								value={formData.flightNumber}
-								onChange={e => handleInputChange('flightNumber', e.target.value)}
+								value={pickUpInfo?.flightNum}
+								onChange={(e) => globalStateController.updateState({
+									stepperForm: {
+										...stepperValues?.stepperForm,
+										pickUpInfo: {
+											...pickUpInfo,
+											flightNum: e.target.value
+										}
+									}
+								})}
 							/>
 							<p className="text-sm text-muted-foreground">
 								Enter your flight number to ensure your chauffeur can track your flight and adjust the pickup time.
@@ -84,8 +90,16 @@ export function PickupInfo() {
 							<Input
 								id="pickup-sign"
 								className="bg-gray-200"
-								value={formData.pickupSign}
-								onChange={e => handleInputChange('pickupSign', e.target.value)}
+								value={pickUpInfo?.pickUpSign}
+								onChange={(e) => globalStateController.updateState({
+									stepperForm: {
+										...stepperValues?.stepperForm,
+										pickUpInfo: {
+											...pickUpInfo,
+											pickUpSign: e.target.value
+										}
+									}
+								})}
 							/>
 							<p className="text-sm text-muted-foreground">
 								It will appear on your chauffeur's pickup sign when they meet you.
@@ -97,8 +111,16 @@ export function PickupInfo() {
 							<Label htmlFor="notes">Notes for the chauffeur</Label>
 							<Textarea
 								id="notes"
-								value={formData.notes}
-								onChange={e => handleInputChange('notes', e.target.value)}
+								value={pickUpInfo?.notes}
+								onChange={(e) => globalStateController.updateState({
+									stepperForm: {
+										...stepperValues?.stepperForm,
+										pickUpInfo: {
+											...pickUpInfo,
+											notes: e.target.value
+										}
+									}
+								})}
 								className="min-h-[100px] resize-none bg-gray-200"
 							/>
 							<p className="text-sm text-muted-foreground">
@@ -113,8 +135,16 @@ export function PickupInfo() {
 							<Input
 								id="reference-code"
 								className="bg-gray-200"
-								value={formData.referenceCode}
-								onChange={e => handleInputChange('referenceCode', e.target.value)}
+								value={pickUpInfo?.refCode}
+								onChange={(e) => globalStateController.updateState({
+									stepperForm: {
+										...stepperValues?.stepperForm,
+										pickUpInfo: {
+											...pickUpInfo,
+											refCode: e.target.value
+										}
+									}
+								})}
 							/>
 							<p className="text-sm text-muted-foreground">
 								Booking for business? What you enter above will appear on the invoice.
@@ -124,7 +154,7 @@ export function PickupInfo() {
 				</Card>
 
 				{/* Book for someone else Notes*/}
-				{formData.bookingFor === 'someone-else' && (
+				{pickUpInfo.bookFor === 'someone-else' && (
 					<Card className="mt-8">
 						<CardContent className="space-y-6 pt-6">
 							<Notes notes={PICKUP_INFO_NOTES} />

@@ -19,6 +19,7 @@ export const RIDES: Ride[] = [
 	{
 		id: 0,
 		title: 'Business Class',
+		value: 'businessClass',
 		image: '/business-class-car.png',
 		price: 'US$215.94',
 		description: 'Most popular • Mercedes-Benz E-Class or similar',
@@ -31,6 +32,7 @@ export const RIDES: Ride[] = [
 	{
 		id: 1,
 		title: 'Business Van/SUV',
+		value: 'businessVan/Suv',
 		image: '/business-class-van.png',
 		price: 'US$293.20',
 		description: 'More spacious • Mercedes-Benz V-Class or similar',
@@ -43,6 +45,7 @@ export const RIDES: Ride[] = [
 	{
 		id: 2,
 		title: 'First Class',
+		value: 'firstClass',
 		image: '/first-class-car.png',
 		price: 'US$353.26',
 		description: 'Most luxurious • Mercedes-Benz S-Class or similar',

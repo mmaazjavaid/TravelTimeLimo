@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { DropDown } from '@/components/ui/dropdown';
+import { globalStateController } from '@/state/global/globalStateController';
 
 const titles = [
 	{ value: 'mr', label: 'Mr.' },
@@ -23,6 +24,8 @@ const countries = [
 export function BookForSomeoneForm() {
 	const [title, setTitle] = React.useState('');
 	const [country, setCountry] = React.useState(countries[0]);
+	const { stepperValues } = globalStateController.useState(['stepperForm'], 'stepperValues');
+	const pickUpInfo = stepperValues?.stepperForm?.pickUpInfo;
 
 	return (
 		<Card className="pt-6">
@@ -33,8 +36,16 @@ export function BookForSomeoneForm() {
 					</Label>
 					<DropDown
 						options={titles}
-						value={title}
-						onChange={setTitle}
+						value={pickUpInfo?.title}
+						onChange={(value) => globalStateController.updateState({
+							stepperForm: {
+								...stepperValues?.stepperForm,
+								pickUpInfo: {
+									...pickUpInfo,
+									title: value
+								}
+							}
+						})}
 						placeholder="Select title"
 						className="bg-gray-200"
 					/>
@@ -45,13 +56,41 @@ export function BookForSomeoneForm() {
 						<Label htmlFor="firstName">
 							First name <span className="text-red-500">*</span>
 						</Label>
-						<Input id="firstName" placeholder="First name" className="bg-gray-200" />
+						<Input
+							id="firstName"
+							placeholder="First name"
+							className="bg-gray-200"
+							value={pickUpInfo?.fn}
+							onChange={(e) => globalStateController.updateState({
+								stepperForm: {
+									...stepperValues?.stepperForm,
+									pickUpInfo: {
+										...pickUpInfo,
+										fn: e.target.value
+									}
+								}
+							})}
+						/>
 					</div>
 					<div className="space-y-2">
 						<Label htmlFor="lastName">
 							Last name <span className="text-red-500">*</span>
 						</Label>
-						<Input id="lastName" placeholder="Last name" className="bg-gray-200" />
+						<Input
+							id="lastName"
+							placeholder="Last name"
+							className="bg-gray-200"
+							value={pickUpInfo?.ln}
+							onChange={(e) => globalStateController.updateState({
+								stepperForm: {
+									...stepperValues?.stepperForm,
+									pickUpInfo: {
+										...pickUpInfo,
+										ln: e.target.value
+									}
+								}
+							})}
+						/>
 					</div>
 				</div>
 
@@ -59,7 +98,22 @@ export function BookForSomeoneForm() {
 					<Label htmlFor="email">
 						Email <span className="text-red-500">*</span>
 					</Label>
-					<Input id="email" type="email" placeholder="Email" className="bg-gray-200" />
+					<Input
+						id="email"
+						type="email"
+						placeholder="Email"
+						className="bg-gray-200"
+						value={pickUpInfo?.email}
+						onChange={(e) => globalStateController.updateState({
+							stepperForm: {
+								...stepperValues?.stepperForm,
+								pickUpInfo: {
+									...pickUpInfo,
+									email: e.target.value
+								}
+							}
+						})}
+					/>
 				</div>
 
 				<div className="space-y-2 mt-2">
@@ -86,7 +140,22 @@ export function BookForSomeoneForm() {
 								))}
 							</select>
 						</div>
-						<Input id="phone" type="tel" className="rounded-l-none bg-gray-200" placeholder="Phone number" />
+						<Input
+							id="phone"
+							type="tel"
+							className="rounded-l-none bg-gray-200"
+							placeholder="Phone number"
+							value={pickUpInfo?.phoneNum}
+							onChange={(e) => globalStateController.updateState({
+								stepperForm: {
+									...stepperValues?.stepperForm,
+									pickUpInfo: {
+										...pickUpInfo,
+										phoneNum: e.target.value
+									}
+								}
+							})}
+						/>
 					</div>
 					<p className="text-sm text-muted-foreground">
 						Please enter the phone number on which the guest would like to receive notifications

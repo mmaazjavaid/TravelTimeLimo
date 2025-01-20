@@ -1,3 +1,4 @@
+"use client";
 import { JSX } from 'react';
 import ServiceClass from '@/components/bookings/service-class';
 
