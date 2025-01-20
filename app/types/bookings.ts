@@ -62,3 +62,33 @@ export interface PickupData {
 	notes: string;
 	referenceCode: string;
 }
+
+export interface BookingModel {
+	userDetails: {
+		title: string;
+		firstName: string;
+		lastName: string;
+		email: string;
+		phoneNumber: string;
+	};
+	pickupDetails?: {
+		flightNumber?: string;
+		pickupSign?: string;
+		notes?: string;
+		referenceCode?: string;
+	};
+	bookingDetails: {
+		from: string;
+		to: string;
+		numberOfHours: number;
+		date: Date | string; // Use Date if working directly with Date objects, or string for serialized data
+		time: string;
+		vehicleType: 'business_class' | 'business_van_suv' | 'first_class';
+		passengers: number;
+		luggage: number;
+		baseFare: number;
+		meetAndGreet: number;
+		tax: number;
+		totalFare: number;
+	};
+}
