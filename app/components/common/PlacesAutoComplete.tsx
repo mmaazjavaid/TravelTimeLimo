@@ -46,12 +46,12 @@ const GoMapsAutocomplete = ({ placeholder }) => {
 					fetchSuggestions(e.target.value);
 				}}
 				placeholder={placeholder}
-                className="w-full h-10 pl-12 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400"
+				className="w-full h-10 pl-12 pr-10 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400"
 			/>
 			{query && (
 				<button
 					onClick={clearInput}
-					className="absolute top-1/2 right-2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
+					className="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
 				>
 					&#x2715; {/* Unicode for cross icon (×) */}
 				</button>
