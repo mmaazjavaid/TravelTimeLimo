@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Input } from '@/components/ui/input';
+import { globalStateController } from '@/state/global/globalStateController';
 
-const GoMapsAutocomplete = ({ placeholder }) => {
+const GoMapsAutocomplete = ({ placeholder, distination }) => {
 	const [query, setQuery] = useState('');
 	const [suggestions, setSuggestions] = useState([]);
+
+	const { stepperValues } = globalStateController.useState(['stepperForm'], 'stepperValues');
+	const bookingInfo = stepperValues?.stepperForm?.bookingInfo;
+
 
 	// Function to fetch suggestions
 	const fetchSuggestions = async input => {
@@ -34,8 +39,16 @@ const GoMapsAutocomplete = ({ placeholder }) => {
 		event.preventDefault();
 		setQuery(event.target.innerText);
 		setSuggestions([]);
-	};
-
+		globalStateController.updateState({
+			stepperForm: {
+				...stepperValues?.stepperForm,
+				bookingInfo: {
+					...bookingInfo,
+					[distination]: event.target.innerText
+				}
+			}
+		})
+	}
 	return (
 		<div className="autocomplete-container">
 			<Input
@@ -72,5 +85,6 @@ const GoMapsAutocomplete = ({ placeholder }) => {
 		</div>
 	);
 };
+
 
 export default GoMapsAutocomplete;

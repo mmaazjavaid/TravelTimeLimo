@@ -104,6 +104,7 @@ export const STEPS: Step[] = [
 	{ label: 'Service Class', status: 'current', link: '/bookings/service-class' },
 	{ label: 'Pickup Info', status: 'current', link: '/bookings/pickup-info' },
 	{ label: 'Payment Info', status: 'current', link: '/bookings/payment-info' },
+	{ label: 'Confirmed Ride', status: 'current', link: '/confirmed-ride' },
 ];
 
 export const FOOTER_NAVIGATIONS = {

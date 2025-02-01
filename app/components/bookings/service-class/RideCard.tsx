@@ -27,7 +27,6 @@ const RideCard: React.FC = () => {
 	const [selectedRide, setSelectedRide] = useState<number>(0); // Track the selected ride
 	const [expandedRide, setExpandedRide] = useState<ExpandedRide>({ id: null, isExpanded: false });
 	const { stepperValues } = globalStateController.useState(['stepperForm'], 'stepperValues');
-	console.log(stepperValues?.stepperForm?.serviceClass);
 
 	return (
 		<div className="border border-gray-300 rounded-lg">

@@ -6,23 +6,13 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import Notes from '../service-class/Notes';
 import { PAYMENT_NOTES } from '@/lib/constants';
-
-interface CreditCardFormData {
-	nameOnCard: string;
-	cardNumber: string;
-	expirationDate: string;
-	cvv: string;
-	saveCard: boolean;
-}
+import { globalStateController } from '@/state/global/globalStateController';
 
 export function PaymentInfo() {
-	const [formData, setFormData] = React.useState<CreditCardFormData>({
-		nameOnCard: '',
-		cardNumber: '',
-		expirationDate: '',
-		cvv: '',
-		saveCard: false,
-	});
+	const { stepperValues } = globalStateController.useState(['stepperForm'], 'stepperValues');
+	const paymentInfo = stepperValues?.stepperForm?.paymentInfo;
+
+
 
 	const formatCardNumber = (value: string) => {
 		return value
@@ -52,37 +42,42 @@ export function PaymentInfo() {
 				<Card className="mb-6 p-6">
 					<div className="space-y-6">
 						<div className="space-y-2">
-							<Label htmlFor="nameOnCard">
+							<Label>
 								Name on card <span className="text-red-500">*</span>
 							</Label>
 							<Input
-								id="nameOnCard"
-								value={formData.nameOnCard}
-								onChange={e =>
-									setFormData(prev => ({
-										...prev,
-										nameOnCard: e.target.value,
-									}))
-								}
+								value={paymentInfo.nameOnCard}
+								onChange={(e) => globalStateController.updateState({
+									stepperForm: {
+										...stepperValues?.stepperForm,
+										paymentInfo: {
+											...paymentInfo,
+											nameOnCard: e.target.value
+										}
+									}
+								})}
 								className="bg-gray-200"
 								required
 							/>
 						</div>
 
 						<div className="space-y-2">
-							<Label htmlFor="cardNumber">
+							<Label>
 								Card number <span className="text-red-500">*</span>
 							</Label>
 							<div className="relative">
 								<Input
 									id="cardNumber"
-									value={formData.cardNumber}
-									onChange={e =>
-										setFormData(prev => ({
-											...prev,
-											cardNumber: formatCardNumber(e.target.value),
-										}))
-									}
+									value={paymentInfo.cardNumber}
+									onChange={(e) => globalStateController.updateState({
+										stepperForm: {
+											...stepperValues?.stepperForm,
+											paymentInfo: {
+												...paymentInfo,
+												cardNumber: e.target.value
+											}
+										}
+									})}
 									className="bg-gray-200"
 									maxLength={19}
 									required
@@ -97,38 +92,44 @@ export function PaymentInfo() {
 
 						<div className="grid gap-4 sm:grid-cols-2">
 							<div className="space-y-2">
-								<Label htmlFor="expirationDate">
+								<Label>
 									Expiration date <span className="text-red-500">*</span>
 								</Label>
 								<Input
 									id="expirationDate"
 									placeholder="MM/YY"
-									value={formData.expirationDate}
-									onChange={e =>
-										setFormData(prev => ({
-											...prev,
-											expirationDate: formatExpirationDate(e.target.value),
-										}))
-									}
+									value={paymentInfo.expirationDate}
+									onChange={(e) => globalStateController.updateState({
+										stepperForm: {
+											...stepperValues?.stepperForm,
+											paymentInfo: {
+												...paymentInfo,
+												expirationDate: e.target.value
+											}
+										}
+									})}
 									className="bg-gray-200"
 									maxLength={5}
 									required
 								/>
 							</div>
 							<div className="space-y-2">
-								<Label htmlFor="cvv">
+								<Label>
 									CVV <span className="text-red-500">*</span>
 								</Label>
 								<Input
 									id="cvv"
 									type="password"
-									value={formData.cvv}
-									onChange={e =>
-										setFormData(prev => ({
-											...prev,
-											cvv: e.target.value,
-										}))
-									}
+									value={paymentInfo.cvv}
+									onChange={(e) => globalStateController.updateState({
+										stepperForm: {
+											...stepperValues?.stepperForm,
+											paymentInfo: {
+												...paymentInfo,
+												cvv: e.target.value
+											}
+										}
+									})}
 									className="bg-gray-200"
 									maxLength={4}
 									required

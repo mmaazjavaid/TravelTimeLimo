@@ -8,9 +8,12 @@ import { useRouter } from 'next/navigation';
 import { Card, CardContent } from '@/components/ui/card';
 import { STYLES } from '@/lib/commonStyles';
 import GoMapsAutocomplete from '../common/PlacesAutoComplete';
+import { globalStateController } from '@/state/global/globalStateController';
 
 export function BookingForm() {
 	const router = useRouter();
+	const { stepperValues } = globalStateController.useState(['stepperForm'], 'stepperValues');
+	const bookingInfo = stepperValues?.stepperForm?.bookingInfo;
 
 	return (
 		<Card className="w-full max-w-2xl mx-auto bg-gradient-to-r from-gray-50 to-gray-100 shadow-2xl rounded-xl overflow-hidden">
@@ -35,17 +38,27 @@ export function BookingForm() {
 						<div className="space-y-6">
 							<div className="relative">
 								<MapPin className="absolute left-4 top-2 h-5 w-5 text-gray-400" />
-								<GoMapsAutocomplete placeholder={'From: Address, airport, hotel...'} />
+								<GoMapsAutocomplete placeholder={'From: Address, airport, hotel...'} distination={"from"} />
 							</div>
 							<div className="relative">
 								<MapPin className="absolute left-4 top-2 h-5 w-5 text-gray-400" />
-								<GoMapsAutocomplete placeholder={'To: Address, airport, hotel...'} />
+								<GoMapsAutocomplete placeholder={'To: Address, airport, hotel...'} distination={"to"} />
 							</div>
 							<div className="relative">
 								<Calendar className="absolute left-4 top-2 h-5 w-5 text-gray-400" />
 								<Input
 									type="date"
 									className="w-full h-10 pl-12 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400"
+									value={bookingInfo.date}
+									onChange={(e) => globalStateController.updateState({
+										stepperForm: {
+											...stepperValues?.stepperForm,
+											bookingInfo: {
+												...bookingInfo,
+												date: e.target.value
+											}
+										}
+									})}
 								/>
 							</div>
 							<div className="relative">
@@ -53,6 +66,16 @@ export function BookingForm() {
 								<Input
 									type="time"
 									className="w-full h-10 pl-12 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400"
+									value={bookingInfo.time}
+									onChange={(e) => globalStateController.updateState({
+										stepperForm: {
+											...stepperValues?.stepperForm,
+											bookingInfo: {
+												...bookingInfo,
+												time: e.target.value
+											}
+										}
+									})}
 								/>
 							</div>
 							<p className="text-sm text-gray-500 text-center">Chauffeur will wait 15 minutes free of charge.</p>
@@ -71,7 +94,7 @@ export function BookingForm() {
 						<div className="space-y-6">
 							<div className="relative">
 								<MapPin className="absolute left-4 top-2 h-5 w-5 text-gray-400" />
-								<GoMapsAutocomplete placeholder={'Pickup location'} />
+								<GoMapsAutocomplete placeholder={'Pickup location'} distination={"from"} />
 							</div>
 							<div className="relative">
 								<Calendar className="absolute left-4 top-2 h-5 w-5 text-gray-400" />

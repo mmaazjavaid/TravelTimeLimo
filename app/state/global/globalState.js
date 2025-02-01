@@ -3,6 +3,12 @@ import { cloneDeep } from "lodash";
 
 export const globalInitialState = {
     stepperForm: {
+        bookingInfo: {
+            from: '',
+            to: '',
+            date: '',
+            time: ''
+        },
         serviceClass: {
             rideType: 'businessClass',
         },
@@ -17,6 +23,13 @@ export const globalInitialState = {
             ln: '',
             email: '',
             phoneNum: '',
+        },
+        paymentInfo: {
+            nameOnCard: '',
+            cardNumber: '',
+            expirationDate: '',
+            cvv: '',
+            saveCard: false,
         }
     },
 };
