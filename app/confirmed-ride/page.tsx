@@ -9,7 +9,6 @@ import { globalStateController } from "@/state/global/globalStateController"
 export default function ThankYouPage() {
     const [mounted, setMounted] = useState(false)
     const { stepperValues } = globalStateController.useState(['stepperForm'], 'stepperValues');
-    console.log(stepperValues?.stepperForm)
 
     useEffect(() => {
         setMounted(true)

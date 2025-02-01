@@ -17,7 +17,6 @@ export async function POST(req) {
             text: `Stepper`,
         };
 
-        console.log(emailData)
         const result = await new Promise((resolve, reject) => {
             mg.messages().send(emailData, (error, body) => {
                 if (error) {
@@ -30,7 +29,6 @@ export async function POST(req) {
 
         return new Response(JSON.stringify({ success: true, result }), { status: 200 });
     } catch (error) {
-        console.log(error.message)
         return new Response(JSON.stringify({ success: false, error: error.message }), { status: 500 });
     }
 }
