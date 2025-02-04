@@ -31,14 +31,14 @@ export function PickupInfo() {
 								id="flight-number"
 								className="bg-gray-200"
 								placeholder="e.g. LH 202, U24567, BA2490"
-								value={pickUpInfo?.flightNum}
+								value={pickUpInfo?.flightNumber}
 								onChange={e =>
 									globalStateController.updateState({
 										stepperForm: {
 											...stepperValues?.stepperForm,
 											pickUpInfo: {
 												...pickUpInfo,
-												flightNum: e.target.value,
+												flightNumber: e.target.value,
 											},
 										},
 									})
@@ -55,14 +55,14 @@ export function PickupInfo() {
 							<Input
 								id="pickup-sign"
 								className="bg-gray-200"
-								value={pickUpInfo?.pickUpSign}
+								value={pickUpInfo?.pickupSign}
 								onChange={e =>
 									globalStateController.updateState({
 										stepperForm: {
 											...stepperValues?.stepperForm,
 											pickUpInfo: {
 												...pickUpInfo,
-												pickUpSign: e.target.value,
+												pickupSign: e.target.value,
 											},
 										},
 									})
@@ -104,14 +104,14 @@ export function PickupInfo() {
 							<Input
 								id="reference-code"
 								className="bg-gray-200"
-								value={pickUpInfo?.refCode}
+								value={pickUpInfo?.referenceCode}
 								onChange={e =>
 									globalStateController.updateState({
 										stepperForm: {
 											...stepperValues?.stepperForm,
 											pickUpInfo: {
 												...pickUpInfo,
-												refCode: e.target.value,
+												referenceCode: e.target.value,
 											},
 										},
 									})

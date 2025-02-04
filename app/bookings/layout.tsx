@@ -13,29 +13,23 @@ function Layout({ children }: { children: ReactNode }) {
 	const { stepperValues } = globalStateController.useState(['stepperForm'], 'stepperValues');
 	const booking = stepperValues?.stepperForm;
 
-console.log('booking: ', booking)
 	const handleNextStep = async () => {
 		const stepperForm = globalStateController.getValue('stepperForm');
 
 		if (activeStep === STEPS.length - 2) {
 			try {
-				// const response = await fetch('/api/send-email', {
-				// 	method: 'POST',
-				// 	headers: {
-				// 		'Content-Type': 'application/json',
-				// 	},
-				// 	body: JSON.stringify({ stepperForm }),
-				// });
-				// const result = await response.json();
-				// if (response.ok) {
-				// 	console.log('Email sent successfully:', result);
-				// } else {
-				// 	console.error('Failed to send email:', result.error);
-				// }
-				// setActiveStep(prev => prev + 1);
-				// router.push(STEPS[activeStep + 1].link);
+				const response = await fetch('http://localhost:3000/api/bookings', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify(stepperForm),
+				});
+
+				const result = await response.json();
+				if (!response.ok) throw new Error(result.error || 'Failed to create booking');
+
+				console.log('Booking successfully processed:', result);
 			} catch (error) {
-				console.error('Error sending email:', error);
+				console.error('Error sending booking:', error);
 			}
 		}
 

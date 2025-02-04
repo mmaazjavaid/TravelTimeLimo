@@ -25,10 +25,10 @@ export const globalInitialState = {
 			phoneNumber: '',
 		},
 		pickUpInfo: {
-			flightNum: null,
-			pickUpSign: '',
+			flightNumber: '',
+			pickupSign: '',
 			notes: '',
-			refCode: '',
+			referenceCode: '',
 		},
 		paymentInfo: {
 			nameOnCard: '',
