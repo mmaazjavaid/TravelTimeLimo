@@ -27,6 +27,7 @@ const RideCard: React.FC = () => {
 	const [selectedRide, setSelectedRide] = useState<number>(0); // Track the selected ride
 	const [expandedRide, setExpandedRide] = useState<ExpandedRide>({ id: null, isExpanded: false });
 	const { stepperValues } = globalStateController.useState(['stepperForm'], 'stepperValues');
+	const bookingInfo = stepperValues?.stepperForm?.bookingInfo;
 
 	return (
 		<div className="border border-gray-300 rounded-lg">
@@ -40,15 +41,22 @@ const RideCard: React.FC = () => {
 							borderColor: selectedRide === ride.id ? 'black' : undefined, // Apply border color conditionally
 						}}
 						onClick={() => {
-							setSelectedRide(ride.id)
+							setSelectedRide(ride.id);
 							globalStateController.updateState({
 								stepperForm: {
 									...stepperValues?.stepperForm,
-									serviceClass: {
-										rideType: ride.value,
+									bookingInfo: {
+										...bookingInfo,
+										vehicleType: ride.value,
+										passengers: ride.seats,
+										luggage: ride.luggage,
+										baseFare: ride.baseFare,
+										meetAndGreet: ride.meetAndGreet,
+										tax: ride.tax,
+										totalFare: ride.price,
 									},
-								}
-							})
+								},
+							});
 						}} // Set the selected ride on click
 					>
 						<div className="flex items-center justify-between">
@@ -68,7 +76,7 @@ const RideCard: React.FC = () => {
 								</div>
 							</div>
 							<div className="flex items-center gap-2">
-								<p className="font-semibold">{ride.price}</p>
+								<p className="font-semibold">{`US$${ride.price.toFixed(2)}`}</p>
 								{expandedRide?.id === ride.id && expandedRide?.isExpanded ? (
 									<ChevronUp
 										onClick={() => setExpandedRide({ isExpanded: false, id: ride.id })}
@@ -83,7 +91,7 @@ const RideCard: React.FC = () => {
 							</div>
 						</div>
 						{expandedRide?.id === ride.id && expandedRide?.isExpanded && (
-							<PriceBreakdown baseFare={ride.baseFair} meetAndGreet={ride.meetAndGreet} tax={ride.tax} />
+							<PriceBreakdown baseFare={ride.baseFare} meetAndGreet={ride.meetAndGreet} tax={ride.tax} />
 						)}
 					</div>
 				))}

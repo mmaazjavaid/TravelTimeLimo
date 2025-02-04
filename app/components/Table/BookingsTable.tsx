@@ -13,7 +13,7 @@ export const BookingsTable: React.FC<{ bookings: BookingModel[] }> = ({ bookings
 		initialState: {
 			sorting: [
 				{
-					id: 'bookingDetails.date',
+					id: 'bookingInfo.date',
 					desc: true,
 				},
 			],

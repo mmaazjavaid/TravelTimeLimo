@@ -10,7 +10,10 @@ import { globalStateController } from '@/state/global/globalStateController';
 function Layout({ children }: { children: ReactNode }) {
 	const router = useRouter();
 	const [activeStep, setActiveStep] = useState<number>(0);
+	const { stepperValues } = globalStateController.useState(['stepperForm'], 'stepperValues');
+	const booking = stepperValues?.stepperForm;
 
+console.log('booking: ', booking)
 	const handleNextStep = async () => {
 		const stepperForm = globalStateController.getValue('stepperForm');
 

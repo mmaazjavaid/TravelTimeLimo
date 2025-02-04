@@ -33,11 +33,11 @@ export interface Ride {
 	value: string;
 	title: string;
 	image: string;
-	price: string;
+	price: number;
 	description: string;
 	seats: number;
 	luggage: number;
-	baseFair: number;
+	baseFare: number;
 	meetAndGreet: number;
 	tax: number;
 }
@@ -64,13 +64,13 @@ export interface BookingModel {
 		email: string;
 		phoneNumber: string;
 	};
-	pickupDetails?: {
+	pickUpInfo?: {
 		flightNumber?: string;
 		pickupSign?: string;
 		notes?: string;
 		referenceCode?: string;
 	};
-	bookingDetails: {
+	bookingInfo: {
 		from: string;
 		to: string;
 		numberOfHours: number;

@@ -12,8 +12,6 @@ export function PaymentInfo() {
 	const { stepperValues } = globalStateController.useState(['stepperForm'], 'stepperValues');
 	const paymentInfo = stepperValues?.stepperForm?.paymentInfo;
 
-
-
 	const formatCardNumber = (value: string) => {
 		return value
 			.replace(/\s/g, '')
@@ -31,7 +29,6 @@ export function PaymentInfo() {
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
 		// send email with payment data
-
 	};
 
 	return (
@@ -47,15 +44,17 @@ export function PaymentInfo() {
 							</Label>
 							<Input
 								value={paymentInfo.nameOnCard}
-								onChange={(e) => globalStateController.updateState({
-									stepperForm: {
-										...stepperValues?.stepperForm,
-										paymentInfo: {
-											...paymentInfo,
-											nameOnCard: e.target.value
-										}
-									}
-								})}
+								onChange={e =>
+									globalStateController.updateState({
+										stepperForm: {
+											...stepperValues?.stepperForm,
+											paymentInfo: {
+												...paymentInfo,
+												nameOnCard: e.target.value,
+											},
+										},
+									})
+								}
 								className="bg-gray-200"
 								required
 							/>
@@ -69,15 +68,17 @@ export function PaymentInfo() {
 								<Input
 									id="cardNumber"
 									value={paymentInfo.cardNumber}
-									onChange={(e) => globalStateController.updateState({
-										stepperForm: {
-											...stepperValues?.stepperForm,
-											paymentInfo: {
-												...paymentInfo,
-												cardNumber: e.target.value
-											}
-										}
-									})}
+									onChange={e =>
+										globalStateController.updateState({
+											stepperForm: {
+												...stepperValues?.stepperForm,
+												paymentInfo: {
+													...paymentInfo,
+													cardNumber: formatCardNumber(e.target.value),
+												},
+											},
+										})
+									}
 									className="bg-gray-200"
 									maxLength={19}
 									required
@@ -99,15 +100,17 @@ export function PaymentInfo() {
 									id="expirationDate"
 									placeholder="MM/YY"
 									value={paymentInfo.expirationDate}
-									onChange={(e) => globalStateController.updateState({
-										stepperForm: {
-											...stepperValues?.stepperForm,
-											paymentInfo: {
-												...paymentInfo,
-												expirationDate: e.target.value
-											}
-										}
-									})}
+									onChange={e =>
+										globalStateController.updateState({
+											stepperForm: {
+												...stepperValues?.stepperForm,
+												paymentInfo: {
+													...paymentInfo,
+													expirationDate: formatExpirationDate(e.target.value),
+												},
+											},
+										})
+									}
 									className="bg-gray-200"
 									maxLength={5}
 									required
@@ -121,15 +124,17 @@ export function PaymentInfo() {
 									id="cvv"
 									type="password"
 									value={paymentInfo.cvv}
-									onChange={(e) => globalStateController.updateState({
-										stepperForm: {
-											...stepperValues?.stepperForm,
-											paymentInfo: {
-												...paymentInfo,
-												cvv: e.target.value
-											}
-										}
-									})}
+									onChange={e =>
+										globalStateController.updateState({
+											stepperForm: {
+												...stepperValues?.stepperForm,
+												paymentInfo: {
+													...paymentInfo,
+													cvv: e.target.value,
+												},
+											},
+										})
+									}
 									className="bg-gray-200"
 									maxLength={4}
 									required

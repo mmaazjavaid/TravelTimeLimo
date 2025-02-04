@@ -22,10 +22,9 @@ const countries = [
 ];
 
 export function BookForSomeoneForm() {
-	const [title, setTitle] = React.useState('');
 	const [country, setCountry] = React.useState(countries[0]);
 	const { stepperValues } = globalStateController.useState(['stepperForm'], 'stepperValues');
-	const pickUpInfo = stepperValues?.stepperForm?.pickUpInfo;
+	const passengerInfo = stepperValues?.stepperForm?.passengerInfo;
 
 	return (
 		<Card className="pt-6">
@@ -36,16 +35,18 @@ export function BookForSomeoneForm() {
 					</Label>
 					<DropDown
 						options={titles}
-						value={pickUpInfo?.title}
-						onChange={(value) => globalStateController.updateState({
-							stepperForm: {
-								...stepperValues?.stepperForm,
-								pickUpInfo: {
-									...pickUpInfo,
-									title: value
-								}
-							}
-						})}
+						value={passengerInfo?.title}
+						onChange={value =>
+							globalStateController.updateState({
+								stepperForm: {
+									...stepperValues?.stepperForm,
+									passengerInfo: {
+										...passengerInfo,
+										title: value,
+									},
+								},
+							})
+						}
 						placeholder="Select title"
 						className="bg-gray-200"
 					/>
@@ -60,16 +61,18 @@ export function BookForSomeoneForm() {
 							id="firstName"
 							placeholder="First name"
 							className="bg-gray-200"
-							value={pickUpInfo?.fn}
-							onChange={(e) => globalStateController.updateState({
-								stepperForm: {
-									...stepperValues?.stepperForm,
-									pickUpInfo: {
-										...pickUpInfo,
-										fn: e.target.value
-									}
-								}
-							})}
+							value={passengerInfo?.firstName}
+							onChange={e =>
+								globalStateController.updateState({
+									stepperForm: {
+										...stepperValues?.stepperForm,
+										passengerInfo: {
+											...passengerInfo,
+											firstName: e.target.value,
+										},
+									},
+								})
+							}
 						/>
 					</div>
 					<div className="space-y-2">
@@ -80,16 +83,18 @@ export function BookForSomeoneForm() {
 							id="lastName"
 							placeholder="Last name"
 							className="bg-gray-200"
-							value={pickUpInfo?.ln}
-							onChange={(e) => globalStateController.updateState({
-								stepperForm: {
-									...stepperValues?.stepperForm,
-									pickUpInfo: {
-										...pickUpInfo,
-										ln: e.target.value
-									}
-								}
-							})}
+							value={passengerInfo?.lastName}
+							onChange={e =>
+								globalStateController.updateState({
+									stepperForm: {
+										...stepperValues?.stepperForm,
+										passengerInfo: {
+											...passengerInfo,
+											lastName: e.target.value,
+										},
+									},
+								})
+							}
 						/>
 					</div>
 				</div>
@@ -103,16 +108,18 @@ export function BookForSomeoneForm() {
 						type="email"
 						placeholder="Email"
 						className="bg-gray-200"
-						value={pickUpInfo?.email}
-						onChange={(e) => globalStateController.updateState({
-							stepperForm: {
-								...stepperValues?.stepperForm,
-								pickUpInfo: {
-									...pickUpInfo,
-									email: e.target.value
-								}
-							}
-						})}
+						value={passengerInfo?.email}
+						onChange={e =>
+							globalStateController.updateState({
+								stepperForm: {
+									...stepperValues?.stepperForm,
+									passengerInfo: {
+										...passengerInfo,
+										email: e.target.value,
+									},
+								},
+							})
+						}
 					/>
 				</div>
 
@@ -145,16 +152,18 @@ export function BookForSomeoneForm() {
 							type="tel"
 							className="rounded-l-none bg-gray-200"
 							placeholder="Phone number"
-							value={pickUpInfo?.phoneNum}
-							onChange={(e) => globalStateController.updateState({
-								stepperForm: {
-									...stepperValues?.stepperForm,
-									pickUpInfo: {
-										...pickUpInfo,
-										phoneNum: e.target.value
-									}
-								}
-							})}
+							value={passengerInfo?.phoneNumber}
+							onChange={e =>
+								globalStateController.updateState({
+									stepperForm: {
+										...stepperValues?.stepperForm,
+										passengerInfo: {
+											...passengerInfo,
+											phoneNumber: e.target.value,
+										},
+									},
+								})
+							}
 						/>
 					</div>
 					<p className="text-sm text-muted-foreground">
