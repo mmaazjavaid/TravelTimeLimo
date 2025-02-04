@@ -11,13 +11,6 @@ export interface StepperProps {
 	setActiveStep: (step: number) => void;
 }
 
-export interface BookingDetailsProps {
-	date: string;
-	location: string;
-	duration: string;
-	distance: string;
-}
-
 /* Service Class */
 
 export interface Amenity {

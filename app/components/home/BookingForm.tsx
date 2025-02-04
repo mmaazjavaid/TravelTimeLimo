@@ -9,11 +9,39 @@ import { Card, CardContent } from '@/components/ui/card';
 import { STYLES } from '@/lib/commonStyles';
 import GoMapsAutocomplete from '../common/PlacesAutoComplete';
 import { globalStateController } from '@/state/global/globalStateController';
+import axios from 'axios';
 
 export function BookingForm() {
 	const router = useRouter();
 	const { stepperValues } = globalStateController.useState(['stepperForm'], 'stepperValues');
 	const bookingInfo = stepperValues?.stepperForm?.bookingInfo;
+
+	const getDistanceParameters = async () => {
+		try {
+			const response = await axios.get('https://maps.gomaps.pro/maps/api/distancematrix/json', {
+				params: {
+					key: process.env.NEXT_PUBLIC_GOMAPS_PLACES_API_KEY, // Replace with your API key
+					avoid: 'indoor',
+					destinations: bookingInfo?.to,
+					origins: bookingInfo?.from,
+					units: 'metric',
+				},
+			});
+			const distanceParameters = response?.data?.rows?.[0]?.elements?.[0] || {};
+			globalStateController.updateState({
+				stepperForm: {
+					...stepperValues?.stepperForm,
+					bookingInfo: {
+						...bookingInfo,
+						distance: distanceParameters?.distance,
+						duration: distanceParameters?.duration,
+					},
+				},
+			});
+		} catch (error) {
+			console.error('Error fetching distance parameters:', error);
+		}
+	};
 
 	return (
 		<Card className="w-full max-w-2xl mx-auto bg-gradient-to-r from-gray-50 to-gray-100 shadow-2xl rounded-xl overflow-hidden">
@@ -38,11 +66,11 @@ export function BookingForm() {
 						<div className="space-y-6">
 							<div className="relative">
 								<MapPin className="absolute left-4 top-2 h-5 w-5 text-gray-400" />
-								<GoMapsAutocomplete placeholder={'From: Address, airport, hotel...'} distination={"from"} />
+								<GoMapsAutocomplete placeholder={'From: Address, airport, hotel...'} distination={'from'} />
 							</div>
 							<div className="relative">
 								<MapPin className="absolute left-4 top-2 h-5 w-5 text-gray-400" />
-								<GoMapsAutocomplete placeholder={'To: Address, airport, hotel...'} distination={"to"} />
+								<GoMapsAutocomplete placeholder={'To: Address, airport, hotel...'} distination={'to'} />
 							</div>
 							<div className="relative">
 								<Calendar className="absolute left-4 top-2 h-5 w-5 text-gray-400" />
@@ -50,15 +78,17 @@ export function BookingForm() {
 									type="date"
 									className="w-full h-10 pl-12 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400"
 									value={bookingInfo.date}
-									onChange={(e) => globalStateController.updateState({
-										stepperForm: {
-											...stepperValues?.stepperForm,
-											bookingInfo: {
-												...bookingInfo,
-												date: e.target.value
-											}
-										}
-									})}
+									onChange={e =>
+										globalStateController.updateState({
+											stepperForm: {
+												...stepperValues?.stepperForm,
+												bookingInfo: {
+													...bookingInfo,
+													date: e.target.value,
+												},
+											},
+										})
+									}
 								/>
 							</div>
 							<div className="relative">
@@ -67,21 +97,24 @@ export function BookingForm() {
 									type="time"
 									className="w-full h-10 pl-12 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400"
 									value={bookingInfo.time}
-									onChange={(e) => globalStateController.updateState({
-										stepperForm: {
-											...stepperValues?.stepperForm,
-											bookingInfo: {
-												...bookingInfo,
-												time: e.target.value
-											}
-										}
-									})}
+									onChange={e =>
+										globalStateController.updateState({
+											stepperForm: {
+												...stepperValues?.stepperForm,
+												bookingInfo: {
+													...bookingInfo,
+													time: e.target.value,
+												},
+											},
+										})
+									}
 								/>
 							</div>
 							<p className="text-sm text-gray-500 text-center">Chauffeur will wait 15 minutes free of charge.</p>
 							<Button
 								onClick={() => {
 									router.push('/bookings/service-class');
+									getDistanceParameters();
 								}}
 								className={`w-full text-white font-semibold py-3 rounded-lg text-base sm:text-lg md:text-xl`}
 								variant="gradient"
@@ -94,13 +127,24 @@ export function BookingForm() {
 						<div className="space-y-6">
 							<div className="relative">
 								<MapPin className="absolute left-4 top-2 h-5 w-5 text-gray-400" />
-								<GoMapsAutocomplete placeholder={'Pickup location'} distination={"from"} />
+								<GoMapsAutocomplete placeholder={'Pickup location'} distination={'from'} />
 							</div>
 							<div className="relative">
 								<Calendar className="absolute left-4 top-2 h-5 w-5 text-gray-400" />
 								<Input
 									type="date"
 									className="w-full h-10 pl-12 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400"
+									onChange={e =>
+										globalStateController.updateState({
+											stepperForm: {
+												...stepperValues?.stepperForm,
+												bookingInfo: {
+													...bookingInfo,
+													date: e.target.value,
+												},
+											},
+										})
+									}
 								/>
 							</div>
 							<div className="relative">
@@ -108,6 +152,17 @@ export function BookingForm() {
 								<Input
 									type="time"
 									className="w-full h-10 pl-12 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400"
+									onChange={e =>
+										globalStateController.updateState({
+											stepperForm: {
+												...stepperValues?.stepperForm,
+												bookingInfo: {
+													...bookingInfo,
+													time: e.target.value,
+												},
+											},
+										})
+									}
 								/>
 							</div>
 							<div className="relative">
@@ -116,6 +171,17 @@ export function BookingForm() {
 									type="number"
 									placeholder="Number of hours"
 									className="w-full pl-12 h-10 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400"
+									onChange={e =>
+										globalStateController.updateState({
+											stepperForm: {
+												...stepperValues?.stepperForm,
+												bookingInfo: {
+													...bookingInfo,
+													numberOfHours: e.target.value,
+												},
+											},
+										})
+									}
 								/>
 							</div>
 							<Button

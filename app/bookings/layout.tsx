@@ -23,9 +23,7 @@ function Layout({ children }: { children: ReactNode }) {
 				// 	},
 				// 	body: JSON.stringify({ stepperForm }),
 				// });
-
 				// const result = await response.json();
-
 				// if (response.ok) {
 				// 	console.log('Email sent successfully:', result);
 				// } else {
@@ -44,18 +42,12 @@ function Layout({ children }: { children: ReactNode }) {
 		}
 	};
 
-
 	return (
 		<main className="container mx-auto px-4 py-8 max-w-3xl">
 			{/* Stepper */}
 			<Stepper steps={STEPS} activeStep={activeStep} setActiveStep={setActiveStep} />
 
-			<BookingDetails
-				date="Fri, Dec 20, 2024"
-				location="New York LaGuardia Airport (LGA)"
-				duration="2 hours"
-				distance="incl. 40 km"
-			/>
+			<BookingDetails />
 
 			{/* Main Content (Children) */}
 			{children}
