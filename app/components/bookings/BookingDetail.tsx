@@ -5,7 +5,7 @@ import { globalStateController } from '@/state/global/globalStateController';
 const BookingDetails: React.FC = () => {
 	const [bookingDate, setBookingDate] = useState('');
 	const { stepperValues } = globalStateController.useState(['stepperForm'], 'stepperValues');
-	const bookingInfo = stepperValues?.stepperForm?.bookingInfo;
+	const { bookingInfo, routeInfo } = stepperValues?.stepperForm;
 
 	useEffect(() => {
 		const date = new Date(bookingInfo?.date);
@@ -37,15 +37,15 @@ const BookingDetails: React.FC = () => {
 			)}
 
 			<div className="flex items-center gap-2 text-sm text-gray-500 mt-1">
-				{bookingInfo?.distance ? (
+				{routeInfo?.distanceText ? (
 					<>
 						<Clock className="h-4 w-4" />
-						<span>{bookingInfo?.duration?.text || ''}</span>
+						<span>{routeInfo?.durationText || ''}</span>
+						<span>•{` ${routeInfo?.distanceText}` || ''}</span>
 					</>
 				) : (
 					<span>{`Hours: ${bookingInfo?.numberOfHours}` || ''}</span>
 				)}
-				{bookingInfo?.distance && <span>•{` ${bookingInfo?.distance?.text}` || ''}</span>}
 			</div>
 		</div>
 	);

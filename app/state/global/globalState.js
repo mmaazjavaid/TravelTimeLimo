@@ -4,6 +4,7 @@ import { cloneDeep } from 'lodash';
 export const globalInitialState = {
 	stepperForm: {
 		bookingInfo: {
+			type: '',
 			from: '',
 			to: '',
 			date: '',
@@ -36,6 +37,12 @@ export const globalInitialState = {
 			expirationDate: '',
 			cvv: '',
 			saveCard: false,
+		},
+		routeInfo: {
+			distanceText: '',
+			distanceValue: 0,
+			durationText: '',
+			durationValue: 0,
 		},
 	},
 };

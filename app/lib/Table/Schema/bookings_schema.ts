@@ -1,5 +1,5 @@
-import { BookingModel } from "@/types/bookings";
-import { MRT_ColumnDef } from "material-react-table";
+import { BookingModel } from '@/types/bookings';
+import { MRT_ColumnDef } from 'material-react-table';
 
 const BookingsMeta: Array<MRT_ColumnDef<BookingModel>> = [
 	{
@@ -43,6 +43,11 @@ const BookingsMeta: Array<MRT_ColumnDef<BookingModel>> = [
 		size: 200,
 	},
 	{
+		accessorKey: 'bookingInfo.type',
+		header: 'Type',
+		size: 200,
+	},
+	{
 		accessorKey: 'bookingInfo.from',
 		header: 'From',
 		size: 200,
@@ -60,6 +65,16 @@ const BookingsMeta: Array<MRT_ColumnDef<BookingModel>> = [
 	{
 		accessorKey: 'bookingInfo.time',
 		header: 'Time',
+		size: 200,
+	},
+	{
+		accessorKey: 'routeInfo.distanceText',
+		header: 'Approx. Distance',
+		size: 200,
+	},
+	{
+		accessorKey: 'routeInfo.durationText',
+		header: 'Approx. Duration',
 		size: 200,
 	},
 	{

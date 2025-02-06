@@ -28,13 +28,15 @@ export function BookingForm() {
 				},
 			});
 			const distanceParameters = response?.data?.rows?.[0]?.elements?.[0] || {};
+			console.log(distanceParameters);
 			globalStateController.updateState({
 				stepperForm: {
 					...stepperValues?.stepperForm,
-					bookingInfo: {
-						...bookingInfo,
-						distance: distanceParameters?.distance,
-						duration: distanceParameters?.duration,
+					routeInfo: {
+						distanceText: distanceParameters?.distance?.text,
+						distanceValue: distanceParameters?.distance?.value,
+						durationText: distanceParameters?.duration?.text,
+						durationValue: distanceParameters?.duration?.value,
 					},
 				},
 			});
@@ -50,12 +52,34 @@ export function BookingForm() {
 				<Tabs defaultValue="one-way" className="w-full">
 					<TabsList className="flex justify-center gap-4 mb-8">
 						<TabsTrigger
+							onClick={() => {
+								globalStateController.updateState({
+									stepperForm: {
+										...stepperValues?.stepperForm,
+										bookingInfo: {
+											...bookingInfo,
+											type: 'oneWay',
+										},
+									},
+								});
+							}}
 							value="one-way"
 							className={`px-6 py-3 text-sm font-semibold uppercase rounded-full border ${STYLES.transition} data-[state=active]:bg-gradient-to-r data-[state=active]:from-gray-400 data-[state=active]:via-gray-500 data-[state=active]:to-gray-600 data-[state=active]:text-white data-[state=active]:shadow-lg`}
 						>
 							One Way
 						</TabsTrigger>
 						<TabsTrigger
+							onClick={() => {
+								globalStateController.updateState({
+									stepperForm: {
+										...stepperValues?.stepperForm,
+										bookingInfo: {
+											...bookingInfo,
+											type: 'hourly',
+										},
+									},
+								});
+							}}
 							value="hourly"
 							className={`px-6 py-3 text-sm font-semibold uppercase rounded-full border ${STYLES.transition} data-[state=active]:bg-gradient-to-r data-[state=active]:from-gray-400 data-[state=active]:via-gray-500 data-[state=active]:to-gray-600 data-[state=active]:text-white data-[state=active]:shadow-lg`}
 						>
