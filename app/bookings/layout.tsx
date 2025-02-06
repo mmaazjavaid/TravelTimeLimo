@@ -3,8 +3,8 @@ import { ReactNode, useState } from 'react';
 import { STEPS } from '@/lib/constants';
 import BookingDetails from '@/components/bookings/BookingDetail';
 import { useRouter } from 'next/navigation';
-import { Stepper } from '@/components/bookings/Stepper';
-import BookingFooter from '@/components/bookings/Footer';
+import { Stepper } from '@/components/bookings/stepper';
+import BookingFooter from '@/components/bookings/footer';
 import { globalStateController } from '@/state/global/globalStateController';
 
 function Layout({ children }: { children: ReactNode }) {
