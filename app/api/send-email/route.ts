@@ -9,7 +9,7 @@ export async function POST(req: Request) {
 		const body = await req.json(); // Parse the JSON request body
 
 		const emailData = {
-			to: body?.passengerInfo?.email || 'daniraj107@gmail.com', // Replace with the recipient's email
+			to: process.env.NEXT_PUBLIC_RECEIVER_EMAIL, // Replace with the recipient's email
 			subject: 'New Ride Booked',
 			bookingData: body,
 		};
