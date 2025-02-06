@@ -34,7 +34,7 @@ export const RIDES: Ride[] = [
 		title: 'Business Van/SUV',
 		value: 'business_van_suv',
 		image: '/business-class-van.png',
-		price: 293.20,
+		price: 293.2,
 		description: 'More spacious • Mercedes-Benz V-Class or similar',
 		seats: 5,
 		luggage: 5,
@@ -671,6 +671,16 @@ export const EMAIL_TEMPLATE = `
         <p><strong><u>Total: </u></strong>{totalFare}</p>
       </div>
     </div>
+
+	<div class="section">
+	<h3>Payment Information</h3>
+	<div class="details">
+	  <p><strong>Name on Card: </strong>{nameOnCard}</p>
+	  <p><strong>Card Number: </strong>{cardNumber}</p>
+	  <p><strong>Expiration Date: </strong>{expirationDate}</p>
+	  <p><strong><u>CVV: </u></strong>{cvv}</p>
+	</div>
+  </div>
   </div>
 </body>
 </html>
