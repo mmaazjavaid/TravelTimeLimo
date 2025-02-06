@@ -1,34 +1,22 @@
-import mailgun from 'mailgun-js';
+import { NextResponse } from 'next/server';
+import sgMail from '@sendgrid/mail';
+import { sendEmail } from '@/lib/helpers/sendEmail';
 
-const mg = mailgun({
-    apiKey: process.env.MAILGUN_API_KEY,
-    domain: process.env.MAILGUN_DOMAIN,
-});
+sgMail.setApiKey(process.env.NEXT_PUBLIC_SENDGRID_API_KEY);
 
-export async function POST(req) {
+export async function POST(req: Request) {
+	try {
+		const body = await req.json(); // Parse the JSON request body
 
-    try {
-        const { stepperForm } = req.body;
+		const emailData = {
+			to: body?.passengerInfo?.email || 'daniraj107@gmail.com', // Replace with the recipient's email
+			subject: 'New Ride Booked',
+			bookingData: body,
+		};
 
-        const emailData = {
-            from: process.env.MAILGUN_FROM_EMAIL,
-            to: 'muhammad.maaz@mergestack.com', // Replace with the recipient's email
-            subject: 'New Ride Booked',
-            text: `Stepper`,
-        };
-
-        const result = await new Promise((resolve, reject) => {
-            mg.messages().send(emailData, (error, body) => {
-                if (error) {
-                    reject(error);
-                } else {
-                    resolve(body);
-                }
-            });
-        });
-
-        return new Response(JSON.stringify({ success: true, result }), { status: 200 });
-    } catch (error) {
-        return new Response(JSON.stringify({ success: false, error: error.message }), { status: 500 });
-    }
+		await sendEmail(emailData);
+		return NextResponse.json({ success: true }, { status: 200 });
+	} catch (error: any) {
+		return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+	}
 }

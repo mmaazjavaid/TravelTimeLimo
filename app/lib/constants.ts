@@ -612,3 +612,66 @@ export const TERMS: TermsSection[] = [
 		],
 	},
 ];
+
+export const EMAIL_TEMPLATE = `
+<html>
+<head>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; }
+    h2 { color: #007bff; }
+    .section { margin-bottom: 20px; }
+    .section h3 { margin-bottom: 8px; border-bottom: 2px solid #007bff; padding-bottom: 5px; }
+    .details { padding: 10px; background-color: #f9f9f9; border-radius: 5px; }
+    .footer { margin-top: 20px; text-align: center; font-size: 12px; color: #777; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Booking Information</h2>
+    <p>{passengerName} Booked a Ride!,</p>
+
+    <div class="section">
+      <h3>Booking Information</h3>
+      <div class="details">
+        <p><strong>From: </strong> {from}</p>
+        <p><strong>To: </strong> {to}</p>
+        <p><strong>Date: </strong> {date} at {time}</p>
+        <p><strong>Vehicle Type: </strong> {vehicleType}</p>
+        <p><strong>Passengers: </strong> {passengers}</p>
+        <p><strong>Luggage: </strong> {luggage}</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Passenger Information</h3>
+      <div class="details">
+        <p><strong>Name: </strong> {title} {firstName} {lastName}</p>
+        <p><strong>Email: </strong> {email}</p>
+        <p><strong>Phone Number: </strong> {phoneNumber}</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Pickup Information</h3>
+      <div class="details">
+        <p><strong>Flight Number: </strong> {flightNumber}</p>
+        <p><strong>Pickup Sign: </strong> {pickupSign}</p>
+        <p><strong>Notes: </strong> {notes}</p>
+        <p><strong>Reference Code: </strong> {referenceCode}</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Fare Breakdown</h3>
+      <div class="details">
+        <p><strong>Base Fare: </strong>{baseFare}</p>
+        <p><strong>Meet & Greet: </strong>{meetAndGreet}</p>
+        <p><strong>Tax: </strong>{tax}</p>
+        <p><strong><u>Total: </u></strong>{totalFare}</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+`;

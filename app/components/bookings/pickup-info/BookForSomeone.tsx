@@ -9,9 +9,9 @@ import { DropDown } from '@/components/ui/dropdown';
 import { globalStateController } from '@/state/global/globalStateController';
 
 const titles = [
-	{ value: 'mr', label: 'Mr.' },
-	{ value: 'ms', label: 'Ms.' },
-	{ value: 'mx', label: 'Mx.' },
+	{ value: 'Mr.', label: 'Mr.' },
+	{ value: 'Ms.', label: 'Ms.' },
+	{ value: 'MX.', label: 'Mx.' },
 ];
 
 const countries = [

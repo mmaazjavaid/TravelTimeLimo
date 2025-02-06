@@ -8,7 +8,7 @@ async function BookingsTablePage({ params }) {
 		return <h1 className="p-72 text-center font-bold text-3xl">Opps! Unauthorized</h1>;
 	}
 
-	let bookingsRes: any = await fetch(`http://localhost:3000/api/bookings`);
+	let bookingsRes: any = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/bookings`);
 	bookingsRes = await bookingsRes.json();
 	const { bookings } = bookingsRes;
 

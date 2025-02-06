@@ -3,22 +3,22 @@ import { MRT_ColumnDef } from "material-react-table";
 
 const BookingsMeta: Array<MRT_ColumnDef<BookingModel>> = [
 	{
-		accessorKey: 'userDetails.firstName',
+		accessorKey: 'passengerInfo.firstName',
 		header: 'First Name',
 		size: 200,
 	},
 	{
-		accessorKey: 'userDetails.lastName',
+		accessorKey: 'passengerInfo.lastName',
 		header: 'Last Name',
 		size: 200,
 	},
 	{
-		accessorKey: 'userDetails.email',
+		accessorKey: 'passengerInfo.email',
 		header: 'Email',
 		size: 200,
 	},
 	{
-		accessorKey: 'userDetails.phoneNumber',
+		accessorKey: 'passengerInfo.phoneNumber',
 		header: 'Phone Number',
 		size: 200,
 	},
