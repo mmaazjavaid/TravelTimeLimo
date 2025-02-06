@@ -13,18 +13,19 @@ function Layout({ children }: { children: ReactNode }) {
 
 	const saveBooking = async (stepperForm: any) => {
 		try {
+			const { paymentInfo, ...bookingData } = stepperForm;
 			const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/bookings`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify(stepperForm),
+				body: JSON.stringify(bookingData),
 			});
 
 			const result = await response.json();
 			if (!response.ok) throw new Error(result.error || 'Failed to create booking');
 
-			console.log('Booking successfully processed:', result);
+			console.log('Booking saved successfully', result);
 		} catch (error) {
-			console.error('Error sending booking:', error);
+			console.error('Error saving booking:', error);
 		}
 	};
 

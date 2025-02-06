@@ -63,8 +63,7 @@ export function BookingForm() {
 					progress: undefined,
 					className: 'bg-gradient-to-r from-gray-600 to-gray-700 text-white', // Gradient background
 				});
-			}
-			console.log(existingBookings);
+			} else return true;
 		} catch (error) {
 			console.error('Error fetching distance parameters:', error);
 		}

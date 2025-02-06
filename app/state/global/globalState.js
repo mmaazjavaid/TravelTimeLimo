@@ -4,7 +4,7 @@ import { cloneDeep } from 'lodash';
 export const globalInitialState = {
 	stepperForm: {
 		bookingInfo: {
-			type: '',
+			type: 'oneWay',
 			from: '',
 			to: '',
 			date: '',

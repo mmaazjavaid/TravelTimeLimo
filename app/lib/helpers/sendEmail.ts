@@ -12,7 +12,7 @@ export const sendEmail = async ({ bookingData }) => {
 		.replace('{date}', bookingInfo.date)
 		.replace('{time}', bookingInfo.time)
 		.replace('{approxDistance}', routeInfo.distanceText || 'N/A')
-		.replace('{approxDuration}', bookingInfo.durationText || 'N/A')
+		.replace('{approxDuration}', routeInfo.durationText || 'N/A')
 		.replace('{vehicleType}', bookingInfo.vehicleType)
 		.replace('{passengers}', bookingInfo.passengers)
 		.replace('{luggage}', bookingInfo.luggage)
