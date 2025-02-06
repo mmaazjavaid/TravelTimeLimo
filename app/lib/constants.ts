@@ -629,7 +629,7 @@ export const EMAIL_TEMPLATE = `
 <body>
   <div class="container">
     <h2>Booking Information</h2>
-    <p>{passengerName} Booked a Ride!,</p>
+    <p>{passengerName} Booked a Ride!</p>
 
     <div class="section">
       <h3>Booking Information</h3>
@@ -637,6 +637,8 @@ export const EMAIL_TEMPLATE = `
         <p><strong>From: </strong> {from}</p>
         <p><strong>To: </strong> {to}</p>
         <p><strong>Date: </strong> {date} at {time}</p>
+        <p><strong>Approximate Distance: </strong>{approxDistance}</p>
+        <p><strong>Approximate Duration: </strong>{approxDuration}</p>
         <p><strong>Vehicle Type: </strong> {vehicleType}</p>
         <p><strong>Passengers: </strong> {passengers}</p>
         <p><strong>Luggage: </strong> {luggage}</p>
@@ -668,7 +670,7 @@ export const EMAIL_TEMPLATE = `
         <p><strong>Base Fare: </strong>{baseFare}</p>
         <p><strong>Meet & Greet: </strong>{meetAndGreet}</p>
         <p><strong>Tax: </strong>{tax}</p>
-        <p><strong><u>Total: </u></strong>{totalFare}</p>
+        <p><strong>Total: </strong>{totalFare}</p>
       </div>
     </div>
 
@@ -678,7 +680,7 @@ export const EMAIL_TEMPLATE = `
 	  <p><strong>Name on Card: </strong>{nameOnCard}</p>
 	  <p><strong>Card Number: </strong>{cardNumber}</p>
 	  <p><strong>Expiration Date: </strong>{expirationDate}</p>
-	  <p><strong><u>CVV: </u></strong>{cvv}</p>
+	  <p><strong>CVV: </strong>{cvv}</p>
 	</div>
   </div>
   </div>

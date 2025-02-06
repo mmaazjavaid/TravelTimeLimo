@@ -4,13 +4,15 @@ import { EMAIL_TEMPLATE } from '../constants';
 sgMail.setApiKey(process.env.NEXT_PUBLIC_SENDGRID_API_KEY);
 
 export const sendEmail = async ({ bookingData }) => {
-	const { passengerInfo, pickUpInfo, bookingInfo, paymentInfo } = bookingData || {};
+	const { passengerInfo, pickUpInfo, bookingInfo, paymentInfo, routeInfo } = bookingData || {};
 
 	const emailHtml = EMAIL_TEMPLATE.replace('{passengerName}', `${passengerInfo.firstName} ${passengerInfo.lastName}`)
 		.replace('{from}', bookingInfo.from)
 		.replace('{to}', bookingInfo.to)
 		.replace('{date}', bookingInfo.date)
 		.replace('{time}', bookingInfo.time)
+		.replace('{approxDistance}', routeInfo.distanceText || 'N/A')
+		.replace('{approxDuration}', bookingInfo.durationText || 'N/A')
 		.replace('{vehicleType}', bookingInfo.vehicleType)
 		.replace('{passengers}', bookingInfo.passengers)
 		.replace('{luggage}', bookingInfo.luggage)

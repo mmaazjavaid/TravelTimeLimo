@@ -28,7 +28,7 @@ export function BookingForm() {
 				},
 			});
 			const distanceParameters = response?.data?.rows?.[0]?.elements?.[0] || {};
-			console.log(distanceParameters);
+
 			globalStateController.updateState({
 				stepperForm: {
 					...stepperValues?.stepperForm,
