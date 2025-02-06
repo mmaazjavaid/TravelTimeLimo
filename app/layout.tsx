@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { Navbar } from './components/navbar';
 import { Footer } from './components/footer';
+import { ToastContainer } from 'react-toastify';
 
 const geistSans = Geist({
 	variable: '--font-geist-sans',
@@ -23,6 +24,7 @@ export default function RootLayout({ children }) {
 		<html lang="en">
 			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
 				<Navbar />
+				<ToastContainer />
 
 				{/* Scrollable Content */}
 				<div className="overflow-y-auto mt-8">{children}</div>

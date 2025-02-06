@@ -15,6 +15,8 @@ import {
 	Youtube,
 } from 'lucide-react';
 
+export const BOOKING_GAP_IN_MINUTES = 30;
+
 export const RIDES: Ride[] = [
 	{
 		id: 0,

@@ -10,6 +10,7 @@ import { STYLES } from '@/lib/commonStyles';
 import GoMapsAutocomplete from '../common/PlacesAutoComplete';
 import { globalStateController } from '@/state/global/globalStateController';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 export function BookingForm() {
 	const router = useRouter();
@@ -40,6 +41,30 @@ export function BookingForm() {
 					},
 				},
 			});
+		} catch (error) {
+			console.error('Error fetching distance parameters:', error);
+		}
+	};
+
+	const isBookingAvailable = async () => {
+		try {
+			const response = await fetch(
+				`${process.env.NEXT_PUBLIC_SITE_URL}/api/bookings/${bookingInfo?.date}/${bookingInfo?.time}`
+			);
+			const existingBookings = await response.json();
+			if (!existingBookings.isAvailable) {
+				toast.error(existingBookings.message, {
+					position: 'top-right',
+					autoClose: 3000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					className: 'bg-gradient-to-r from-gray-600 to-gray-700 text-white', // Gradient background
+				});
+			}
+			console.log(existingBookings);
 		} catch (error) {
 			console.error('Error fetching distance parameters:', error);
 		}
@@ -138,8 +163,11 @@ export function BookingForm() {
 							<p className="text-sm text-gray-500 text-center">Chauffeur will wait 15 minutes free of charge.</p>
 							<Button
 								onClick={() => {
-									router.push('/bookings/service-class');
-									getDistanceParameters();
+									const isAvailable = isBookingAvailable();
+									if (isAvailable) {
+										router.push('/bookings/service-class');
+										getDistanceParameters();
+									}
 								}}
 								className={`w-full text-white font-semibold py-3 rounded-lg text-base sm:text-lg md:text-xl`}
 								variant="gradient"
@@ -212,7 +240,10 @@ export function BookingForm() {
 							</div>
 							<Button
 								onClick={() => {
-									router.push('/bookings/service-class');
+									const isAvailable = isBookingAvailable();
+									if (isAvailable) {
+										router.push('/bookings/service-class');
+									}
 								}}
 								className={`w-full text-white font-semibold py-3 rounded-lg text-base sm:text-lg md:text-xl`}
 								variant="gradient"
