@@ -121,7 +121,6 @@ export function BookingForm() {
 								<GoMapsAutocomplete placeholder={'To: Address, airport, hotel...'} distination={'to'} />
 							</div>
 							<div className="relative">
-								<Calendar className="absolute left-4 top-2 h-5 w-5 text-gray-400" />
 								<Input
 									type="date"
 									min={new Date().toISOString().split('T')[0]} // Disable previous dates
@@ -141,7 +140,6 @@ export function BookingForm() {
 								/>
 							</div>
 							<div className="relative">
-								<Clock className="absolute left-4 top-2 h-5 w-5 text-gray-400" />
 								<Input
 									type="time"
 									className="w-full h-10 pl-12 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400"
@@ -182,7 +180,6 @@ export function BookingForm() {
 								<GoMapsAutocomplete placeholder={'Pickup location'} distination={'from'} />
 							</div>
 							<div className="relative">
-								<Calendar className="absolute left-4 top-2 h-5 w-5 text-gray-400" />
 								<Input
 									type="date"
 									min={new Date().toISOString().split('T')[0]} // Disable previous dates
@@ -201,7 +198,6 @@ export function BookingForm() {
 								/>
 							</div>
 							<div className="relative">
-								<Clock className="absolute left-4 top-2 h-5 w-5 text-gray-400" />
 								<Input
 									type="time"
 									className="w-full h-10 pl-12 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400"

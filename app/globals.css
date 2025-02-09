@@ -60,6 +60,22 @@ body {
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    left: 1rem; /* Moves the icon to the left */
+    cursor: pointer;
+    transform: scale(1.5); /* Increases icon size */
+    filter: invert(66%) sepia(5%) saturate(0%) brightness(90%); /* Matches text-gray-400 */
+  }
+
+  input[type="time"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    left: 7px; /* Moves the icon to the left */
+    cursor: pointer;
+    transform: scale(1.5); /* Increases icon size */
+    filter: invert(66%) sepia(5%) saturate(0%) brightness(90%); /* Matches text-gray-400 */
+  }
 }
 
 @layer base {
