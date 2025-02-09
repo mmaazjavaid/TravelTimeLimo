@@ -44,6 +44,7 @@ export const globalInitialState = {
 			durationText: '',
 			durationValue: 0,
 		},
+		isTermsAgreed: false,
 	},
 };
 

@@ -9,7 +9,10 @@ export const Stepper: React.FC<StepperProps> = ({ steps, activeStep, setActiveSt
 		<div className="w-full py-4 md:py-6 px-2 md:px-0">
 			<div className="relative flex justify-between">
 				{/* Line connecting the steps */}
-				<div className="absolute top-[11px] left-[6%] right-[6%] h-[3px] bg-gray-200" aria-hidden="true" />
+				<div
+					className="absolute top-[11px] left-[6%] right-[6%] h-[3px] bg-gray-200 md:right-[7%]"
+					aria-hidden="true"
+				/>
 
 				{/* Steps */}
 				{steps.map((step, index) => (

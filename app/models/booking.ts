@@ -36,6 +36,7 @@ const bookingSchema = new Schema({
 		durationValue: { type: Number },
 	},
 	isDeleted: { type: Boolean, default: false },
+	isTermsAgreed: { type: Boolean, required: true },
 	createdAt: { type: Date, default: Date.now },
 });
 

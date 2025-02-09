@@ -117,6 +117,12 @@ const BookingsMeta: Array<MRT_ColumnDef<BookingModel>> = [
 		header: 'Total Fare',
 		size: 200,
 	},
+	{
+		accessorKey: 'isTermsAgreed',
+		header: 'Agreed to Terms',
+		size: 200,
+		accessorFn: (row: any) => (row.isTermsAgreed ? 'Yes' : 'No'),
+	},
 ];
 
 export default BookingsMeta;

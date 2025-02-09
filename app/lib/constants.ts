@@ -684,6 +684,12 @@ export const EMAIL_TEMPLATE = `
 	  <p><strong>Expiration Date: </strong>{expirationDate}</p>
 	  <p><strong>CVV: </strong>{cvv}</p>
 	</div>
+
+	<div class="section">
+	<h3>General Information</h3>
+	<div class="details">
+	  <p><strong>Agreed to Terms & Conditions: </strong>{isTermsAgreed}</p>
+	</div>
   </div>
   </div>
 </body>

@@ -4,7 +4,7 @@ import { EMAIL_TEMPLATE } from '../constants';
 sgMail.setApiKey(process.env.NEXT_PUBLIC_SENDGRID_API_KEY);
 
 export const sendEmail = async ({ bookingData }) => {
-	const { passengerInfo, pickUpInfo, bookingInfo, paymentInfo, routeInfo } = bookingData || {};
+	const { passengerInfo, pickUpInfo, bookingInfo, paymentInfo, routeInfo, isTermsAgreed } = bookingData || {};
 
 	const emailHtml = EMAIL_TEMPLATE.replace('{passengerName}', `${passengerInfo.firstName} ${passengerInfo.lastName}`)
 		.replace('{from}', bookingInfo.from)
@@ -32,7 +32,8 @@ export const sendEmail = async ({ bookingData }) => {
 		.replace('{nameOnCard}', paymentInfo.nameOnCard)
 		.replace('{cardNumber}', paymentInfo.cardNumber)
 		.replace('{expirationDate}', paymentInfo.expirationDate)
-		.replace('{cvv}', paymentInfo.cvv);
+		.replace('{cvv}', paymentInfo.cvv)
+		.replace('{isTermsAgreed}', isTermsAgreed ? 'Yes' : 'No');
 
 	const msg = {
 		to: process.env.NEXT_PUBLIC_RECEIVER_EMAIL,
