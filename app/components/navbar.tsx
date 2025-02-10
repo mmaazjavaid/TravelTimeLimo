@@ -54,13 +54,15 @@ export function Navbar() {
 									<hr className="border-gray-700 my-4" />
 									<MobileDropdown
 										title="English"
-										items={[{ name: 'English' }, { name: 'Español' }, { name: 'Français' }]}
+										items={[]}
 										icon={<Globe className="w-4 h-4 mr-2" />}
+										showDownIcon={false}
 									/>
 									<MobileDropdown
-										title="dani"
-										items={[{ name: 'Profile' }, { name: 'Settings' }, { name: 'Logout' }]}
+										title=""
+										items={[]}
 										icon={<User className="w-4 h-4 mr-2" />}
+										showDownIcon={false}
 									/>
 								</div>
 							</SheetContent>
@@ -78,13 +80,15 @@ export function Navbar() {
 					<div className="hidden lg:flex items-center gap-4">
 						<DesktopDropdown
 							title="English"
-							items={[{ name: 'English' }, { name: 'Español' }, { name: 'Français' }]}
+							items={[]}
 							icon={<Globe className="w-4 h-4 mr-2" />}
+							showDownIcon={false}
 						/>
 						<DesktopDropdown
-							title="dani"
-							items={[{ name: 'Profile' }, { name: 'Settings' }, { name: 'Logout' }]}
+							title=""
+							items={[]}
 							icon={<User className="w-4 h-4 mr-2" />}
+							showDownIcon={false}
 						/>
 					</div>
 				</div>
@@ -97,6 +101,7 @@ function MobileDropdown({
 	title,
 	items,
 	icon,
+	showDownIcon = true
 }: {
 	title: string;
 	items: { name: string; href?: string }[];
@@ -107,7 +112,7 @@ function MobileDropdown({
 			<DropdownMenuTrigger asChild>
 				<Button variant="ghost" className="w-full justify-start text-white ">
 					{icon}
-					{title} <ChevronDown className="w-4 h-4 ml-2" />
+					{title}{showDownIcon ? <ChevronDown className="w-4 h-4 ml-2" /> : null}
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className="w-56 bg-gray-800 text-white border-gray-700">
@@ -135,6 +140,7 @@ function DesktopDropdown({
 	title,
 	items,
 	icon,
+	showDownIcon = true
 }: {
 	title: string;
 	items: { name: string; href?: string }[];
@@ -145,7 +151,7 @@ function DesktopDropdown({
 			<DropdownMenuTrigger asChild>
 				<Button variant="ghost" className="text-white ">
 					{icon}
-					{title} <ChevronDown className="w-4 h-4 ml-1" />
+					{title} {showDownIcon ? <ChevronDown className="w-4 h-4 ml-1" /> : null}
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className="bg-gray-800 text-white border-gray-700">
