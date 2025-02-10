@@ -120,11 +120,12 @@ export function BookingForm() {
 								<MapPin className="absolute left-4 top-2 h-5 w-5 text-gray-400" />
 								<GoMapsAutocomplete placeholder={'To: Address, airport, hotel...'} distination={'to'} />
 							</div>
-							<div className="relative w-full">
+							<div className="relative">
 								<Input
+									style={{ width: '100%' }}
 									type="date"
 									min={new Date().toISOString().split('T')[0]} // Disable previous dates
-									className="w-full h-10 pl-12 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400"
+									className="h-10 pl-12 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400"
 									value={bookingInfo.date}
 									onChange={e =>
 										globalStateController.updateState({
