@@ -120,7 +120,7 @@ export function BookingForm() {
 								<MapPin className="absolute left-4 top-2 h-5 w-5 text-gray-400" />
 								<GoMapsAutocomplete placeholder={'To: Address, airport, hotel...'} distination={'to'} />
 							</div>
-							<div className="relative">
+							<div className="relative w-full">
 								<Input
 									type="date"
 									min={new Date().toISOString().split('T')[0]} // Disable previous dates
