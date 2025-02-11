@@ -122,7 +122,10 @@ export function BookingForm() {
 							</div>
 							<div className="relative">
 								<Input
-									style={{ width: '100%', minWidth: "100%" }}
+									style={{
+										width: '100%',
+										minWidth: window.innerWidth < 640 ? '90%' : '100%', // Apply only on mobile screens
+									}}
 									type="date"
 									min={new Date().toISOString().split('T')[0]} // Disable previous dates
 									className="h-10 pl-12 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400"
