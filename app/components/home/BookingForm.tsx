@@ -148,7 +148,7 @@ export function BookingForm() {
 										width: '100%',
 									}}
 									type="time"
-									className="w-full h-10 pl-12 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 mobile-min-width"
+									className="h-10 pl-12 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 mobile-min-width"
 									value={bookingInfo.time}
 									onChange={e =>
 										globalStateController.updateState({
@@ -192,7 +192,7 @@ export function BookingForm() {
 									}}
 									type="date"
 									min={new Date().toISOString().split('T')[0]} // Disable previous dates
-									className="w-full h-10 pl-12 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 mobile-min-width"
+									className="h-10 pl-12 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 mobile-min-width"
 									onChange={e =>
 										globalStateController.updateState({
 											stepperForm: {
@@ -212,7 +212,7 @@ export function BookingForm() {
 										width: '100%',
 									}}
 									type="time"
-									className="w-full h-10 pl-12 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 mobile-min-width"
+									className="h-10 pl-12 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 mobile-min-width"
 									onChange={e =>
 										globalStateController.updateState({
 											stepperForm: {
