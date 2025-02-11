@@ -106,6 +106,7 @@ function MobileDropdown({
 	title: string;
 	items: { name: string; href?: string }[];
 	icon?: React.ReactNode;
+	showDownIcon?: boolean;
 }) {
 	return (
 		<DropdownMenu>
@@ -145,6 +146,7 @@ function DesktopDropdown({
 	title: string;
 	items: { name: string; href?: string }[];
 	icon?: React.ReactNode;
+	showDownIcon?: boolean
 }) {
 	return (
 		<DropdownMenu>
