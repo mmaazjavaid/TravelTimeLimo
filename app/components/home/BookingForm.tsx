@@ -125,7 +125,7 @@ export function BookingForm() {
 									style={{ width: '100%', minWidth: "100%" }}
 									type="date"
 									min={new Date().toISOString().split('T')[0]} // Disable previous dates
-									className="w-full sm:min-w-full h-10 pl-12 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400"
+									className="h-10 pl-12 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400"
 									value={bookingInfo.date}
 									onChange={e =>
 										globalStateController.updateState({
