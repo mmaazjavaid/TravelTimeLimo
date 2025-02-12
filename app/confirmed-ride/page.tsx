@@ -33,20 +33,20 @@ export default function ThankYouPage() {
 
 				<div className="space-y-4 mb-8">
 					<div className="flex items-center">
-						<Calendar className="text-blue-500 w-5 h-5 mr-2" />
+						<Calendar className="text-blue-500 w-5 h-5 mr-2 flex-shrink-0" />
 						<span className="text-gray-700">Date: {bookingInfo?.date}</span>
 					</div>
 					<div className="flex items-center">
-						<Clock className="text-blue-500 w-5 h-5 mr-2" />
+						<Clock className="text-blue-500 w-5 h-5 mr-2 flex-shrink-0" />
 						<span className="text-gray-700">Time: {bookingInfo?.time}</span>
 					</div>
 					<div className="flex items-center">
-						<MapPin className="text-blue-500 w-5 h-5 mr-2" />
+						<MapPin className="text-blue-500 w-5 h-5 mr-2 flex-shrink-0" />
 						<span className="text-gray-700">Pick Up: {bookingInfo?.from}</span>
 					</div>
 					{bookingInfo?.to && (
 						<div className="flex items-center">
-							<MapPin className="text-blue-500 w-5 h-5 mr-2" />
+							<MapPin className="text-blue-500 w-5 h-5 mr-2 flex-shrink-0" />
 							<span className="text-gray-700">Destination: {bookingInfo?.to}</span>
 						</div>
 					)}
