@@ -10,7 +10,6 @@ const GoMapsAutocomplete = ({ placeholder, distination }) => {
 	const { stepperValues } = globalStateController.useState(['stepperForm'], 'stepperValues');
 	const bookingInfo = stepperValues?.stepperForm?.bookingInfo;
 
-
 	// Function to fetch suggestions
 	const fetchSuggestions = async input => {
 		try {
@@ -24,7 +23,19 @@ const GoMapsAutocomplete = ({ placeholder, distination }) => {
 					radius: 50000, // Radius in meters (e.g., 50 km / 31 miles around NYC)
 				},
 			});
-			setSuggestions(response.data.predictions || []);
+
+			// Filter already selected suggestions
+			let predictions = response.data.predictions || [];
+			if (bookingInfo?.from) {
+				predictions = predictions.filter(
+					suggestion => suggestion.description.toLowerCase() !== bookingInfo.from.toLowerCase()
+				);
+			} else if (bookingInfo?.to) {
+				predictions = predictions.filter(
+					suggestion => suggestion.description.toLowerCase() !== bookingInfo.to.toLowerCase()
+				);
+			}
+			setSuggestions(predictions);
 		} catch (error) {
 			console.error('Error fetching suggestions:', error);
 		}
@@ -33,6 +44,15 @@ const GoMapsAutocomplete = ({ placeholder, distination }) => {
 	const clearInput = () => {
 		setQuery('');
 		setSuggestions([]);
+		globalStateController.updateState({
+			stepperForm: {
+				...stepperValues?.stepperForm,
+				bookingInfo: {
+					...bookingInfo,
+					[distination]: '',
+				},
+			},
+		});
 	};
 
 	const onClickHandler = event => {
@@ -44,11 +64,11 @@ const GoMapsAutocomplete = ({ placeholder, distination }) => {
 				...stepperValues?.stepperForm,
 				bookingInfo: {
 					...bookingInfo,
-					[distination]: event.target.innerText
-				}
-			}
-		})
-	}
+					[distination]: event.target.innerText,
+				},
+			},
+		});
+	};
 	return (
 		<div className="autocomplete-container">
 			<Input
@@ -85,6 +105,5 @@ const GoMapsAutocomplete = ({ placeholder, distination }) => {
 		</div>
 	);
 };
-
 
 export default GoMapsAutocomplete;

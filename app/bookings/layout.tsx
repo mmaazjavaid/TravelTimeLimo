@@ -61,7 +61,7 @@ function Layout({ children }: { children: ReactNode }) {
 	};
 
 	return (
-		<main className="container mx-auto px-4 py-8 max-w-3xl">
+		<main className="container mx-auto my-4 px-4 py-8 max-w-3xl">
 			{/* Stepper */}
 			<Stepper steps={STEPS} activeStep={activeStep} setActiveStep={setActiveStep} />
 
