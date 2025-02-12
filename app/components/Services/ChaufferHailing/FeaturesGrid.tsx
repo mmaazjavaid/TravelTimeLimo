@@ -4,7 +4,7 @@ const features = [
     {
         icon: Smartphone,
         title: "Convenience",
-        description: "Get a door-to-door chauffeured ride right when you need with just a few taps in the Blacklane app."
+        description: "Get a door-to-door chauffeured ride right when you need with just a few taps in the Travel time Limo app."
     },
     {
         icon: Car,

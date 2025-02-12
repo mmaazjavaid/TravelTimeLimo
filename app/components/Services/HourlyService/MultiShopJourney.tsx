@@ -64,7 +64,7 @@ export function MultiStopJourney() {
                 <div className="relative h-[300px] lg:h-[400px]">
                     <Image
                         src="https://images.ctfassets.net/ov8o7v78mnye/2T2z4Oh9PtQDNR7zeUewpE/f8f2db2c39510a0c1f3d42a69e5bcad0/BL_Map__1_.jpg?w=1280&fm=webp"
-                        alt="Global coverage map showing Blacklane's presence"
+                        alt="Global coverage map showing Travel Time Limo's presence"
                         className="object-contain"
                         fill
                     />

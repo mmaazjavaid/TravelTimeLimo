@@ -24,7 +24,7 @@ export function ChauffeurBlog() {
                         Convenient on-demand rides within minutes
                     </h2>
                     <p className="text-lg text-gray-600">
-                        When you need a safe way to get around the city, think Blacklane's Chauffeur Hailing™. You can book the top-quality service you know and love for immediate pickup in the cities listed below. The perfect combination of traditional car service and ride hailing, chauffeur hailing is now available in the new version of the Blacklane app for iOS and Android.
+                        When you need a safe way to get around the city, think Travel time Limo's Chauffeur Hailing™. You can book the top-quality service you know and love for immediate pickup in the cities listed below. The perfect combination of traditional car service and ride hailing, chauffeur hailing is now available in the new version of the Travel time Limo app for iOS and Android.
                     </p>
                     <Button
                         className="bg-red-500 hover:bg-red-600 text-white px-8"

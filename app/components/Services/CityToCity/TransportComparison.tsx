@@ -1,154 +1,130 @@
 import Image from "next/image"
-import Link from "next/link"
+import { Car, Clock, Plane, Train } from "lucide-react"
+
+const TransportOption = ({
+    type,
+    title,
+    subtitle,
+    totalTime,
+    steps,
+    vehicleTypeImage,
+    icon: Icon,
+}: {
+    type: "airplane" | "train" | "car"
+    title: string
+    subtitle: string
+    totalTime: string
+    steps: { label: string; duration: string }[]
+    vehicleTypeImage: string
+    icon: any
+}) => {
+    return (
+        <div className="relative grid grid-cols-1 md:grid-cols-[300px_1fr] gap-6 bg-gray-100 rounded-lg overflow-hidden">
+            <div className="relative h-48 md:h-auto">
+                <Image
+                    src={`/${vehicleTypeImage}`}
+                    alt={title}
+                    fill
+                    className="object-cover object-center"
+                    priority
+                />
+                <div className="absolute bottom-0 left-0 p-4 bg-white/90 rounded-tr-lg">
+                    <div className="flex items-center gap-2">
+                        <Icon className="w-5 h-5 text-red-500" />
+                        <div>
+                            <h3 className="font-semibold">{title}</h3>
+                            <p className="text-sm text-gray-600">{subtitle}</p>
+                        </div>
+                    </div>
+                    <div className="mt-2 flex items-center gap-2 bg-red-500 text-white px-3 py-1 rounded w-fit">
+                        <Clock className="w-4 h-4" />
+                        <span className="text-sm font-medium">{totalTime}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div className="p-4 md:py-8">
+                {type === "car" ? (
+                    <div className="relative px-8 py-4">
+                        <div className="flex justify-between items-center">
+                            <div className="font-medium">DOOR</div>
+                            <div className="font-medium">DOOR</div>
+                        </div>
+                        <div className="absolute top-1/2 left-8 right-8 h-0.5 bg-red-500" />
+                        <div className="absolute top-1/2 left-8 w-4 h-4 rounded-full bg-red-500 -translate-x-2 -translate-y-2 border-4 border-white" />
+                        <div className="absolute top-1/2 right-8 w-4 h-4 rounded-full bg-red-500 translate-x-2 -translate-y-2 border-4 border-white" />
+                        <div className="text-center text-red-500 font-medium mt-8">ENJOY THE RIDE</div>
+                    </div>
+                ) : (
+                    <div className="relative px-8">
+                        <div className="grid gap-12">
+                            {steps.map((step, index) => (
+                                <div key={index} className="relative flex items-center">
+                                    <div className="absolute left-0 w-4 h-4 rounded-full bg-red-500 border-4 border-white" />
+                                    <div className="ml-8 flex-grow flex justify-between items-center">
+                                        <div className="font-medium">{step.label}</div>
+                                        <div className="text-red-500 text-sm">{step.duration}</div>
+                                    </div>
+                                    {index < steps.length - 1 && <div className="absolute top-4 left-2 w-0.5 h-16 bg-red-500" />}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
+            </div>
+        </div>
+    )
+}
 
 export default function TransportComparison() {
     return (
-        <>
-            <section className="w-full py-12 md:py-24">
-                <div className="w-full max-w-6xl mx-auto px-4">
-                    <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
-                        {/* Image Section */}
-                        <div className="flex items-center justify-center">
-                            <Image
-                                src="/CTC_Time_COPY__1_.webp"
-                                alt="Transport comparison diagram showing airplane, train, and car journey times"
-                                width={800}
-                                height={600}
-                                className="rounded-lg object-cover"
-                                priority
-                            />
-                        </div>
+        <div className="max-w-5xl mx-auto p-4 space-y-6">
+            <TransportOption
+                type="airplane"
+                title="Airplane"
+                subtitle="Short flights"
+                totalTime="TOTAL TIME: over 5 hours"
+                vehicleTypeImage="photo-1559268950-2d7ceb2efa3a.jpeg"
+                icon={Plane}
+                steps={[
+                    { label: "DOOR", duration: "" },
+                    { label: "RIDE TO AIRPORT", duration: "45min" },
+                    { label: "CHECK-IN AND SECURITY", duration: "2h" },
+                    { label: "FLIGHT", duration: "1h" },
+                    { label: "OFFBOARDING AND BAGGAGE COLLECTION", duration: "45min" },
+                    { label: "RIDE TO DESTINATION", duration: "45min" },
+                    { label: "DOOR", duration: "" },
+                ]}
+            />
 
-                        {/* Content Section */}
-                        <div className="flex flex-col justify-center space-y-4">
-                            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-                                Long distance car service, the better way between cities
-                            </h2>
-                            <p className="text-gray-500 md:text-lg">
-                                Say goodbye to the stress of short-haul flights, regional trains, or car rentals, and hello to
-                                the comfort and simplicity of chauffeured rides with our City-to-City private transportation
-                                service. Here are just a few of the reasons why our service is{" "}
-                                <span className="font-semibold">an excellent alternative to flying</span> and other means of
-                                transport:
-                            </p>
-                            <ul className="space-y-4">
-                                <li>
-                                    <h3 className="font-semibold">Save time:</h3>
-                                    <p className="text-gray-500">
-                                        Door-to-door rides mean no waiting in lines or switching between modes of transportation.
-                                    </p>
-                                </li>
-                                <li>
-                                    <h3 className="font-semibold">Set the schedule:</h3>
-                                    <p className="text-gray-500">
-                                        You choose the pickup time, plus you can cancel up until 1 hour before your ride.
-                                    </p>
-                                </li>
-                                <li>
-                                    <h3 className="font-semibold">Enjoy peace of mind:</h3>
-                                    <p className="text-gray-500">
-                                        Travel in comfort in a premium vehicle, and rest assured every ride is carbon offset.
-                                    </p>
-                                </li>
-                                <li>
-                                    <h3 className="font-semibold">Competitive rates:</h3>
-                                    <p className="text-gray-500">
-                                        Taxes and tolls are included, you pay per car instead of per seat, and the only luggage
-                                        limit is trunk space.
-                                    </p>
-                                </li>
-                                <li>
-                                    <h3 className="font-semibold">Reliable pickups:</h3>
-                                    <p className="text-gray-500">
-                                        With long distance car service you don't have to worry about strikes, short-staffing, or
-                                        crowds.
-                                    </p>
-                                </li>
-                                <li>
-                                    <h3 className="font-semibold">Work while en route:</h3>
-                                    <p className="text-gray-500">
-                                        On a business trip? Work comfortably from the back seat, with Wi-Fi available for most
-                                        locations.
-                                    </p>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section className="w-full py-8">
-                <div className="w-full max-w-6xl mx-auto px-4">
-                    <div className="grid lg:grid-cols-2 gap-8 items-start">
-                        {/* Map Image - Removed aspect ratio constraint to align with text */}
-                        <div className="relative w-full h-full">
-                            <Image
-                                src="/CTC_Map_Updated.webp"
-                                alt="World map showing Blacklane's global reach across multiple countries"
-                                className="object-contain w-full"
-                                width={800}
-                                height={600}
-                                priority
-                            />
-                        </div>
+            <TransportOption
+                type="train"
+                title="Train"
+                subtitle="Journeys"
+                totalTime="TOTAL TIME: up to 5 hours"
+                vehicleTypeImage="photo-1580442374555-3def8fb41738.jpeg"
+                icon={Train}
+                steps={[
+                    { label: "DOOR", duration: "" },
+                    { label: "RIDE TO STATION", duration: "45min" },
+                    { label: "BOARDING", duration: "30min" },
+                    { label: "JOURNEY", duration: "3h" },
+                    { label: "OFFBOARDING", duration: "30min" },
+                    { label: "RIDE TO DESTINATION", duration: "45min" },
+                    { label: "DOOR", duration: "" },
+                ]}
+            />
 
-                        {/* Content Section */}
-                        <div className="space-y-6">
-                            <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
-                                Global reach
-                            </h2>
-                            <p className="text-lg text-gray-600">
-                                With over 180 routes across Australia, Austria, Canada, China, France, Ireland, Japan, Luxembourg, Malaysia, the Netherlands, New Zealand, Poland, Saudi Arabia, Singapore, South Africa, Spain, Sweden, Switzerland, Taiwan, Thailand, Turkiye, the United Arab Emirates, the United Kingdom, and the United States, long distance travel is easier than ever with a reliable chauffeur service. Plus, you can count on the same fantastic service whether you're going from{" "}
-                                <Link href="#" className="underline decoration-2 font-medium">
-                                    New York to the Hamptons
-                                </Link>
-                                ,{" "}
-                                <Link href="#" className="underline decoration-2 font-medium">
-                                    London to Oxford
-                                </Link>
-                                , or{" "}
-                                <Link href="#" className="underline decoration-2 font-medium">
-                                    Dubai to Abu Dhabi
-                                </Link>
-                                .
-                            </p>
-
-                            <div className="space-y-4">
-                                <p className="text-lg text-gray-600">
-                                    Planning your next ski trip?{" "}
-                                    <Link href="#" className="underline decoration-2 font-medium">
-                                        Check out our City-to-Slopes
-                                    </Link>{" "}
-                                    offering for all your ski season transport needs.
-                                </p>
-
-                                <p className="text-lg text-gray-600">
-                                    Or maybe sandy beaches are on your mind?{" "}
-                                    <Link href="#" className="underline decoration-2 font-medium">
-                                        Check out our City-to-Beach
-                                    </Link>{" "}
-                                    offering for all your beach getaway transport needs.
-                                </p>
-
-                                <p className="text-lg text-gray-600">
-                                    Teeing off? Check out our{" "}
-                                    <Link href="#" className="underline decoration-2 font-medium">
-                                        City-to-Golf transfers
-                                    </Link>{" "}
-                                    and discover premium rides for the world's best courses.
-                                </p>
-
-                                <p className="text-lg text-gray-600">
-                                    Explore some of the most famous wine regions in the world with Blacklane's new{" "}
-                                    <Link href="#" className="underline decoration-2 font-medium">
-                                        City-to-Vineyard service
-                                    </Link>
-                                    .
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </>
+            <TransportOption
+                type="car"
+                title="Blacklane"
+                subtitle="City to City rides"
+                totalTime="TOTAL TIME: 4h"
+                vehicleTypeImage="PHOTO-2023-03-16-07-40-46.jpg"
+                icon={Car}
+                steps={[]}
+            />
+        </div>
     )
 }
+
