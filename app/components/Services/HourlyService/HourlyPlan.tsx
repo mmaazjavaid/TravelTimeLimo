@@ -1,4 +1,5 @@
 import Image from "next/image"
+import { Car } from "lucide-react"
 
 const features = [
     {
@@ -56,19 +57,35 @@ export function HourlyPlan() {
                 </div>
 
                 <div>
-                    <div className="space-y-2 mb-6">
+                    {/* <div className="space-y-2 mb-6">
                         <div className="text-sm font-semibold uppercase tracking-wider text-gray-600">Travel Time Limo</div>
                         <div className="text-2xl font-bold">By-the-hour</div>
                         <div className="text-lg text-gray-600">4h seamless travel</div>
-                    </div>
+                    </div> */}
 
-                    <div className="relative">
-                        <Image
-                            src="https://images.ctfassets.net/ov8o7v78mnye/2ZNFim3IFRBSImhulS4fJe/43170bf8010138f9871bf477f75333bd/ABCD_Landscape_11_Nowhite.jpg"
-                            alt="Route diagram showing pickup, multiple stops, and drop off points"
-                            width={1200}
-                            height={400}
-                            className="w-full object-contain"
+                    <div className="max-w-7xl mx-auto p-12 space-y-32">
+                        <TravelOption
+                            type="by-the-hour"
+                            title="By-the-hour"
+                            duration="4h seamless"
+                            stops={[
+                                { label: "Pickup" },
+                                { label: "Stop 1" },
+                                { label: "Stop 2" },
+                                { label: "Stop 3", subLabel: "Drop off" },
+                            ]}
+                        />
+
+                        <TravelOption
+                            type="taxi"
+                            title="Taxi"
+                            duration="5h interrupted"
+                            stops={[
+                                { label: "Pickup", subLabel: "Wait for Taxi", showTaxi: true },
+                                { label: "Stop 1", subLabel: "Wait for Taxi", showTaxi: true },
+                                { label: "Stop 2", subLabel: "Wait for Taxi", showTaxi: true },
+                                { label: "Stop 3", subLabel: "Wait for Taxi", showTaxi: true },
+                            ]}
                         />
                     </div>
                 </div>
@@ -77,3 +94,64 @@ export function HourlyPlan() {
     )
 }
 
+const TravelOption = ({
+    type,
+    title,
+    duration,
+    stops,
+}: {
+    type: "by-the-hour" | "taxi"
+    title: string
+    duration: string
+    stops: {
+        label: string
+        subLabel?: string
+        showTaxi?: boolean
+    }[]
+}) => {
+    return (
+        <div className="space-y-6">
+            <div>
+                <h2 className="text-3xl font-semibold">{title}</h2>
+                <p className="text-xl text-gray-600">{duration} travel</p>
+            </div>
+
+            <div className="grid grid-cols-[250px_1fr] gap-12 items-center min-h-[200px]">
+                <div className="space-y-6">
+                    {type === "by-the-hour" ? (
+                        <div className="bg-gray-200 h-14 w-full rounded-md flex items-center justify-center">
+                            <Car className="h-8 w-8 text-black" />
+                        </div>
+                    ) : null}
+                </div>
+
+                <div className="relative py-12">
+                    {stops.map((stop, index) => (
+                        <div key={index} className="relative mb-24 last:mb-0">
+                            <div className="flex items-start">
+                                <div className={`w-4 h-4 rounded-sm ${type === "by-the-hour" ? "bg-gray-800" : "bg-black"} mt-2`} />
+                                <div className="ml-4">
+                                    <div className="font-medium text-xl">{stop.label}</div>
+                                    {stop.subLabel && <div className="text-lg text-gray-600 mt-1">{stop.subLabel}</div>}
+                                    {stop.showTaxi && (
+                                        <div className="mt-3 bg-yellow-400 h-10 w-20 rounded flex items-center justify-center">
+                                            <Car className="h-6 w-6 text-black" />
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                            {index < stops.length - 1 && (
+                                <div
+                                    className={`absolute left-2 top-6 w-0.5 h-24 ${type === "taxi" ? "bg-yellow-400" : "bg-gray-800"}`}
+                                />
+                            )}
+                            {index === 1 && type === "by-the-hour" && (
+                                <div className="absolute left-2 top-6 w-64 h-48 border-b-2 border-r-2 border-gray-800 rounded-br-[64px]" />
+                            )}
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+    )
+}
