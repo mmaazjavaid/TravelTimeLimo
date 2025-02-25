@@ -21,7 +21,7 @@ export function BlogsSection() {
                     </div>
                     <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
                         <Image
-                            src="/01_AT_City.webp"
+                            src="/cab-203486_960_720.jpg"
                             alt="Professional driver helping a passenger into a luxury vehicle"
                             className="object-cover"
                             fill
@@ -36,7 +36,7 @@ export function BlogsSection() {
                 <div className="grid lg:grid-cols-2 gap-8 items-center">
                     <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
                         <Image
-                            src="/02_Get_to.webp"
+                            src="/taxiapp.avif"
                             alt="Chauffeur loading luggage into a luxury car"
                             className="object-cover"
                             fill

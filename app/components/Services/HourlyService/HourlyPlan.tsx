@@ -57,11 +57,6 @@ export function HourlyPlan() {
                 </div>
 
                 <div>
-                    {/* <div className="space-y-2 mb-6">
-                        <div className="text-sm font-semibold uppercase tracking-wider text-gray-600">Travel Time Limo</div>
-                        <div className="text-2xl font-bold">By-the-hour</div>
-                        <div className="text-lg text-gray-600">4h seamless travel</div>
-                    </div> */}
 
                     <div className="max-w-7xl mx-auto p-12 space-y-32">
                         <TravelOption

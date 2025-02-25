@@ -11,7 +11,7 @@ const InfoSection: React.FC = () => {
 					{/* Left side - Image */}
 					<div className="relative h-[250px] w-full md:h-[300px] sm:h-[350px] md:w-1/3">
 						<Image
-							src="/city-to-city-routes-sub.png"
+							src="/cab-203486_960_720.jpg"
 							alt="Professional chauffeur standing by luxury vehicle"
 							className="object-cover"
 							fill

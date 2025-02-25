@@ -10,7 +10,7 @@ const MainSection: React.FC = () => {
 			{/* Mobile */}
 			<div className="relative h-[40vh] md:hidden">
 				<Image
-					src="/city-to-city-routes-mobile.png"
+					src="/IMG-20240815-WA0045.jpg"
 					alt="Black Cadillac Escalade with chauffeur service"
 					className="object-cover"
 					fill
@@ -21,7 +21,7 @@ const MainSection: React.FC = () => {
 			{/* Desktop */}
 			<div className="relative hidden h-[50vh] w-full md:block">
 				<Image
-					src="/city-to-city-routes-main.png"
+					src="/IMG-20240815-WA0045.jpg"
 					alt="Black Cadillac Escalade with chauffeur service"
 					className="object-cover"
 					fill
