@@ -1,11 +1,12 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Briefcase, ChevronDown, ChevronUp, Users } from 'lucide-react';
 import { RIDES } from '@/lib/constants';
 import { ExpandedRide } from '@/types/bookings';
 import PriceBreakdown from './PriceBreakdown';
 import { globalStateController } from '@/state/global/globalStateController';
+import { calculateFare } from '@/lib/utils';
 
 const getRideClassNames = ({ id, selectedRide }: { id: number; selectedRide: number }) => {
 	const isSelected = selectedRide === id;
@@ -28,6 +29,27 @@ const RideCard: React.FC = () => {
 	const [expandedRide, setExpandedRide] = useState<ExpandedRide>({ id: null, isExpanded: false });
 	const { stepperValues } = globalStateController.useState(['stepperForm'], 'stepperValues');
 	const bookingInfo = stepperValues?.stepperForm?.bookingInfo;
+	const routeDistance = stepperValues?.stepperForm?.routeInfo?.distanceValue;
+	const sedanFare = calculateFare(routeDistance).sedan;
+	const suvFare = calculateFare(routeDistance).suv;
+	console.log(stepperValues?.stepperForm)
+
+	useEffect(() => {
+		if (routeDistance) {
+			globalStateController.updateState({
+				stepperForm: {
+					...stepperValues?.stepperForm,
+					bookingInfo: {
+						...bookingInfo,
+						baseFare: sedanFare,
+						totalFare: sedanFare,
+						meetAndGreet: 0,
+						tax: 0,
+					},
+				},
+			});
+		}
+	}, [routeDistance]);
 
 	return (
 		<div className="border border-gray-300 rounded-lg">
@@ -50,10 +72,10 @@ const RideCard: React.FC = () => {
 										vehicleType: ride.value,
 										passengers: ride.seats,
 										luggage: ride.luggage,
-										baseFare: ride.baseFare,
-										meetAndGreet: ride.meetAndGreet,
-										tax: ride.tax,
-										totalFare: ride.price,
+										baseFare: ride.value === 'business_class' ? sedanFare : suvFare,
+										meetAndGreet: 0,
+										tax: 0,
+										totalFare: ride.value === 'business_class' ? sedanFare : suvFare,
 									},
 								},
 							});
@@ -76,7 +98,7 @@ const RideCard: React.FC = () => {
 								</div>
 							</div>
 							<div className="flex items-center gap-2">
-								<p className="font-semibold">{`US$${ride.price.toFixed(2)}`}</p>
+								<p className="font-semibold">{`US${ride.value === 'business_class' ? sedanFare : suvFare}`}</p>
 								{expandedRide?.id === ride.id && expandedRide?.isExpanded ? (
 									<ChevronUp
 										onClick={() => setExpandedRide({ isExpanded: false, id: ride.id })}
@@ -91,7 +113,7 @@ const RideCard: React.FC = () => {
 							</div>
 						</div>
 						{expandedRide?.id === ride.id && expandedRide?.isExpanded && (
-							<PriceBreakdown baseFare={ride.baseFare} meetAndGreet={ride.meetAndGreet} tax={ride.tax} />
+							<PriceBreakdown baseFare={ride.value === 'business_class' ? sedanFare : suvFare} meetAndGreet={0} tax={0} />
 						)}
 					</div>
 				))}
