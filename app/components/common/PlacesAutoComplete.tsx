@@ -71,6 +71,18 @@ const GoMapsAutocomplete = ({ placeholder, distination }) => {
 				);
 			}
 
+			// **Filter out already selected locations**
+			if (bookingInfo?.from) {
+				mergedSuggestions = mergedSuggestions.filter(
+					suggestion => suggestion.description.toLowerCase() !== bookingInfo.from.toLowerCase()
+				);
+			}
+			if (bookingInfo?.to) {
+				mergedSuggestions = mergedSuggestions.filter(
+					suggestion => suggestion.description.toLowerCase() !== bookingInfo.to.toLowerCase()
+				);
+			}
+
 			// Deduplicate results based on description
 			mergedSuggestions = mergedSuggestions.filter(
 				(suggestion, index, self) =>
