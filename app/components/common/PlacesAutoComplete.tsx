@@ -3,6 +3,9 @@ import axios from 'axios';
 import { Input } from '@/components/ui/input';
 import { globalStateController } from '@/state/global/globalStateController';
 
+const LOCATION_NY = '40.7696052,-73.5113524';
+const LOCATION_TX = '30.2726839,-97.7498649';
+
 const GoMapsAutocomplete = ({ placeholder, distination }) => {
 	const [query, setQuery] = useState('');
 	const [suggestions, setSuggestions] = useState([]);
@@ -30,34 +33,49 @@ const GoMapsAutocomplete = ({ placeholder, distination }) => {
 		}
 	};
 
+	// Determine which location the selected place belongs to
+	const determineLocationSource = place => {
+		if (!place) return null;
+		const nyKeywords = ['New York', 'NY', 'JFK', 'LaGuardia', 'Manhattan', 'Brooklyn', 'Queens'];
+		const txKeywords = ['Austin', 'TX', 'Texas', 'Bergstrom', 'Downtown', 'Round Rock'];
+
+		if (nyKeywords.some(keyword => place.includes(keyword))) return LOCATION_NY;
+		if (txKeywords.some(keyword => place.includes(keyword))) return LOCATION_TX;
+		return null;
+	};
+
 	// Fetch suggestions from both locations & merge
 	const fetchSuggestions = async input => {
 		if (!input) return;
 
-		const locations = ['40.7696052,-73.5113524', '30.2726839,-97.7498649'];
-
 		try {
-			// Fetch both in parallel
-			const [suggestionsNY, suggestionsTX] = await Promise.all(
-				locations.map(location => fetchFromLocation(input, location))
-			);
+			const [suggestionsNY, suggestionsTX] = await Promise.all([
+				fetchFromLocation(input, LOCATION_NY),
+				fetchFromLocation(input, LOCATION_TX),
+			]);
 
-			// Merge and remove duplicates based on `description`
-			let mergedSuggestions = [...suggestionsNY, ...suggestionsTX].filter(
+			let mergedSuggestions = [...suggestionsNY, ...suggestionsTX];
+
+			// Determine if 'from' or 'to' is already selected and from which location
+			const selectedLocation = determineLocationSource(bookingInfo?.from) || determineLocationSource(bookingInfo?.to);
+
+			if (selectedLocation === LOCATION_NY) {
+				// If user selected a NY location, filter out Austin suggestions
+				mergedSuggestions = mergedSuggestions.filter(suggestion =>
+					suggestionsNY.some(nySuggestion => nySuggestion.description === suggestion.description)
+				);
+			} else if (selectedLocation === LOCATION_TX) {
+				// If user selected an Austin location, filter out NY suggestions
+				mergedSuggestions = mergedSuggestions.filter(suggestion =>
+					suggestionsTX.some(txSuggestion => txSuggestion.description === suggestion.description)
+				);
+			}
+
+			// Deduplicate results based on description
+			mergedSuggestions = mergedSuggestions.filter(
 				(suggestion, index, self) =>
 					index === self.findIndex(s => s.description === suggestion.description)
 			);
-
-			// Filter out already selected locations
-			if (bookingInfo?.from) {
-				mergedSuggestions = mergedSuggestions.filter(
-					suggestion => suggestion.description.toLowerCase() !== bookingInfo.from.toLowerCase()
-				);
-			} else if (bookingInfo?.to) {
-				mergedSuggestions = mergedSuggestions.filter(
-					suggestion => suggestion.description.toLowerCase() !== bookingInfo.to.toLowerCase()
-				);
-			}
 
 			setSuggestions(mergedSuggestions);
 		} catch (error) {
