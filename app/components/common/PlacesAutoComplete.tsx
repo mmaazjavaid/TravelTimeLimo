@@ -10,34 +10,58 @@ const GoMapsAutocomplete = ({ placeholder, distination }) => {
 	const { stepperValues } = globalStateController.useState(['stepperForm'], 'stepperValues');
 	const bookingInfo = stepperValues?.stepperForm?.bookingInfo;
 
-	// Function to fetch suggestions
-	const fetchSuggestions = async input => {
+	// API call function
+	const fetchFromLocation = async (input, location) => {
 		try {
 			const response = await axios.get('https://maps.gomaps.pro/maps/api/place/autocomplete/json', {
 				params: {
-					key: process.env.NEXT_PUBLIC_GOMAPS_PLACES_API_KEY, // Replace with your API key
-					input, // User's input
-					components: 'country:us', // Restrict to a specific country (optional)
-					strictbounds: true, // return places strictly within the region defined by location and radius
-					location: '40.730610,-73.935242', // restrict location to new york
-					radius: 50000, // Radius in meters (e.g., 50 km / 31 miles around NYC)
+					key: process.env.NEXT_PUBLIC_GOMAPS_PLACES_API_KEY,
+					input,
+					components: 'country:us',
+					strictbounds: true,
+					location,
+					radius: 50000,
 				},
 			});
+			return response.data.predictions || [];
+		} catch (error) {
+			console.error('Error fetching suggestions:', error);
+			return [];
+		}
+	};
 
-			// Filter already selected suggestions
-			let predictions = response.data.predictions || [];
+	// Fetch suggestions from both locations & merge
+	const fetchSuggestions = async input => {
+		if (!input) return;
+
+		const locations = ['40.7696052,-73.5113524', '30.2726839,-97.7498649'];
+
+		try {
+			// Fetch both in parallel
+			const [suggestionsNY, suggestionsTX] = await Promise.all(
+				locations.map(location => fetchFromLocation(input, location))
+			);
+
+			// Merge and remove duplicates based on `description`
+			let mergedSuggestions = [...suggestionsNY, ...suggestionsTX].filter(
+				(suggestion, index, self) =>
+					index === self.findIndex(s => s.description === suggestion.description)
+			);
+
+			// Filter out already selected locations
 			if (bookingInfo?.from) {
-				predictions = predictions.filter(
+				mergedSuggestions = mergedSuggestions.filter(
 					suggestion => suggestion.description.toLowerCase() !== bookingInfo.from.toLowerCase()
 				);
 			} else if (bookingInfo?.to) {
-				predictions = predictions.filter(
+				mergedSuggestions = mergedSuggestions.filter(
 					suggestion => suggestion.description.toLowerCase() !== bookingInfo.to.toLowerCase()
 				);
 			}
-			setSuggestions(predictions);
+
+			setSuggestions(mergedSuggestions);
 		} catch (error) {
-			console.error('Error fetching suggestions:', error);
+			console.error('Error merging suggestions:', error);
 		}
 	};
 
@@ -69,6 +93,7 @@ const GoMapsAutocomplete = ({ placeholder, distination }) => {
 			},
 		});
 	};
+
 	return (
 		<div className="autocomplete-container">
 			<Input
@@ -86,10 +111,10 @@ const GoMapsAutocomplete = ({ placeholder, distination }) => {
 					onClick={clearInput}
 					className="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
 				>
-					&#x2715; {/* Unicode for cross icon (×) */}
+					&#x2715;
 				</button>
 			)}
-			{query && suggestions && (
+			{query && suggestions.length > 0 && (
 				<ul className="absolute w-full mt-2 bg-white rounded-lg shadow z-10">
 					{suggestions.map(suggestion => (
 						<li
