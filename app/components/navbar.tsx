@@ -48,9 +48,9 @@ export function Navbar() {
 							<SheetContent side="right" className="w-80 bg-gray-900 text-white p-6">
 								<div className="flex flex-col gap-6 mt-6">
 									<MobileDropdown title="Our services" items={services} />
-									<MobileDropdown title="For business" items={business} />
-									<MobileLink href="#">For chauffeurs</MobileLink>
-									<MobileLink href="#">Help</MobileLink>
+									<MobileLink href="/services/city-city">City-to-city rides</MobileLink>
+									<MobileLink href="/services/airport-transfer">Airport transfer</MobileLink>
+									<MobileLink href="/services/hourly-car-service">Hourly car service</MobileLink>
 									<hr className="border-gray-700 my-4" />
 									<MobileDropdown
 										title="English"
@@ -72,9 +72,9 @@ export function Navbar() {
 					{/* Desktop Menu */}
 					<div className="hidden lg:flex items-center gap-8">
 						<DesktopDropdown title="Our services" items={services} />
-						<DesktopDropdown title="For business" items={business} />
-						<DesktopLink href="#">For chauffeurs</DesktopLink>
-						<DesktopLink href="#">Help</DesktopLink>
+						<DesktopLink href="/services/city-city">City-to-city rides</DesktopLink>
+						<DesktopLink href="/services/airport-transfer">Airport transfer</DesktopLink>
+						<DesktopLink href="/services/hourly-car-service">Hourly car service</DesktopLink>
 					</div>
 
 					<div className="hidden lg:flex items-center gap-4">
