@@ -15,7 +15,7 @@ export default function MainHeader({ heading, showDownloadSection = true, imageP
 				{showBookingDialog && (
 					<div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-8 lg:py-12">
 						<div className="flex flex-col lg:flex-row lg:items-center lg:justify-end">
-							<div className="lg:w-1/2 xl:w-5/12">
+							<div>
 								<BookingForm />
 							</div>
 						</div>

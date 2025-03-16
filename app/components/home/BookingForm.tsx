@@ -70,7 +70,7 @@ export function BookingForm() {
 	};
 
 	return (
-		<Card className="w-full max-w-2xl mx-auto bg-gradient-to-r from-gray-50 to-gray-100 shadow-2xl rounded-xl overflow-hidden">
+		<Card className="w-[350px] md:w-[350px] lg:w-[400px] mx-auto bg-gradient-to-r from-gray-50 to-gray-100 shadow-2xl rounded-xl overflow-hidden ">
 			<CardContent className="p-8">
 				<h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Book Your Ride</h2>
 				<Tabs defaultValue="one-way" className="w-full">
