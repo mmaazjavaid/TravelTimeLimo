@@ -15,8 +15,8 @@ import { Check } from 'lucide-react'
 const services = [
     {
         title: "Business Class",
-        description: "Mercedes E-Class, BMW 5 Series, Audi A6, Cadillac XTS, or similar",
-        image: "https://images.ctfassets.net/ov8o7v78mnye/1qi5aJOpeVFSTrDdktsQZJ/3204dc3796ba01b6200403b6ab6f2674/business-class.webp",
+        description: "Cadillac XTS",
+        image: "/iStock-2152529144-removebg-preview.png",
         features: [
             "Fits up to 3 people",
             "Fits 2 carry-on bags, or 2 standard check-in, or 1 extra large check-in bag",
@@ -24,35 +24,15 @@ const services = [
         ]
     },
     {
-        title: "First Class",
-        description: "Mercedes S-Class, BMW 7 Series, Audi A8, or similar",
-        image: "https://images.ctfassets.net/ov8o7v78mnye/5ukDCmGk3pJNq48IAoPz1b/8bf2038de6ceb379aba9cf4ee824838e/first-class.webp",
-        features: [
-            "Fits up to 3 people",
-            "Fits 2 carry-on bags, or 2 standard check-in, or 1 extra large check-in bag",
-            "Available in most of our business districts"
-        ]
-    },
-    {
-        title: "Business Van",
-        description: "Mercedes V-Class, Chevy Suburban, Cadillac Escalade, Toyota Alphard, or similar",
-        image: "https://images.ctfassets.net/ov8o7v78mnye/6vZRlxdXyChu5uMiZIUAZz/e01fc45c93742d9176e2d2e7462214c4/van-class.webp",
+        title: "Business SUV",
+        description: "Chevy Suburban",
+        image: "/suburban-variant-black-removebg-preview.png",
         features: [
             "Fits up to 5 people",
             "Fits 12 carry-on bags or 8 standard check-in or 6 extra large check-in bags",
             "Best for larger parties, lots of luggage, or families"
         ]
     },
-    {
-        title: "Electric Class",
-        description: "Jaguar I-PACE, Tesla Model S, Tesla Model X, or similar",
-        image: "https://images.ctfassets.net/ov8o7v78mnye/3adipFMgNojPGUh2aqHeEN/d911b00e6a8adc22b4f529cc2a150021/electric-class.webp",
-        features: [
-            "Fits up to 3 people",
-            "Fits 2 carry-on bags, or 2 standard check-in, or 1 extra large check-in bag",
-            "Available in some of our business districts"
-        ]
-    }
 ]
 
 export default function CarService() {

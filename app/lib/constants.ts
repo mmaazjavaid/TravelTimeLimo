@@ -22,9 +22,9 @@ export const RIDES: Ride[] = [
 		id: 0,
 		title: 'Business Class',
 		value: 'business_class',
-		image: '/business-class-car.png',
+		image: '/iStock-2152529144-removebg-preview.png',
 		price: 215.94,
-		description: 'Most popular • Mercedes-Benz E-Class or similar',
+		description: 'Most popular • Cadillac XTS',
 		seats: 3,
 		luggage: 2,
 		baseFare: 188.72,
@@ -33,29 +33,16 @@ export const RIDES: Ride[] = [
 	},
 	{
 		id: 1,
-		title: 'Business Van/SUV',
+		title: 'Business SUV',
 		value: 'business_van_suv',
-		image: '/business-class-van.png',
+		image: '/suburban-variant-black-removebg-preview.png',
 		price: 293.2,
-		description: 'More spacious • Mercedes-Benz V-Class or similar',
+		description: 'More spacious • Chevy Suburban',
 		seats: 5,
 		luggage: 5,
 		baseFare: 259.68,
 		meetAndGreet: 9.63,
 		tax: 23.89,
-	},
-	{
-		id: 2,
-		title: 'First Class',
-		value: 'first_class',
-		image: '/first-class-car.png',
-		price: 353.26,
-		description: 'Most luxurious • Mercedes-Benz S-Class or similar',
-		seats: 3,
-		luggage: 2,
-		baseFare: 314.84,
-		meetAndGreet: 9.63,
-		tax: 28.79,
 	},
 ];
 
@@ -348,7 +335,7 @@ export const TERMS: TermsSection[] = [
 			{
 				id: '4.3',
 				title: 'VEHICLE CLASS/VEHICLE MODEL, UPGRADE',
-				content: `Depending on the regional availability of the vehicle, the user can choose from different vehicle classes in its ride request (for example, “Business Class”, ”Business Van/SUV”, ”First Class”, “Sprinter Class” or “Electric Class”).
+				content: `Depending on the regional availability of the vehicle, the user can choose from different vehicle classes in its ride request (for example, “Business Class”, ”Business SUV”, ”First Class”, “Sprinter Class” or “Electric Class”).
 
 					The vehicles shown in the BL Tools are only illustrative examples. There is no right to a particular vehicle model associated with a booked vehicle class Regional differences are possible.
 
