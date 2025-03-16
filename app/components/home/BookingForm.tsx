@@ -88,7 +88,7 @@ export function BookingForm() {
 								});
 							}}
 							value="one-way"
-							className={`px-6 py-3 text-sm font-semibold uppercase rounded-full border ${STYLES.transition} data-[state=active]:bg-gradient-to-r data-[state=active]:from-gray-400 data-[state=active]:via-gray-500 data-[state=active]:to-gray-600 data-[state=active]:text-white data-[state=active]:shadow-lg`}
+							className={`px-6 py-3 text-sm font-bold uppercase rounded-full border ${STYLES.transition} data-[state=active]:bg-gradient-to-r data-[state=active]:from-gray-400 data-[state=active]:via-gray-500 data-[state=active]:to-gray-600 data-[state=active]:text-white data-[state=active]:shadow-lg`}
 						>
 							One Way
 						</TabsTrigger>
@@ -105,7 +105,7 @@ export function BookingForm() {
 								});
 							}}
 							value="hourly"
-							className={`px-6 py-3 text-sm font-semibold uppercase rounded-full border ${STYLES.transition} data-[state=active]:bg-gradient-to-r data-[state=active]:from-gray-400 data-[state=active]:via-gray-500 data-[state=active]:to-gray-600 data-[state=active]:text-white data-[state=active]:shadow-lg`}
+							className={`px-6 py-3 text-sm font-bold uppercase rounded-full border ${STYLES.transition} data-[state=active]:bg-gradient-to-r data-[state=active]:from-gray-400 data-[state=active]:via-gray-500 data-[state=active]:to-gray-600 data-[state=active]:text-white data-[state=active]:shadow-lg`}
 						>
 							Hourly
 						</TabsTrigger>
@@ -127,7 +127,7 @@ export function BookingForm() {
 									}}
 									type="date"
 									min={new Date().toISOString().split('T')[0]} // Disable previous dates
-									className="h-10 pl-12 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 mobile-min-width"
+									className="h-10 pl-12 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 mobile-min-width font-bold"
 									value={bookingInfo.date}
 									onChange={e =>
 										globalStateController.updateState({
@@ -148,7 +148,7 @@ export function BookingForm() {
 										width: '100%',
 									}}
 									type="time"
-									className="h-10 pl-12 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 mobile-min-width"
+									className="h-10 pl-12 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 mobile-min-width font-bold"
 									value={bookingInfo.time}
 									onChange={e =>
 										globalStateController.updateState({
@@ -163,7 +163,10 @@ export function BookingForm() {
 									}
 								/>
 							</div>
-							<p className="text-sm text-gray-500 text-center">Chauffeur will wait 15 minutes free of charge.</p>
+							<p className="text-sm font-bold text-red-400 text-center">
+								Chauffeur will wait 15 minutes free of charge.
+							</p>
+
 							<Button
 								onClick={() => {
 									const isAvailable = isBookingAvailable();
@@ -172,7 +175,7 @@ export function BookingForm() {
 										getDistanceParameters();
 									}
 								}}
-								className={`w-full text-white font-semibold py-3 rounded-lg text-base sm:text-lg md:text-xl`}
+								className={`w-full text-white font-bold py-3 rounded-lg text-base sm:text-lg md:text-xl`}
 								variant="gradient"
 							>
 								Search
@@ -192,7 +195,7 @@ export function BookingForm() {
 									}}
 									type="date"
 									min={new Date().toISOString().split('T')[0]} // Disable previous dates
-									className="h-10 pl-12 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 mobile-min-width"
+									className="h-10 pl-12 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 mobile-min-width font-bold"
 									onChange={e =>
 										globalStateController.updateState({
 											stepperForm: {
@@ -212,7 +215,7 @@ export function BookingForm() {
 										width: '100%',
 									}}
 									type="time"
-									className="h-10 pl-12 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 mobile-min-width"
+									className="h-10 pl-12 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 mobile-min-width font-bold"
 									onChange={e =>
 										globalStateController.updateState({
 											stepperForm: {
@@ -231,7 +234,7 @@ export function BookingForm() {
 								<Input
 									type="number"
 									placeholder="Number of hours"
-									className="w-full pl-12 h-10 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400"
+									className="w-full pl-12 h-10 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 font-bold"
 									onChange={e =>
 										globalStateController.updateState({
 											stepperForm: {
@@ -252,7 +255,7 @@ export function BookingForm() {
 										router.push('/bookings/service-class');
 									}
 								}}
-								className={`w-full text-white font-semibold py-3 rounded-lg text-base sm:text-lg md:text-xl`}
+								className={`w-full text-white font-bold py-3 rounded-lg text-base sm:text-lg md:text-xl`}
 								variant="gradient"
 							>
 								Search

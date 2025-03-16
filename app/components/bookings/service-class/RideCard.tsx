@@ -42,7 +42,7 @@ const RideCard: React.FC = () => {
 					bookingInfo: {
 						...bookingInfo,
 						baseFare: sedanFare,
-						totalFare: sedanFare,
+						totalFare: sedanFare + (sedanFare * 0.08625),
 						meetAndGreet: 0,
 						tax: 0,
 					},
@@ -75,7 +75,7 @@ const RideCard: React.FC = () => {
 										baseFare: ride.value === 'business_class' ? sedanFare : suvFare,
 										meetAndGreet: 0,
 										tax: 0,
-										totalFare: ride.value === 'business_class' ? sedanFare : suvFare,
+										totalFare: ride.value === 'business_class' ? sedanFare + (sedanFare * 0.08625) : suvFare + (suvFare * 0.08625),
 									},
 								},
 							});
@@ -98,7 +98,7 @@ const RideCard: React.FC = () => {
 								</div>
 							</div>
 							<div className="flex items-center gap-2">
-								<p className="font-semibold">{`US${ride.value === 'business_class' ? sedanFare : suvFare}`}</p>
+								<p className="font-semibold">{`US${ride.value === 'business_class' ? (sedanFare + (sedanFare * 0.08625)).toFixed(2) : (suvFare + (suvFare * 0.08625)).toFixed(2)}`}</p>
 								{expandedRide?.id === ride.id && expandedRide?.isExpanded ? (
 									<ChevronUp
 										onClick={() => setExpandedRide({ isExpanded: false, id: ride.id })}
@@ -113,7 +113,11 @@ const RideCard: React.FC = () => {
 							</div>
 						</div>
 						{expandedRide?.id === ride.id && expandedRide?.isExpanded && (
-							<PriceBreakdown baseFare={ride.value === 'business_class' ? sedanFare : suvFare} meetAndGreet={0} tax={0} />
+							<PriceBreakdown
+								baseFare={ride.value === 'business_class' ? sedanFare : suvFare}
+								meetAndGreet={0}
+								tax={ride.value === 'business_class' ? (sedanFare * 0.08625) : (suvFare * 0.08625)}
+							/>
 						)}
 					</div>
 				))}
