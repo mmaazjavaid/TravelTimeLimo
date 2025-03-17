@@ -49,7 +49,7 @@ export const RIDES: Ride[] = [
 export const AMENITIES: Amenity[] = [
 	{
 		icon: Clock,
-		text: 'Free cancellation up until 1 hour before pickup',
+		text: 'Free cancellation up until 2 hour before pickup',
 	},
 	{
 		icon: Users2,
@@ -74,10 +74,11 @@ export const AMENITIES: Amenity[] = [
 ];
 
 export const SERVICE_CLASS_NOTES = [
+	'The vehicle images above are examples. You may get a different vehicle of similar quality.',
+	'All airports pickups allows free 60 minutes after flight landed. All other pickups 15  min free of charge.',
 	'Your ride includes 20 km of travel per hour booked. Extra distance or time will result in extra charges.',
 	'By-the-hour bookings must end in the same city or metropolitan area as the pickup location, or an extra vehicle-return charge will apply. If you plan to go from one city to another, please book a one-way ride.',
 	'Guest/luggage capacities must be abided by for safety reasons. If you are unsure, select a larger class as chauffeurs may turn down service when they are exceeded.',
-	'The vehicle images above are examples. You may get a different vehicle of similar quality.',
 ];
 
 export const PICKUP_INFO_NOTES = [
@@ -86,7 +87,7 @@ export const PICKUP_INFO_NOTES = [
 ];
 
 export const PAYMENT_NOTES = [
-	'The amount will be held from your selected payment method after the booking. We only charge you after the ride is finished.',
+	'The amount will be held from your selected payment method after the booking. We only charge you after the ride is finished. But if you have any extra waiting time the price will be changed and will be charged in the final billing.'
 ];
 
 export const STEPS: Step[] = [

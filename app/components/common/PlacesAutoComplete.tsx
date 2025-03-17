@@ -101,16 +101,29 @@ const GoMapsAutocomplete = ({ placeholder, distination }) => {
 		});
 	};
 
+	const airportKeywords = ['Airport', 'JFK', 'LaGuardia', 'Bergstrom', 'IAH', 'DFW'];
+
 	const onClickHandler = event => {
 		event.preventDefault();
-		setQuery(event.target.innerText);
+		const selectedLocation = event.target.innerText;
+
+		// Check if the selected location is an airport
+		const isAirport = airportKeywords.some(keyword => selectedLocation.includes(keyword));
+
+		if (isAirport && distination === 'from') {
+			globalStateController.updateState({
+				isAirport: true,
+			});
+		}
+
+		setQuery(selectedLocation);
 		setSuggestions([]);
 		globalStateController.updateState({
 			stepperForm: {
 				...stepperValues?.stepperForm,
 				bookingInfo: {
 					...bookingInfo,
-					[distination]: event.target.innerText,
+					[distination]: selectedLocation,
 				},
 			},
 		});
@@ -126,7 +139,7 @@ const GoMapsAutocomplete = ({ placeholder, distination }) => {
 					fetchSuggestions(e.target.value);
 				}}
 				placeholder={placeholder}
-				className="w-full h-10 pl-12 pr-10 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 font-semibold"
+				className="w-full h-10 pl-12 pr-10 bg-white border border-gray-600 rounded-lg shadow focus:border-gray-500 focus:ring-gray-500 font-semibold"
 			/>
 			{query && (
 				<button

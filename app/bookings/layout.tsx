@@ -46,6 +46,32 @@ function Layout({ children }: { children: ReactNode }) {
 		}
 	};
 
+	const isStepValidated = () => {
+		const stepperForm = globalStateController.getValue('stepperForm');
+		if (STEPS[activeStep].label === 'Pickup Info') {
+			const { passengerInfo, pickUpInfo } = stepperForm;
+			const { title, firstName, lastName, email, phoneNumber } = passengerInfo;
+
+			if (stepperForm?.isAirport) {
+				const { flightNumber, pickupSign } = pickUpInfo;
+				if (!flightNumber || !pickupSign) return false;
+			}
+
+			if (title && firstName && lastName && email && phoneNumber) return true;
+			return false;
+		}
+
+		if (STEPS[activeStep].label === 'Payment Info') {
+			const { paymentInfo } = stepperForm;
+			const { nameOnCard, cardNumber, expirationDate, cvv, saveCard } = paymentInfo;
+
+			if (nameOnCard && cardNumber && expirationDate && cvv && saveCard) return true;
+			return false;
+		}
+
+		return true;
+	}
+
 	const handleNextStep = async () => {
 		const stepperForm = globalStateController.getValue('stepperForm');
 
@@ -54,7 +80,8 @@ function Layout({ children }: { children: ReactNode }) {
 			await sendEmail(stepperForm);
 		}
 
-		if (activeStep < STEPS.length - 1) {
+
+		if (activeStep < STEPS.length - 1 && isStepValidated()) {
 			setActiveStep(prev => prev + 1);
 			router.push(STEPS[activeStep + 1].link);
 		}

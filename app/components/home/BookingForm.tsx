@@ -11,11 +11,35 @@ import GoMapsAutocomplete from '../common/PlacesAutoComplete';
 import { globalStateController } from '@/state/global/globalStateController';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useEffect } from 'react';
 
 export function BookingForm() {
 	const router = useRouter();
-	const { stepperValues } = globalStateController.useState(['stepperForm'], 'stepperValues');
+	const { stepperValues } = globalStateController.useState(['stepperForm', 'isAirport'], 'stepperValues');
 	const bookingInfo = stepperValues?.stepperForm?.bookingInfo;
+	const isAirport = stepperValues?.isAirport;
+	useEffect(() => {
+		const now = new Date();
+
+		// Set date to next day
+		now.setDate(now.getDate() + 1);
+		const nextDay = now.toISOString().split("T")[0];
+
+		// Set time to current time + 24 hours
+		const hours = now.getHours().toString().padStart(2, "0");
+		const minutes = now.getMinutes().toString().padStart(2, "0");
+		const nextTime = `${hours}:${minutes}`;
+
+		globalStateController.updateState({
+			stepperForm: {
+				...stepperValues?.stepperForm,
+				bookingInfo: {
+					date: nextDay,
+					time: nextTime,
+				},
+			},
+		});
+	}, []);
 
 	const getDistanceParameters = async () => {
 		try {
@@ -67,6 +91,14 @@ export function BookingForm() {
 		} catch (error) {
 			console.error('Error fetching distance parameters:', error);
 		}
+	};
+
+	const getValidTime = () => {
+		const now = new Date();
+		now.setHours(now.getHours() + 4); // Add 4 hours to disable selection before this
+		const hours = now.getHours().toString().padStart(2, "0");
+		const minutes = now.getMinutes().toString().padStart(2, "0");
+		return `${hours}:${minutes}`;
 	};
 
 	return (
@@ -150,6 +182,7 @@ export function BookingForm() {
 									type="time"
 									className="h-10 pl-12 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 mobile-min-width font-bold"
 									value={bookingInfo.time}
+									min={getValidTime()}
 									onChange={e =>
 										globalStateController.updateState({
 											stepperForm: {
@@ -164,13 +197,19 @@ export function BookingForm() {
 								/>
 							</div>
 							<p className="text-sm font-bold text-red-400 text-center">
-								Chauffeur will wait 15 minutes free of charge.
+								Chauffeur will wait {isAirport ? '60' : '15'} minutes free of charge.
 							</p>
 
 							<Button
 								onClick={() => {
 									const isAvailable = isBookingAvailable();
-									if (isAvailable) {
+
+									if (isAvailable
+										&& bookingInfo.time
+										&& bookingInfo.date
+										&& bookingInfo.from
+										&& bookingInfo.to
+									) {
 										router.push('/bookings/service-class');
 										getDistanceParameters();
 									}
@@ -195,6 +234,7 @@ export function BookingForm() {
 									}}
 									type="date"
 									min={new Date().toISOString().split('T')[0]} // Disable previous dates
+									value={bookingInfo.date}
 									className="h-10 pl-12 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 mobile-min-width font-bold"
 									onChange={e =>
 										globalStateController.updateState({
@@ -215,6 +255,8 @@ export function BookingForm() {
 										width: '100%',
 									}}
 									type="time"
+									value={bookingInfo.time}
+									min={getValidTime()}
 									className="h-10 pl-12 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 mobile-min-width font-bold"
 									onChange={e =>
 										globalStateController.updateState({
@@ -251,7 +293,11 @@ export function BookingForm() {
 							<Button
 								onClick={() => {
 									const isAvailable = isBookingAvailable();
-									if (isAvailable) {
+									if (isAvailable
+										&& bookingInfo.time
+										&& bookingInfo.date
+										&& bookingInfo.from
+									) {
 										router.push('/bookings/service-class');
 									}
 								}}
