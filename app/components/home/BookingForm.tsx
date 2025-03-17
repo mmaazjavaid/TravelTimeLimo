@@ -297,7 +297,7 @@ export function BookingForm() {
 										});
 
 										// Force the input value to update in the UI
-										e.target.value = value;
+										e.target.value = value.toString();
 									}}
 								/>
 							</div>
