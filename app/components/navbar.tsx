@@ -28,12 +28,33 @@ const business = [
 ];
 
 export function Navbar() {
+	const [title, setTitle] = React.useState("TRAVEL TIME LIMO");
+
+	React.useEffect(() => {
+		const fetchLocation = async () => {
+			try {
+				const res = await fetch("https://ipapi.co/json/");
+				const data = await res.json();
+				const city = data.city;
+				console.log(city);
+
+
+				if (city === "Austin") {
+					setTitle("AUSTIN CAB SERVICES");
+				}
+			} catch (error) {
+				console.error("Error fetching location:", error);
+			}
+		};
+
+		fetchLocation();
+	}, []);
 	return (
 		<nav className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-gray-800 to-gray-900 text-white">
 			<div className="container mx-auto px-4 lg:px-8">
 				<div className="flex items-center justify-between h-20">
 					<Link href="/" className="text-2xl font-bold text-gold">
-						TRAVEL TIME LIMO
+						{title}
 					</Link>
 
 					{/* Mobile Menu */}
