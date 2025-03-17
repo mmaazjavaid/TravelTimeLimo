@@ -10,6 +10,7 @@ const bookingSchema = new Schema({
 	},
 	pickUpInfo: {
 		flightNumber: { type: String },
+		flightArrivalTime: { type: String },
 		pickupSign: { type: String },
 		notes: { type: String },
 		referenceCode: { type: String },

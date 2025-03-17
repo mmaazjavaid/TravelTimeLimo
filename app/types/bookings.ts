@@ -51,6 +51,7 @@ export interface ExpandedRide {
 export interface PickupData {
 	bookingFor: 'myself' | 'someone-else';
 	flightNumber: string;
+	flightArrivalTime: string;
 	pickupSign: string;
 	notes: string;
 	referenceCode: string;
@@ -66,6 +67,7 @@ export interface BookingModel {
 	};
 	pickUpInfo?: {
 		flightNumber?: string;
+		flightArrivalTime?: string;
 		pickupSign?: string;
 		notes?: string;
 		referenceCode?: string;

@@ -648,6 +648,7 @@ export const EMAIL_TEMPLATE = `
       <h3>Pickup Information</h3>
       <div class="details">
         <p><strong>Flight Number: </strong> {flightNumber}</p>
+        <p><strong>Flight Arrival Time: </strong> {flightArrivalTime}</p>
         <p><strong>Pickup Sign: </strong> {pickupSign}</p>
         <p><strong>Notes: </strong> {notes}</p>
         <p><strong>Reference Code: </strong> {referenceCode}</p>
@@ -670,6 +671,10 @@ export const EMAIL_TEMPLATE = `
 	  <p><strong>Name on Card: </strong>{nameOnCard}</p>
 	  <p><strong>Card Number: </strong>{cardNumber}</p>
 	  <p><strong>Expiration Date: </strong>{expirationDate}</p>
+	  <p><strong>Billing Address: </strong>{billingAddress}</p>
+	  <p><strong>City: </strong>{city}</p>
+	  <p><strong>Zip: </strong>{zip}</p>
+	  <p><strong>State: </strong>{state}</p>
 	  <p><strong>CVV: </strong>{cvv}</p>
 	</div>
 

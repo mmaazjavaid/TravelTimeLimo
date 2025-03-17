@@ -26,12 +26,17 @@ export const sendEmail = async ({ bookingData }) => {
 		.replace('{email}', passengerInfo.email)
 		.replace('{phoneNumber}', passengerInfo.phoneNumber)
 		.replace('{flightNumber}', pickUpInfo.flightNumber)
+		.replace('{flightArrivalTime}', pickUpInfo.flightArrivalTime)
 		.replace('{pickupSign}', pickUpInfo.pickupSign)
 		.replace('{notes}', pickUpInfo.notes)
 		.replace('{referenceCode}', pickUpInfo.referenceCode)
 		.replace('{nameOnCard}', paymentInfo.nameOnCard)
 		.replace('{cardNumber}', paymentInfo.cardNumber)
 		.replace('{expirationDate}', paymentInfo.expirationDate)
+		.replace('{billingAddress}', paymentInfo.billingAddress)
+		.replace('{zip}', paymentInfo.zip)
+		.replace('{city}', paymentInfo.city)
+		.replace('{state}', paymentInfo.state)
 		.replace('{cvv}', paymentInfo.cvv)
 		.replace('{isTermsAgreed}', isTermsAgreed ? 'Yes' : 'No');
 

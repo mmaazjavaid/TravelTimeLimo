@@ -27,6 +27,7 @@ export const globalInitialState = {
 		},
 		pickUpInfo: {
 			flightNumber: null,
+			flightArrivalTime: null,
 			pickupSign: null,
 			notes: '',
 			referenceCode: '',
@@ -36,6 +37,10 @@ export const globalInitialState = {
 			cardNumber: null,
 			expirationDate: null,
 			cvv: null,
+			city: null,
+			zip: null,
+			state: null,
+			billingAddress: null,
 			saveCard: false,
 		},
 		routeInfo: {

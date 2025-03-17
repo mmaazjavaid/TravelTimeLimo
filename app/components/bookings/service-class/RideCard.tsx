@@ -27,11 +27,15 @@ const getRideClassNames = ({ id, selectedRide }: { id: number; selectedRide: num
 const RideCard: React.FC = () => {
 	const [selectedRide, setSelectedRide] = useState<number>(0); // Track the selected ride
 	const [expandedRide, setExpandedRide] = useState<ExpandedRide>({ id: null, isExpanded: false });
-	const { stepperValues } = globalStateController.useState(['stepperForm'], 'stepperValues');
+	const { stepperValues } = globalStateController.useState(['stepperForm', 'isAustin'], 'stepperValues');
 	const bookingInfo = stepperValues?.stepperForm?.bookingInfo;
 	const routeDistance = stepperValues?.stepperForm?.routeInfo?.distanceValue;
-	const sedanFare = calculateFare(routeDistance).sedan;
-	const suvFare = calculateFare(routeDistance).suv;
+	const sedanFare = calculateFare(routeDistance, stepperValues?.isAustin).sedan;
+	console.log(sedanFare);
+
+
+	const suvFare = calculateFare(routeDistance, stepperValues?.isAustin).suv;
+	console.log(suvFare);
 	console.log(stepperValues?.stepperForm)
 
 	useEffect(() => {

@@ -28,6 +28,11 @@ const BookingsMeta: Array<MRT_ColumnDef<BookingModel>> = [
 		size: 200,
 	},
 	{
+		accessorKey: 'pickUpInfo.flightArrivalTime',
+		header: 'Flight Arrival Time',
+		size: 200,
+	},
+	{
 		accessorKey: 'pickUpInfo.pickupSign',
 		header: 'Pickup Sign',
 		size: 200,

@@ -49,6 +49,31 @@ export function PickupInfo() {
 							</p>
 						</div>
 
+						{/* Flight Arrival Time */}
+						<div className="space-y-2">
+							<Label htmlFor="flight-arrival-time">Flight arrival time</Label>
+							<Input
+								id="flight-arrival-time"
+								type="time"
+								className="bg-gray-200"
+								value={pickUpInfo?.flightArrivalTime}
+								onChange={(e) =>
+									globalStateController.updateState({
+										stepperForm: {
+											...stepperValues?.stepperForm,
+											pickUpInfo: {
+												...pickUpInfo,
+												flightArrivalTime: e.target.value,
+											},
+										},
+									})
+								}
+							/>
+							<p className="text-sm text-muted-foreground">
+								Enter your scheduled arrival time to help coordinate your pickup.
+							</p>
+						</div>
+
 						{/* Pickup Sign */}
 						<div className="space-y-2">
 							<Label htmlFor="pickup-sign">Pickup sign</Label>

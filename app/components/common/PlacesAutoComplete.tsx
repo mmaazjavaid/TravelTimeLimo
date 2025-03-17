@@ -32,10 +32,10 @@ const GoMapsAutocomplete = ({ placeholder, distination }) => {
 		}
 	};
 
+	const nyKeywords = ['New York', 'NY', 'JFK', 'LaGuardia', 'Manhattan', 'Brooklyn', 'Queens'];
+	const txKeywords = ['Austin', 'TX', 'Texas', 'Bergstrom', 'Downtown', 'Round Rock'];
 	const determineLocationSource = place => {
 		if (!place) return null;
-		const nyKeywords = ['New York', 'NY', 'JFK', 'LaGuardia', 'Manhattan', 'Brooklyn', 'Queens'];
-		const txKeywords = ['Austin', 'TX', 'Texas', 'Bergstrom', 'Downtown', 'Round Rock'];
 
 		if (nyKeywords.some(keyword => place.includes(keyword))) return LOCATION_NY;
 		if (txKeywords.some(keyword => place.includes(keyword))) return LOCATION_TX;
@@ -113,6 +113,13 @@ const GoMapsAutocomplete = ({ placeholder, distination }) => {
 		if (isAirport && distination === 'from') {
 			globalStateController.updateState({
 				isAirport: true,
+			});
+		}
+
+		const isAustin = txKeywords.some(keyword => selectedLocation.includes(keyword))
+		if (isAustin) {
+			globalStateController.updateState({
+				isAustin: true,
 			});
 		}
 

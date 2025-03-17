@@ -53,8 +53,8 @@ function Layout({ children }: { children: ReactNode }) {
 			const { title, firstName, lastName, email, phoneNumber } = passengerInfo;
 
 			if (stepperForm?.isAirport) {
-				const { flightNumber, pickupSign } = pickUpInfo;
-				if (!flightNumber || !pickupSign) return false;
+				const { flightNumber, pickupSign, flightArrivalTime } = pickUpInfo;
+				if (!flightNumber || !pickupSign || !flightArrivalTime) return false;
 			}
 
 			if (title && firstName && lastName && email && phoneNumber) return true;
@@ -63,9 +63,9 @@ function Layout({ children }: { children: ReactNode }) {
 
 		if (STEPS[activeStep].label === 'Payment Info') {
 			const { paymentInfo } = stepperForm;
-			const { nameOnCard, cardNumber, expirationDate, cvv, saveCard } = paymentInfo;
+			const { nameOnCard, cardNumber, expirationDate, cvv, billingAddress, city, state, zip } = paymentInfo;
 
-			if (nameOnCard && cardNumber && expirationDate && cvv && saveCard) return true;
+			if (nameOnCard && cardNumber && expirationDate && cvv && billingAddress && city && state && zip) return true;
 			return false;
 		}
 

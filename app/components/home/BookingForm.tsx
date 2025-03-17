@@ -277,17 +277,28 @@ export function BookingForm() {
 									type="number"
 									placeholder="Number of hours"
 									className="w-full pl-12 h-10 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 font-bold"
-									onChange={e =>
+									min="2"
+									onChange={e => {
+										let value = parseInt(e.target.value, 10);
+
+										// If value is less than 2 or not a number, set it to 2
+										if (isNaN(value) || value < 2) {
+											value = 2;
+										}
+
 										globalStateController.updateState({
 											stepperForm: {
 												...stepperValues?.stepperForm,
 												bookingInfo: {
 													...bookingInfo,
-													numberOfHours: e.target.value,
+													numberOfHours: value,
 												},
 											},
-										})
-									}
+										});
+
+										// Force the input value to update in the UI
+										e.target.value = value;
+									}}
 								/>
 							</div>
 							<Button
