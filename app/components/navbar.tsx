@@ -33,11 +33,9 @@ export function Navbar() {
 	React.useEffect(() => {
 		const fetchLocation = async () => {
 			try {
-				const res = await fetch("https://ipapi.co/json/");
+				const res = await fetch("https://ipinfo.io/json?token=5de9c3725adbab");
 				const data = await res.json();
 				const city = data.city;
-				console.log(city);
-
 
 				if (city === "Austin") {
 					setTitle("AUSTIN CAB SERVICES");
