@@ -48,7 +48,7 @@ const RideCard: React.FC = () => {
 						baseFare: sedanFare,
 						totalFare: sedanFare + (sedanFare * 0.08625),
 						meetAndGreet: 0,
-						tax: 0,
+						tax: (sedanFare * 0.08625),
 					},
 				},
 			});
@@ -78,7 +78,7 @@ const RideCard: React.FC = () => {
 										luggage: ride.luggage,
 										baseFare: ride.value === 'business_class' ? sedanFare : suvFare,
 										meetAndGreet: 0,
-										tax: 0,
+										tax: ride.value === 'business_class' ? (sedanFare * 0.08625) : (suvFare * 0.08625),
 										totalFare: ride.value === 'business_class' ? sedanFare + (sedanFare * 0.08625) : suvFare + (suvFare * 0.08625),
 									},
 								},

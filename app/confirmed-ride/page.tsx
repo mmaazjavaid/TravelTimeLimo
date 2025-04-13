@@ -4,11 +4,16 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { CheckCircle, ArrowLeft, Calendar, Clock, MapPin } from 'lucide-react';
 import { globalStateController } from '@/state/global/globalStateController';
+import { useEffect } from 'react';
 
 export default function ThankYouPage() {
 	const { stepperValues } = globalStateController.useState(['stepperForm'], 'stepperValues');
 	const bookingInfo = stepperValues?.stepperForm?.bookingInfo;
-
+	useEffect(() => {
+		return () => {
+			globalStateController.reset();
+		};
+	}, []);
 	return (
 		<div className="min-h-screen bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center p-4">
 			<motion.div

@@ -38,7 +38,11 @@ export function Navbar() {
 				const city = data.city;
 
 				if (city === "Austin") {
-					setTitle("AUSTIN CAB SERVICES");
+					setTitle("ATX Airport limo");
+				}
+
+				if (city === 'New York' || city == 'Newyork') {
+					setTitle('NY ICON LIMO');
 				}
 			} catch (error) {
 				console.error("Error fetching location:", error);

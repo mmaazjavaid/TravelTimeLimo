@@ -9,9 +9,9 @@ const Notes: React.FC<NotesProps> = ({ notes }) => {
 				{notes.map((note, index) => (
 					<div key={index} className="flex items-start gap-3">
 						<div className="flex-shrink-0">
-							<AlertCircle fill="#64666b" className="w-6 h-6 text-white" />
+							<AlertCircle fill="#dc2626" className="w-6 h-6 text-white" />
 						</div>
-						<p className="text-gray-600">{note}</p>
+						<p className="text-red-700">{note}</p>
 					</div>
 				))}
 			</div>

@@ -27,7 +27,7 @@ export function BookingForm() {
 			const hours = now.getHours().toString().padStart(2, "0");
 			const minutes = now.getMinutes().toString().padStart(2, "0");
 			const nextTime = `${hours}:${minutes}`;
-		
+
 			globalStateController.updateState({
 				stepperForm: {
 					...stepperValues?.stepperForm,
@@ -116,11 +116,11 @@ export function BookingForm() {
 	};
 
 	return (
-		<Card className="w-[350px] mx-auto bg-gradient-to-r from-gray-50 to-gray-100 shadow-2xl rounded-xl overflow-hidden ">
-			<CardContent className="p-8">
-				<h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Book Your Ride</h2>
-				<Tabs defaultValue="one-way" className="w-full">
-					<TabsList className="flex justify-center gap-4 mb-8">
+		<Card className="w-[350px] aspect-square mx-auto bg-gradient-to-r from-gray-50 to-gray-100 shadow-2xl rounded-xl overflow-hidden">
+			<CardContent className="p-4 flex flex-col h-full">
+				<h2 className="text-xl font-bold text-gray-800 mb-2 text-center">Book Your Ride</h2>
+				<Tabs defaultValue="one-way" className="flex-grow">
+					<TabsList className="flex justify-center gap-2 mb-2">
 						<TabsTrigger
 							onClick={() => {
 								globalStateController.updateState({
@@ -128,13 +128,13 @@ export function BookingForm() {
 										...stepperValues?.stepperForm,
 										bookingInfo: {
 											...bookingInfo,
-											type: 'oneWay',
+											type: "oneWay",
 										},
 									},
-								});
+								})
 							}}
 							value="one-way"
-							className={`px-6 py-3 text-sm font-bold uppercase rounded-full border ${STYLES.transition} data-[state=active]:bg-gradient-to-r data-[state=active]:from-gray-400 data-[state=active]:via-gray-500 data-[state=active]:to-gray-600 data-[state=active]:text-white data-[state=active]:shadow-lg`}
+							className={`px-4 py-1 text-xs font-bold uppercase rounded-full border ${STYLES.transition} data-[state=active]:bg-[#3B82F6] hover:bg-[#2563eb] data-[state=active]:text-white data-[state=active]:shadow-lg`}
 						>
 							One Way
 						</TabsTrigger>
@@ -145,37 +145,37 @@ export function BookingForm() {
 										...stepperValues?.stepperForm,
 										bookingInfo: {
 											...bookingInfo,
-											type: 'hourly',
+											type: "hourly",
 										},
 									},
-								});
+								})
 							}}
 							value="hourly"
-							className={`px-6 py-3 text-sm font-bold uppercase rounded-full border ${STYLES.transition} data-[state=active]:bg-gradient-to-r data-[state=active]:from-gray-400 data-[state=active]:via-gray-500 data-[state=active]:to-gray-600 data-[state=active]:text-white data-[state=active]:shadow-lg`}
+							className={`px-4 py-1 text-xs font-bold uppercase rounded-full border ${STYLES.transition} data-[state=active]:bg-[#3B82F6] hover:bg-[#2563eb] data-[state=active]:text-white data-[state=active]:shadow-lg`}
 						>
 							Hourly
 						</TabsTrigger>
 					</TabsList>
-					<TabsContent value="one-way" className="space-y-6">
-						<div className="space-y-6">
+					<TabsContent value="one-way" className="space-y-3 flex-grow">
+						<div className="space-y-3 flex flex-col h-full">
 							<div className="relative">
-								<MapPin className="absolute left-4 top-2 h-5 w-5 text-gray-400" />
-								<GoMapsAutocomplete placeholder={'From: Address, airport, hotel...'} distination={'from'} />
+								<MapPin className="absolute left-3 top-1.5 h-4 w-4 text-gray-400" />
+								<GoMapsAutocomplete placeholder={"From: Address, airport, hotel..."} distination={"from"} />
 							</div>
 							<div className="relative">
-								<MapPin className="absolute left-4 top-2 h-5 w-5 text-gray-400" />
-								<GoMapsAutocomplete placeholder={'To: Address, airport, hotel...'} distination={'to'} />
+								<MapPin className="absolute left-3 top-1.5 h-4 w-4 text-gray-400" />
+								<GoMapsAutocomplete placeholder={"To: Address, airport, hotel..."} distination={"to"} />
 							</div>
 							<div className="relative">
 								<Input
 									style={{
-										width: '100%',
+										width: "100%",
 									}}
 									type="date"
-									min={new Date().toISOString().split('T')[0]} // Disable previous dates
-									className="h-10 pl-12 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 mobile-min-width font-bold"
+									min={new Date().toISOString().split("T")[0]} // Disable previous dates
+									className="h-8 pl-10 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 mobile-min-width font-bold text-sm"
 									value={bookingInfo.date}
-									onChange={e =>
+									onChange={(e) =>
 										globalStateController.updateState({
 											stepperForm: {
 												...stepperValues?.stepperForm,
@@ -191,28 +191,28 @@ export function BookingForm() {
 							<div className="relative">
 								<Input
 									style={{
-										width: '100%',
+										width: "100%",
 									}}
 									type="time"
-									className="h-10 pl-12 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 mobile-min-width font-bold"
+									className="h-8 pl-10 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 mobile-min-width font-bold text-sm"
 									value={bookingInfo.time}
 									min={getValidTime()}
 									step="900" // Restricts to 15-minute intervals
 									onFocus={(e) => {
 										// Force browser to re-evaluate min time when input is focused
-										e.target.min = getValidTime();
+										e.target.min = getValidTime()
 									}}
-									onChange={e => {
-										const selectedTime = e.target.value;
-										const [hours, minutes] = selectedTime.split(':').map(Number);
-										const selectedDateTime = new Date();
-										selectedDateTime.setHours(hours, minutes);
+									onChange={(e) => {
+										const selectedTime = e.target.value
+										const [hours, minutes] = selectedTime.split(":").map(Number)
+										const selectedDateTime = new Date()
+										selectedDateTime.setHours(hours, minutes)
 
-										const minTime = new Date();
-										minTime.setHours(minTime.getHours() + 4);
+										const minTime = new Date()
+										minTime.setHours(minTime.getHours() + 4)
 
 										// Only update if selected time is valid
-										if (selectedDateTime >= minTime || bookingInfo.date !== new Date().toISOString().split('T')[0]) {
+										if (selectedDateTime >= minTime || bookingInfo.date !== new Date().toISOString().split("T")[0]) {
 											globalStateController.updateState({
 												stepperForm: {
 													...stepperValues?.stepperForm,
@@ -221,7 +221,7 @@ export function BookingForm() {
 														time: selectedTime,
 													},
 												},
-											});
+											})
 										} else {
 											// Reset to minimum valid time if invalid selection
 											globalStateController.updateState({
@@ -232,54 +232,48 @@ export function BookingForm() {
 														time: getValidTime(),
 													},
 												},
-											});
-											toast.error('Please select a time at least 4 hours from now');
+											})
+											toast.error("Please select a time at least 4 hours from now")
 										}
 									}}
 								/>
 							</div>
-							<p className="text-sm font-bold text-red-400 text-center">
-								Chauffeur will wait {isAirport ? '60' : '15'} minutes free of charge.
+							<p className="text-xs font-bold text-red-400 text-center">
+								Chauffeur will wait {isAirport ? "60" : "15"} minutes free of charge.
 							</p>
 
 							<Button
 								onClick={() => {
-									const isAvailable = isBookingAvailable();
+									const isAvailable = isBookingAvailable()
 
-									if (isAvailable
-										&& bookingInfo.time
-										&& bookingInfo.date
-										&& bookingInfo.from
-										&& bookingInfo.to
-									) {
-										router.push('/bookings/service-class');
-										getDistanceParameters();
+									if (isAvailable && bookingInfo.time && bookingInfo.date && bookingInfo.from && bookingInfo.to) {
+										router.push("/bookings/service-class")
+										getDistanceParameters()
 									}
 								}}
-								className={`w-full text-white font-bold py-3 rounded-lg text-base sm:text-lg md:text-xl`}
-								variant="gradient"
+								className={`w-full font-bold py-2 rounded-lg text-sm bg-[#3B82F6] hover:bg-[#2563eb] text-white transition-colors duration-200`}
 							>
 								Search
 							</Button>
 						</div>
 					</TabsContent>
-					<TabsContent value="hourly" className="space-y-6">
-						<div className="space-y-6">
+					<TabsContent value="hourly" className="space-y-3 flex-grow">
+						<div className="space-y-3 flex flex-col h-full">
 							<div className="relative">
-								<MapPin className="absolute left-4 top-2 h-5 w-5 text-gray-400" />
-								<GoMapsAutocomplete placeholder={'Pickup location'} distination={'from'} />
+								<MapPin className="absolute left-3 top-1.5 h-4 w-4 text-gray-400" />
+								<GoMapsAutocomplete placeholder={"Pickup location"} distination={"from"} />
 							</div>
 							<div className="relative">
 								<Input
 									style={{
-										width: '100%',
+										width: "100%",
 									}}
 									type="date"
-									min={new Date().toISOString().split('T')[0]} // Disable previous dates
+									min={new Date().toISOString().split("T")[0]} // Disable previous dates
 									value={bookingInfo.date}
-									className="h-10 pl-12 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 mobile-min-width font-bold"
-									onChange={e => {
-										const newDate = e.target.value;
+									className="h-8 pl-10 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 mobile-min-width font-bold text-sm"
+									onChange={(e) => {
+										const newDate = e.target.value
 										globalStateController.updateState({
 											stepperForm: {
 												...stepperValues?.stepperForm,
@@ -287,38 +281,38 @@ export function BookingForm() {
 													...bookingInfo,
 													date: newDate,
 													// Reset time when date changes
-													time: newDate === new Date().toISOString().split('T')[0] ? getValidTime() : '00:00'
+													time: newDate === new Date().toISOString().split("T")[0] ? getValidTime() : "00:00",
 												},
 											},
-										});
+										})
 									}}
 								/>
 							</div>
 							<div className="relative">
 								<Input
 									style={{
-										width: '100%',
+										width: "100%",
 									}}
 									type="time"
-									className="h-10 pl-12 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 mobile-min-width font-bold"
+									className="h-8 pl-10 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 mobile-min-width font-bold text-sm"
 									value={bookingInfo.time}
 									min={getValidTime()}
 									step="900" // Restricts to 15-minute intervals
 									onFocus={(e) => {
 										// Force browser to re-evaluate min time when input is focused
-										e.target.min = getValidTime();
+										e.target.min = getValidTime()
 									}}
-									onChange={e => {
-										const selectedTime = e.target.value;
-										const [hours, minutes] = selectedTime.split(':').map(Number);
-										const selectedDateTime = new Date();
-										selectedDateTime.setHours(hours, minutes);
+									onChange={(e) => {
+										const selectedTime = e.target.value
+										const [hours, minutes] = selectedTime.split(":").map(Number)
+										const selectedDateTime = new Date()
+										selectedDateTime.setHours(hours, minutes)
 
-										const minTime = new Date();
-										minTime.setHours(minTime.getHours() + 4);
+										const minTime = new Date()
+										minTime.setHours(minTime.getHours() + 4)
 
 										// Only update if selected time is valid
-										if (selectedDateTime >= minTime || bookingInfo.date !== new Date().toISOString().split('T')[0]) {
+										if (selectedDateTime >= minTime || bookingInfo.date !== new Date().toISOString().split("T")[0]) {
 											globalStateController.updateState({
 												stepperForm: {
 													...stepperValues?.stepperForm,
@@ -327,7 +321,7 @@ export function BookingForm() {
 														time: selectedTime,
 													},
 												},
-											});
+											})
 										} else {
 											// Reset to minimum valid time if invalid selection
 											globalStateController.updateState({
@@ -338,25 +332,25 @@ export function BookingForm() {
 														time: getValidTime(),
 													},
 												},
-											});
-											toast.error('Please select a time at least 4 hours from now');
+											})
+											toast.error("Please select a time at least 4 hours from now")
 										}
 									}}
 								/>
 							</div>
 							<div className="relative">
-								<Clock className="absolute left-4 top-2 h-5 w-5 text-gray-400" />
+								<Clock className="absolute left-3 top-1.5 h-4 w-4 text-gray-400" />
 								<Input
 									type="number"
 									placeholder="Number of hours"
 									className="w-full pl-12 h-10 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 font-bold"
 									min="2"
-									onChange={e => {
-										let value = parseInt(e.target.value, 10);
+									onChange={(e) => {
+										let value = Number.parseInt(e.target.value, 10)
 
 										// If value is less than 2 or not a number, set it to 2
 										if (isNaN(value) || value < 2) {
-											value = 2;
+											value = 2
 										}
 
 										globalStateController.updateState({
@@ -367,26 +361,23 @@ export function BookingForm() {
 													numberOfHours: value,
 												},
 											},
-										});
+										})
 
 										// Force the input value to update in the UI
-										e.target.value = value.toString();
+										e.target.value = value.toString()
 									}}
 								/>
 							</div>
 							<Button
 								onClick={() => {
-									const isAvailable = isBookingAvailable();
-									if (isAvailable
-										&& bookingInfo.time
-										&& bookingInfo.date
-										&& bookingInfo.from
-									) {
-										router.push('/bookings/service-class');
+									const isAvailable = isBookingAvailable()
+									if (isAvailable && bookingInfo.time && bookingInfo.date && bookingInfo.from) {
+										router.push("/bookings/service-class")
 									}
 								}}
-								className={`w-full text-white font-bold py-3 rounded-lg text-base sm:text-lg md:text-xl`}
-								variant="gradient"
+
+								// For search buttons
+								className={`w-full font-bold py-2 rounded-lg text-sm bg-[#3B82F6] hover:bg-[#2563eb] text-white transition-colors duration-200`}
 							>
 								Search
 							</Button>

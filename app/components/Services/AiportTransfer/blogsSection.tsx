@@ -9,7 +9,7 @@ export function BlogsSection() {
                 <div className="grid lg:grid-cols-2 gap-8 items-center">
                     <div className="space-y-6">
                         <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
-                            Airport transfer in global cities
+                            Airport transfer in US cities
                         </h1>
                         <p className="text-lg text-gray-600">
                             If you've just stepped off a plane, tired and aching from a long flight, there can be no better stress-reliever than a Travel time limo airport transfer direct to your destination. Travel time Limo transfers are available in{" "}

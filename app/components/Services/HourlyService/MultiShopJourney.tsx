@@ -54,7 +54,7 @@ export function MultiStopJourney() {
             <div className="grid lg:grid-cols-2 gap-8">
                 <div className="space-y-6 lg:pr-12">
                     <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
-                        Global reach
+                        US reach
                     </h2>
                     <p className="text-lg text-gray-600">
                         With professional chauffeurs in hundreds of cities spanning{" "}

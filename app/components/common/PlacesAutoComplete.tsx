@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { globalStateController } from '@/state/global/globalStateController';
 
 const LOCATION_NY = '40.7696052,-73.5113524';
-const LOCATION_TX = '30.2726839,-97.7498649';
+const LOCATION_TX = '30.4534963,-97.5566541';
 
 const GoMapsAutocomplete = ({ placeholder, distination }) => {
 	const [query, setQuery] = useState('');
@@ -146,7 +146,7 @@ const GoMapsAutocomplete = ({ placeholder, distination }) => {
 					fetchSuggestions(e.target.value);
 				}}
 				placeholder={placeholder}
-				className="w-full h-10 pl-12 pr-10 bg-white border border-gray-600 rounded-lg shadow focus:border-gray-500 focus:ring-gray-500 font-semibold"
+				className="w-full h-8 pl-12 pr-10 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 font-semibold text-sm"
 			/>
 			{query && (
 				<button

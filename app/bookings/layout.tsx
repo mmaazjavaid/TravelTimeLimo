@@ -75,7 +75,7 @@ function Layout({ children }: { children: ReactNode }) {
 	const handleNextStep = async () => {
 		const stepperForm = globalStateController.getValue('stepperForm');
 
-		if (activeStep === STEPS.length - 2) {
+		if (activeStep === STEPS.length - 2 && isStepValidated()) {
 			await saveBooking(stepperForm);
 			await sendEmail(stepperForm);
 		}
