@@ -4,14 +4,20 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { CheckCircle, ArrowLeft, Calendar, Clock, MapPin } from 'lucide-react';
 import { globalStateController } from '@/state/global/globalStateController';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 export default function ThankYouPage() {
+	const shouldRedirect = useRef(true);
 	const { stepperValues } = globalStateController.useState(['stepperForm'], 'stepperValues');
 	const bookingInfo = stepperValues?.stepperForm?.bookingInfo;
 	useEffect(() => {
 		return () => {
-			globalStateController.reset();
+			if (shouldRedirect.current) {
+				globalStateController.reset();
+				setTimeout(() => {
+					window.location.href = '/';
+				}, 3000);
+			}
 		};
 	}, []);
 	return (
