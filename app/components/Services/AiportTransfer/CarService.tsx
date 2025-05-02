@@ -113,7 +113,7 @@ export default function CarService() {
                 >
                     {"←"}
                 </button>
-                {[1, 2, 3, 4].map((num) => (
+                {[1, 2].map((num) => (
                     <button
                         key={num}
                         onClick={() => api?.scrollTo(num - 1)}

@@ -6,9 +6,10 @@ interface ServiceCardProps {
 	description: string;
 	imageSrc: string;
 	isNew?: boolean;
+	redirectUrl: string;
 }
 
-function ServiceCard({ title, description, imageSrc, isNew }: ServiceCardProps) {
+function ServiceCard({ title, description, imageSrc, isNew, redirectUrl }: ServiceCardProps) {
 	return (
 		<div className="flex flex-col space-y-4 bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-105">
 			<div className="relative aspect-[4/3] overflow-hidden">
@@ -31,7 +32,7 @@ function ServiceCard({ title, description, imageSrc, isNew }: ServiceCardProps) 
 				</div>
 				<p className="text-gray-600">{description}</p>
 				<Link
-					href="#"
+					href={redirectUrl}
 					className="inline-block text-sm font-semibold text-primary hover:text-primary-dark transition-colors duration-300"
 				>
 					Learn more
@@ -83,22 +84,26 @@ export function ServicesSection() {
 							title="City-to-city rides"
 							description="Your stress-free solution for long-distance rides with professional chauffeurs across the globe."
 							imageSrc="/charleston-black-cab-company (2).jpg"
+							redirectUrl="/services/city-city"
 						/>
 						<ServiceCard
 							title="Chauffeur hailing"
 							description="Enjoy the quality of a traditional chauffeur, with the convenience of riding within minutes of booking."
 							imageSrc="/02f1f7cfe36b0f5f33652b4561dcfe5c.jpg?height=300&width=400"
+							redirectUrl="/services/chauffeur-hailing"
 							isNew
 						/>
 						<ServiceCard
 							title="Airport transfers"
 							description="With additional wait time and flight tracking in case of delays, our service is optimized to make every airport transfer a breeze."
 							imageSrc="/CourtneyMac_Design_an_image_featuring_a_luxury_chauffeur-driven_756e7c04-70b8-4f33-ad0f-cf53402e56a6.jpg?height=300&width=400"
+							redirectUrl="/services/airport-transfer"
 						/>
 						<ServiceCard
 							title="Hourly and full day hire"
 							description="For by-the-hour bookings or daily chauffeur hire, choose one of our tailored services for total flexibility, reliability and comfort."
 							imageSrc="/Executive-Hire.avif?height=300&width=400"
+							redirectUrl="/services/hourly-car-service"
 						/>
 					</div>
 				</div>
