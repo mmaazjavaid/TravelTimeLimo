@@ -5,7 +5,7 @@ export default function MainHeader({ heading, showDownloadSection = true, imageP
 	return (
 		<main className="relative">
 			<div className="container mx-auto px-4 sm:px-6 lg:px-8">
-				<h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-8 pt-24 lg:pt-28">{heading}</h1>
+				<h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-8 pt-20">{heading}</h1>
 			</div>
 			<section className="relative min-h-[50vh] md:min-h-[60vh] lg:min-h-[75vh] flex items-center">
 				<div className="absolute inset-0 z-0">
