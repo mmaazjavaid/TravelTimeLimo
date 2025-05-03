@@ -99,27 +99,14 @@ export const STEPS: Step[] = [
 
 export const FOOTER_NAVIGATIONS = {
 	company: [
-		{ name: 'How Travel Time Limo works', href: '#' },
-		{ name: 'Career', href: '#' },
-		{ name: 'Press', href: '#' },
-		{ name: 'Blog', href: '#' },
-		{ name: 'Green initiatives', href: '#' },
-		{ name: 'Become a chauffeur partner', href: '#' },
-		{ name: 'Influencers', href: '#' },
+		{ name: 'Coming soon', href: '#' },
 	],
 	business: [
-		{ name: 'Overview', href: '#' },
-		{ name: 'Corporations', href: '#' },
-		{ name: 'Travel agencies', href: '#' },
-		{ name: 'Strategic partnerships', href: '#' },
+		{ name: 'Coming soon', href: '#' },
 	],
 	cities: [
-		{ name: 'New York', href: '#' },
-		{ name: 'London', href: '#' },
-		{ name: 'Berlin', href: '#' },
-		{ name: 'Los Angeles', href: '#' },
-		{ name: 'Paris', href: '#' },
-		{ name: 'All cities', href: '#' },
+		{ name: 'New York', href: '/services/city-city' },
+		{ name: 'Austin', href: '/services/city-city' },
 	],
 	explore: [
 		{ name: 'City-to-city rides', href: '/services/city-city' },
@@ -130,18 +117,15 @@ export const FOOTER_NAVIGATIONS = {
 		{ name: 'Hourly car service', href: '/services/hourly-car-service' },
 	],
 	cityToCity: [
-		{ name: 'New York - East Hampton', href: '#' },
-		{ name: 'Los Angeles - San Diego', href: '#' },
-		{ name: 'Miami - Palm Beach', href: '#' },
-		{ name: 'London - Bristol', href: '#' },
-		{ name: 'Dubai - Abu Dhabi', href: '#' },
-		{ name: 'Paris - Reims', href: '#' },
+		{ name: 'New York - East Hampton', href: '/services/city-city' },
+		{ name: 'Los Angeles - San Diego', href: '/services/city-city' },
+		{ name: 'Miami - Palm Beach', href: '/services/city-city' },
+		{ name: 'London - Bristol', href: '/services/city-city' },
+		{ name: 'Dubai - Abu Dhabi', href: '/services/city-city' },
+		{ name: 'Paris - Reims', href: '/services/city-city' },
 	],
 	legal: [
 		{ name: 'Terms', href: '/terms' },
-		{ name: 'Privacy policy', href: '#' },
-		{ name: 'Legal notice', href: '#' },
-		{ name: 'Accessibility', href: '#' },
 	],
 };
 
@@ -266,7 +250,7 @@ export const TERMS: TermsSection[] = [
 		id: 1,
 		title: 'GENERAL PROVISIONS',
 		href: 'general-provisions',
-		content: `Travel Time Limo GmbH, Feurigstraße 59, 10827 Berlin, Germany (hereinafter referred to as "Travel Time Limo") enables its users to book transportation services via its own online platform by integrating third-party online platforms and applications for mobile devices ("apps"; all methods collectively referred to as "BL Tools"). Travel Time Limo's service consists of arranging for the transportation of a user by an independent ride service provider (Transportation Service Provider or "TSP"). Travel Time Limo arranges this business service for the user but does not in provide the actual transportation service.
+		content: `Travel Time Limo, Feurigstraße 59, 10827 Berlin, Germany (hereinafter referred to as "Travel Time Limo") enables its users to book transportation services via its own online platform by integrating third-party online platforms and applications for mobile devices ("apps"; all methods collectively referred to as "BL Tools"). Travel Time Limo's service consists of arranging for the transportation of a user by an independent ride service provider (Transportation Service Provider or "TSP"). Travel Time Limo arranges this business service for the user but does not in provide the actual transportation service.
 
 		These General Terms and Conditions (hereinafter referred to as “T&Cs”) are part of each agreement of the user concerning Travel Time Limo's arrangement of business service contracts. They also describe the details of the transportation services for which Travel Time Limo provides the user a direct claim against a particular TSP.
 

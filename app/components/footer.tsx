@@ -14,13 +14,7 @@ export function Footer() {
 					<Link href="/" className="text-3xl font-bold text-white mb-4 lg:mb-0">
 						TRAVEL TIME LIMO
 					</Link>
-					<Link
-						href="#"
-						className="flex items-center gap-x-3 text-sm font-medium text-gray-300 hover:text-white transition-colors"
-					>
-						<CircleHelp className="w-5 h-5 text-white" />
-						Need Help?
-					</Link>
+
 				</div>
 
 				{/* Navigation Section */}
@@ -55,7 +49,7 @@ export function Footer() {
 				{/* Legal Section */}
 				<div className="border-t border-gray-700 pt-8">
 					<div className="flex flex-col md:flex-row justify-between items-center">
-						<p className="text-xs text-gray-400">&copy; 2024 Travel Time Limo GmbH</p>
+						<p className="text-xs text-gray-400">&copy; 2024 Travel Time Limo</p>
 						<div className="flex space-x-6 mt-4 md:mt-0">
 							{FOOTER_NAVIGATIONS.legal.map(item => (
 								<Link
