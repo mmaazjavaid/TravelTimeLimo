@@ -52,22 +52,6 @@ export function Footer() {
 					</div>
 				</div>
 
-				{/* Bottom Section */}
-				<div className="flex justify-center items-center gap-8 mb-12">
-					{SOCIALS.map(social => (
-						<Link
-							key={social.name}
-							href={social.href}
-							className="text-gray-400 hover:text-white transition-colors"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							<span className="sr-only">{social.name}</span>
-							<social.icon className="w-6 h-6" />
-						</Link>
-					))}
-				</div>
-
 				{/* Legal Section */}
 				<div className="border-t border-gray-700 pt-8">
 					<div className="flex flex-col md:flex-row justify-between items-center">

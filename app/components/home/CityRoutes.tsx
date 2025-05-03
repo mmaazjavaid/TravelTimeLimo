@@ -25,18 +25,18 @@ const topCities: CityCard[] = [
 		routeCount: 21,
 	},
 	{
-		name: 'London',
-		image: '/premium_photo-1682799116921-de130f76c1d0.jpeg',
+		name: 'Austin',
+		image: '/austin.jpeg',
 		routeCount: 25,
 	},
 	{
-		name: 'Paris',
-		image: '/paris.jpg',
+		name: 'Man Hattan',
+		image: '/manhattan.jpg',
 		routeCount: 16,
 	},
 	{
-		name: 'Dubai',
-		image: '/dubai-palm-jumeirah-island-shutterstock_1291548640.jpg_3ab124c2b9.jpg',
+		name: 'Brooklyn',
+		image: '/Brooklyn.jpeg',
 		routeCount: 15,
 	},
 ];
