@@ -70,6 +70,20 @@ export function BookingForm() {
 		}
 	};
 
+	const isValidSlot = () => {
+		const now = new Date();
+		const selectedDate = bookingInfo.date ? new Date(bookingInfo.date) : now;
+		const today = new Date().toISOString().split('T')[0];
+		const selectedDateTime = new Date(bookingInfo.date + "T" + bookingInfo.time);
+
+		// Create minimum allowed time (current time + 4 hours)
+		const minAllowedTime = new Date();
+		minAllowedTime.setHours(minAllowedTime.getHours() + 4);
+
+		// Compare the full datetime
+		return selectedDateTime >= minAllowedTime;
+	};
+
 	const isBookingAvailable = async () => {
 		try {
 			const response = await fetch(
@@ -245,8 +259,9 @@ export function BookingForm() {
 							<Button
 								onClick={() => {
 									const isAvailable = isBookingAvailable()
+									if (!isValidSlot()) toast.error("Please select a time at least 4 hours from now");
 
-									if (isAvailable && bookingInfo.time && bookingInfo.date && bookingInfo.from && bookingInfo.to) {
+									if (isValidSlot() && isAvailable && bookingInfo.time && bookingInfo.date && bookingInfo.from && bookingInfo.to) {
 										router.push("/bookings/service-class")
 										getDistanceParameters()
 									}
@@ -344,7 +359,7 @@ export function BookingForm() {
 								<Input
 									type="number"
 									placeholder="Number of hours"
-									className="w-full pl-12 h-10 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 font-bold"
+									className="w-full pl-12 h-8 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 font-bold"
 									min="2"
 									onChange={(e) => {
 										let value = Number.parseInt(e.target.value, 10)
@@ -372,7 +387,9 @@ export function BookingForm() {
 							<Button
 								onClick={() => {
 									const isAvailable = isBookingAvailable()
-									if (isAvailable && bookingInfo.time && bookingInfo.date && bookingInfo.from) {
+									if (!isValidSlot()) toast.error("Please select a time at least 4 hours from now");
+
+									if (isValidSlot() && isAvailable && bookingInfo.time && bookingInfo.date && bookingInfo.from) {
 										router.push("/bookings/service-class")
 									}
 								}}
