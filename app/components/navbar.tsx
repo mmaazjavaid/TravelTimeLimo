@@ -59,6 +59,14 @@ export function Navbar() {
 						{title}
 					</Link>
 
+					<Button
+						variant="ghost"
+						onClick={() => window.location.href = '/services/city-city'}
+						className="bg-[#52c134] hover:bg-[#47ab2d] text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200"
+					>
+						Book Now
+					</Button>
+
 					{/* Mobile Menu */}
 					<div className="lg:hidden">
 						<Sheet>
