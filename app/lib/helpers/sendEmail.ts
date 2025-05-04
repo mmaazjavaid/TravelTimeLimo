@@ -1,10 +1,12 @@
 import sgMail from '@sendgrid/mail';
-import { EMAIL_TEMPLATE } from '../constants';
+import { EMAIL_TEMPLATE, RIDES } from '../constants';
 
 sgMail.setApiKey(process.env.NEXT_PUBLIC_SENDGRID_API_KEY);
 
 export const sendEmail = async ({ bookingData }) => {
 	const { passengerInfo, pickUpInfo, bookingInfo, paymentInfo, routeInfo, isTermsAgreed } = bookingData || {};
+
+	const ride = RIDES.find((ride) => ride.value === bookingInfo.vehicleType);
 
 	const emailHtml = EMAIL_TEMPLATE.replace('{passengerName}', `${passengerInfo.firstName} ${passengerInfo.lastName}`)
 		.replace('{from}', bookingInfo.from)
@@ -13,13 +15,13 @@ export const sendEmail = async ({ bookingData }) => {
 		.replace('{time}', bookingInfo.time)
 		.replace('{approxDistance}', routeInfo.distanceText || 'N/A')
 		.replace('{approxDuration}', routeInfo.durationText || 'N/A')
-		.replace('{vehicleType}', bookingInfo.vehicleType)
+		.replace('{vehicleType}', ride.title)
 		.replace('{passengers}', bookingInfo.passengers)
 		.replace('{luggage}', bookingInfo.luggage)
-		.replace('{totalFare}', bookingInfo.totalFare.toFixed(2))
-		.replace('{baseFare}', bookingInfo.baseFare.toFixed(2))
-		.replace('{meetAndGreet}', bookingInfo.meetAndGreet.toFixed(2))
-		.replace('{tax}', bookingInfo.tax.toFixed(2))
+		.replace('{totalFare}', bookingInfo.totalFare.toFixed(2) + '$')
+		.replace('{baseFare}', bookingInfo.baseFare.toFixed(2) + '$')
+		.replace('{meetAndGreet}', bookingInfo.meetAndGreet.toFixed(2) + '$')
+		.replace('{tax}', bookingInfo.tax.toFixed(2) + '$')
 		.replace('{title}', passengerInfo.title)
 		.replace('{firstName}', passengerInfo.firstName)
 		.replace('{lastName}', passengerInfo.lastName)

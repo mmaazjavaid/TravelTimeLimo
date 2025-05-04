@@ -25,7 +25,7 @@ export const GET = async (req: Request, { params }) => {
 		// If the last booking time is too close
 		return NextResponse.json({
 			available: false,
-			message: `The previous booking is too close. Please select a time at least ${BOOKING_GAP_IN_MINUTES} minutes apart.`,
+			message: `Some other booking at this slot. Please select a time at least ${BOOKING_GAP_IN_MINUTES} minutes apart.`,
 		});
 	}
 };

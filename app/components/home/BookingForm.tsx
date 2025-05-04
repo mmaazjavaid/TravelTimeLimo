@@ -90,7 +90,7 @@ export function BookingForm() {
 				`${process.env.NEXT_PUBLIC_SITE_URL}/api/bookings/${bookingInfo?.date}/${bookingInfo?.time}`
 			);
 			const existingBookings = await response.json();
-			if (!existingBookings.isAvailable) {
+			if (!existingBookings.available) {
 				toast.error(existingBookings.message, {
 					position: 'top-right',
 					autoClose: 3000,
@@ -257,8 +257,8 @@ export function BookingForm() {
 							</p>
 
 							<Button
-								onClick={() => {
-									const isAvailable = isBookingAvailable()
+								onClick={async () => {
+									const isAvailable = await isBookingAvailable()
 									if (!isValidSlot()) toast.error("Please select a time at least 4 hours from now");
 
 									if (isValidSlot() && isAvailable && bookingInfo.time && bookingInfo.date && bookingInfo.from && bookingInfo.to) {
@@ -385,8 +385,8 @@ export function BookingForm() {
 								/>
 							</div>
 							<Button
-								onClick={() => {
-									const isAvailable = isBookingAvailable()
+								onClick={async () => {
+									const isAvailable = await isBookingAvailable()
 									if (!isValidSlot()) toast.error("Please select a time at least 4 hours from now");
 
 									if (isValidSlot() && isAvailable && bookingInfo.time && bookingInfo.date && bookingInfo.from) {
