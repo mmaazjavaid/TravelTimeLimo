@@ -55,7 +55,7 @@ export function Navbar() {
 		<nav className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-gray-800 to-gray-900 text-white">
 			<div className="container mx-auto px-4 lg:px-8">
 				<div className="flex items-center justify-between h-20">
-					<Link href="/" className="text-2xl font-bold text-gold">
+					<Link href="/" className="text-2xl font-bold text-gold whitespace-nowrap mr-3">
 						{title}
 					</Link>
 
