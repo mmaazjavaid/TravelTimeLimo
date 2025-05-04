@@ -118,7 +118,7 @@ export function BookingForm() {
 	return (
 		<Card className="w-[350px] aspect-square mx-auto bg-gradient-to-r from-gray-50 to-gray-100 shadow-2xl rounded-xl overflow-hidden">
 			<CardContent className="p-4 flex flex-col h-full">
-				<h2 className="text-xl font-bold text-gray-800 mb-2 text-center">Book Your Ride</h2>
+				<h2 className="text-xl font-bold text-gray-800 mb-2 text-center" style={{ color: '#52c134' }}>Book Your Ride</h2>
 				<Tabs defaultValue="one-way" className="flex-grow">
 					<TabsList className="flex justify-center gap-2 mb-2">
 						<TabsTrigger
@@ -134,7 +134,7 @@ export function BookingForm() {
 								})
 							}}
 							value="one-way"
-							className={`px-4 py-1 text-xs font-bold uppercase rounded-full border ${STYLES.transition} data-[state=active]:bg-[#3B82F6] hover:bg-[#2563eb] data-[state=active]:text-white data-[state=active]:shadow-lg`}
+							className={`px-4 py-1 text-xs font-bold uppercase rounded-full border ${STYLES.transition} data-[state=active]:bg-[#52c134] hover:bg-[#52c134] data-[state=active]:text-white data-[state=active]:shadow-lg`}
 						>
 							One Way
 						</TabsTrigger>
@@ -151,7 +151,7 @@ export function BookingForm() {
 								})
 							}}
 							value="hourly"
-							className={`px-4 py-1 text-xs font-bold uppercase rounded-full border ${STYLES.transition} data-[state=active]:bg-[#3B82F6] hover:bg-[#2563eb] data-[state=active]:text-white data-[state=active]:shadow-lg`}
+							className={`px-4 py-1 text-xs font-bold uppercase rounded-full border ${STYLES.transition} data-[state=active]:bg-[#52c134] hover:bg-[#52c134] data-[state=active]:text-white data-[state=active]:shadow-lg`}
 						>
 							Hourly
 						</TabsTrigger>
@@ -252,6 +252,7 @@ export function BookingForm() {
 									}
 								}}
 								className={`w-full font-bold py-2 rounded-lg text-sm bg-[#3B82F6] hover:bg-[#2563eb] text-white transition-colors duration-200`}
+								style={{ background: '#52c134' }}
 							>
 								Search
 							</Button>
@@ -378,6 +379,7 @@ export function BookingForm() {
 
 								// For search buttons
 								className={`w-full font-bold py-2 rounded-lg text-sm bg-[#3B82F6] hover:bg-[#2563eb] text-white transition-colors duration-200`}
+								style={{ background: '#52c134' }}
 							>
 								Search
 							</Button>
