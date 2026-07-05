@@ -8,7 +8,20 @@ export default {
   ],
   theme: {
   	extend: {
+  		fontFamily: {
+  			sans: ['var(--font-geist-sans)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+  			display: ['var(--font-display)', 'Georgia', 'serif'],
+  		},
   		colors: {
+  			ink: {
+  				DEFAULT: '#0c0f16',
+  				soft: '#161a24',
+  			},
+  			gold: {
+  				DEFAULT: '#c6a15b',
+  				light: '#e3c98c',
+  				dark: '#9a7b33',
+  			},
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

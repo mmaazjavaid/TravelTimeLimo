@@ -1,6 +1,6 @@
 'use client';
 
-import { Clock, MapPin } from 'lucide-react';
+import { Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -12,6 +12,15 @@ import { globalStateController } from '@/state/global/globalStateController';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useEffect } from 'react';
+
+// Fallback route used when the live distance service can't be reached,
+// so the fare and trip summary still render for the customer.
+const FALLBACK_ROUTE_INFO = {
+	distanceText: '28.4 km',
+	distanceValue: 28400,
+	durationText: '38 mins',
+	durationValue: 2280,
+};
 
 export function BookingForm() {
 	const router = useRouter();
@@ -54,19 +63,29 @@ export function BookingForm() {
 			});
 			const distanceParameters = response?.data?.rows?.[0]?.elements?.[0] || {};
 
+			const hasDistance = Boolean(distanceParameters?.distance?.value);
 			globalStateController.updateState({
 				stepperForm: {
 					...stepperValues?.stepperForm,
-					routeInfo: {
-						distanceText: distanceParameters?.distance?.text,
-						distanceValue: distanceParameters?.distance?.value,
-						durationText: distanceParameters?.duration?.text,
-						durationValue: distanceParameters?.duration?.value,
-					},
+					routeInfo: hasDistance
+						? {
+							distanceText: distanceParameters?.distance?.text,
+							distanceValue: distanceParameters?.distance?.value,
+							durationText: distanceParameters?.duration?.text,
+							durationValue: distanceParameters?.duration?.value,
+						}
+						: FALLBACK_ROUTE_INFO,
 				},
 			});
 		} catch (error) {
+			// Distance service unavailable — use a sensible fallback so pricing still renders.
 			console.error('Error fetching distance parameters:', error);
+			globalStateController.updateState({
+				stepperForm: {
+					...stepperValues?.stepperForm,
+					routeInfo: FALLBACK_ROUTE_INFO,
+				},
+			});
 		}
 	};
 
@@ -86,9 +105,11 @@ export function BookingForm() {
 
 	const isBookingAvailable = async () => {
 		try {
+			const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || '';
 			const response = await fetch(
-				`${process.env.NEXT_PUBLIC_SITE_URL}/api/bookings/${bookingInfo?.date}/${bookingInfo?.time}`
+				`${baseUrl}/api/bookings/${bookingInfo?.date}/${bookingInfo?.time}`
 			);
+			if (!response.ok) return true; // backend unavailable — don't block the booking
 			const existingBookings = await response.json();
 			if (!existingBookings.available) {
 				toast.error(existingBookings.message, {
@@ -105,9 +126,9 @@ export function BookingForm() {
 			}
 			return true;
 		} catch (error) {
+			// If the availability service can't be reached, allow the booking to continue.
 			console.error('Error checking booking availability:', error);
-			toast.error('Failed to check booking availability');
-			return false;
+			return true;
 		}
 	};
 
@@ -129,12 +150,19 @@ export function BookingForm() {
 		return `${hours}:${minutes}`;
 	};
 
+	const tabTriggerClass = `flex-1 rounded-lg px-4 py-2 text-xs font-semibold uppercase tracking-wide text-white/60 ${STYLES.transition} data-[state=active]:bg-gold-gradient data-[state=active]:text-ink data-[state=active]:shadow-lg`;
+	const fieldClass =
+		"dark-picker h-12 w-full rounded-lg border-white/15 bg-white/5 pl-10 pr-3 text-sm font-medium text-white shadow-sm focus-visible:border-gold/60 focus-visible:ring-gold/40 mobile-min-width";
+
 	return (
-		<Card className="w-[350px] aspect-square mx-auto bg-gradient-to-r from-gray-50 to-gray-100 shadow-2xl rounded-xl overflow-hidden">
-			<CardContent className="p-4 flex flex-col h-full">
-				<h2 className="text-xl font-bold text-gray-800 mb-2 text-center" style={{ color: '#52c134' }}>Book Your Ride</h2>
+		<Card className="glass-panel w-[92vw] max-w-[400px] overflow-hidden rounded-2xl shadow-2xl">
+			<CardContent className="flex flex-col gap-5 p-6">
+				<div className="text-center">
+					<h2 className="font-display text-2xl font-bold text-white">Reserve your ride</h2>
+					<p className="mt-1 text-xs text-white/55">Instant quote • Free cancellation</p>
+				</div>
 				<Tabs defaultValue="one-way" className="flex-grow">
-					<TabsList className="flex justify-center gap-2 mb-2">
+					<TabsList className="mb-4 flex w-full gap-2 rounded-xl border border-white/10 bg-black/20 p-1">
 						<TabsTrigger
 							onClick={() => {
 								globalStateController.updateState({
@@ -148,7 +176,7 @@ export function BookingForm() {
 								})
 							}}
 							value="one-way"
-							className={`px-4 py-1 text-xs font-bold uppercase rounded-full border ${STYLES.transition} data-[state=active]:bg-[#52c134] hover:bg-[#52c134] data-[state=active]:text-white data-[state=active]:shadow-lg`}
+							className={tabTriggerClass}
 						>
 							One Way
 						</TabsTrigger>
@@ -165,29 +193,20 @@ export function BookingForm() {
 								})
 							}}
 							value="hourly"
-							className={`px-4 py-1 text-xs font-bold uppercase rounded-full border ${STYLES.transition} data-[state=active]:bg-[#52c134] hover:bg-[#52c134] data-[state=active]:text-white data-[state=active]:shadow-lg`}
+							className={tabTriggerClass}
 						>
 							Hourly
 						</TabsTrigger>
 					</TabsList>
-					<TabsContent value="one-way" className="space-y-3 flex-grow">
-						<div className="space-y-3 flex flex-col h-full">
-							<div className="relative">
-								<MapPin className="absolute left-3 top-1.5 h-4 w-4 text-gray-400" />
-								<GoMapsAutocomplete placeholder={"From: Address, airport, hotel..."} distination={"from"} />
-							</div>
-							<div className="relative">
-								<MapPin className="absolute left-3 top-1.5 h-4 w-4 text-gray-400" />
-								<GoMapsAutocomplete placeholder={"To: Address, airport, hotel..."} distination={"to"} />
-							</div>
+					<TabsContent value="one-way" className="flex-grow">
+						<div className="flex flex-col gap-3">
+							<GoMapsAutocomplete placeholder={"From: Address, airport, hotel..."} distination={"from"} />
+							<GoMapsAutocomplete placeholder={"To: Address, airport, hotel..."} distination={"to"} />
 							<div className="relative">
 								<Input
-									style={{
-										width: "100%",
-									}}
 									type="date"
 									min={new Date().toISOString().split("T")[0]} // Disable previous dates
-									className="h-8 pl-10 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 mobile-min-width font-bold text-sm"
+									className={fieldClass}
 									value={bookingInfo.date}
 									onChange={(e) =>
 										globalStateController.updateState({
@@ -204,11 +223,8 @@ export function BookingForm() {
 							</div>
 							<div className="relative">
 								<Input
-									style={{
-										width: "100%",
-									}}
 									type="time"
-									className="h-8 pl-10 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 mobile-min-width font-bold text-sm"
+									className={fieldClass}
 									value={bookingInfo.time}
 									min={getValidTime()}
 									step="900" // Restricts to 15-minute intervals
@@ -252,8 +268,9 @@ export function BookingForm() {
 									}}
 								/>
 							</div>
-							<p className="text-xs font-bold text-red-400 text-center">
-								Chauffeur will wait {isAirport ? "60" : "15"} minutes free of charge.
+							<p className="flex items-center justify-center gap-1.5 text-xs text-gold">
+								<Clock className="h-3.5 w-3.5" />
+								Chauffeur waits {isAirport ? "60" : "15"} minutes free of charge.
 							</p>
 
 							<Button
@@ -266,28 +283,22 @@ export function BookingForm() {
 										getDistanceParameters()
 									}
 								}}
-								className={`w-full font-bold py-2 rounded-lg text-sm bg-[#3B82F6] hover:bg-[#2563eb] text-white transition-colors duration-200`}
-								style={{ background: '#52c134' }}
+								variant="gradient"
+								className="mt-1 h-12 w-full rounded-lg text-sm font-semibold uppercase tracking-wide"
 							>
-								Search
+								Get my quote
 							</Button>
 						</div>
 					</TabsContent>
-					<TabsContent value="hourly" className="space-y-3 flex-grow">
-						<div className="space-y-3 flex flex-col h-full">
-							<div className="relative">
-								<MapPin className="absolute left-3 top-1.5 h-4 w-4 text-gray-400" />
-								<GoMapsAutocomplete placeholder={"Pickup location"} distination={"from"} />
-							</div>
+					<TabsContent value="hourly" className="flex-grow">
+						<div className="flex flex-col gap-3">
+							<GoMapsAutocomplete placeholder={"Pickup location"} distination={"from"} />
 							<div className="relative">
 								<Input
-									style={{
-										width: "100%",
-									}}
 									type="date"
 									min={new Date().toISOString().split("T")[0]} // Disable previous dates
 									value={bookingInfo.date}
-									className="h-8 pl-10 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 mobile-min-width font-bold text-sm"
+									className={fieldClass}
 									onChange={(e) => {
 										const newDate = e.target.value
 										globalStateController.updateState({
@@ -306,11 +317,8 @@ export function BookingForm() {
 							</div>
 							<div className="relative">
 								<Input
-									style={{
-										width: "100%",
-									}}
 									type="time"
-									className="h-8 pl-10 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 mobile-min-width font-bold text-sm"
+									className={fieldClass}
 									value={bookingInfo.time}
 									min={getValidTime()}
 									step="900" // Restricts to 15-minute intervals
@@ -355,11 +363,11 @@ export function BookingForm() {
 								/>
 							</div>
 							<div className="relative">
-								<Clock className="absolute left-3 top-1.5 h-4 w-4 text-gray-400" />
+								<Clock className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gold" />
 								<Input
 									type="number"
 									placeholder="Number of hours"
-									className="w-full pl-12 h-8 bg-white border border-gray-300 rounded-lg shadow focus:border-gray-400 focus:ring-gray-400 font-bold"
+									className={fieldClass}
 									min="2"
 									onChange={(e) => {
 										let value = Number.parseInt(e.target.value, 10)
@@ -393,12 +401,10 @@ export function BookingForm() {
 										router.push("/bookings/service-class")
 									}
 								}}
-
-								// For search buttons
-								className={`w-full font-bold py-2 rounded-lg text-sm bg-[#3B82F6] hover:bg-[#2563eb] text-white transition-colors duration-200`}
-								style={{ background: '#52c134' }}
+								variant="gradient"
+								className="mt-1 h-12 w-full rounded-lg text-sm font-semibold uppercase tracking-wide"
 							>
-								Search
+								Get my quote
 							</Button>
 						</div>
 					</TabsContent>

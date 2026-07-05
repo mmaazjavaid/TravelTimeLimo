@@ -20,26 +20,26 @@ const BookingDetails: React.FC = () => {
 	}, [bookingInfo?.date]);
 
 	return (
-		<div className="bg-gray-200 rounded-lg p-4 mb-8">
-			<h2 className="font-semibold">{bookingDate || bookingInfo?.date}</h2>
+		<div className="mb-8 rounded-xl border border-gold/25 bg-ink p-5 text-white shadow-lg">
+			<h2 className="font-display text-lg font-semibold text-gold">{bookingDate || bookingInfo?.date}</h2>
 			{bookingInfo?.from && (
-				<p className="text-gray-600">
-					<span className="font-semibold">Pick up:</span>
+				<p className="mt-2 text-sm text-white/85">
+					<span className="font-semibold text-white">Pick up:</span>
 					{` ${bookingInfo?.from}`}
 				</p>
 			)}
 
 			{bookingInfo?.to && (
-				<p className="text-gray-600">
-					<span className="font-semibold">Destination:</span>
+				<p className="mt-1 text-sm text-white/85">
+					<span className="font-semibold text-white">Destination:</span>
 					{` ${bookingInfo?.to}`}
 				</p>
 			)}
 
-			<div className="flex items-center gap-2 text-sm text-gray-500 mt-1">
+			<div className="mt-3 flex items-center gap-2 text-sm text-white/60">
 				{routeInfo?.distanceText ? (
 					<>
-						<Clock className="h-4 w-4" />
+						<Clock className="h-4 w-4 text-gold" />
 						<span>{routeInfo?.durationText || ''}</span>
 						<span>•{` ${routeInfo?.distanceText}` || ''}</span>
 					</>

@@ -26,7 +26,7 @@ const BookingFooter: React.FC<{ onNextStep: () => void }> = ({ onNextStep }) => 
 				disabled={!isTermsAgreed}
 				onClick={onNextStep}
 				variant="gradient"
-				className="w-full sm:w-auto text-white text-lg py-6 px-8 rounded-xl"
+				className="w-full rounded-xl px-8 py-6 text-lg font-semibold sm:w-auto"
 			>
 				Continue
 			</Button>

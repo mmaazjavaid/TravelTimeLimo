@@ -89,7 +89,7 @@ export function PaymentInfo() {
 
 	return (
 		<div>
-			<h1 className="mb-8 text-2xl font-semibold">Add credit card</h1>
+			<h1 className="mb-8 font-display text-2xl font-semibold text-gray-900">Add credit card</h1>
 
 			<form onSubmit={handleSubmit}>
 				<Card className="mb-6 p-6">
@@ -111,7 +111,7 @@ export function PaymentInfo() {
 										},
 									})
 								}
-								className="bg-gray-200"
+								className="border-gray-300 bg-gray-50 focus-visible:ring-gold/40"
 								required
 							/>
 						</div>
@@ -135,7 +135,7 @@ export function PaymentInfo() {
 											},
 										})
 									}
-									className="bg-gray-200"
+									className="border-gray-300 bg-gray-50 focus-visible:ring-gold/40"
 									maxLength={19}
 									required
 								/>
@@ -167,7 +167,7 @@ export function PaymentInfo() {
 											},
 										})
 									}
-									className="bg-gray-200"
+									className="border-gray-300 bg-gray-50 focus-visible:ring-gold/40"
 									maxLength={5}
 									required
 								/>
@@ -191,7 +191,7 @@ export function PaymentInfo() {
 											},
 										})
 									}
-									className="bg-gray-200"
+									className="border-gray-300 bg-gray-50 focus-visible:ring-gold/40"
 									maxLength={4}
 									required
 								/>
@@ -216,7 +216,7 @@ export function PaymentInfo() {
 										},
 									})
 								}
-								className="bg-gray-200"
+								className="border-gray-300 bg-gray-50 focus-visible:ring-gold/40"
 								required
 							/>
 						</div>
@@ -239,7 +239,7 @@ export function PaymentInfo() {
 											},
 										})
 									}
-									className="bg-gray-200"
+									className="border-gray-300 bg-gray-50 focus-visible:ring-gold/40"
 									required
 								/>
 							</div>
@@ -261,7 +261,7 @@ export function PaymentInfo() {
 										})
 									}
 								>
-									<SelectTrigger className="bg-gray-200">
+									<SelectTrigger className="border-gray-300 bg-gray-50 focus-visible:ring-gold/40">
 										<SelectValue placeholder="Select state" />
 									</SelectTrigger>
 									<SelectContent>
@@ -290,7 +290,7 @@ export function PaymentInfo() {
 											},
 										})
 									}
-									className="bg-gray-200"
+									className="border-gray-300 bg-gray-50 focus-visible:ring-gold/40"
 									maxLength={10}
 									required
 								/>

@@ -14,11 +14,11 @@ const getRideClassNames = ({ id, selectedRide }: { id: number; selectedRide: num
 	const isLast = id === RIDES.length - 1;
 
 	return `
-        p-4 cursor-pointer hover:bg-gray-200 transition-colors
-        ${isSelected ? 'bg-gray-200 border-black border-2' : 'border-gray-300'}
+        p-4 cursor-pointer hover:bg-gold/5 transition-colors
+        ${isSelected ? 'bg-gold/10 border-gold border-2' : 'border-gray-200'}
         ${isSelected && isFirst && 'rounded-t-lg'}
         ${isSelected && isLast && 'rounded-b-lg'}
-        ${!isSelected && isFirst && 'rounded-t-lg'} 
+        ${!isSelected && isFirst && 'rounded-t-lg'}
         ${!isSelected && isLast && 'rounded-b-lg'}
         ${(isFirst || isLast) && 'overflow-hidden'}
     `;
@@ -64,7 +64,7 @@ const RideCard: React.FC = () => {
 						className={getRideClassNames({ id: ride.id, selectedRide })} // Use the helper function to determine class names
 						style={{
 							borderWidth: selectedRide === ride.id ? '2px' : undefined, // Apply border width conditionally
-							borderColor: selectedRide === ride.id ? 'black' : undefined, // Apply border color conditionally
+							borderColor: selectedRide === ride.id ? '#c6a15b' : undefined, // Gold border when selected
 						}}
 						onClick={() => {
 							setSelectedRide(ride.id);

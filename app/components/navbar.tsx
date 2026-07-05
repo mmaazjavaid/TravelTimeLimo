@@ -52,17 +52,22 @@ export function Navbar() {
 		fetchLocation();
 	}, []);
 	return (
-		<nav className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-gray-800 to-gray-900 text-white">
+		<nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-ink/95 text-white backdrop-blur-md supports-[backdrop-filter]:bg-ink/80">
 			<div className="container mx-auto px-4 lg:px-8">
 				<div className="flex items-center justify-between h-20">
-					<Link href="/" className="text-2xl font-bold text-gold whitespace-nowrap mr-3">
-						{title}
+					<Link href="/" className="mr-3 flex items-center gap-2 whitespace-nowrap">
+						<span className="font-display text-2xl font-bold tracking-wide text-white">
+							{title.split(' ')[0]}
+						</span>
+						<span className="font-display text-2xl font-bold tracking-wide text-gold">
+							{title.split(' ').slice(1).join(' ')}
+						</span>
 					</Link>
 
 					<Button
 						variant="ghost"
 						onClick={() => window.location.href = '/services/city-city'}
-						className="bg-[#52c134] hover:bg-[#47ab2d] text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200"
+						className="order-last lg:order-none border border-gold/60 bg-transparent text-gold hover:bg-gold hover:text-ink px-5 py-2 rounded-lg font-semibold transition-colors duration-200"
 					>
 						Book Now
 					</Button>
@@ -202,7 +207,7 @@ function DesktopDropdown({
 
 function DesktopLink({ href, children }: { href: string; children: React.ReactNode }) {
 	return (
-		<Link href={href} className="text-white transition-colors duration-200">
+		<Link href={href} className="text-sm text-white/85 hover:text-gold transition-colors duration-200">
 			{children}
 		</Link>
 	);

@@ -7,14 +7,15 @@ import { CITY_TO_CITY_ROUTES, FOOTER_NAVIGATIONS, SOCIALS } from '@/lib/constant
 
 export function Footer() {
 	return (
-		<footer className="bg-gradient-to-r from-gray-900 to-gray-800 text-white">
+		<footer className="bg-ink text-white">
 			<div className="container mx-auto px-6 py-12">
 				{/* Top Section */}
-				<div className="flex flex-col lg:flex-row items-center justify-between mb-12 border-b border-gray-700 pb-8">
-					<Link href="/" className="text-3xl font-bold text-white mb-4 lg:mb-0">
-						TRAVEL TIME LIMO
+				<div className="mb-12 flex flex-col items-center justify-between gap-4 border-b border-white/10 pb-8 lg:flex-row">
+					<Link href="/" className="font-display text-3xl font-bold">
+						<span className="text-white">TRAVEL TIME </span>
+						<span className="text-gold">LIMO</span>
 					</Link>
-
+					<p className="text-sm text-white/60">Premium chauffeur service, available 24/7.</p>
 				</div>
 
 				{/* Navigation Section */}
@@ -26,7 +27,7 @@ export function Footer() {
 					<div>
 						<h3 className="flex items-center text-sm font-semibold text-white mb-4">
 							City-to-City Rides
-							<Badge variant="secondary" className="ml-2 bg-yellow-400 text-black">
+							<Badge variant="secondary" className="ml-2 bg-gold text-ink">
 								NEW
 							</Badge>
 						</h3>

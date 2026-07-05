@@ -100,12 +100,12 @@ export function CityRoutes() {
 					{/* Top Cities Section */}
 					<div>
 						<div className="flex items-center justify-between mb-8">
-							<h2 className="text-3xl font-bold text-gray-900">Top cities</h2>
+							<h2 className="font-display text-3xl font-bold text-gray-900">Top cities</h2>
 							<Link
 								href="/city-to-city/routes"
-								className="text-primary hover:text-primary-dark transition-colors duration-300"
+								className="inline-flex items-center gap-1 text-sm font-semibold text-gold-dark transition-colors duration-300 hover:text-gold"
 							>
-								See all
+								See all <ArrowRight className="h-4 w-4" />
 							</Link>
 						</div>
 						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -131,12 +131,12 @@ export function CityRoutes() {
 					{/* Top Routes Section */}
 					<div>
 						<div className="flex items-center justify-between mb-8">
-							<h2 className="text-3xl font-bold text-gray-900">Top routes</h2>
+							<h2 className="font-display text-3xl font-bold text-gray-900">Top routes</h2>
 							<Link
 								href="/city-to-city/routes"
-								className="text-primary hover:text-primary-dark transition-colors duration-300"
+								className="inline-flex items-center gap-1 text-sm font-semibold text-gold-dark transition-colors duration-300 hover:text-gold"
 							>
-								See all
+								See all <ArrowRight className="h-4 w-4" />
 							</Link>
 						</div>
 						<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-6 py-4">
@@ -166,15 +166,16 @@ export function CityRoutes() {
 					</div>
 
 					{/* CTA Section */}
-					<Card className="bg-gradient-to-r from-gray-800 to-gray-700 text-white">
-						<CardContent className="flex flex-col md:flex-row items-center justify-between p-8 gap-6">
-							<div className="space-y-2">
-								<h3 className="text-2xl font-semibold">Have a route in mind?</h3>
-								<p className="text-primary-foreground">Enter your pickup and drop-off locations to see the price.</p>
+					<Card className="relative overflow-hidden border-none bg-ink text-white">
+						<div className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-gold/10 blur-3xl" />
+						<CardContent className="relative flex flex-col items-center justify-between gap-6 p-8 md:flex-row md:p-10">
+							<div className="space-y-2 text-center md:text-left">
+								<h3 className="font-display text-2xl font-semibold md:text-3xl">Have a route in mind?</h3>
+								<p className="text-white/70">Enter your pickup and drop-off locations to see the price instantly.</p>
 							</div>
 
 							<Link href={'/services/city-city'}>
-								<Button size="lg" variant="gradient" className="w-full md:w-auto">
+								<Button size="lg" variant="gradient" className="w-full px-8 md:w-auto">
 									Book a City-to-City ride
 								</Button>
 							</Link>

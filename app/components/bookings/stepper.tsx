@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { StepperProps } from '@/types/bookings';
-import { STYLES } from '@/lib/commonStyles';
 
 export const Stepper: React.FC<StepperProps> = ({ steps, activeStep, setActiveStep }) => {
 	return (
@@ -19,13 +18,13 @@ export const Stepper: React.FC<StepperProps> = ({ steps, activeStep, setActiveSt
 					<div key={index} className="relative flex flex-col items-center group">
 						{/* Circle */}
 						<div
-							className={`w-[22px] h-[22px] rounded-full z-10 border-[2px] 
+							className={`w-[22px] h-[22px] rounded-full z-10 border-2 transition-colors duration-300
                 ${
 									index < activeStep
-										? `${STYLES.gray_white_gradient.color}`
+										? 'bg-gold border-gold'
 										: index === activeStep
-										? `${STYLES.gray_blue_gradient.color}`
-										: 'border-gray-200 bg-gray-100'
+										? 'border-gold bg-gold/20 ring-4 ring-gold/15'
+										: 'border-gray-300 bg-gray-100'
 								}`}
 						/>
 
@@ -40,8 +39,10 @@ export const Stepper: React.FC<StepperProps> = ({ steps, activeStep, setActiveSt
 								}}
 								className={`hidden md:block mt-2 text-sm rounded-full px-3 py-1 whitespace-nowrap transition-all duration-300 ease-in-out
                 ${
-									index <= activeStep
-										? 'bg-gray-200 text-black font-medium hover:bg-white hover:text-gray-400'
+									index === activeStep
+										? 'text-ink font-semibold'
+										: index < activeStep
+										? 'text-gold-dark font-medium'
 										: 'text-gray-400 pointer-events-none'
 								}`}
 							>

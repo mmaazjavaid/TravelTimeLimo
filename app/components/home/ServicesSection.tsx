@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 
 interface ServiceCardProps {
 	title: string;
@@ -11,41 +12,41 @@ interface ServiceCardProps {
 
 function ServiceCard({ title, description, imageSrc, isNew, redirectUrl }: ServiceCardProps) {
 	return (
-		<div className="flex flex-col space-y-4 bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-105">
+		<Link
+			href={redirectUrl}
+			className="group flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-gold/50 hover:shadow-xl"
+		>
 			<div className="relative aspect-[4/3] overflow-hidden">
 				<Image
 					src={imageSrc}
 					alt={title}
 					fill
-					className="object-cover"
+					className="object-cover transition-transform duration-500 group-hover:scale-105"
 					sizes="(min-width: 1280px) 25vw, (min-width: 768px) 50vw, 100vw"
 				/>
+				<div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+				{isNew && (
+					<span className="absolute left-4 top-4 inline-flex items-center rounded-full bg-gold px-3 py-1 text-xs font-semibold uppercase tracking-wide text-ink shadow">
+						New
+					</span>
+				)}
 			</div>
-			<div className="p-6 space-y-2">
-				<div className="flex items-center gap-2">
-					<h3 className="text-xl font-semibold text-gray-900">{title}</h3>
-					{isNew && (
-						<span className="inline-flex items-center rounded-full bg-red-100 px-2 py-1 text-xs font-medium text-red-700">
-							NEW
-						</span>
-					)}
-				</div>
-				<p className="text-gray-600">{description}</p>
-				<Link
-					href={redirectUrl}
-					className="inline-block text-sm font-semibold text-primary hover:text-primary-dark transition-colors duration-300"
-				>
+			<div className="flex flex-1 flex-col p-6">
+				<h3 className="font-display text-xl font-semibold text-gray-900">{title}</h3>
+				<p className="mt-2 flex-1 text-sm leading-relaxed text-gray-600">{description}</p>
+				<span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-gold-dark transition-colors group-hover:text-gold">
 					Learn more
-				</Link>
+					<ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+				</span>
 			</div>
-		</div>
+		</Link>
 	);
 }
 
 export function ServicesSection() {
 	return (
-		<section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
-			<div className="max-w-7xl mx-auto space-y-16">
+		<section className="bg-[#f8f7f4] px-4 py-20 sm:px-6 lg:px-8">
+			<div className="mx-auto max-w-7xl space-y-16">
 				{/* Sustainability Partners */}
 				{/* <div className="text-center space-y-8">
 					<h2 className="text-2xl font-semibold tracking-tight text-gray-900">Our sustainability partners</h2>
@@ -77,8 +78,18 @@ export function ServicesSection() {
 				</div> */}
 
 				{/* Services Grid */}
-				<div className="space-y-8">
-					<h2 className="text-4xl font-bold text-center text-gray-900">Our services</h2>
+				<div className="space-y-10">
+					<div className="text-center">
+						<span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-luxe text-gold-dark">
+							<span className="h-px w-8 bg-gold" />
+							What we offer
+							<span className="h-px w-8 bg-gold" />
+						</span>
+						<h2 className="mt-4 font-display text-3xl font-bold text-gray-900 sm:text-4xl">Our services</h2>
+						<p className="mx-auto mt-3 max-w-2xl text-gray-600">
+							One trusted partner for every journey — from the airport to across the state.
+						</p>
+					</div>
 					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 						<ServiceCard
 							title="City-to-city rides"

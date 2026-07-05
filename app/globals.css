@@ -3,8 +3,63 @@
 @tailwind utilities;
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  letter-spacing: -0.01em;
 }
+
+/* Elegant display face for headings */
+.font-display {
+  font-family: var(--font-display), Georgia, 'Times New Roman', serif;
+}
+
+/* ---- Brand palette ---- */
+:root {
+  --ink: #0c0f16;
+  --ink-soft: #161a24;
+  --gold: #c6a15b;
+  --gold-light: #e3c98c;
+  --gold-dark: #9a7b33;
+}
+
+.text-gold { color: var(--gold); }
+.bg-ink { background-color: var(--ink); }
+
+/* Champagne-gold gradient used for accents and primary CTAs */
+.bg-gold-gradient {
+  background-image: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 45%, var(--gold-dark) 100%);
+}
+.btn-gold {
+  background-image: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dark) 100%);
+  color: #1a140a;
+  box-shadow: 0 10px 24px -8px rgba(198, 161, 91, 0.55);
+  transition: filter 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+}
+.btn-gold:hover {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+  box-shadow: 0 16px 30px -10px rgba(198, 161, 91, 0.7);
+}
+
+/* Cinematic dark overlay for hero imagery */
+.hero-overlay {
+  background: linear-gradient(90deg, rgba(8, 10, 15, 0.86) 0%, rgba(8, 10, 15, 0.62) 42%, rgba(8, 10, 15, 0.28) 100%);
+}
+
+/* Frosted booking panel */
+.glass-panel {
+  background: rgba(13, 16, 23, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(198, 161, 91, 0.28);
+}
+
+.tracking-luxe { letter-spacing: 0.32em; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up { animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
 
 @media (max-width: 640px) {
 
@@ -90,6 +145,11 @@ body {
     /* Increases icon size */
     filter: invert(66%) sepia(5%) saturate(0%) brightness(90%);
     /* Matches text-gray-400 */
+  }
+
+  /* Light icon for date/time pickers placed on dark surfaces */
+  .dark-picker::-webkit-calendar-picker-indicator {
+    filter: brightness(0) invert(1) opacity(0.7);
   }
 }
 

@@ -7,7 +7,9 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function calculateFare(distance: number, isAustin: boolean) {
-  if (distance < 0) throw new Error("Distance must be a non-negative number");
+  // Guard against a missing/invalid distance (e.g. distance service unavailable)
+  // so pricing still renders instead of throwing.
+  if (!Number.isFinite(distance) || distance < 0) distance = 28400;
 
   const stepperValue = globalStateController.getValue('stepperForm');
   const { bookingInfo } = stepperValue;

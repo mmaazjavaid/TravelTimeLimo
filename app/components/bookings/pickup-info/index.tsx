@@ -15,13 +15,13 @@ export function PickupInfo() {
 	return (
 		<>
 			<div className="mt-8">
-				<h2 className="mb-6 text-2xl font-semibold">Passenger Details</h2>
+				<h2 className="mb-6 font-display text-2xl font-semibold text-gray-900">Passenger Details</h2>
 				<BookForSomeoneForm />
 			</div>
 
 			{/* Additional Information */}
 			<div className="mt-8">
-				<h2 className="mb-6 text-2xl font-semibold">Provide additional information</h2>
+				<h2 className="mb-6 font-display text-2xl font-semibold text-gray-900">Provide additional information</h2>
 				<Card>
 					<CardContent className="space-y-6 pt-6">
 						{/* Flight Number */}
@@ -29,7 +29,7 @@ export function PickupInfo() {
 							<Label htmlFor="flight-number">Flight number</Label>
 							<Input
 								id="flight-number"
-								className="bg-gray-200"
+								className="border-gray-300 bg-gray-50 focus-visible:ring-gold/40"
 								placeholder="e.g. LH 202, U24567, BA2490"
 								value={pickUpInfo?.flightNumber}
 								onChange={e =>
@@ -55,7 +55,7 @@ export function PickupInfo() {
 							<Input
 								id="flight-arrival-time"
 								type="time"
-								className="bg-gray-200"
+								className="border-gray-300 bg-gray-50 focus-visible:ring-gold/40"
 								value={pickUpInfo?.flightArrivalTime}
 								onChange={(e) =>
 									globalStateController.updateState({
@@ -79,7 +79,7 @@ export function PickupInfo() {
 							<Label htmlFor="pickup-sign">Pickup sign</Label>
 							<Input
 								id="pickup-sign"
-								className="bg-gray-200"
+								className="border-gray-300 bg-gray-50 focus-visible:ring-gold/40"
 								value={pickUpInfo?.pickupSign}
 								onChange={e =>
 									globalStateController.updateState({
@@ -115,7 +115,7 @@ export function PickupInfo() {
 										},
 									})
 								}
-								className="min-h-[100px] resize-none bg-gray-200"
+								className="min-h-[100px] resize-none border-gray-300 bg-gray-50 focus-visible:ring-gold/40"
 							/>
 							<p className="text-sm text-muted-foreground">
 								Add special requests, e.g. booking itinerary, number of bags, child seats, etc. Please do not include
@@ -128,7 +128,7 @@ export function PickupInfo() {
 							<Label htmlFor="reference-code">Reference code or cost center</Label>
 							<Input
 								id="reference-code"
-								className="bg-gray-200"
+								className="border-gray-300 bg-gray-50 focus-visible:ring-gold/40"
 								value={pickUpInfo?.referenceCode}
 								onChange={e =>
 									globalStateController.updateState({
