@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Travel Time Limo
 
-## Getting Started
+A Next.js web app for a US chauffeur/limo service — airport transfers, hourly hire, chauffeur hailing, and city-to-city rides. Includes a public marketing site, a multi-step booking flow, and a simple admin bookings view.
 
-First, run the development server:
+## Tech stack
+
+- **Framework:** Next.js 15 (App Router) + React 19
+- **Styling:** Tailwind CSS, shadcn/ui-style components (Radix UI primitives), `class-variance-authority`
+- **Animation:** Framer Motion (scroll reveals) and GSAP + `@gsap/react` (timelines, hover, parallax, ScrollTrigger)
+- **State:** Hookstate
+- **Data:** MongoDB via Mongoose
+- **Email:** SendGrid
+- **Maps/places:** Google Maps Places autocomplete
+
+## Getting started
+
+Install dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+yarn install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Create a `.env.local` file in the project root with:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```bash
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+NEXT_PUBLIC_MONGO_DB_URI=your_mongodb_connection_string
+NEXT_PUBLIC_SENDGRID_API_KEY=your_sendgrid_api_key
+NEXT_PUBLIC_SENDER_EMAIL=your_sender_email
+NEXT_PUBLIC_RECEIVER_EMAIL=your_receiver_email
+NEXT_PUBLIC_GOMAPS_PLACES_API_KEY=your_places_api_key
+NEXT_PUBLIC_ADMIN_SECRET=your_admin_secret
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Run the dev server:
 
-## Learn More
+```bash
+yarn dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Open [http://localhost:3000](http://localhost:3000) to view the site.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Scripts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Command       | Description                          |
+| ------------- | ------------------------------------- |
+| `yarn dev`    | Start the dev server (Turbopack)      |
+| `yarn build`  | Production build                      |
+| `yarn start`  | Start the production server           |
+| `yarn lint`   | Run ESLint                            |
 
-## Deploy on Vercel
+## Project structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+app/
+  api/                    API routes (bookings, email)
+  components/             UI components
+    home/                 Landing page sections (hero, services, city routes, features)
+    bookings/              Multi-step booking flow (pickup, service class, payment)
+    Services/              Marketing pages per service line
+    city-to-city/          City-to-city route pages
+    Table/                 Admin bookings table
+    ui/                    Reusable primitives (button, card, dialog, motion, counter, ...)
+  services/               Service landing pages (airport transfer, hourly, etc.)
+  bookings/               Booking flow routes
+  city-to-city/           City-to-city route pages
+  allBookings/[secret]/   Admin bookings view (secret-gated)
+  lib/                    Constants, helpers, DB connection, shared styles
+  models/                 Mongoose models
+  state/                  Hookstate global state
+  types/                  Shared TypeScript types
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Key features
+
+- **Landing page** — hero with animated entrance/parallax, services grid, top cities & routes with animated counters, features section.
+- **Booking flow** — pickup info, service class selection, payment info, confirmation.
+- **City-to-city routes** — browsable route directory with per-route detail pages.
+- **Admin bookings** — a secret-gated page listing all bookings in a data table.
+- **Email notifications** — booking confirmations sent via SendGrid.
+
+## Deployment
+
+Deploys cleanly to [Vercel](https://vercel.com). Set the environment variables above in your Vercel project settings before deploying.

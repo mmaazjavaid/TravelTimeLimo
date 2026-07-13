@@ -1,5 +1,9 @@
-import { Car, Leaf, Shield } from 'lucide-react';
+'use client';
+
+import { useRef } from 'react';
+import { Car, Leaf, Shield, type LucideIcon } from 'lucide-react';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/ui/motion';
+import { gsap, useGSAP } from '@/lib/gsap';
 
 const features = [
 	{
@@ -22,6 +26,38 @@ const features = [
 	},
 ];
 
+function IconBadge({ icon: Icon }: { icon: LucideIcon }) {
+	const ref = useRef<HTMLDivElement>(null);
+
+	useGSAP(
+		(_context, contextSafe) => {
+			const el = ref.current;
+			if (!el || !contextSafe) return;
+
+			const onEnter = contextSafe(() => {
+				gsap.to(el, { rotate: -8, scale: 1.08, duration: 0.35, ease: 'back.out(2)' });
+			});
+			const onLeave = contextSafe(() => {
+				gsap.to(el, { rotate: 0, scale: 1, duration: 0.35, ease: 'power2.out' });
+			});
+
+			el.addEventListener('mouseenter', onEnter);
+			el.addEventListener('mouseleave', onLeave);
+			return () => {
+				el.removeEventListener('mouseenter', onEnter);
+				el.removeEventListener('mouseleave', onLeave);
+			};
+		},
+		{ scope: ref }
+	);
+
+	return (
+		<div ref={ref} className="mb-6 rounded-2xl border border-white/10 bg-ink-soft p-5">
+			<Icon className="h-10 w-10 text-gold" strokeWidth={1.5} />
+		</div>
+	);
+}
+
 export function FeaturesSection() {
 	return (
 		<section className="section-padding bg-ink text-white">
@@ -35,9 +71,7 @@ export function FeaturesSection() {
 					{features.map(feature => (
 						<StaggerItem key={feature.title}>
 							<div className="flex flex-col items-center text-center">
-								<div className="mb-6 rounded-2xl border border-gold/20 bg-gold/10 p-5">
-									<feature.icon className="h-10 w-10 text-gold" strokeWidth={1.5} />
-								</div>
+								<IconBadge icon={feature.icon} />
 								<h3 className="mb-3 font-display text-xl font-semibold">{feature.title}</h3>
 								<p className="max-w-sm leading-relaxed text-white/65">{feature.description}</p>
 							</div>
@@ -46,7 +80,7 @@ export function FeaturesSection() {
 				</StaggerChildren>
 
 				<FadeIn delay={0.2}>
-					<div className="mx-auto max-w-4xl space-y-6 rounded-2xl border border-gold/20 bg-white/5 p-8 text-center md:p-14">
+					<div className="mx-auto max-w-4xl space-y-6 rounded-2xl border border-white/10 bg-white/5 p-8 text-center md:p-14">
 						<div className="mx-auto flex justify-center text-gold">
 							<span className="font-display text-5xl leading-none md:text-6xl">&ldquo;</span>
 						</div>

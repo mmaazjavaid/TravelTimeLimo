@@ -1,15 +1,21 @@
 'use client';
 import { ReactNode, useState } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { STEPS } from '@/lib/constants';
 import BookingDetails from '@/components/bookings/BookingDetail';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { Stepper } from '@/components/bookings/stepper';
 import BookingFooter from '@/components/bookings/footer';
 import { globalStateController } from '@/state/global/globalStateController';
 
 function Layout({ children }: { children: ReactNode }) {
 	const router = useRouter();
-	const [activeStep, setActiveStep] = useState<number>(0);
+	const pathname = usePathname();
+	const prefersReducedMotion = useReducedMotion();
+	const [activeStep, setActiveStep] = useState<number>(() => {
+		const index = STEPS.findIndex(step => step.link === pathname);
+		return index === -1 ? 0 : index;
+	});
 
 	const saveBooking = async (stepperForm: any) => {
 		try {
@@ -91,7 +97,19 @@ function Layout({ children }: { children: ReactNode }) {
 			<div className="section-container mx-auto max-w-3xl">
 				<Stepper steps={STEPS} activeStep={activeStep} setActiveStep={setActiveStep} />
 				<BookingDetails />
-				<div className="rounded-xl border border-border/60 bg-white p-6 shadow-soft md:p-8">{children}</div>
+				<div className="overflow-hidden rounded-xl border border-border/60 bg-white p-6 shadow-soft md:p-8">
+					<AnimatePresence mode="wait" initial={false}>
+						<motion.div
+							key={pathname}
+							initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: 16 }}
+							animate={{ opacity: 1, x: 0 }}
+							exit={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: -16 }}
+							transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+						>
+							{children}
+						</motion.div>
+					</AnimatePresence>
+				</div>
 				<BookingFooter onNextStep={handleNextStep} />
 			</div>
 		</div>

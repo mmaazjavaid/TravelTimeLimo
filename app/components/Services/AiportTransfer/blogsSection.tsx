@@ -44,7 +44,7 @@ export function BlogsSection() {
 						<div className="order-1 space-y-5 lg:order-2">
 							<h2 className="text-title text-foreground">Get to or from the airport</h2>
 							<p className="text-body text-muted-foreground">
-								<Link href="#" className="font-medium text-gold-dark underline-offset-4 hover:underline">
+								<Link href="#" className="font-medium text-gold underline-offset-4 hover:text-gold-dark hover:underline">
 									A Travel Time Limo chauffeur service
 								</Link>{' '}
 								aims to achieve the very highest possible standards for all its passengers. Whether you&apos;re stepping out
@@ -67,7 +67,7 @@ export function BlogsSection() {
 							<h2 className="text-title text-foreground">Airport shuttle booking</h2>
 							<p className="text-body text-muted-foreground">
 								The booking of{' '}
-								<Link href="#" className="font-medium text-gold-dark underline-offset-4 hover:underline">
+								<Link href="#" className="font-medium text-gold underline-offset-4 hover:text-gold-dark hover:underline">
 									Travel Time Limo&apos;s limousine service
 								</Link>{' '}
 								is easy and requires just a few seconds. Provide pickup and destination data, select your vehicle class,

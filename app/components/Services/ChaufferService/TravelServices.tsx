@@ -29,7 +29,7 @@ export function TravelFeatures() {
 						<StaggerItem key={index}>
 							<div className="flex flex-col items-center space-y-4 text-center">
 								<div className="mb-4 rounded-2xl border border-gold/20 bg-gold/10 p-5">
-									<feature.icon className="h-8 w-8 text-gold-dark" strokeWidth={1.5} />
+									<feature.icon className="h-8 w-8 text-gold" strokeWidth={1.5} />
 								</div>
 								<h3 className="font-display text-xl font-semibold text-foreground">{feature.title}</h3>
 								<p className="max-w-[300px] leading-relaxed text-muted-foreground">{feature.description}</p>

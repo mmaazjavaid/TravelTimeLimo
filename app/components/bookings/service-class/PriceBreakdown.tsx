@@ -22,7 +22,7 @@ const PriceBreakdown = ({ baseFare, meetAndGreet, tax }: PriceBreakdownProps) =>
 				</div>
 				<div className="flex items-center justify-between border-t border-border/60 pt-2 text-sm font-semibold">
 					<span className="text-foreground">Total</span>
-					<span className="text-gold-dark">US${(baseFare + meetAndGreet + tax).toFixed(2)}</span>
+					<span className="tabular-nums text-gold">US${(baseFare + meetAndGreet + tax).toFixed(2)}</span>
 				</div>
 			</div>
 		</div>

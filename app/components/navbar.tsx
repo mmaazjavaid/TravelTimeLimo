@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
+import { gsap, useGSAP } from '@/lib/gsap';
 
 const services = [
 	{ name: 'City-to-city rides', href: '/services/city-city' },
@@ -33,6 +34,16 @@ export function Navbar() {
 	const pathname = usePathname();
 	const [title, setTitle] = React.useState('TRAVEL TIME LIMO');
 	const [scrolled, setScrolled] = React.useState(false);
+	const headerRef = React.useRef(null);
+
+	useGSAP(
+		() => {
+			// Slide only (never fades to 0) so nav stays usable even if the tab is
+			// backgrounded mid-animation and the tween never finishes.
+			gsap.fromTo(headerRef.current, { y: -24 }, { y: 0, duration: 0.6, ease: 'power3.out', delay: 0.1 });
+		},
+		{ scope: headerRef }
+	);
 
 	React.useEffect(() => {
 		const fetchLocation = async () => {
@@ -68,6 +79,7 @@ export function Navbar() {
 
 	return (
 		<header
+			ref={headerRef}
 			className={cn(
 				'fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300',
 				scrolled

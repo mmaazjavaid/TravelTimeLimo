@@ -8,7 +8,7 @@ const AmenitiesList: React.FC = () => {
 				{AMENITIES.map((amenity, index) => (
 					<div key={index} className="flex items-center gap-3 text-sm">
 						<div className="flex-shrink-0 rounded-full bg-gold/10 p-2">
-							<amenity.icon className="h-4 w-4 text-gold-dark" />
+							<amenity.icon className="h-4 w-4 text-gold" />
 						</div>
 						<span className="text-muted-foreground">{amenity.text}</span>
 					</div>

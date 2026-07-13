@@ -34,10 +34,10 @@ const features = [
 
 export function HourlyPlan() {
     return (
-        <div className="w-full max-w-6xl mx-auto px-4 py-16">
+        <div className="section-container section-padding">
             <div className="space-y-12">
                 <div className="max-w-4xl">
-                    <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
+                    <h2 className="text-title mb-6 text-foreground">
                         Hourly chauffeur service
                     </h2>
                     <p className="text-body mb-8 text-muted-foreground">
@@ -107,15 +107,15 @@ const TravelOption = ({
     return (
         <div className="space-y-6">
             <div>
-                <h2 className="text-3xl font-semibold">{title}</h2>
-                <p className="text-xl text-muted-foreground">{duration} travel</p>
+                <h2 className="font-display text-2xl font-semibold text-foreground">{title}</h2>
+                <p className="text-lg text-muted-foreground">{duration} travel</p>
             </div>
 
             <div className="grid grid-cols-[250px_1fr] gap-12 items-center min-h-[200px]">
                 <div className="space-y-6">
                     {type === "by-the-hour" ? (
                         <div className="flex h-14 w-full items-center justify-center rounded-lg bg-surface">
-                            <Car className="h-8 w-8 text-black" />
+                            <Car className="h-8 w-8 text-foreground" />
                         </div>
                     ) : null}
                 </div>
@@ -124,13 +124,13 @@ const TravelOption = ({
                     {stops.map((stop, index) => (
                         <div key={index} className="relative mb-24 last:mb-0">
                             <div className="flex items-start">
-                                <div className={`mt-2 h-4 w-4 rounded-sm ${type === "by-the-hour" ? "bg-ink" : "bg-ink"}`} />
+                                <div className="mt-2 h-4 w-4 rounded-sm bg-ink" />
                                 <div className="ml-4">
-                                    <div className="font-medium text-xl">{stop.label}</div>
+                                    <div className="font-medium text-xl text-foreground">{stop.label}</div>
                                     {stop.subLabel && <div className="mt-1 text-lg text-muted-foreground">{stop.subLabel}</div>}
                                     {stop.showTaxi && (
-                                        <div className="mt-3 bg-yellow-400 h-10 w-20 rounded flex items-center justify-center">
-                                            <Car className="h-6 w-6 text-black" />
+                                        <div className="mt-3 flex h-10 w-20 items-center justify-center rounded-lg bg-warning/15">
+                                            <Car className="h-5 w-5 text-warning" />
                                         </div>
                                     )}
                                 </div>

@@ -21,17 +21,20 @@ export const BookingsTable: React.FC<{ bookings: BookingModel[] }> = ({ bookings
 		},
 		muiTableHeadCellProps: {
 			sx: {
-				fontFamily: 'var(--font-geist-sans)',
+				fontFamily: 'var(--font-sans)',
 				fontWeight: 600,
-				fontSize: '0.8125rem',
-				color: '#0c0f16',
-				backgroundColor: '#fafaf9',
+				fontSize: '0.75rem',
+				letterSpacing: '0.06em',
+				textTransform: 'uppercase',
+				color: 'var(--ink)',
+				backgroundColor: 'var(--surface)',
 			},
 		},
 		muiTableBodyCellProps: {
 			sx: {
-				fontFamily: 'var(--font-geist-sans)',
+				fontFamily: 'var(--font-sans)',
 				fontSize: '0.875rem',
+				fontVariantNumeric: 'tabular-nums',
 			},
 		},
 	});

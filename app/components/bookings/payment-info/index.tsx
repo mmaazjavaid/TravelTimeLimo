@@ -1,6 +1,7 @@
 "use client"
 
 import type * as React from "react"
+import { ShieldCheck } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
@@ -89,7 +90,13 @@ export function PaymentInfo() {
 
 	return (
 		<div>
-			<h1 className="mb-8 font-display text-2xl font-semibold text-foreground">Add credit card</h1>
+			<div className="mb-8 flex flex-wrap items-center justify-between gap-3">
+				<h1 className="font-display text-2xl font-semibold text-foreground">Add credit card</h1>
+				<span className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+					<ShieldCheck className="h-4 w-4 text-gold" />
+					Secure, encrypted checkout
+				</span>
+			</div>
 
 			<form onSubmit={handleSubmit}>
 				<Card className="mb-6 border-border/60 p-6 shadow-soft">

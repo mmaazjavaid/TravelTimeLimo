@@ -1,7 +1,11 @@
+'use client';
+
+import { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/ui/motion';
+import { gsap, useGSAP } from '@/lib/gsap';
 
 interface ServiceCardProps {
 	title: string;
@@ -18,13 +22,15 @@ function ServiceCard({ title, description, imageSrc, isNew, redirectUrl }: Servi
 			className="group flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-white shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-gold/40 hover:shadow-lift"
 		>
 			<div className="relative aspect-[4/3] overflow-hidden">
-				<Image
-					src={imageSrc}
-					alt={title}
-					fill
-					className="object-cover transition-transform duration-500 group-hover:scale-105"
-					sizes="(min-width: 1280px) 25vw, (min-width: 768px) 50vw, 100vw"
-				/>
+				<div className="service-image-wrap absolute inset-0">
+					<Image
+						src={imageSrc}
+						alt={title}
+						fill
+						className="object-cover transition-transform duration-500 group-hover:scale-105"
+						sizes="(min-width: 1280px) 25vw, (min-width: 768px) 50vw, 100vw"
+					/>
+				</div>
 				<div className="absolute inset-0 bg-gradient-to-t from-ink/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 				{isNew && (
 					<span className="absolute left-4 top-4 inline-flex items-center rounded-md bg-gold px-2.5 py-1 text-xs font-semibold uppercase tracking-wide text-ink">
@@ -35,7 +41,7 @@ function ServiceCard({ title, description, imageSrc, isNew, redirectUrl }: Servi
 			<div className="flex flex-1 flex-col p-6">
 				<h3 className="font-display text-xl font-semibold text-foreground">{title}</h3>
 				<p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{description}</p>
-				<span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-gold-dark transition-colors group-hover:text-gold">
+				<span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-gold transition-colors group-hover:text-gold-dark">
 					Learn more
 					<ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
 				</span>
@@ -45,11 +51,44 @@ function ServiceCard({ title, description, imageSrc, isNew, redirectUrl }: Servi
 }
 
 export function ServicesSection() {
+	const sectionRef = useRef(null);
+
+	useGSAP(
+		() => {
+			const mm = gsap.matchMedia();
+
+			// Signature moment #2: a quiet parallax drift across the fleet imagery,
+			// scoped to a scrub tied to the section's own scroll progress.
+			mm.add('(prefers-reduced-motion: no-preference) and (min-width: 768px)', () => {
+				gsap.utils.toArray<HTMLElement>('.service-image-wrap').forEach(wrap => {
+					gsap.fromTo(
+						wrap,
+						{ yPercent: -6, scale: 1.18 },
+						{
+							yPercent: 6,
+							scale: 1.18,
+							ease: 'none',
+							scrollTrigger: {
+								trigger: sectionRef.current,
+								start: 'top bottom',
+								end: 'bottom top',
+								scrub: 0.5,
+							},
+						}
+					);
+				});
+			});
+
+			return () => mm.revert();
+		},
+		{ scope: sectionRef }
+	);
+
 	return (
-		<section className="section-padding bg-surface">
+		<section ref={sectionRef} className="section-padding bg-surface">
 			<div className="section-container space-y-10">
 				<FadeIn className="text-center">
-					<span className="text-label text-gold-dark">What we offer</span>
+					<span className="text-label text-gold">What we offer</span>
 					<h2 className="text-title mt-3 text-foreground">Our services</h2>
 					<p className="mx-auto mt-3 max-w-2xl text-muted-foreground">
 						One trusted partner for every journey — from the airport to across the state.

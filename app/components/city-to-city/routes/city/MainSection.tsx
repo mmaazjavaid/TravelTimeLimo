@@ -15,7 +15,7 @@ const MainSection: React.FC = () => {
 	return (
 		<section className="relative w-full">
 			<FadeIn className="section-padding pb-8 pt-4 text-center">
-				<span className="text-label text-gold-dark">City-to-City Route</span>
+				<span className="text-label text-gold">City-to-City Route</span>
 				<h1 className="text-title mt-3 text-foreground">
 					{city.from} <span className="text-gold">&lt;&gt;</span> {city.to}
 				</h1>

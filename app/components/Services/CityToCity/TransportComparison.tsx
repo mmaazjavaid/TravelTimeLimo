@@ -25,7 +25,7 @@ const TransportOption = ({
 				<Image src={`/${vehicleTypeImage}`} alt={title} fill className="object-cover object-center" priority />
 				<div className="absolute bottom-0 left-0 rounded-tr-xl bg-white/95 p-4 backdrop-blur-sm">
 					<div className="flex items-center gap-2">
-						<Icon className="h-5 w-5 text-gold-dark" />
+						<Icon className="h-5 w-5 text-gold" />
 						<div>
 							<h3 className="font-semibold text-foreground">{title}</h3>
 							<p className="text-sm text-muted-foreground">{subtitle}</p>
@@ -48,7 +48,7 @@ const TransportOption = ({
 						<div className="absolute left-8 right-8 top-1/2 h-0.5 bg-gold" />
 						<div className="absolute left-8 top-1/2 h-4 w-4 -translate-x-2 -translate-y-2 rounded-full border-4 border-white bg-gold" />
 						<div className="absolute right-8 top-1/2 h-4 w-4 translate-x-2 -translate-y-2 rounded-full border-4 border-white bg-gold" />
-						<div className="mt-8 text-center font-medium text-gold-dark">ENJOY THE RIDE</div>
+						<div className="mt-8 text-center font-medium text-gold">ENJOY THE RIDE</div>
 					</div>
 				) : (
 					<div className="relative px-8">
@@ -58,7 +58,7 @@ const TransportOption = ({
 									<div className="absolute left-0 h-4 w-4 rounded-full border-4 border-white bg-gold" />
 									<div className="ml-8 flex flex-grow items-center justify-between">
 										<div className="font-medium text-foreground">{step.label}</div>
-										<div className="text-sm text-gold-dark">{step.duration}</div>
+										<div className="text-sm text-gold">{step.duration}</div>
 									</div>
 									{index < steps.length - 1 && <div className="absolute left-2 top-4 h-16 w-0.5 bg-gold/40" />}
 								</div>

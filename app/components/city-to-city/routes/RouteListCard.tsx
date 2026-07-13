@@ -27,7 +27,7 @@ const RouteListCard = ({ routes }: RouteListProps) => {
 										</div>
 										<div className="flex items-center justify-between border-t border-border/60 pt-3 text-sm text-muted-foreground">
 											<span>{route.duration}</span>
-											<span className="inline-flex items-center gap-1 font-medium text-gold-dark transition-colors group-hover:text-gold">
+											<span className="inline-flex items-center gap-1 font-medium text-gold transition-colors group-hover:text-gold-dark">
 												{route.distance}
 												<ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
 											</span>

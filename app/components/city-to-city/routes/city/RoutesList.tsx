@@ -9,7 +9,7 @@ export const RouteList = ({ countryRoutes }: any) => {
 				<li key={route.id}>
 					<Link
 						href={`/city-to-city/routes/${route.id}`}
-						className="group text-base text-foreground transition-colors hover:text-gold-dark"
+						className="group text-base text-foreground transition-colors hover:text-gold"
 					>
 						<span className="underline-offset-4 group-hover:underline">
 							{route.from} {'<>'} {route.to}

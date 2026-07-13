@@ -23,7 +23,7 @@ const BookingFooter: React.FC<{ onNextStep: () => void }> = ({ onNextStep }) => 
 					/>
 					<Label htmlFor="terms" className="cursor-pointer text-sm text-muted-foreground">
 						I agree to the{' '}
-						<Link href="/terms" target="_blank" className="text-gold-dark underline-offset-4 hover:underline">
+						<Link href="/terms" target="_blank" className="text-gold underline-offset-4 hover:text-gold-dark hover:underline">
 							terms &amp; conditions
 						</Link>
 					</Label>

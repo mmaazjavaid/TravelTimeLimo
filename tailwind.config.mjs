@@ -9,23 +9,27 @@ export default {
 	theme: {
 		extend: {
 			fontFamily: {
-				sans: ['var(--font-geist-sans)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+				sans: ['var(--font-sans)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
 				display: ['var(--font-display)', 'Georgia', 'serif'],
-				mono: ['var(--font-geist-mono)', 'ui-monospace', 'monospace'],
+				mono: ['ui-monospace', 'SFMono-Regular', 'monospace'],
 			},
 			colors: {
 				ink: {
-					DEFAULT: '#0c0f16',
-					soft: '#161a24',
-					muted: '#1e2433',
+					DEFAULT: '#0b0d12',
+					soft: '#14171f',
+					muted: '#1c202b',
 				},
 				gold: {
-					DEFAULT: '#c6a15b',
-					light: '#e3c98c',
-					dark: '#9a7b33',
+					DEFAULT: '#a9814a',
+					light: '#c9a06a',
+					dark: '#5c4a2e',
+				},
+				graphite: {
+					DEFAULT: '#4b4f58',
+					light: '#71757d',
 				},
 				surface: {
-					DEFAULT: '#fafaf9',
+					DEFAULT: '#f7f6f3',
 					elevated: '#ffffff',
 				},
 				background: 'hsl(var(--background))',

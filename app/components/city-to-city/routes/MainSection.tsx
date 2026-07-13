@@ -6,7 +6,7 @@ const MainSection: React.FC = () => {
 	return (
 		<section className="relative w-full">
 			<FadeIn className="section-padding pb-8 pt-4 text-center">
-				<span className="text-label text-gold-dark">Explore Routes</span>
+				<span className="text-label text-gold">Explore Routes</span>
 				<h1 className="text-title mt-3 text-foreground">City-to-City chauffeured ride routes</h1>
 				<p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
 					Discover premium long-distance routes with professional chauffeurs across the United States.

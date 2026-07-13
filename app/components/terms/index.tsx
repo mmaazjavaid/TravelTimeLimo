@@ -11,13 +11,13 @@ export function TermsAndConditions() {
 			</FadeIn>
 
 			<nav className="mb-12 rounded-xl border border-border/60 bg-surface p-6" aria-label="Table of contents">
-				<h2 className="text-label mb-4 text-gold-dark">Contents</h2>
+				<h2 className="text-label mb-4 text-gold">Contents</h2>
 				<ul className="space-y-2">
 					{TERMS.map(section => (
 						<li key={section.id}>
 							<Link
 								href={`#${section.href}`}
-								className="group flex items-baseline gap-2 text-sm text-foreground transition-colors hover:text-gold-dark"
+								className="group flex items-baseline gap-2 text-sm text-foreground transition-colors hover:text-gold"
 							>
 								<span className="text-muted-foreground">{section.id}.</span>
 								<span className="underline-offset-4 group-hover:underline">{section.title}</span>

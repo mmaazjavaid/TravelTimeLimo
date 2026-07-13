@@ -5,7 +5,7 @@ import { FadeIn } from '@/components/ui/motion';
 export function DownloadSection() {
 	return (
 		<section className="relative overflow-hidden bg-ink py-16 text-white sm:py-20">
-			<div className="absolute inset-0 z-0 opacity-15">
+			<div className="absolute inset-0 z-0 opacity-10 grayscale sepia">
 				<Image
 					src="https://images.ctfassets.net/ov8o7v78mnye/6JTwhj2JHkJqdyGKQqeCW0/1c365adecbf39ae640d66a8ed557f04e/BackgroundDesktop.svg"
 					alt=""

@@ -53,7 +53,7 @@ export const Stepper: React.FC<StepperProps> = ({ steps, activeStep, setActiveSt
 								className={cn(
 									'mt-2 hidden rounded-lg px-3 py-1 text-sm transition-all md:block',
 									isActive && 'font-semibold text-foreground',
-									isComplete && 'font-medium text-gold-dark hover:text-gold',
+									isComplete && 'font-medium text-gold hover:text-gold-dark',
 									isUpcoming && 'pointer-events-none text-muted-foreground'
 								)}
 							>
@@ -64,7 +64,7 @@ export const Stepper: React.FC<StepperProps> = ({ steps, activeStep, setActiveSt
 								className={cn(
 									'mt-2 text-xs md:hidden',
 									isActive && 'font-semibold text-foreground',
-									isComplete && 'text-gold-dark',
+									isComplete && 'text-gold',
 									isUpcoming && 'text-muted-foreground'
 								)}
 							>

@@ -203,7 +203,7 @@ const GoMapsAutocomplete = ({ placeholder, distination }) => {
 				</button>
 			)}
 			{showDropdown && (
-				<ul className="absolute z-30 mt-2 max-h-72 w-full overflow-auto rounded-lg border border-white/10 bg-ink-soft py-1 shadow-2xl">
+				<ul className="absolute z-30 mt-2 max-h-40 w-full overflow-auto rounded-lg border border-white/10 bg-ink-soft py-1 shadow-2xl">
 					{suggestions.map(suggestion => (
 						<li
 							key={suggestion.place_id}

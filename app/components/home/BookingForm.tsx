@@ -1,17 +1,17 @@
 'use client';
 
-import { Clock } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { Calendar, Clock, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useRouter } from 'next/navigation';
 import { Card, CardContent } from '@/components/ui/card';
-import { STYLES } from '@/lib/commonStyles';
 import GoMapsAutocomplete from '../common/PlacesAutoComplete';
 import { globalStateController } from '@/state/global/globalStateController';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { useEffect } from 'react';
 
 // Fallback route used when the live distance service can't be reached,
 // so the fare and trip summary still render for the customer.
@@ -24,6 +24,8 @@ const FALLBACK_ROUTE_INFO = {
 
 export function BookingForm() {
 	const router = useRouter();
+	const [activeTab, setActiveTab] = useState<'one-way' | 'hourly'>('one-way');
+	const [isSubmitting, setIsSubmitting] = useState(false);
 	const { stepperValues } = globalStateController.useState(['stepperForm', 'isAirport'], 'stepperValues');
 	const bookingInfo = stepperValues?.stepperForm?.bookingInfo || {};
 	const isAirport = stepperValues?.isAirport;
@@ -49,6 +51,20 @@ export function BookingForm() {
 			});
 		}
 	}, []);  // Remove stepperValues dependency
+
+	const handleTabChange = (value: string) => {
+		const nextTab = value as 'one-way' | 'hourly';
+		setActiveTab(nextTab);
+		globalStateController.updateState({
+			stepperForm: {
+				...stepperValues?.stepperForm,
+				bookingInfo: {
+					...bookingInfo,
+					type: nextTab === 'one-way' ? 'oneWay' : 'hourly',
+				},
+			},
+		});
+	};
 
 	const getDistanceParameters = async () => {
 		try {
@@ -80,6 +96,7 @@ export function BookingForm() {
 		} catch (error) {
 			// Distance service unavailable — use a sensible fallback so pricing still renders.
 			console.error('Error fetching distance parameters:', error);
+			toast.error("Couldn't fetch live pricing — showing an estimated fare instead.");
 			globalStateController.updateState({
 				stepperForm: {
 					...stepperValues?.stepperForm,
@@ -90,9 +107,6 @@ export function BookingForm() {
 	};
 
 	const isValidSlot = () => {
-		const now = new Date();
-		const selectedDate = bookingInfo.date ? new Date(bookingInfo.date) : now;
-		const today = new Date().toISOString().split('T')[0];
 		const selectedDateTime = new Date(bookingInfo.date + "T" + bookingInfo.time);
 
 		// Create minimum allowed time (current time + 4 hours)
@@ -112,22 +126,14 @@ export function BookingForm() {
 			if (!response.ok) return true; // backend unavailable — don't block the booking
 			const existingBookings = await response.json();
 			if (!existingBookings.available) {
-				toast.error(existingBookings.message, {
-					position: 'top-right',
-					autoClose: 3000,
-					hideProgressBar: false,
-					closeOnClick: true,
-					pauseOnHover: true,
-					draggable: true,
-					progress: undefined,
-					className: 'bg-gradient-to-r from-gray-600 to-gray-700 text-white',
-				});
+				toast.error(existingBookings.message || 'That time slot is no longer available. Please pick another time.');
 				return false;
 			}
 			return true;
 		} catch (error) {
 			// If the availability service can't be reached, allow the booking to continue.
 			console.error('Error checking booking availability:', error);
+			toast.error("Couldn't verify slot availability — continuing anyway.");
 			return true;
 		}
 	};
@@ -150,51 +156,102 @@ export function BookingForm() {
 		return `${hours}:${minutes}`;
 	};
 
-	const tabTriggerClass = `flex-1 rounded-lg px-4 py-2 text-xs font-semibold uppercase tracking-wide text-white/60 ${STYLES.transition} data-[state=active]:bg-gold-gradient data-[state=active]:text-ink data-[state=active]:shadow-lg`;
+	const updateTime = (selectedTime: string) => {
+		const [hours, minutes] = selectedTime.split(":").map(Number)
+		const selectedDateTime = new Date()
+		selectedDateTime.setHours(hours, minutes)
+
+		const minTime = new Date()
+		minTime.setHours(minTime.getHours() + 4)
+
+		// Only update if selected time is valid
+		if (selectedDateTime >= minTime || bookingInfo.date !== new Date().toISOString().split("T")[0]) {
+			globalStateController.updateState({
+				stepperForm: {
+					...stepperValues?.stepperForm,
+					bookingInfo: {
+						...bookingInfo,
+						time: selectedTime,
+					},
+				},
+			})
+		} else {
+			// Reset to minimum valid time if invalid selection
+			globalStateController.updateState({
+				stepperForm: {
+					...stepperValues?.stepperForm,
+					bookingInfo: {
+						...bookingInfo,
+						time: getValidTime(),
+					},
+				},
+			})
+			toast.error("Please select a time at least 4 hours from now")
+		}
+	};
+
+	const handleGetQuote = async (type: 'oneWay' | 'hourly') => {
+		if (isSubmitting) return;
+
+		if (!bookingInfo.date || !bookingInfo.time) {
+			toast.error('Please select a date and time for your ride.');
+			return;
+		}
+		if (!bookingInfo.from) {
+			toast.error('Please enter a pickup location.');
+			return;
+		}
+		if (type === 'oneWay' && !bookingInfo.to) {
+			toast.error('Please enter a drop-off location.');
+			return;
+		}
+		if (!isValidSlot()) {
+			toast.error('Please select a time at least 4 hours from now.');
+			return;
+		}
+
+		setIsSubmitting(true);
+		try {
+			const isAvailable = await isBookingAvailable();
+			if (!isAvailable) return;
+
+			if (type === 'oneWay') {
+				await getDistanceParameters();
+			}
+
+			router.push('/bookings/service-class');
+		} catch (error) {
+			console.error('Error getting quote:', error);
+			toast.error('Something went wrong while getting your quote. Please try again.');
+		} finally {
+			setIsSubmitting(false);
+		}
+	};
+
+	const tabTriggerClass =
+		'relative z-10 flex-1 rounded-lg px-4 py-2.5 text-xs font-semibold uppercase tracking-wide text-white/60 transition-colors duration-200 data-[state=active]:text-ink';
 	const fieldClass =
 		"dark-picker h-12 w-full rounded-lg border-white/15 bg-white/5 pl-10 pr-3 text-sm font-medium text-white shadow-sm focus-visible:border-gold/60 focus-visible:ring-gold/40 mobile-min-width";
+	const dateTimeIconClass = 'pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gold';
 
 	return (
-		<Card className="glass-panel w-[92vw] max-w-[400px] overflow-hidden rounded-2xl shadow-2xl">
+		<Card className="glass-panel w-[92vw] max-w-[400px] rounded-2xl shadow-2xl">
 			<CardContent className="flex flex-col gap-5 p-6">
 				<div className="text-center">
 					<h2 className="font-display text-2xl font-bold text-white">Reserve your ride</h2>
 					<p className="mt-1 text-xs text-white/55">Instant quote • Free cancellation</p>
 				</div>
-				<Tabs defaultValue="one-way" className="flex-grow">
-					<TabsList className="mb-4 flex w-full gap-2 rounded-xl border border-white/10 bg-black/20 p-1">
-						<TabsTrigger
-							onClick={() => {
-								globalStateController.updateState({
-									stepperForm: {
-										...stepperValues?.stepperForm,
-										bookingInfo: {
-											...bookingInfo,
-											type: "oneWay",
-										},
-									},
-								})
-							}}
-							value="one-way"
-							className={tabTriggerClass}
-						>
+				<Tabs value={activeTab} onValueChange={handleTabChange} className="flex-grow">
+					<TabsList className="relative mb-4 flex w-full gap-1 rounded-xl border border-white/10 bg-black/25 p-1">
+						<motion.div
+							className="absolute inset-y-1 w-[calc(50%-0.125rem)] rounded-lg bg-gold"
+							animate={{ left: activeTab === 'one-way' ? '0.25rem' : 'calc(50% + 0.125rem)' }}
+							transition={{ type: 'spring', stiffness: 400, damping: 34 }}
+						/>
+						<TabsTrigger value="one-way" className={tabTriggerClass}>
 							One Way
 						</TabsTrigger>
-						<TabsTrigger
-							onClick={() => {
-								globalStateController.updateState({
-									stepperForm: {
-										...stepperValues?.stepperForm,
-										bookingInfo: {
-											...bookingInfo,
-											type: "hourly",
-										},
-									},
-								})
-							}}
-							value="hourly"
-							className={tabTriggerClass}
-						>
+						<TabsTrigger value="hourly" className={tabTriggerClass}>
 							Hourly
 						</TabsTrigger>
 					</TabsList>
@@ -203,6 +260,7 @@ export function BookingForm() {
 							<GoMapsAutocomplete placeholder={"From: Address, airport, hotel..."} distination={"from"} />
 							<GoMapsAutocomplete placeholder={"To: Address, airport, hotel..."} distination={"to"} />
 							<div className="relative">
+								<Calendar className={dateTimeIconClass} />
 								<Input
 									type="date"
 									min={new Date().toISOString().split("T")[0]} // Disable previous dates
@@ -222,6 +280,7 @@ export function BookingForm() {
 								/>
 							</div>
 							<div className="relative">
+								<Clock className={dateTimeIconClass} />
 								<Input
 									type="time"
 									className={fieldClass}
@@ -232,40 +291,7 @@ export function BookingForm() {
 										// Force browser to re-evaluate min time when input is focused
 										e.target.min = getValidTime()
 									}}
-									onChange={(e) => {
-										const selectedTime = e.target.value
-										const [hours, minutes] = selectedTime.split(":").map(Number)
-										const selectedDateTime = new Date()
-										selectedDateTime.setHours(hours, minutes)
-
-										const minTime = new Date()
-										minTime.setHours(minTime.getHours() + 4)
-
-										// Only update if selected time is valid
-										if (selectedDateTime >= minTime || bookingInfo.date !== new Date().toISOString().split("T")[0]) {
-											globalStateController.updateState({
-												stepperForm: {
-													...stepperValues?.stepperForm,
-													bookingInfo: {
-														...bookingInfo,
-														time: selectedTime,
-													},
-												},
-											})
-										} else {
-											// Reset to minimum valid time if invalid selection
-											globalStateController.updateState({
-												stepperForm: {
-													...stepperValues?.stepperForm,
-													bookingInfo: {
-														...bookingInfo,
-														time: getValidTime(),
-													},
-												},
-											})
-											toast.error("Please select a time at least 4 hours from now")
-										}
-									}}
+									onChange={(e) => updateTime(e.target.value)}
 								/>
 							</div>
 							<p className="flex items-center justify-center gap-1.5 text-xs text-gold">
@@ -274,19 +300,19 @@ export function BookingForm() {
 							</p>
 
 							<Button
-								onClick={async () => {
-									const isAvailable = await isBookingAvailable()
-									if (!isValidSlot()) toast.error("Please select a time at least 4 hours from now");
-
-									if (isValidSlot() && isAvailable && bookingInfo.time && bookingInfo.date && bookingInfo.from && bookingInfo.to) {
-										router.push("/bookings/service-class")
-										getDistanceParameters()
-									}
-								}}
+								onClick={() => handleGetQuote('oneWay')}
+								disabled={isSubmitting}
 								variant="gradient"
 								className="mt-1 h-12 w-full rounded-lg text-sm font-semibold uppercase tracking-wide"
 							>
-								Get my quote
+								{isSubmitting ? (
+									<>
+										<Loader2 className="h-4 w-4 animate-spin" />
+										Getting your quote...
+									</>
+								) : (
+									'Get my quote'
+								)}
 							</Button>
 						</div>
 					</TabsContent>
@@ -294,6 +320,7 @@ export function BookingForm() {
 						<div className="flex flex-col gap-3">
 							<GoMapsAutocomplete placeholder={"Pickup location"} distination={"from"} />
 							<div className="relative">
+								<Calendar className={dateTimeIconClass} />
 								<Input
 									type="date"
 									min={new Date().toISOString().split("T")[0]} // Disable previous dates
@@ -316,6 +343,7 @@ export function BookingForm() {
 								/>
 							</div>
 							<div className="relative">
+								<Clock className={dateTimeIconClass} />
 								<Input
 									type="time"
 									className={fieldClass}
@@ -326,44 +354,11 @@ export function BookingForm() {
 										// Force browser to re-evaluate min time when input is focused
 										e.target.min = getValidTime()
 									}}
-									onChange={(e) => {
-										const selectedTime = e.target.value
-										const [hours, minutes] = selectedTime.split(":").map(Number)
-										const selectedDateTime = new Date()
-										selectedDateTime.setHours(hours, minutes)
-
-										const minTime = new Date()
-										minTime.setHours(minTime.getHours() + 4)
-
-										// Only update if selected time is valid
-										if (selectedDateTime >= minTime || bookingInfo.date !== new Date().toISOString().split("T")[0]) {
-											globalStateController.updateState({
-												stepperForm: {
-													...stepperValues?.stepperForm,
-													bookingInfo: {
-														...bookingInfo,
-														time: selectedTime,
-													},
-												},
-											})
-										} else {
-											// Reset to minimum valid time if invalid selection
-											globalStateController.updateState({
-												stepperForm: {
-													...stepperValues?.stepperForm,
-													bookingInfo: {
-														...bookingInfo,
-														time: getValidTime(),
-													},
-												},
-											})
-											toast.error("Please select a time at least 4 hours from now")
-										}
-									}}
+									onChange={(e) => updateTime(e.target.value)}
 								/>
 							</div>
 							<div className="relative">
-								<Clock className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gold" />
+								<Clock className={dateTimeIconClass} />
 								<Input
 									type="number"
 									placeholder="Number of hours"
@@ -393,18 +388,19 @@ export function BookingForm() {
 								/>
 							</div>
 							<Button
-								onClick={async () => {
-									const isAvailable = await isBookingAvailable()
-									if (!isValidSlot()) toast.error("Please select a time at least 4 hours from now");
-
-									if (isValidSlot() && isAvailable && bookingInfo.time && bookingInfo.date && bookingInfo.from) {
-										router.push("/bookings/service-class")
-									}
-								}}
+								onClick={() => handleGetQuote('hourly')}
+								disabled={isSubmitting}
 								variant="gradient"
 								className="mt-1 h-12 w-full rounded-lg text-sm font-semibold uppercase tracking-wide"
 							>
-								Get my quote
+								{isSubmitting ? (
+									<>
+										<Loader2 className="h-4 w-4 animate-spin" />
+										Getting your quote...
+									</>
+								) : (
+									'Get my quote'
+								)}
 							</Button>
 						</div>
 					</TabsContent>

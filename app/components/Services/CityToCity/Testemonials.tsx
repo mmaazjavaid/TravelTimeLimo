@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { Star } from 'lucide-react';
 import { FadeIn, StaggerChildren, StaggerItem } from '@/components/ui/motion';
 
 const testimonials = [
@@ -27,8 +27,10 @@ export default function Testimonials() {
 					{testimonials.map(item => (
 						<StaggerItem key={item.title}>
 							<div className="space-y-4 rounded-2xl border border-border/60 bg-surface p-6 text-center shadow-soft">
-								<div className="flex justify-center">
-									<Image src="/App_Stars.svg" alt="5 star rating" width={150} height={50} className="h-auto w-auto" />
+								<div className="flex justify-center gap-1 text-gold" role="img" aria-label="5 out of 5 stars">
+									{[...Array(5)].map((_, i) => (
+										<Star key={i} className="h-4 w-4 fill-current" />
+									))}
 								</div>
 								<h3 className="font-display text-lg font-semibold text-foreground">{item.title}</h3>
 								<p className="text-sm leading-relaxed text-muted-foreground">{item.quote}</p>
