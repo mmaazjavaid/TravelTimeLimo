@@ -20,34 +20,36 @@ const BookingDetails: React.FC = () => {
 	}, [bookingInfo?.date]);
 
 	return (
-		<div className="mb-8 rounded-xl border border-gold/25 bg-ink p-5 text-white shadow-lg">
-			<h2 className="font-display text-lg font-semibold text-gold">{bookingDate || bookingInfo?.date}</h2>
+		<aside className="sticky top-24 mb-8 rounded-xl border border-gold/25 bg-ink p-6 text-white shadow-lift">
+			<p className="text-label text-gold">Trip Summary</p>
+			<h2 className="mt-2 font-display text-xl font-semibold text-white">{bookingDate || bookingInfo?.date}</h2>
+
 			{bookingInfo?.from && (
-				<p className="mt-2 text-sm text-white/85">
-					<span className="font-semibold text-white">Pick up:</span>
-					{` ${bookingInfo?.from}`}
-				</p>
+				<div className="mt-4 border-t border-white/10 pt-4">
+					<p className="text-xs font-medium uppercase tracking-wide text-white/50">Pick up</p>
+					<p className="mt-1 text-sm text-white/85">{bookingInfo.from}</p>
+				</div>
 			)}
 
 			{bookingInfo?.to && (
-				<p className="mt-1 text-sm text-white/85">
-					<span className="font-semibold text-white">Destination:</span>
-					{` ${bookingInfo?.to}`}
-				</p>
+				<div className="mt-3">
+					<p className="text-xs font-medium uppercase tracking-wide text-white/50">Destination</p>
+					<p className="mt-1 text-sm text-white/85">{bookingInfo.to}</p>
+				</div>
 			)}
 
-			<div className="mt-3 flex items-center gap-2 text-sm text-white/60">
+			<div className="mt-4 flex items-center gap-2 border-t border-white/10 pt-4 text-sm text-white/60">
 				{routeInfo?.distanceText ? (
 					<>
-						<Clock className="h-4 w-4 text-gold" />
-						<span>{routeInfo?.durationText || ''}</span>
-						<span>•{` ${routeInfo?.distanceText}` || ''}</span>
+						<Clock className="h-4 w-4 shrink-0 text-gold" />
+						<span>{routeInfo.durationText}</span>
+						<span>· {routeInfo.distanceText}</span>
 					</>
 				) : (
-					<span>{`Hours: ${bookingInfo?.numberOfHours}` || ''}</span>
+					<span>Hours: {bookingInfo?.numberOfHours}</span>
 				)}
 			</div>
-		</div>
+		</aside>
 	);
 };
 

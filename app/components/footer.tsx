@@ -1,45 +1,46 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-import { CircleHelp, ChevronRight } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
-import { CITY_TO_CITY_ROUTES, FOOTER_NAVIGATIONS, SOCIALS } from '@/lib/constants';
+import { CITY_TO_CITY_ROUTES, FOOTER_NAVIGATIONS } from '@/lib/constants';
 
 export function Footer() {
 	return (
 		<footer className="bg-ink text-white">
-			<div className="container mx-auto px-6 py-12">
+			<div className="section-container section-padding pb-10 pt-16">
 				{/* Top Section */}
-				<div className="mb-12 flex flex-col items-center justify-between gap-4 border-b border-white/10 pb-8 lg:flex-row">
-					<Link href="/" className="font-display text-3xl font-bold">
-						<span className="text-white">TRAVEL TIME </span>
-						<span className="text-gold">LIMO</span>
+				<div className="mb-12 flex flex-col items-start justify-between gap-6 border-b border-white/10 pb-10 lg:flex-row lg:items-center">
+					<Link href="/" className="group font-display text-2xl font-bold sm:text-3xl">
+						<span className="text-white transition-colors group-hover:text-white/90">TRAVEL TIME </span>
+						<span className="text-gold transition-colors group-hover:text-gold-light">LIMO</span>
 					</Link>
-					<p className="text-sm text-white/60">Premium chauffeur service, available 24/7.</p>
+					<p className="max-w-sm text-sm leading-relaxed text-white/60">
+						Premium chauffeur service, available 24/7 across the United States.
+					</p>
 				</div>
 
 				{/* Navigation Section */}
-				<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 mb-12">
+				<div className="mb-12 grid grid-cols-2 gap-10 md:grid-cols-3 lg:grid-cols-5">
 					<FooterSection title="Company" items={FOOTER_NAVIGATIONS.company} />
 					<FooterSection title="For Business" items={FOOTER_NAVIGATIONS.business} />
 					<FooterSection title="Top Cities" items={FOOTER_NAVIGATIONS.cities} />
 					<FooterSection title="Explore" items={FOOTER_NAVIGATIONS.explore} />
 					<div>
-						<h3 className="flex items-center text-sm font-semibold text-white mb-4">
+						<h3 className="mb-4 flex items-center text-sm font-semibold text-white">
 							City-to-City Rides
-							<Badge variant="secondary" className="ml-2 bg-gold text-ink">
+							<Badge variant="gold" className="ml-2">
 								NEW
 							</Badge>
 						</h3>
-						<ul className="space-y-3">
+						<ul className="space-y-2.5">
 							{CITY_TO_CITY_ROUTES[0]?.routes?.slice(0, 6).map(route => (
 								<li key={route.id}>
 									<Link
 										href={`/city-to-city/routes/${route.id}`}
-										className="flex items-center text-sm text-gray-400 hover:text-white transition-colors"
+										className="group flex items-center text-sm text-white/50 transition-colors hover:text-gold"
 									>
-										<ChevronRight className="w-4 h-4 mr-2" />
-										{route.from} - {route.to}
+										<ChevronRight className="mr-1.5 h-3.5 w-3.5 opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100" />
+										{route.from} – {route.to}
 									</Link>
 								</li>
 							))}
@@ -48,15 +49,15 @@ export function Footer() {
 				</div>
 
 				{/* Legal Section */}
-				<div className="border-t border-gray-700 pt-8">
-					<div className="flex flex-col md:flex-row justify-between items-center">
-						<p className="text-xs text-gray-400">&copy; 2024 Travel Time Limo</p>
-						<div className="flex space-x-6 mt-4 md:mt-0">
+				<div className="border-t border-white/10 pt-8">
+					<div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+						<p className="text-xs text-white/40">&copy; {new Date().getFullYear()} Travel Time Limo</p>
+						<div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
 							{FOOTER_NAVIGATIONS.legal.map(item => (
 								<Link
 									key={item.name}
 									href={item.href}
-									className="text-xs text-gray-400 hover:text-white transition-colors"
+									className="text-xs text-white/40 transition-colors hover:text-white/80"
 								>
 									{item.name}
 								</Link>
@@ -69,18 +70,18 @@ export function Footer() {
 	);
 }
 
-function FooterSection({ title, items }) {
+function FooterSection({ title, items }: { title: string; items: { name: string; href: string }[] }) {
 	return (
 		<div>
-			<h3 className="text-base font-semibold text-white mb-4">{title}</h3>
-			<ul className="space-y-3">
+			<h3 className="mb-4 text-sm font-semibold text-white">{title}</h3>
+			<ul className="space-y-2.5">
 				{items.map(item => (
 					<li key={item.name}>
 						<Link
 							href={item.href}
-							className="flex items-center text-sm text-gray-400 hover:text-white transition-colors"
+							className="group flex items-center text-sm text-white/50 transition-colors hover:text-white"
 						>
-							<ChevronRight className="w-4 h-4 mr-2" />
+							<ChevronRight className="mr-1.5 h-3.5 w-3.5 opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100" />
 							{item.name}
 						</Link>
 					</li>

@@ -4,6 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { CITY_TO_CITY_ROUTES } from '@/lib/constants';
+import { FadeIn } from '@/components/ui/motion';
 
 const MainSection: React.FC = () => {
 	const { cityId } = useParams();
@@ -13,31 +14,22 @@ const MainSection: React.FC = () => {
 
 	return (
 		<section className="relative w-full">
-			<div className="mt-8 py-8 text-center">
-				<h1 className="md:text-3xl sm:text-2xl font-bold">
-					{city.from} <span className="text-2xl">{'<>'}</span> {city.to}
+			<FadeIn className="section-padding pb-8 pt-4 text-center">
+				<span className="text-label text-gold-dark">City-to-City Route</span>
+				<h1 className="text-title mt-3 text-foreground">
+					{city.from} <span className="text-gold">&lt;&gt;</span> {city.to}
 				</h1>
-			</div>
-			{/* Mobile */}
-			<div className="relative h-[40vh] md:hidden">
-				<Image
-					src={`${city.image}-mobile.png`}
-					alt="Black Cadillac Escalade with chauffeur service"
-					className="object-cover"
-					fill
-					loading="lazy"
-				/>
-			</div>
+			</FadeIn>
 
-			{/* Desktop */}
-			<div className="relative hidden h-[50vh] w-full md:block">
+			<div className="relative h-[40vh] w-full md:h-[50vh]">
 				<Image
 					src={`${city.image}.png`}
-					alt="Black Cadillac Escalade with chauffeur service"
+					alt={`${city.from} to ${city.to} chauffeur service`}
 					className="object-cover"
 					fill
 					loading="lazy"
 				/>
+				<div className="absolute inset-0 bg-gradient-to-t from-ink/50 via-transparent to-transparent" />
 			</div>
 		</section>
 	);

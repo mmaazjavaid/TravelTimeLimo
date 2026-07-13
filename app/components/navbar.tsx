@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { ChevronDown, Menu, User, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -10,7 +11,8 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { cn } from '@/lib/utils';
 
 const services = [
 	{ name: 'City-to-city rides', href: '/services/city-city' },
@@ -21,115 +23,129 @@ const services = [
 	{ name: 'Hourly car service', href: '/services/hourly-car-service' },
 ];
 
-const business = [
-	{ name: 'For Companies', href: '#' },
-	{ name: 'For Events', href: '#' },
-	{ name: 'Corporate Accounts', href: '#' },
+const navLinks = [
+	{ name: 'City-to-city rides', href: '/services/city-city' },
+	{ name: 'Airport transfer', href: '/services/airport-transfer' },
+	{ name: 'Hourly car service', href: '/services/hourly-car-service' },
 ];
 
 export function Navbar() {
-	const [title, setTitle] = React.useState("TRAVEL TIME LIMO");
+	const pathname = usePathname();
+	const [title, setTitle] = React.useState('TRAVEL TIME LIMO');
+	const [scrolled, setScrolled] = React.useState(false);
 
 	React.useEffect(() => {
 		const fetchLocation = async () => {
 			try {
-				const res = await fetch("https://ipinfo.io/json?token=5de9c3725adbab");
+				const res = await fetch('https://ipinfo.io/json?token=5de9c3725adbab');
 				const data = await res.json();
 				const city = data.city;
 
-				if (city === "Austin") {
-					setTitle("ATX Airport limo");
+				if (city === 'Austin') {
+					setTitle('ATX Airport limo');
 				}
 
 				if (city === 'New York' || city == 'Newyork') {
 					setTitle('NY ICON LIMO');
 				}
 			} catch (error) {
-				console.error("Error fetching location:", error);
+				console.error('Error fetching location:', error);
 			}
 		};
 
 		fetchLocation();
 	}, []);
+
+	React.useEffect(() => {
+		const onScroll = () => setScrolled(window.scrollY > 8);
+		onScroll();
+		window.addEventListener('scroll', onScroll, { passive: true });
+		return () => window.removeEventListener('scroll', onScroll);
+	}, []);
+
+	const brandFirst = title.split(' ')[0];
+	const brandRest = title.split(' ').slice(1).join(' ');
+
 	return (
-		<nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-ink/95 text-white backdrop-blur-md supports-[backdrop-filter]:bg-ink/80">
-			<div className="container mx-auto px-4 lg:px-8">
-				<div className="flex items-center justify-between h-20">
-					<Link href="/" className="mr-3 flex items-center gap-2 whitespace-nowrap">
-						<span className="font-display text-2xl font-bold tracking-wide text-white">
-							{title.split(' ')[0]}
+		<header
+			className={cn(
+				'fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300',
+				scrolled
+					? 'border-white/10 glass-nav shadow-soft'
+					: 'border-transparent bg-ink/90 backdrop-blur-md'
+			)}
+		>
+			<div className="section-container px-4 lg:px-8">
+				<div className="flex h-[4.5rem] items-center justify-between gap-4">
+					<Link href="/" className="group flex shrink-0 items-center gap-1.5 whitespace-nowrap">
+						<span className="font-display text-xl font-bold tracking-wide text-white transition-colors group-hover:text-gold-light sm:text-2xl">
+							{brandFirst}
 						</span>
-						<span className="font-display text-2xl font-bold tracking-wide text-gold">
-							{title.split(' ').slice(1).join(' ')}
-						</span>
+						<span className="font-display text-xl font-bold tracking-wide text-gold sm:text-2xl">{brandRest}</span>
 					</Link>
 
-					<Button
-						variant="ghost"
-						onClick={() => window.location.href = '/services/city-city'}
-						className="order-last lg:order-none border border-gold/60 bg-transparent text-gold hover:bg-gold hover:text-ink px-5 py-2 rounded-lg font-semibold transition-colors duration-200"
-					>
-						Book Now
-					</Button>
+					{/* Desktop nav */}
+					<nav className="hidden items-center gap-1 lg:flex" aria-label="Main navigation">
+						<DesktopDropdown title="Our services" items={services} />
+						{navLinks.map(link => (
+							<DesktopLink key={link.href} href={link.href} active={pathname === link.href}>
+								{link.name}
+							</DesktopLink>
+						))}
+					</nav>
 
-					{/* Mobile Menu */}
-					<div className="lg:hidden">
+					<div className="flex items-center gap-2">
+						<div className="hidden items-center gap-1 lg:flex">
+							<DesktopDropdown title="English" items={[]} icon={<Globe className="h-4 w-4" />} showDownIcon={false} />
+							<DesktopDropdown title="" items={[]} icon={<User className="h-4 w-4" />} showDownIcon={false} />
+						</div>
+
+						<Button
+							variant="gradient"
+							size="sm"
+							onClick={() => (window.location.href = '/services/city-city')}
+							className="hidden sm:inline-flex"
+						>
+							Book Now
+						</Button>
+
+						{/* Mobile menu */}
 						<Sheet>
 							<SheetTrigger asChild>
-								<Button variant="ghost" size="icon" className="text-white">
-									<Menu className="h-6 w-6" />
-									<span className="sr-only">Toggle menu</span>
+								<Button variant="ghost" size="icon" className="text-white hover:bg-white/10 lg:hidden" aria-label="Open menu">
+									<Menu className="h-5 w-5" />
 								</Button>
 							</SheetTrigger>
-							<SheetContent side="right" className="w-80 bg-gray-900 text-white p-6">
-								<div className="flex flex-col gap-6 mt-6">
+							<SheetContent side="right" className="w-full max-w-sm border-white/10 bg-ink text-white">
+								<SheetHeader>
+									<SheetTitle className="text-left font-display text-xl text-white">
+										<span className="text-white">{brandFirst}</span>{' '}
+										<span className="text-gold">{brandRest}</span>
+									</SheetTitle>
+								</SheetHeader>
+								<nav className="mt-8 flex flex-col gap-1" aria-label="Mobile navigation">
 									<MobileDropdown title="Our services" items={services} />
-									<MobileLink href="/services/city-city">City-to-city rides</MobileLink>
-									<MobileLink href="/services/airport-transfer">Airport transfer</MobileLink>
-									<MobileLink href="/services/hourly-car-service">Hourly car service</MobileLink>
-									<hr className="border-gray-700 my-4" />
-									<MobileDropdown
-										title="English"
-										items={[]}
-										icon={<Globe className="w-4 h-4 mr-2" />}
-										showDownIcon={false}
-									/>
-									<MobileDropdown
-										title=""
-										items={[]}
-										icon={<User className="w-4 h-4 mr-2" />}
-										showDownIcon={false}
-									/>
-								</div>
+									{navLinks.map(link => (
+										<MobileLink key={link.href} href={link.href} active={pathname === link.href}>
+											{link.name}
+										</MobileLink>
+									))}
+									<hr className="my-4 border-white/10" />
+									<MobileDropdown title="English" items={[]} icon={<Globe className="h-4 w-4" />} showDownIcon={false} />
+									<Button
+										variant="gradient"
+										className="mt-4 w-full"
+										onClick={() => (window.location.href = '/services/city-city')}
+									>
+										Book Now
+									</Button>
+								</nav>
 							</SheetContent>
 						</Sheet>
 					</div>
-
-					{/* Desktop Menu */}
-					<div className="hidden lg:flex items-center gap-8">
-						<DesktopDropdown title="Our services" items={services} />
-						<DesktopLink href="/services/city-city">City-to-city rides</DesktopLink>
-						<DesktopLink href="/services/airport-transfer">Airport transfer</DesktopLink>
-						<DesktopLink href="/services/hourly-car-service">Hourly car service</DesktopLink>
-					</div>
-
-					<div className="hidden lg:flex items-center gap-4">
-						<DesktopDropdown
-							title="English"
-							items={[]}
-							icon={<Globe className="w-4 h-4 mr-2" />}
-							showDownIcon={false}
-						/>
-						<DesktopDropdown
-							title=""
-							items={[]}
-							icon={<User className="w-4 h-4 mr-2" />}
-							showDownIcon={false}
-						/>
-					</div>
 				</div>
 			</div>
-		</nav>
+		</header>
 	);
 }
 
@@ -137,7 +153,7 @@ function MobileDropdown({
 	title,
 	items,
 	icon,
-	showDownIcon = true
+	showDownIcon = true,
 }: {
 	title: string;
 	items: { name: string; href?: string }[];
@@ -147,15 +163,16 @@ function MobileDropdown({
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Button variant="ghost" className="w-full justify-start text-white ">
+				<Button variant="ghost" className="h-11 w-full justify-start text-white/90 hover:bg-white/10 hover:text-white">
 					{icon}
-					{title}{showDownIcon ? <ChevronDown className="w-4 h-4 ml-2" /> : null}
+					{title}
+					{showDownIcon ? <ChevronDown className="ml-auto h-4 w-4" /> : null}
 				</Button>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent className="w-56 bg-gray-800 text-white border-gray-700">
+			<DropdownMenuContent className="w-56 border-white/10 bg-ink-soft text-white">
 				{items.map(item => (
-					<DropdownMenuItem key={item.name} asChild className="hover:bg-gray-700">
-						<Link href={item.href || '#'} className="w-full px-4 py-2">
+					<DropdownMenuItem key={item.name} asChild className="focus:bg-white/10 focus:text-white">
+						<Link href={item.href || '#'} className="w-full px-2 py-2">
 							{item.name}
 						</Link>
 					</DropdownMenuItem>
@@ -165,9 +182,15 @@ function MobileDropdown({
 	);
 }
 
-function MobileLink({ href, children }: { href: string; children: React.ReactNode }) {
+function MobileLink({ href, children, active }: { href: string; children: React.ReactNode; active?: boolean }) {
 	return (
-		<Link href={href} className="text-white  transition-colors duration-200">
+		<Link
+			href={href}
+			className={cn(
+				'rounded-lg px-3 py-2.5 text-sm font-medium transition-colors',
+				active ? 'bg-white/10 text-gold' : 'text-white/85 hover:bg-white/5 hover:text-white'
+			)}
+		>
 			{children}
 		</Link>
 	);
@@ -177,25 +200,26 @@ function DesktopDropdown({
 	title,
 	items,
 	icon,
-	showDownIcon = true
+	showDownIcon = true,
 }: {
 	title: string;
 	items: { name: string; href?: string }[];
 	icon?: React.ReactNode;
-	showDownIcon?: boolean
+	showDownIcon?: boolean;
 }) {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Button variant="ghost" className="text-white ">
+				<Button variant="ghost" className="text-sm text-white/85 hover:bg-white/10 hover:text-white">
 					{icon}
-					{title} {showDownIcon ? <ChevronDown className="w-4 h-4 ml-1" /> : null}
+					{title}
+					{showDownIcon ? <ChevronDown className="ml-1 h-3.5 w-3.5 opacity-70" /> : null}
 				</Button>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent className="bg-gray-800 text-white border-gray-700">
+			<DropdownMenuContent className="min-w-[220px] border-white/10 bg-ink-soft text-white shadow-lift">
 				{items.map(item => (
-					<DropdownMenuItem key={item.name} asChild className="hover:bg-gray-700">
-						<Link href={item.href || '#'} className="w-full px-4 py-2">
+					<DropdownMenuItem key={item.name} asChild className="focus:bg-white/10 focus:text-gold">
+						<Link href={item.href || '#'} className="w-full cursor-pointer px-2 py-2">
 							{item.name}
 						</Link>
 					</DropdownMenuItem>
@@ -205,9 +229,15 @@ function DesktopDropdown({
 	);
 }
 
-function DesktopLink({ href, children }: { href: string; children: React.ReactNode }) {
+function DesktopLink({ href, children, active }: { href: string; children: React.ReactNode; active?: boolean }) {
 	return (
-		<Link href={href} className="text-sm text-white/85 hover:text-gold transition-colors duration-200">
+		<Link
+			href={href}
+			className={cn(
+				'rounded-lg px-3 py-2 text-sm font-medium transition-colors duration-200',
+				active ? 'text-gold' : 'text-white/80 hover:bg-white/5 hover:text-white'
+			)}
+		>
 			{children}
 		</Link>
 	);

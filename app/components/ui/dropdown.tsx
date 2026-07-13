@@ -41,14 +41,14 @@ export function DropDown({
 					variant="outline"
 					role="combobox"
 					aria-expanded={open}
-					className={`w-full justify-between ${className}`}
+					className={cn('h-11 w-full justify-between font-normal', className)}
 					disabled={disabled}
 				>
 					{value ? options.find(option => option.value === value)?.label : placeholder}
 					<ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
 				</Button>
 			</PopoverTrigger>
-			<PopoverContent className="w-[200px] p-0">
+			<PopoverContent className="w-[var(--radix-popover-trigger-width)] min-w-[200px] p-0 shadow-lift">
 				<Command>
 					<CommandInput placeholder={placeholder} />
 					<CommandEmpty>{emptyMessage}</CommandEmpty>

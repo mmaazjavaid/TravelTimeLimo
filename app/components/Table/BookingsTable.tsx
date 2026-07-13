@@ -3,7 +3,8 @@ import React from 'react';
 import BookingsMeta from '@/lib/Table/Schema/bookings_schema';
 import { MaterialReactTable, useMaterialReactTable } from 'material-react-table';
 import { BookingModel } from '@/types/bookings';
-import { Card, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { FadeIn } from '@/components/ui/motion';
 
 export const BookingsTable: React.FC<{ bookings: BookingModel[] }> = ({ bookings }) => {
 	const table = useMaterialReactTable({
@@ -11,20 +12,51 @@ export const BookingsTable: React.FC<{ bookings: BookingModel[] }> = ({ bookings
 		data: bookings || [],
 		enableColumnPinning: true,
 		initialState: {
-			sorting: [
-				{
-					id: 'bookingInfo.date',
-					desc: true,
-				},
-			],
+			sorting: [{ id: 'bookingInfo.date', desc: true }],
 		},
-		muiTableContainerProps: { sx: { maxHeight: '800px' } },
+		muiTableContainerProps: { sx: { maxHeight: '700px' } },
+		muiTablePaperProps: {
+			elevation: 0,
+			sx: { border: 'none', boxShadow: 'none' },
+		},
+		muiTableHeadCellProps: {
+			sx: {
+				fontFamily: 'var(--font-geist-sans)',
+				fontWeight: 600,
+				fontSize: '0.8125rem',
+				color: '#0c0f16',
+				backgroundColor: '#fafaf9',
+			},
+		},
+		muiTableBodyCellProps: {
+			sx: {
+				fontFamily: 'var(--font-geist-sans)',
+				fontSize: '0.875rem',
+			},
+		},
 	});
 
+	const isEmpty = !bookings || bookings.length === 0;
+
 	return (
-		<Card className="m-10 mt-16 p-8 shadow-lg rounded-lg bg-white border border-gray-200">
-			<CardTitle className="text-3xl font-bold mb-6 text-gray-800 text-center"> Bookings</CardTitle>
-			<MaterialReactTable table={table} />
-		</Card>
+		<FadeIn>
+			<Card className="border-border/60 shadow-lift">
+				<CardHeader className="border-b border-border/60 bg-surface">
+					<CardTitle className="font-display text-2xl text-foreground">Bookings</CardTitle>
+					<p className="text-sm text-muted-foreground">
+						{isEmpty ? 'No bookings found' : `${bookings.length} total booking${bookings.length !== 1 ? 's' : ''}`}
+					</p>
+				</CardHeader>
+				<CardContent className="p-0">
+					{isEmpty ? (
+						<div className="flex flex-col items-center justify-center py-20 text-center">
+							<p className="text-muted-foreground">No bookings to display yet.</p>
+						</div>
+					) : (
+						<MaterialReactTable table={table} />
+					)}
+				</CardContent>
+			</Card>
+		</FadeIn>
 	);
 };

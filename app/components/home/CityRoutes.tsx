@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { ArrowRight } from 'lucide-react';
-import { STYLES } from '@/lib/commonStyles';
+import { FadeIn, StaggerChildren, StaggerItem } from '@/components/ui/motion';
 
 interface CityCard {
 	name: string;
@@ -42,147 +42,109 @@ const topCities: CityCard[] = [
 ];
 
 const topRoutes: RouteCard[] = [
-	{
-		from: 'Newyork',
-		to: 'Philadelphia',
-		duration: '1h 50m',
-		distance: '59 mi',
-	},
-	{
-		from: 'Newyork',
-		to: 'EastHampton',
-		duration: '2h 30m',
-		distance: '68 mi',
-	},
-	{
-		from: 'Newyork',
-		to: 'Oxford',
-		duration: '1h 45m',
-		distance: '96 km',
-	},
-	{
-		from: 'Newyork',
-		to: 'Reims',
-		duration: '2h 15m',
-		distance: '145 km',
-	},
-	{
-		from: 'Austin',
-		to: 'San Antonio',
-		duration: '1h 20m',
-		distance: '80 mi',
-	},
-	{
-		from: 'Austin',
-		to: 'Houston',
-		duration: '2h 30m',
-		distance: '165 mi',
-	},
-	{
-		from: 'Austin',
-		to: 'Dallas',
-		duration: '3h 0m',
-		distance: '195 mi',
-	},
-	{
-		from: 'Austin',
-		to: 'Waco',
-		duration: '1h 40m',
-		distance: '102 mi',
-	},
+	{ from: 'Newyork', to: 'Philadelphia', duration: '1h 50m', distance: '59 mi' },
+	{ from: 'Newyork', to: 'EastHampton', duration: '2h 30m', distance: '68 mi' },
+	{ from: 'Newyork', to: 'Oxford', duration: '1h 45m', distance: '96 km' },
+	{ from: 'Newyork', to: 'Reims', duration: '2h 15m', distance: '145 km' },
+	{ from: 'Austin', to: 'San Antonio', duration: '1h 20m', distance: '80 mi' },
+	{ from: 'Austin', to: 'Houston', duration: '2h 30m', distance: '165 mi' },
+	{ from: 'Austin', to: 'Dallas', duration: '3h 0m', distance: '195 mi' },
+	{ from: 'Austin', to: 'Waco', duration: '1h 40m', distance: '102 mi' },
 ];
 
 export function CityRoutes() {
 	return (
-		<div className="bg-white">
-			<div className="container mx-auto px-4 py-16">
-				<div className="space-y-16">
-					{/* Top Cities Section */}
-					<div>
-						<div className="flex items-center justify-between mb-8">
-							<h2 className="font-display text-3xl font-bold text-gray-900">Top cities</h2>
-							<Link
-								href="/city-to-city/routes"
-								className="inline-flex items-center gap-1 text-sm font-semibold text-gold-dark transition-colors duration-300 hover:text-gold"
-							>
-								See all <ArrowRight className="h-4 w-4" />
-							</Link>
-						</div>
-						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-							{topCities.map(city => (
-								<Link key={city.name} href={`/city-to-city/routes`}>
-									<Card className="overflow-hidden transition-transform duration-300 hover:scale-105">
+		<section className="section-padding bg-white">
+			<div className="section-container space-y-16">
+				{/* Top Cities */}
+				<div>
+					<FadeIn className="mb-8 flex items-center justify-between">
+						<h2 className="text-title text-foreground">Top cities</h2>
+						<Link
+							href="/city-to-city/routes"
+							className="inline-flex items-center gap-1 text-sm font-semibold text-gold-dark transition-colors hover:text-gold"
+						>
+							See all <ArrowRight className="h-4 w-4" />
+						</Link>
+					</FadeIn>
+					<StaggerChildren className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+						{topCities.map(city => (
+							<StaggerItem key={city.name}>
+								<Link href="/city-to-city/routes" className="group block">
+									<Card className="overflow-hidden border-border/60 transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
 										<CardContent className="p-0">
 											<div className="relative h-48">
-												<Image src={city.image} alt={`${city.name} cityscape`} fill className="object-cover" />
-												<div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+												<Image
+													src={city.image}
+													alt={`${city.name} cityscape`}
+													fill
+													className="object-cover transition-transform duration-500 group-hover:scale-105"
+												/>
+												<div className="absolute inset-0 bg-gradient-to-t from-ink/70 to-transparent" />
 												<div className="absolute bottom-4 left-4 text-white">
-													<h3 className="font-semibold text-lg">{city.name}</h3>
-													<p className="text-sm">{city.routeCount} routes</p>
+													<h3 className="font-display text-lg font-semibold">{city.name}</h3>
+													<p className="text-sm text-white/70">{city.routeCount} routes</p>
 												</div>
 											</div>
 										</CardContent>
 									</Card>
 								</Link>
-							))}
-						</div>
-					</div>
+							</StaggerItem>
+						))}
+					</StaggerChildren>
+				</div>
 
-					{/* Top Routes Section */}
-					<div>
-						<div className="flex items-center justify-between mb-8">
-							<h2 className="font-display text-3xl font-bold text-gray-900">Top routes</h2>
-							<Link
-								href="/city-to-city/routes"
-								className="inline-flex items-center gap-1 text-sm font-semibold text-gold-dark transition-colors duration-300 hover:text-gold"
-							>
-								See all <ArrowRight className="h-4 w-4" />
-							</Link>
-						</div>
-						<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-6 py-4">
-							{topRoutes.map(route => (
-								<Link key={`${route.from}-${route.to}`} href={`/city-to-city/routes`} className="block group">
-									<Card className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-white to-gray-50 shadow-lg border-2 border-gray-100 transition-transform duration-300 transform group-hover:scale-105">
-										<div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-indigo-100 to-transparent opacity-10 group-hover:opacity-20 transition-opacity duration-300"></div>
-
-										<CardContent className="relative z-10 p-6 flex flex-col items-start">
-											<div className="flex items-center mb-4">
-												<span className="text-lg font-semibold text-gray-900">{route.from}</span>
-												<ArrowRight className="mx-2 w-6 h-6 text-gray-400" />
-												<span className="text-lg font-semibold text-gray-900">{route.to}</span>
+				{/* Top Routes */}
+				<div>
+					<FadeIn className="mb-8 flex items-center justify-between">
+						<h2 className="text-title text-foreground">Top routes</h2>
+						<Link
+							href="/city-to-city/routes"
+							className="inline-flex items-center gap-1 text-sm font-semibold text-gold-dark transition-colors hover:text-gold"
+						>
+							See all <ArrowRight className="h-4 w-4" />
+						</Link>
+					</FadeIn>
+					<StaggerChildren className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+						{topRoutes.map(route => (
+							<StaggerItem key={`${route.from}-${route.to}`}>
+								<Link href="/city-to-city/routes" className="group block">
+									<Card className="border-border/60 transition-all duration-300 hover:-translate-y-1 hover:border-gold/30 hover:shadow-lift">
+										<CardContent className="p-5">
+											<div className="mb-3 flex items-center">
+												<span className="font-medium text-foreground">{route.from}</span>
+												<ArrowRight className="mx-2 h-4 w-4 text-muted-foreground" />
+												<span className="font-medium text-foreground">{route.to}</span>
 											</div>
-
-											<div className="text-sm text-gray-600 group-hover:text-gray-800 transition-colors duration-300">
+											<p className="text-sm text-muted-foreground">
 												{route.duration} · {route.distance}
-											</div>
+											</p>
 										</CardContent>
-										<div
-											className={`absolute top-0 right-0 w-16 h-16 rounded-bl-full ${STYLES.gray_white_gradient.color} ${STYLES.transition} opacity-50 group-hover:opacity-80`}
-										></div>
 									</Card>
 								</Link>
-							))}
-						</div>
-					</div>
+							</StaggerItem>
+						))}
+					</StaggerChildren>
+				</div>
 
-					{/* CTA Section */}
-					<Card className="relative overflow-hidden border-none bg-ink text-white">
+				{/* CTA */}
+				<FadeIn>
+					<Card className="relative overflow-hidden border-none bg-ink text-white shadow-lift">
 						<div className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-gold/10 blur-3xl" />
 						<CardContent className="relative flex flex-col items-center justify-between gap-6 p-8 md:flex-row md:p-10">
 							<div className="space-y-2 text-center md:text-left">
 								<h3 className="font-display text-2xl font-semibold md:text-3xl">Have a route in mind?</h3>
 								<p className="text-white/70">Enter your pickup and drop-off locations to see the price instantly.</p>
 							</div>
-
-							<Link href={'/services/city-city'}>
+							<Link href="/services/city-city">
 								<Button size="lg" variant="gradient" className="w-full px-8 md:w-auto">
 									Book a City-to-City ride
 								</Button>
 							</Link>
 						</CardContent>
 					</Card>
-				</div>
+				</FadeIn>
 			</div>
-		</div>
+		</section>
 	);
 }

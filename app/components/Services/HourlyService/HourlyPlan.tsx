@@ -40,16 +40,16 @@ export function HourlyPlan() {
                     <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
                         Hourly chauffeur service
                     </h2>
-                    <p className="text-lg text-gray-600 mb-8">
+                    <p className="text-body mb-8 text-muted-foreground">
                         Say goodbye to switching modes of transportation when you need to make journeys with multiple stops. No more waiting for different taxis at different locations, taking crowded public transport, or finding parking for your rental car.
                     </p>
                     <ul className="space-y-4">
                         {features.map((feature, index) => (
                             <li key={index} className="flex gap-2">
-                                <span className="w-1.5 h-1.5 bg-red-500 rounded-full mt-2.5 flex-shrink-0"></span>
+                                <span className="mt-2.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-gold"></span>
                                 <div>
                                     <span className="font-semibold">{feature.title}</span>{" "}
-                                    <span className="text-gray-600">{feature.description}</span>
+                                    <span className="text-muted-foreground">{feature.description}</span>
                                 </div>
                             </li>
                         ))}
@@ -108,13 +108,13 @@ const TravelOption = ({
         <div className="space-y-6">
             <div>
                 <h2 className="text-3xl font-semibold">{title}</h2>
-                <p className="text-xl text-gray-600">{duration} travel</p>
+                <p className="text-xl text-muted-foreground">{duration} travel</p>
             </div>
 
             <div className="grid grid-cols-[250px_1fr] gap-12 items-center min-h-[200px]">
                 <div className="space-y-6">
                     {type === "by-the-hour" ? (
-                        <div className="bg-gray-200 h-14 w-full rounded-md flex items-center justify-center">
+                        <div className="flex h-14 w-full items-center justify-center rounded-lg bg-surface">
                             <Car className="h-8 w-8 text-black" />
                         </div>
                     ) : null}
@@ -124,10 +124,10 @@ const TravelOption = ({
                     {stops.map((stop, index) => (
                         <div key={index} className="relative mb-24 last:mb-0">
                             <div className="flex items-start">
-                                <div className={`w-4 h-4 rounded-sm ${type === "by-the-hour" ? "bg-gray-800" : "bg-black"} mt-2`} />
+                                <div className={`mt-2 h-4 w-4 rounded-sm ${type === "by-the-hour" ? "bg-ink" : "bg-ink"}`} />
                                 <div className="ml-4">
                                     <div className="font-medium text-xl">{stop.label}</div>
-                                    {stop.subLabel && <div className="text-lg text-gray-600 mt-1">{stop.subLabel}</div>}
+                                    {stop.subLabel && <div className="mt-1 text-lg text-muted-foreground">{stop.subLabel}</div>}
                                     {stop.showTaxi && (
                                         <div className="mt-3 bg-yellow-400 h-10 w-20 rounded flex items-center justify-center">
                                             <Car className="h-6 w-6 text-black" />
@@ -137,11 +137,11 @@ const TravelOption = ({
                             </div>
                             {index < stops.length - 1 && (
                                 <div
-                                    className={`absolute left-2 top-6 w-0.5 h-24 ${type === "taxi" ? "bg-yellow-400" : "bg-gray-800"}`}
+                                    className={`absolute left-2 top-6 h-24 w-0.5 ${type === "taxi" ? "bg-gold/40" : "bg-ink"}`}
                                 />
                             )}
                             {index === 1 && type === "by-the-hour" && (
-                                <div className="absolute left-2 top-6 w-64 h-48 border-b-2 border-r-2 border-gray-800 rounded-br-[64px]" />
+                                <div className="absolute left-2 top-6 h-48 w-64 rounded-br-[64px] border-b-2 border-r-2 border-ink" />
                             )}
                         </div>
                     ))}

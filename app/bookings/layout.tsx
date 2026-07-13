@@ -70,7 +70,7 @@ function Layout({ children }: { children: ReactNode }) {
 		}
 
 		return true;
-	}
+	};
 
 	const handleNextStep = async () => {
 		const stepperForm = globalStateController.getValue('stepperForm');
@@ -80,7 +80,6 @@ function Layout({ children }: { children: ReactNode }) {
 			await sendEmail(stepperForm);
 		}
 
-
 		if (activeStep < STEPS.length - 1 && isStepValidated()) {
 			setActiveStep(prev => prev + 1);
 			router.push(STEPS[activeStep + 1].link);
@@ -88,18 +87,14 @@ function Layout({ children }: { children: ReactNode }) {
 	};
 
 	return (
-		<main className="container mx-auto my-4 px-4 py-8 max-w-3xl">
-			{/* Stepper */}
-			<Stepper steps={STEPS} activeStep={activeStep} setActiveStep={setActiveStep} />
-
-			<BookingDetails />
-
-			{/* Main Content (Children) */}
-			{children}
-
-			{/* Footer Actions */}
-			<BookingFooter onNextStep={handleNextStep} />
-		</main>
+		<div className="section-padding bg-surface">
+			<div className="section-container mx-auto max-w-3xl">
+				<Stepper steps={STEPS} activeStep={activeStep} setActiveStep={setActiveStep} />
+				<BookingDetails />
+				<div className="rounded-xl border border-border/60 bg-white p-6 shadow-soft md:p-8">{children}</div>
+				<BookingFooter onNextStep={handleNextStep} />
+			</div>
+		</div>
 	);
 }
 

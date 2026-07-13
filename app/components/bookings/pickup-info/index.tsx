@@ -15,21 +15,21 @@ export function PickupInfo() {
 	return (
 		<>
 			<div className="mt-8">
-				<h2 className="mb-6 font-display text-2xl font-semibold text-gray-900">Passenger Details</h2>
+				<h2 className="mb-6 font-display text-2xl font-semibold text-foreground">Passenger Details</h2>
 				<BookForSomeoneForm />
 			</div>
 
 			{/* Additional Information */}
 			<div className="mt-8">
-				<h2 className="mb-6 font-display text-2xl font-semibold text-gray-900">Provide additional information</h2>
-				<Card>
+				<h2 className="mb-6 font-display text-2xl font-semibold text-foreground">Provide additional information</h2>
+				<Card className="border-border/60 shadow-soft">
 					<CardContent className="space-y-6 pt-6">
 						{/* Flight Number */}
 						<div className="space-y-2">
 							<Label htmlFor="flight-number">Flight number</Label>
 							<Input
 								id="flight-number"
-								className="border-gray-300 bg-gray-50 focus-visible:ring-gold/40"
+								className="bg-surface"
 								placeholder="e.g. LH 202, U24567, BA2490"
 								value={pickUpInfo?.flightNumber}
 								onChange={e =>
@@ -55,7 +55,7 @@ export function PickupInfo() {
 							<Input
 								id="flight-arrival-time"
 								type="time"
-								className="border-gray-300 bg-gray-50 focus-visible:ring-gold/40"
+								className="bg-surface"
 								value={pickUpInfo?.flightArrivalTime}
 								onChange={(e) =>
 									globalStateController.updateState({
@@ -79,7 +79,7 @@ export function PickupInfo() {
 							<Label htmlFor="pickup-sign">Pickup sign</Label>
 							<Input
 								id="pickup-sign"
-								className="border-gray-300 bg-gray-50 focus-visible:ring-gold/40"
+								className="bg-surface"
 								value={pickUpInfo?.pickupSign}
 								onChange={e =>
 									globalStateController.updateState({
@@ -115,7 +115,7 @@ export function PickupInfo() {
 										},
 									})
 								}
-								className="min-h-[100px] resize-none border-gray-300 bg-gray-50 focus-visible:ring-gold/40"
+								className="min-h-[100px] resize-none bg-surface"
 							/>
 							<p className="text-sm text-muted-foreground">
 								Add special requests, e.g. booking itinerary, number of bags, child seats, etc. Please do not include
@@ -128,7 +128,7 @@ export function PickupInfo() {
 							<Label htmlFor="reference-code">Reference code or cost center</Label>
 							<Input
 								id="reference-code"
-								className="border-gray-300 bg-gray-50 focus-visible:ring-gold/40"
+								className="bg-surface"
 								value={pickUpInfo?.referenceCode}
 								onChange={e =>
 									globalStateController.updateState({
@@ -149,7 +149,7 @@ export function PickupInfo() {
 					</CardContent>
 				</Card>
 
-				<Card className="mt-8">
+				<Card className="mt-8 border-border/60 shadow-soft">
 					<CardContent className="space-y-6 pt-6">
 						<Notes notes={PICKUP_INFO_NOTES} />
 					</CardContent>

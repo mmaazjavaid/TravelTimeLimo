@@ -1,108 +1,88 @@
-import Image from "next/image"
-import Link from "next/link"
+import Image from 'next/image';
+import Link from 'next/link';
+import { FadeIn } from '@/components/ui/motion';
 
 export function BlogsSection() {
-    return (
-        <div className="w-full">
-            {/* Hero Section */}
-            <section className="w-full max-w-6xl mx-auto px-4 py-8">
-                <div className="grid lg:grid-cols-2 gap-8 items-center">
-                    <div className="space-y-6">
-                        <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
-                            Airport transfer in US cities
-                        </h1>
-                        <p className="text-lg text-gray-600">
-                            If you've just stepped off a plane, tired and aching from a long flight, there can be no better stress-reliever than a Travel time limo airport transfer direct to your destination. Travel time Limo transfers are available in{" "}
-                            <span className="underline decoration-2">hundreds of cities</span> and airports across the world, and for those who don't look forward to deciphering foreign public transport maps or haggling with local taxi companies, Travel time Limo offers a service that will take you to your destination directly from the airport.
-                        </p>
-                        <p className="text-lg text-gray-600">
-                            Wherever you go, our professional drivers can track your flight and adjust for any delays outside of your control. They're hand-picked and locally knowledgeable, so feel free to ask them for tips or advice on what to do during your stay.
-                        </p>
-                    </div>
-                    <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
-                        <Image
-                            src="/cab-203486_960_720.jpg"
-                            alt="Professional driver helping a passenger into a luxury vehicle"
-                            className="object-cover"
-                            fill
-                            priority
-                        />
-                    </div>
-                </div>
-            </section>
+	return (
+		<div className="w-full bg-surface">
+			<section className="section-container section-padding">
+				<FadeIn>
+					<div className="grid items-center gap-10 lg:grid-cols-2">
+						<div className="space-y-5">
+							<h2 className="text-title text-foreground">Airport transfer in US cities</h2>
+							<p className="text-body text-muted-foreground">
+								If you&apos;ve just stepped off a plane, tired and aching from a long flight, there can be no better
+								stress-reliever than a Travel Time Limo airport transfer direct to your destination. Travel Time Limo
+								transfers are available in{' '}
+								<span className="font-medium text-foreground underline decoration-gold/50">hundreds of cities</span>{' '}
+								and airports across the world.
+							</p>
+							<p className="text-body text-muted-foreground">
+								Wherever you go, our professional drivers can track your flight and adjust for any delays outside of your
+								control. They&apos;re hand-picked and locally knowledgeable, so feel free to ask them for tips or advice.
+							</p>
+						</div>
+						<div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-lift">
+							<Image
+								src="/cab-203486_960_720.jpg"
+								alt="Professional driver helping a passenger into a luxury vehicle"
+								className="object-cover"
+								fill
+								priority
+							/>
+						</div>
+					</div>
+				</FadeIn>
+			</section>
 
-            {/* Airport Service Section */}
-            <section className="w-full max-w-6xl mx-auto px-4 py-8">
-                <div className="grid lg:grid-cols-2 gap-8 items-center">
-                    <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
-                        <Image
-                            src="/taxiapp.avif"
-                            alt="Chauffeur loading luggage into a luxury car"
-                            className="object-cover"
-                            fill
-                        />
-                    </div>
-                    <div className="space-y-6">
-                        <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
-                            Get to or from the airport
-                        </h2>
-                        <div className="space-y-4">
-                            <p className="text-lg text-gray-600">
-                                <Link href="#" className="underline decoration-2 font-medium">
-                                    A Travel time Limo chauffeur service
-                                </Link>{" "}
-                                aims to achieve the very highest possible standards possible for all its passengers. Whether you're stepping out of{" "}
-                                <Link href="#" className="underline decoration-2 font-medium">
-                                    LAX in California
-                                </Link>{" "}
-                                on business or you need to be dropped off at{" "}
-                                <Link href="#" className="underline decoration-2 font-medium">
-                                    Bangkok International Airport
-                                </Link>{" "}
-                                after a holiday in Thailand, Travel time Limo will get you there relaxed, recharged and ready with an airport pick up or transfer taxi service.
-                            </p>
-                            <p className="text-lg text-gray-600">
-                                Traveling from airports to your hotel with family or colleagues? A Travel time Limo Business Van can be shared by up to five people together, with plenty of room for luggage. For those after that little bit extra, consider our First Class service for the epitome of style and comfort - a great idea for special occasions.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+			<section className="section-container section-padding pt-0">
+				<FadeIn>
+					<div className="grid items-center gap-10 lg:grid-cols-2">
+						<div className="relative order-2 aspect-[4/3] overflow-hidden rounded-2xl shadow-lift lg:order-1">
+							<Image src="/taxiapp.avif" alt="Chauffeur loading luggage into a luxury car" className="object-cover" fill />
+						</div>
+						<div className="order-1 space-y-5 lg:order-2">
+							<h2 className="text-title text-foreground">Get to or from the airport</h2>
+							<p className="text-body text-muted-foreground">
+								<Link href="#" className="font-medium text-gold-dark underline-offset-4 hover:underline">
+									A Travel Time Limo chauffeur service
+								</Link>{' '}
+								aims to achieve the very highest possible standards for all its passengers. Whether you&apos;re stepping out
+								of LAX in California on business or need a drop-off at Bangkok International Airport, Travel Time Limo
+								will get you there relaxed and ready.
+							</p>
+							<p className="text-body text-muted-foreground">
+								Traveling with family or colleagues? A Travel Time Limo Business Van can be shared by up to five people
+								together, with plenty of room for luggage.
+							</p>
+						</div>
+					</div>
+				</FadeIn>
+			</section>
 
-            {/* Booking Section */}
-            <section className="w-full max-w-6xl mx-auto px-4 py-8">
-                <div className="grid lg:grid-cols-2 gap-8 items-center">
-                    <div className="space-y-6">
-                        <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
-                            Airport shuttle booking
-                        </h2>
-                        <div className="space-y-4">
-                            <p className="text-lg text-gray-600">
-                                The booking of{" "}
-                                <Link href="#" className="underline decoration-2 font-medium">
-                                    Travel time Limo's limousine service
-                                </Link>{" "}
-                                is easy and requires just a few seconds. You can reserve your airport transfer in a city of your choice using the accessible Travel time Limo website, or use the smartphone app for Apple and Android devices.
-                            </p>
-                            <p className="text-lg text-gray-600">
-                                The necessary steps are simple: just provide the pickup and destination data and select your shuttle's vehicle class. After you've confirmed the calculated fare and payment details, you will receive an email of confirmation shortly afterwards.
-                            </p>
-                            <p className="text-lg text-gray-600">
-                                Travel time Limo prides itself on transparency, which is why you won't receive any hidden fees when you book with us and the price you see is the price you pay - a great way to kick off your journey.
-                            </p>
-                        </div>
-                    </div>
-                    <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
-                        <Image
-                            src="/03_Shuttle.webp"
-                            alt="Passengers waiting by a luxury vehicle"
-                            className="object-cover"
-                            fill
-                        />
-                    </div>
-                </div>
-            </section>
-        </div>
-    )
+			<section className="section-container section-padding pt-0">
+				<FadeIn>
+					<div className="grid items-center gap-10 lg:grid-cols-2">
+						<div className="space-y-5">
+							<h2 className="text-title text-foreground">Airport shuttle booking</h2>
+							<p className="text-body text-muted-foreground">
+								The booking of{' '}
+								<Link href="#" className="font-medium text-gold-dark underline-offset-4 hover:underline">
+									Travel Time Limo&apos;s limousine service
+								</Link>{' '}
+								is easy and requires just a few seconds. Provide pickup and destination data, select your vehicle class,
+								and confirm.
+							</p>
+							<p className="text-body text-muted-foreground">
+								Travel Time Limo prides itself on transparency — the price you see is the price you pay.
+							</p>
+						</div>
+						<div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-lift">
+							<Image src="/03_Shuttle.webp" alt="Passengers waiting by a luxury vehicle" className="object-cover" fill />
+						</div>
+					</div>
+				</FadeIn>
+			</section>
+		</div>
+	);
 }
-

@@ -1,4 +1,5 @@
 import { Geist, Geist_Mono, Playfair_Display } from 'next/font/google';
+import 'react-toastify/dist/ReactToastify.css';
 import './globals.css';
 import { Navbar } from './components/navbar';
 import { Footer } from './components/footer';
@@ -29,12 +30,22 @@ export default function RootLayout({ children }) {
 	return (
 		<html lang="en">
 			<body className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} antialiased`}>
+				<a href="#main-content" className="skip-link">
+					Skip to main content
+				</a>
 				<Navbar />
-				<ToastContainer position="top-right" theme="dark" />
-
-				{/* Scrollable Content */}
-				<div className="overflow-y-auto pt-20">{children}</div>
-
+				<ToastContainer
+					position="top-right"
+					theme="dark"
+					autoClose={4000}
+					hideProgressBar={false}
+					newestOnTop
+					closeOnClick
+					pauseOnHover
+				/>
+				<main id="main-content" className="min-h-screen overflow-y-auto pt-[4.5rem]">
+					{children}
+				</main>
 				<Footer />
 			</body>
 		</html>

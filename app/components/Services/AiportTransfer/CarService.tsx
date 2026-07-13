@@ -54,8 +54,8 @@ export default function CarService() {
     }, [api])
 
     return (
-        <div className="w-full max-w-6xl mx-auto px-4 py-8">
-            <h1 className="text-4xl font-bold mb-8">Discover our service classes</h1>
+        <div className="section-container section-padding">
+            <h1 className="text-title mb-8 text-foreground">Discover our service classes</h1>
             <Carousel
                 setApi={setApi}
                 className="w-full overflow-visible"
@@ -67,8 +67,8 @@ export default function CarService() {
                 <CarouselContent>
                     {services.map((service, index) => (
                         <CarouselItem key={index} className="md:basis-[45%] lg:basis-[45%] pl-4">
-                            <Card className="border rounded-2xl overflow-hidden h-full flex flex-col">
-                                <div className="relative bg-gray-200 aspect-[4/3]">
+                            <Card className="flex h-full flex-col overflow-hidden rounded-2xl border-border/60 shadow-soft">
+                                <div className="relative aspect-[4/3] bg-surface">
                                     {/* Car Image */}
                                     <img
                                         src={service.image}
@@ -80,16 +80,15 @@ export default function CarService() {
                                         {[1, 2, 3].map((dot) => (
                                             <div
                                                 key={dot}
-                                                className={`w-2 h-2 rounded-full ${dot === 1 ? "bg-red-500" : "bg-white"
-                                                    }`}
+                                                className={`h-2 w-2 rounded-full ${dot === 1 ? 'bg-gold' : 'bg-white/60'}`}
                                             />
                                         ))}
                                     </div>
                                 </div>
                                 <CardContent className="p-6 flex flex-col flex-grow">
-                                    <h2 className="text-2xl font-bold mb-2">{service.title}</h2>
-                                    <p className="text-gray-600 mb-4">{service.description}</p>
-                                    <div className="h-0.5 w-12 bg-red-500 mb-4" />
+                                    <h2 className="mb-2 font-display text-2xl font-semibold">{service.title}</h2>
+                                    <p className="mb-4 text-muted-foreground">{service.description}</p>
+                                    <div className="mb-4 h-0.5 w-12 bg-gold" />
                                     <ul className="space-y-3 flex-grow">
                                         {service.features.map((feature, index) => (
                                             <li key={index} className="flex items-start gap-2">
@@ -109,7 +108,7 @@ export default function CarService() {
             <div className="flex items-center justify-center gap-2 mt-8">
                 <button
                     onClick={() => api?.scrollTo(0)}
-                    className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200"
+                    className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary transition-colors hover:bg-gold/20"
                 >
                     {"←"}
                 </button>
@@ -117,15 +116,14 @@ export default function CarService() {
                     <button
                         key={num}
                         onClick={() => api?.scrollTo(num - 1)}
-                        className={`w-8 h-8 flex items-center justify-center rounded-full ${current === num ? "bg-black text-white" : "bg-gray-200"
-                            }`}
+                        className={`flex h-8 w-8 items-center justify-center rounded-full transition-colors ${current === num ? 'bg-ink text-white' : 'bg-secondary hover:bg-gold/20'}`}
                     >
                         {num}
                     </button>
                 ))}
                 <button
                     onClick={() => api?.scrollTo(3)}
-                    className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200"
+                    className="flex h-8 w-8 items-center justify-center rounded-full bg-secondary transition-colors hover:bg-gold/20"
                 >
                     {"→"}
                 </button>

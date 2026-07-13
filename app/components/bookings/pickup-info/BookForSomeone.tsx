@@ -27,7 +27,7 @@ export function BookForSomeoneForm() {
 	const passengerInfo = stepperValues?.stepperForm?.passengerInfo;
 
 	return (
-		<Card className="pt-6">
+		<Card className="border-border/60 pt-6 shadow-soft">
 			<CardContent>
 				<div className="space-y-2">
 					<Label>
@@ -48,7 +48,7 @@ export function BookForSomeoneForm() {
 							})
 						}
 						placeholder="Select title"
-						className="bg-gray-200"
+						className="bg-surface"
 					/>
 				</div>
 
@@ -60,7 +60,7 @@ export function BookForSomeoneForm() {
 						<Input
 							id="firstName"
 							placeholder="First name"
-							className="bg-gray-200"
+							className="bg-surface"
 							value={passengerInfo?.firstName}
 							onChange={e =>
 								globalStateController.updateState({
@@ -82,7 +82,7 @@ export function BookForSomeoneForm() {
 						<Input
 							id="lastName"
 							placeholder="Last name"
-							className="bg-gray-200"
+							className="bg-surface"
 							value={passengerInfo?.lastName}
 							onChange={e =>
 								globalStateController.updateState({
@@ -107,7 +107,7 @@ export function BookForSomeoneForm() {
 						id="email"
 						type="email"
 						placeholder="Email"
-						className="bg-gray-200"
+						className="bg-surface"
 						value={passengerInfo?.email}
 						onChange={e =>
 							globalStateController.updateState({
@@ -131,7 +131,7 @@ export function BookForSomeoneForm() {
 						<div className="relative">
 							<select
 								className={cn(
-									'h-9 rounded-l-md border border-r-0 bg-gray-200 px-3 py-1 text-sm',
+									'h-11 rounded-l-lg border border-r-0 bg-surface px-3 py-1 text-sm',
 									'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring'
 								)}
 								value={country.code}
@@ -150,7 +150,7 @@ export function BookForSomeoneForm() {
 						<Input
 							id="phone"
 							type="tel"
-							className="rounded-l-none bg-gray-200"
+							className="rounded-l-none bg-surface"
 							placeholder="Phone number"
 							value={passengerInfo?.phoneNumber}
 							onChange={e =>

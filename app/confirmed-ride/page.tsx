@@ -5,11 +5,15 @@ import { motion } from 'framer-motion';
 import { CheckCircle, ArrowLeft, Calendar, Clock, MapPin } from 'lucide-react';
 import { globalStateController } from '@/state/global/globalStateController';
 import { useEffect, useRef } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { ScaleIn } from '@/components/ui/motion';
 
 export default function ThankYouPage() {
 	const shouldRedirect = useRef(true);
 	const { stepperValues } = globalStateController.useState(['stepperForm'], 'stepperValues');
 	const bookingInfo = stepperValues?.stepperForm?.bookingInfo;
+
 	useEffect(() => {
 		return () => {
 			if (shouldRedirect.current) {
@@ -20,64 +24,65 @@ export default function ThankYouPage() {
 			}
 		};
 	}, []);
+
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center p-4">
-			<motion.div
-				initial={{ opacity: 0, y: 20 }}
-				animate={{ opacity: 1, y: 0 }}
-				transition={{ duration: 0.5 }}
-				className="bg-white rounded-lg shadow-xl p-8 max-w-md w-full"
-			>
-				<motion.div
-					initial={{ scale: 0 }}
-					animate={{ scale: 1 }}
-					transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
-					className="flex justify-center mb-6"
-				>
-					<CheckCircle className="text-green-500 w-16 h-16" />
-				</motion.div>
+		<div className="flex min-h-[calc(100vh-4.5rem)] items-center justify-center bg-surface p-4">
+			<ScaleIn className="w-full max-w-md">
+				<Card className="border-border/60 shadow-lift">
+					<CardContent className="p-8 text-center">
+						<motion.div
+							initial={{ scale: 0 }}
+							animate={{ scale: 1 }}
+							transition={{ delay: 0.15, type: 'spring', stiffness: 200 }}
+							className="mb-6 flex justify-center"
+						>
+							<div className="rounded-full bg-success/10 p-3">
+								<CheckCircle className="h-12 w-12 text-success" />
+							</div>
+						</motion.div>
 
-				<h1 className="text-3xl font-bold text-center text-gray-800 mb-4">Thank You!</h1>
-				<p className="text-center text-gray-600 mb-6">
-					Your ride has been successfully reserved. We look forward to serving you!
-				</p>
+						<h1 className="font-display text-3xl font-bold text-foreground">Thank You!</h1>
+						<p className="mt-3 text-muted-foreground">
+							Your ride has been successfully reserved. We look forward to serving you!
+						</p>
 
-				<div className="space-y-4 mb-8">
-					<div className="flex items-center">
-						<Calendar className="text-blue-500 w-5 h-5 mr-2 flex-shrink-0" />
-						<span className="text-gray-700">Date: {bookingInfo?.date}</span>
-					</div>
-					<div className="flex items-center">
-						<Clock className="text-blue-500 w-5 h-5 mr-2 flex-shrink-0" />
-						<span className="text-gray-700">Time: {bookingInfo?.time}</span>
-					</div>
-					<div className="flex items-center">
-						<MapPin className="text-blue-500 w-5 h-5 mr-2 flex-shrink-0" />
-						<span className="text-gray-700">Pick Up: {bookingInfo?.from}</span>
-					</div>
-					{bookingInfo?.to && (
-						<div className="flex items-center">
-							<MapPin className="text-blue-500 w-5 h-5 mr-2 flex-shrink-0" />
-							<span className="text-gray-700">Destination: {bookingInfo?.to}</span>
+						<div className="mt-8 space-y-3 rounded-xl bg-surface p-5 text-left">
+							<div className="flex items-center gap-3">
+								<Calendar className="h-4 w-4 shrink-0 text-gold" />
+								<span className="text-sm text-foreground">Date: {bookingInfo?.date}</span>
+							</div>
+							<div className="flex items-center gap-3">
+								<Clock className="h-4 w-4 shrink-0 text-gold" />
+								<span className="text-sm text-foreground">Time: {bookingInfo?.time}</span>
+							</div>
+							<div className="flex items-center gap-3">
+								<MapPin className="h-4 w-4 shrink-0 text-gold" />
+								<span className="text-sm text-foreground">Pick Up: {bookingInfo?.from}</span>
+							</div>
+							{bookingInfo?.to && (
+								<div className="flex items-center gap-3">
+									<MapPin className="h-4 w-4 shrink-0 text-gold" />
+									<span className="text-sm text-foreground">Destination: {bookingInfo?.to}</span>
+								</div>
+							)}
 						</div>
-					)}
-				</div>
 
-				<div className="text-center">
-					<Link
-						onClick={() => {
-							setTimeout(() => {
-								globalStateController.reset();
-							}, 2000);
-						}}
-						href="/"
-						className="inline-flex items-center px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300"
-					>
-						<ArrowLeft className="w-4 h-4 mr-2" />
-						Back to Home
-					</Link>
-				</div>
-			</motion.div>
+						<Button variant="gradient" size="lg" className="mt-8 w-full" asChild>
+							<Link
+								onClick={() => {
+									setTimeout(() => {
+										globalStateController.reset();
+									}, 2000);
+								}}
+								href="/"
+							>
+								<ArrowLeft className="mr-2 h-4 w-4" />
+								Back to Home
+							</Link>
+						</Button>
+					</CardContent>
+				</Card>
+			</ScaleIn>
 		</div>
 	);
 }

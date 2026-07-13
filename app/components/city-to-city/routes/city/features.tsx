@@ -1,42 +1,45 @@
 import { Globe, User, MapPin } from 'lucide-react';
+import { StaggerChildren, StaggerItem } from '@/components/ui/motion';
+
+const features = [
+	{
+		icon: User,
+		title: 'Professional chauffeurs',
+		description:
+			'Travel confidently with expert chauffeurs delivering industry-leading quality, reliability, discretion, and more.',
+	},
+	{
+		icon: MapPin,
+		title: 'Door-to-door convenience',
+		description:
+			'Rest easy with door-to-door pickup and drop-off: no waiting in lines or change of transportation needed.',
+	},
+	{
+		icon: Globe,
+		title: 'Global quality, local experts',
+		description:
+			'Enjoy world class luxury and professionalism alongside local knowledge. Your chauffeur is here to help you make the most of your journey.',
+	},
+];
 
 export function Features() {
 	return (
-		<section className="py-20">
-			<div className="container mx-auto px-4">
-				<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-					<div className="flex flex-col items-center text-center space-y-4">
-						<div className="mb-6 p-6 bg-[#f5f5f5] rounded-full">
-							<User className="w-8 h-8 text-black" />
-						</div>
-						<h3 className="text-xl font-bold text-black">Professional chauffeurs</h3>
-						<p className="text-gray-600 max-w-[300px] leading-relaxed">
-							Travel confidently with expert chauffeurs delivering industry-leading quality, reliability, discretion,
-							and more.
-						</p>
-					</div>
-					<div className="flex flex-col items-center text-center space-y-4">
-						<div className="mb-6 p-6 bg-[#f5f5f5] rounded-full">
-							<MapPin className="w-8 h-8 text-black" />
-						</div>
-						<h3 className="text-xl font-bold text-black">Door-to-door convenience</h3>
-						<p className="text-gray-600 max-w-[300px] leading-relaxed">
-							Rest easy with door-to-door pickup and drop-off: no waiting in lines or change of transportation needed.
-						</p>
-					</div>
-					<div className="flex flex-col items-center text-center space-y-4">
-						<div className="mb-6 p-6 bg-[#f5f5f5] rounded-full">
-							<Globe className="w-8 h-8 text-black" />
-						</div>
-						<h3 className="text-xl font-bold text-black">Global quality, local experts</h3>
-						<p className="text-gray-600 max-w-[300px] leading-relaxed">
-							Enjoy world class luxury and professionalism alongside local knowledge. Your chauffeur is here to help you
-							make the most of your journey.
-						</p>
-					</div>
-				</div>
+		<section className="section-padding bg-white">
+			<div className="section-container">
+				<StaggerChildren className="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
+					{features.map(feature => (
+						<StaggerItem key={feature.title}>
+							<div className="flex flex-col items-center space-y-4 text-center">
+								<div className="mb-4 rounded-2xl border border-gold/20 bg-gold/10 p-5">
+									<feature.icon className="h-8 w-8 text-gold-dark" strokeWidth={1.5} />
+								</div>
+								<h3 className="font-display text-xl font-semibold text-foreground">{feature.title}</h3>
+								<p className="max-w-[300px] leading-relaxed text-muted-foreground">{feature.description}</p>
+							</div>
+						</StaggerItem>
+					))}
+				</StaggerChildren>
 			</div>
 		</section>
 	);
 }
-

@@ -89,10 +89,10 @@ export function PaymentInfo() {
 
 	return (
 		<div>
-			<h1 className="mb-8 font-display text-2xl font-semibold text-gray-900">Add credit card</h1>
+			<h1 className="mb-8 font-display text-2xl font-semibold text-foreground">Add credit card</h1>
 
 			<form onSubmit={handleSubmit}>
-				<Card className="mb-6 p-6">
+				<Card className="mb-6 border-border/60 p-6 shadow-soft">
 					<div className="space-y-6">
 						<div className="space-y-2">
 							<Label>
@@ -111,7 +111,7 @@ export function PaymentInfo() {
 										},
 									})
 								}
-								className="border-gray-300 bg-gray-50 focus-visible:ring-gold/40"
+								className="bg-surface"
 								required
 							/>
 						</div>
@@ -135,7 +135,7 @@ export function PaymentInfo() {
 											},
 										})
 									}
-									className="border-gray-300 bg-gray-50 focus-visible:ring-gold/40"
+									className="bg-surface"
 									maxLength={19}
 									required
 								/>
@@ -167,7 +167,7 @@ export function PaymentInfo() {
 											},
 										})
 									}
-									className="border-gray-300 bg-gray-50 focus-visible:ring-gold/40"
+									className="bg-surface"
 									maxLength={5}
 									required
 								/>
@@ -191,7 +191,7 @@ export function PaymentInfo() {
 											},
 										})
 									}
-									className="border-gray-300 bg-gray-50 focus-visible:ring-gold/40"
+									className="bg-surface"
 									maxLength={4}
 									required
 								/>
@@ -216,7 +216,7 @@ export function PaymentInfo() {
 										},
 									})
 								}
-								className="border-gray-300 bg-gray-50 focus-visible:ring-gold/40"
+								className="bg-surface"
 								required
 							/>
 						</div>
@@ -239,7 +239,7 @@ export function PaymentInfo() {
 											},
 										})
 									}
-									className="border-gray-300 bg-gray-50 focus-visible:ring-gold/40"
+									className="bg-surface"
 									required
 								/>
 							</div>
@@ -261,7 +261,7 @@ export function PaymentInfo() {
 										})
 									}
 								>
-									<SelectTrigger className="border-gray-300 bg-gray-50 focus-visible:ring-gold/40">
+									<SelectTrigger className="bg-surface">
 										<SelectValue placeholder="Select state" />
 									</SelectTrigger>
 									<SelectContent>
@@ -290,7 +290,7 @@ export function PaymentInfo() {
 											},
 										})
 									}
-									className="border-gray-300 bg-gray-50 focus-visible:ring-gold/40"
+									className="bg-surface"
 									maxLength={10}
 									required
 								/>
@@ -300,7 +300,7 @@ export function PaymentInfo() {
 				</Card>
 			</form>
 
-			<Card className="mt-8">
+			<Card className="mt-8 border-border/60 shadow-soft">
 				<CardContent className="space-y-6 pt-6">
 					<Notes notes={PAYMENT_NOTES} />
 				</CardContent>

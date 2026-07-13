@@ -2,73 +2,77 @@
 
 import Link from 'next/link';
 import { StepperProps } from '@/types/bookings';
+import { Check } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 export const Stepper: React.FC<StepperProps> = ({ steps, activeStep, setActiveStep }) => {
 	return (
-		<div className="w-full py-4 md:py-6 px-2 md:px-0">
+		<div className="w-full px-2 py-6 md:px-0">
 			<div className="relative flex justify-between">
-				{/* Line connecting the steps */}
 				<div
-					className="absolute top-[11px] left-[6%] right-[6%] h-[3px] bg-gray-200 md:right-[7%]"
+					className="absolute left-[8%] right-[8%] top-3 h-0.5 bg-border md:left-[10%] md:right-[10%]"
 					aria-hidden="true"
-				/>
+				>
+					<div
+						className="h-full bg-gold transition-all duration-500 ease-expo-out"
+						style={{ width: `${(activeStep / (steps.length - 1)) * 100}%` }}
+					/>
+				</div>
 
-				{/* Steps */}
-				{steps.map((step, index) => (
-					<div key={index} className="relative flex flex-col items-center group">
-						{/* Circle */}
-						<div
-							className={`w-[22px] h-[22px] rounded-full z-10 border-2 transition-colors duration-300
-                ${
-									index < activeStep
-										? 'bg-gold border-gold'
-										: index === activeStep
-										? 'border-gold bg-gold/20 ring-4 ring-gold/15'
-										: 'border-gray-300 bg-gray-100'
-								}`}
-						/>
+				{steps.map((step, index) => {
+					const isComplete = index < activeStep;
+					const isActive = index === activeStep;
+					const isUpcoming = index > activeStep;
 
-						{/* Label - Link */}
-						<Link href={step.link}>
-							<span
-								onClick={e => {
-									// Prevent navigation if the step is not active
-									if (index > activeStep) {
-										e.preventDefault();
-									} else setActiveStep(index);
+					return (
+						<div key={index} className="relative flex flex-col items-center">
+							<button
+								type="button"
+								onClick={() => {
+									if (!isUpcoming) setActiveStep(index);
 								}}
-								className={`hidden md:block mt-2 text-sm rounded-full px-3 py-1 whitespace-nowrap transition-all duration-300 ease-in-out
-                ${
-									index === activeStep
-										? 'text-ink font-semibold'
-										: index < activeStep
-										? 'text-gold-dark font-medium'
-										: 'text-gray-400 pointer-events-none'
-								}`}
+								disabled={isUpcoming}
+								className={cn(
+									'z-10 flex h-6 w-6 items-center justify-center rounded-full border-2 transition-all duration-300',
+									isComplete && 'border-gold bg-gold text-ink',
+									isActive && 'border-gold bg-gold/15 ring-4 ring-gold/15',
+									isUpcoming && 'border-border bg-muted cursor-not-allowed'
+								)}
+								aria-current={isActive ? 'step' : undefined}
+							>
+								{isComplete && <Check className="h-3.5 w-3.5" strokeWidth={3} />}
+								{isActive && <span className="h-2 w-2 rounded-full bg-gold" />}
+							</button>
+
+							<Link
+								href={step.link}
+								onClick={e => {
+									if (isUpcoming) e.preventDefault();
+									else setActiveStep(index);
+								}}
+								className={cn(
+									'mt-2 hidden rounded-lg px-3 py-1 text-sm transition-all md:block',
+									isActive && 'font-semibold text-foreground',
+									isComplete && 'font-medium text-gold-dark hover:text-gold',
+									isUpcoming && 'pointer-events-none text-muted-foreground'
+								)}
+							>
+								{step.label}
+							</Link>
+
+							<span
+								className={cn(
+									'mt-2 text-xs md:hidden',
+									isActive && 'font-semibold text-foreground',
+									isComplete && 'text-gold-dark',
+									isUpcoming && 'text-muted-foreground'
+								)}
 							>
 								{step.label}
 							</span>
-						</Link>
-
-						{/* Mobile Tooltip */}
-						<Link href={step.link}>
-							<span
-								onClick={e => {
-									// Prevent navigation if the step is not active
-									if (index > activeStep) {
-										e.preventDefault();
-									} else setActiveStep(index);
-								}}
-								className={`absolute top-[calc(100%+4px)] left-1/2 -translate-x-1/2 
-                md:hidden opacity-0 group-hover:opacity-100 transition-opacity
-                bg-gray-900 text-white text-xs rounded-md py-1 px-2 whitespace-nowrap
-                ${index <= activeStep ? 'block' : 'hidden'}`}
-							>
-								{step.label}
-							</span>
-						</Link>
-					</div>
-				))}
+						</div>
+					);
+				})}
 			</div>
 		</div>
 	);
