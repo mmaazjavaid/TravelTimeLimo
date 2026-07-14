@@ -20,7 +20,7 @@ export function PickupInfo() {
 				<BookForSomeoneForm />
 			</div>
 
-			{/* Additional Information */}
+			{/* Additional Information — entirely optional */}
 			<div className="mt-8">
 				<h2 className="mb-6 font-display text-2xl font-semibold text-foreground">Provide additional information</h2>
 				<Card className="border-border/60 shadow-soft">

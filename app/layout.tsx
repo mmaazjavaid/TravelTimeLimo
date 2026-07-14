@@ -4,6 +4,7 @@ import './globals.css';
 import { Navbar } from './components/navbar';
 import { Footer } from './components/footer';
 import { ToastContainer } from 'react-toastify';
+import { BookingStatePersistence } from './state/global/BookingStatePersistence';
 
 const manrope = Manrope({
 	variable: '--font-sans',
@@ -31,6 +32,7 @@ export default function RootLayout({ children }) {
 					Skip to main content
 				</a>
 				<Navbar />
+				<BookingStatePersistence />
 				<ToastContainer
 					position="top-right"
 					theme="dark"

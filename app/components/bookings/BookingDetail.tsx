@@ -8,21 +8,31 @@ const BookingDetails: React.FC = () => {
 	const { bookingInfo, routeInfo } = stepperValues?.stepperForm;
 
 	useEffect(() => {
-		const date = new Date(bookingInfo?.date);
-		const formattedDate = date.toLocaleDateString('en-US', {
-			weekday: 'short',
-			month: 'short',
-			day: '2-digit',
-			year: 'numeric',
-		});
-
-		setBookingDate(formattedDate);
+		if (!bookingInfo?.date) {
+			setBookingDate('');
+			return;
+		}
+		const date = new Date(bookingInfo.date);
+		if (Number.isNaN(date.getTime())) {
+			setBookingDate('');
+			return;
+		}
+		setBookingDate(
+			date.toLocaleDateString('en-US', {
+				weekday: 'short',
+				month: 'short',
+				day: '2-digit',
+				year: 'numeric',
+			})
+		);
 	}, [bookingInfo?.date]);
 
 	return (
 		<aside className="sticky top-24 mb-8 rounded-xl border border-gold/25 bg-ink p-6 text-white shadow-lift">
 			<p className="text-label text-gold">Trip Summary</p>
-			<h2 className="mt-2 font-display text-xl font-semibold text-white">{bookingDate || bookingInfo?.date}</h2>
+			<h2 className="mt-2 font-display text-xl font-semibold text-white">
+				{bookingDate || <span className="text-white/50">Select a date</span>}
+			</h2>
 
 			{bookingInfo?.from && (
 				<div className="mt-4 border-t border-white/10 pt-4">

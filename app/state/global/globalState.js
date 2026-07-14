@@ -1,6 +1,13 @@
 import { hookstate } from '@hookstate/core';
 import { cloneDeep } from 'lodash';
 
+// Booking-in-progress data is restored from sessionStorage after mount (see
+// BookingStatePersistence) so a page refresh mid-booking doesn't wipe
+// everything the customer already entered — that was the direct cause of the
+// "Invalid Date" trip summary on refresh: bookingInfo.date reset to '' and
+// got formatted as `new Date('')`.
+export const BOOKING_STATE_STORAGE_KEY = 'ttl-booking-state-v1';
+
 export const globalInitialState = {
 	stepperForm: {
 		bookingInfo: {
@@ -19,28 +26,33 @@ export const globalInitialState = {
 			tax: 17.59,
 		},
 		passengerInfo: {
-			title: null,
-			firstName: null,
-			lastName: null,
-			email: null,
-			phoneNumber: null,
+			// Controlled <Input>/<Select> components need a defined value
+			// (string) from the very first render — `null` here caused React's
+			// "`value` prop on `input` should not be null" warning (and, after
+			// a refresh restores this exact shape via BookingStatePersistence,
+			// a full dev-mode error overlay) as soon as any of these mounted.
+			title: '',
+			firstName: '',
+			lastName: '',
+			email: '',
+			phoneNumber: '',
 		},
 		pickUpInfo: {
-			flightNumber: null,
-			flightArrivalTime: null,
-			pickupSign: null,
+			flightNumber: '',
+			flightArrivalTime: '',
+			pickupSign: '',
 			notes: '',
 			referenceCode: '',
 		},
 		paymentInfo: {
-			nameOnCard: null,
-			cardNumber: null,
-			expirationDate: null,
-			cvv: null,
-			city: null,
-			zip: null,
-			state: null,
-			billingAddress: null,
+			nameOnCard: '',
+			cardNumber: '',
+			expirationDate: '',
+			cvv: '',
+			city: '',
+			zip: '',
+			state: '',
+			billingAddress: '',
 			saveCard: false,
 		},
 		routeInfo: {
@@ -51,6 +63,10 @@ export const globalInitialState = {
 		},
 		isTermsAgreed: false,
 	},
+	// Flips true when "Continue" is clicked with required fields still empty,
+	// so the form components know to render inline field errors. Reset to
+	// false as soon as the step actually validates or the user moves on.
+	showValidationErrors: false,
 };
 
 export const globalState = hookstate(cloneDeep(globalInitialState));

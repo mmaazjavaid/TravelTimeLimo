@@ -1,6 +1,7 @@
 'use client';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { toast } from 'react-toastify';
 import { STEPS } from '@/lib/constants';
 import BookingDetails from '@/components/bookings/BookingDetail';
 import { useRouter, usePathname } from 'next/navigation';
@@ -53,41 +54,64 @@ function Layout({ children }: { children: ReactNode }) {
 		}
 	};
 
-	const isStepValidated = () => {
+	// Reset any error highlighting left over from a previous step as soon as
+	// the user actually lands on a new one, so it doesn't look like the fresh
+	// step already failed validation.
+	useEffect(() => {
+		globalStateController.updateState({ showValidationErrors: false });
+	}, [pathname]);
+
+	const getMissingFields = (): string[] => {
 		const stepperForm = globalStateController.getValue('stepperForm');
+		const missing: string[] = [];
+
 		if (STEPS[activeStep].label === 'Pickup Info') {
-			const { passengerInfo, pickUpInfo } = stepperForm;
-			const { title, firstName, lastName, email, phoneNumber } = passengerInfo;
-
-			if (stepperForm?.isAirport) {
-				const { flightNumber, pickupSign, flightArrivalTime } = pickUpInfo;
-				if (!flightNumber || !pickupSign || !flightArrivalTime) return false;
-			}
-
-			if (title && firstName && lastName && email && phoneNumber) return true;
-			return false;
+			// "Provide additional information" (flight number/arrival time, pickup
+			// sign, notes, reference code) is genuinely optional — chauffeurs work
+			// fine without it — so only the passenger's own contact details are
+			// required here.
+			const { passengerInfo } = stepperForm;
+			if (!passengerInfo?.title) missing.push('Title');
+			if (!passengerInfo?.firstName) missing.push('First name');
+			if (!passengerInfo?.lastName) missing.push('Last name');
+			if (!passengerInfo?.email) missing.push('Email');
+			if (!passengerInfo?.phoneNumber) missing.push('Phone number');
 		}
 
 		if (STEPS[activeStep].label === 'Payment Info') {
 			const { paymentInfo } = stepperForm;
-			const { nameOnCard, cardNumber, expirationDate, cvv, billingAddress, city, state, zip } = paymentInfo;
-
-			if (nameOnCard && cardNumber && expirationDate && cvv && billingAddress && city && state && zip) return true;
-			return false;
+			if (!paymentInfo?.nameOnCard) missing.push('Name on card');
+			if (!paymentInfo?.cardNumber) missing.push('Card number');
+			if (!paymentInfo?.expirationDate) missing.push('Expiration date');
+			if (!paymentInfo?.cvv) missing.push('CVV');
+			if (!paymentInfo?.billingAddress) missing.push('Billing address');
+			if (!paymentInfo?.city) missing.push('City');
+			if (!paymentInfo?.state) missing.push('State');
+			if (!paymentInfo?.zip) missing.push('Zip code');
 		}
 
-		return true;
+		return missing;
 	};
 
+	const isStepValidated = () => getMissingFields().length === 0;
+
 	const handleNextStep = async () => {
+		const missingFields = getMissingFields();
+		if (missingFields.length > 0) {
+			globalStateController.updateState({ showValidationErrors: true });
+			toast.error(`Please fill in: ${missingFields.join(', ')}.`);
+			return;
+		}
+		globalStateController.updateState({ showValidationErrors: false });
+
 		const stepperForm = globalStateController.getValue('stepperForm');
 
-		if (activeStep === STEPS.length - 2 && isStepValidated()) {
+		if (activeStep === STEPS.length - 2) {
 			await saveBooking(stepperForm);
 			await sendEmail(stepperForm);
 		}
 
-		if (activeStep < STEPS.length - 1 && isStepValidated()) {
+		if (activeStep < STEPS.length - 1) {
 			router.push(STEPS[activeStep + 1].link);
 		}
 	};

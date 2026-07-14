@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { DropDown } from '@/components/ui/dropdown';
+import { FieldError } from '@/components/ui/field-error';
 import { globalStateController } from '@/state/global/globalStateController';
 
 const titles = [
@@ -23,8 +24,9 @@ const countries = [
 
 export function BookForSomeoneForm() {
 	const [country, setCountry] = React.useState(countries[0]);
-	const { stepperValues } = globalStateController.useState(['stepperForm'], 'stepperValues');
+	const { stepperValues } = globalStateController.useState(['stepperForm', 'showValidationErrors'], 'stepperValues');
 	const passengerInfo = stepperValues?.stepperForm?.passengerInfo;
+	const showErrors = stepperValues?.showValidationErrors;
 
 	return (
 		<Card className="border-border/60 pt-6 shadow-soft">
@@ -49,8 +51,9 @@ export function BookForSomeoneForm() {
 							})
 						}
 						placeholder="Select title"
-						className="bg-surface"
+						className={cn('bg-surface', showErrors && !passengerInfo?.title && 'border-destructive ring-1 ring-destructive/30')}
 					/>
+					<FieldError show={showErrors && !passengerInfo?.title} />
 				</div>
 
 				<div className="grid gap-4 sm:grid-cols-2 mt-2">
@@ -62,6 +65,7 @@ export function BookForSomeoneForm() {
 							id="firstName"
 							placeholder="First name"
 							className="bg-surface"
+							aria-invalid={showErrors && !passengerInfo?.firstName}
 							value={passengerInfo?.firstName}
 							onChange={e =>
 								globalStateController.updateState({
@@ -75,6 +79,7 @@ export function BookForSomeoneForm() {
 								})
 							}
 						/>
+						<FieldError show={showErrors && !passengerInfo?.firstName} />
 					</div>
 					<div className="space-y-2">
 						<Label htmlFor="lastName">
@@ -84,6 +89,7 @@ export function BookForSomeoneForm() {
 							id="lastName"
 							placeholder="Last name"
 							className="bg-surface"
+							aria-invalid={showErrors && !passengerInfo?.lastName}
 							value={passengerInfo?.lastName}
 							onChange={e =>
 								globalStateController.updateState({
@@ -97,6 +103,7 @@ export function BookForSomeoneForm() {
 								})
 							}
 						/>
+						<FieldError show={showErrors && !passengerInfo?.lastName} />
 					</div>
 				</div>
 
@@ -109,6 +116,7 @@ export function BookForSomeoneForm() {
 						type="email"
 						placeholder="Email"
 						className="bg-surface"
+						aria-invalid={showErrors && !passengerInfo?.email}
 						value={passengerInfo?.email}
 						onChange={e =>
 							globalStateController.updateState({
@@ -122,6 +130,7 @@ export function BookForSomeoneForm() {
 							})
 						}
 					/>
+					<FieldError show={showErrors && !passengerInfo?.email} />
 				</div>
 
 				<div className="space-y-2 mt-2">
@@ -153,6 +162,7 @@ export function BookForSomeoneForm() {
 							type="tel"
 							className="rounded-l-none bg-surface"
 							placeholder="Phone number"
+							aria-invalid={showErrors && !passengerInfo?.phoneNumber}
 							value={passengerInfo?.phoneNumber}
 							onChange={e =>
 								globalStateController.updateState({
@@ -167,6 +177,7 @@ export function BookForSomeoneForm() {
 							}
 						/>
 					</div>
+					<FieldError show={showErrors && !passengerInfo?.phoneNumber} />
 					<p className="text-sm text-muted-foreground">
 						Please enter the phone number on which the guest would like to receive notifications
 					</p>

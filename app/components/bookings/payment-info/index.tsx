@@ -6,13 +6,16 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { FieldError } from "@/components/ui/field-error"
+import { cn } from "@/lib/utils"
 import Notes from "../service-class/Notes"
 import { PAYMENT_NOTES } from "@/lib/constants"
 import { globalStateController } from "@/state/global/globalStateController"
 
 export function PaymentInfo() {
-	const { stepperValues } = globalStateController.useState(["stepperForm"], "stepperValues")
+	const { stepperValues } = globalStateController.useState(["stepperForm", "showValidationErrors"], "stepperValues")
 	const paymentInfo = stepperValues?.stepperForm?.paymentInfo
+	const showErrors = stepperValues?.showValidationErrors
 
 	const formatCardNumber = (value: string) => {
 		return value
@@ -119,8 +122,11 @@ export function PaymentInfo() {
 									})
 								}
 								className="bg-surface"
+								aria-invalid={showErrors && !paymentInfo.nameOnCard}
+								autoComplete="off"
 								required
 							/>
+							<FieldError show={showErrors && !paymentInfo.nameOnCard} />
 						</div>
 
 						<div className="space-y-2">
@@ -150,8 +156,11 @@ export function PaymentInfo() {
 								}
 								className="bg-surface"
 								maxLength={19}
+								aria-invalid={showErrors && !paymentInfo.cardNumber}
+								autoComplete="off"
 								required
 							/>
+							<FieldError show={showErrors && !paymentInfo.cardNumber} />
 						</div>
 
 						<div className="grid gap-4 sm:grid-cols-2">
@@ -176,8 +185,11 @@ export function PaymentInfo() {
 									}
 									className="bg-surface"
 									maxLength={5}
+									aria-invalid={showErrors && !paymentInfo.expirationDate}
+									autoComplete="off"
 									required
 								/>
+								<FieldError show={showErrors && !paymentInfo.expirationDate} />
 							</div>
 							<div className="space-y-2">
 								<Label>
@@ -200,8 +212,11 @@ export function PaymentInfo() {
 									}
 									className="bg-surface"
 									maxLength={4}
+									aria-invalid={showErrors && !paymentInfo.cvv}
+									autoComplete="off"
 									required
 								/>
+								<FieldError show={showErrors && !paymentInfo.cvv} />
 							</div>
 						</div>
 
@@ -224,8 +239,10 @@ export function PaymentInfo() {
 									})
 								}
 								className="bg-surface"
+								aria-invalid={showErrors && !paymentInfo.billingAddress}
 								required
 							/>
+							<FieldError show={showErrors && !paymentInfo.billingAddress} />
 						</div>
 
 						<div className="grid gap-4 sm:grid-cols-3">
@@ -247,8 +264,10 @@ export function PaymentInfo() {
 										})
 									}
 									className="bg-surface"
+									aria-invalid={showErrors && !paymentInfo.city}
 									required
 								/>
+								<FieldError show={showErrors && !paymentInfo.city} />
 							</div>
 							<div className="space-y-2">
 								<Label>
@@ -268,7 +287,9 @@ export function PaymentInfo() {
 										})
 									}
 								>
-									<SelectTrigger className="bg-surface">
+									<SelectTrigger
+										className={cn("bg-surface", showErrors && !paymentInfo.state && "border-destructive ring-1 ring-destructive/30")}
+									>
 										<SelectValue placeholder="Select state" />
 									</SelectTrigger>
 									<SelectContent>
@@ -279,6 +300,7 @@ export function PaymentInfo() {
 										))}
 									</SelectContent>
 								</Select>
+								<FieldError show={showErrors && !paymentInfo.state} />
 							</div>
 							<div className="space-y-2">
 								<Label>
@@ -299,8 +321,10 @@ export function PaymentInfo() {
 									}
 									className="bg-surface"
 									maxLength={10}
+									aria-invalid={showErrors && !paymentInfo.zip}
 									required
 								/>
+								<FieldError show={showErrors && !paymentInfo.zip} />
 							</div>
 						</div>
 					</div>
