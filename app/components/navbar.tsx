@@ -90,12 +90,17 @@ export function Navbar() {
 			)}
 		>
 			<div className="section-container px-4 lg:px-8">
-				<div className="flex h-[4.5rem] items-center justify-between gap-4">
-					<Link href="/" className="group flex shrink-0 items-center gap-1.5 whitespace-nowrap">
-						<span className="font-display text-xl font-bold tracking-wide text-white transition-colors group-hover:text-gold-light sm:text-2xl">
+				<div className="flex h-[4.5rem] items-center justify-between gap-2 sm:gap-4">
+					<Link
+						href="/"
+						className="group flex min-w-0 items-center gap-1.5 overflow-hidden whitespace-nowrap"
+					>
+						<span className="font-display text-base font-bold tracking-wide text-white transition-colors group-hover:text-gold-light sm:text-xl md:text-2xl">
 							{brandFirst}
 						</span>
-						<span className="font-display text-xl font-bold tracking-wide text-gold sm:text-2xl">{brandRest}</span>
+						<span className="truncate font-display text-base font-bold tracking-wide text-gold sm:text-xl md:text-2xl">
+							{brandRest}
+						</span>
 					</Link>
 
 					{/* Desktop nav */}
@@ -108,7 +113,7 @@ export function Navbar() {
 						))}
 					</nav>
 
-					<div className="flex items-center gap-2">
+					<div className="flex shrink-0 items-center gap-2">
 						<div className="hidden items-center gap-1 lg:flex">
 							<DesktopDropdown title="English" items={[]} icon={<Globe className="h-4 w-4" />} showDownIcon={false} />
 							<DesktopDropdown title="" items={[]} icon={<User className="h-4 w-4" />} showDownIcon={false} />
