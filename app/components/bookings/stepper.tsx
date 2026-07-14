@@ -36,9 +36,20 @@ export const Stepper: React.FC<StepperProps> = ({ steps, activeStep }) => {
 	// because Framer Motion can't reliably tween between two different calc()
 	// strings — that caused a visible "flies in from off-screen" glitch
 	// elsewhere in this app the last time this was tried with percentages.
+	//
+	// `trackWidth` is the measured width of the *inset* track div, which starts
+	// at the first circle's right edge and ends at the last circle's left edge
+	// — i.e. it's exactly one full circle diameter (24px) short of the true
+	// distance between circle *centers*. Using it directly as the interpolation
+	// denominator was the bug: the car's computed position increasingly
+	// undershot the real circle center at each step, so the gap it was
+	// supposed to keep from the circle shrank the further along the track it
+	// was. `centerSpan` corrects for that missing diameter before interpolating.
 	const isLastStep = activeStep === steps.length - 1;
 	const sideOffset = isLastStep ? -SIDE_OFFSET : SIDE_OFFSET;
-	const carX = (progress / 100) * trackWidth + sideOffset - CAR_HALF_WIDTH;
+	const centerSpan = trackWidth + 2 * CIRCLE_RADIUS;
+	const circleCenterX = (progress / 100) * centerSpan - CIRCLE_RADIUS;
+	const carX = circleCenterX + sideOffset - CAR_HALF_WIDTH;
 
 	return (
 		<div className="w-full px-2 pt-6 pb-8 md:px-0 md:pb-14">
