@@ -39,7 +39,6 @@ export default function RootLayout({ children }) {
 					newestOnTop
 					closeOnClick
 					pauseOnHover
-					style={{ top: '5.5rem' }}
 				/>
 				<main id="main-content" className="min-h-screen overflow-y-auto pt-[4.5rem]">
 					{children}

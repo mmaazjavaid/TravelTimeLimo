@@ -278,6 +278,36 @@
   border: 1px solid rgba(198, 161, 91, 0.3) !important;
 }
 
+/* Clear the fixed navbar (an inline style on ToastContainer would also block
+   react-toastify's own <=480px responsive layout — a plain class here lets
+   that still apply, we're only ever adding an offset on top of it). */
+.Toastify__toast-container {
+  top: 5.5rem !important;
+}
+
+@media (max-width: 480px) {
+  /* react-toastify's own mobile breakpoint makes the container full-width,
+     flush to the screen edges, with no gap between stacked toasts and square
+     corners — reasonable for a chat app, not for this brand. Center a compact
+     card sized to its own content instead (capped so long messages still
+     wrap rather than stretching edge to edge), restore rounded corners, and
+     space stacked toasts apart. */
+  .Toastify__toast-container {
+    top: 4.75rem !important;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+    width: max-content !important;
+    max-width: calc(100% - 2.5rem) !important;
+    padding: 0 !important;
+  }
+
+  .Toastify__toast {
+    margin-bottom: 0.5rem !important;
+    border-radius: var(--radius) !important;
+  }
+}
+
 @media (max-width: 640px) {
   .mobile-min-width {
     min-width: 95%;
