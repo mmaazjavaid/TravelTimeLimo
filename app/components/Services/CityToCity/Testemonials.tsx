@@ -25,8 +25,8 @@ export default function Testimonials() {
 			<div className="section-container">
 				<StaggerChildren className="grid gap-10 md:grid-cols-3">
 					{testimonials.map(item => (
-						<StaggerItem key={item.title}>
-							<div className="space-y-4 rounded-2xl border border-border/60 bg-surface p-6 text-center shadow-soft">
+						<StaggerItem key={item.title} className="h-full">
+							<div className="flex h-full flex-col space-y-4 rounded-2xl border border-border/60 bg-surface p-6 text-center shadow-soft">
 								<div className="flex justify-center gap-1 text-gold" role="img" aria-label="5 out of 5 stars">
 									{[...Array(5)].map((_, i) => (
 										<Star key={i} className="h-4 w-4 fill-current" />

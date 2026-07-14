@@ -19,7 +19,7 @@ function ServiceCard({ title, description, imageSrc, isNew, redirectUrl }: Servi
 	return (
 		<Link
 			href={redirectUrl}
-			className="group flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-white shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-gold/40 hover:shadow-lift"
+			className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-white shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-gold/40 hover:shadow-lift"
 		>
 			<div className="relative aspect-[4/3] overflow-hidden">
 				<div className="service-image-wrap absolute inset-0">
@@ -96,7 +96,7 @@ export function ServicesSection() {
 				</FadeIn>
 
 				<StaggerChildren className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-					<StaggerItem>
+					<StaggerItem className="h-full">
 						<ServiceCard
 							title="City-to-city rides"
 							description="Your stress-free solution for long-distance rides with professional chauffeurs across the globe."
@@ -104,7 +104,7 @@ export function ServicesSection() {
 							redirectUrl="/services/city-city"
 						/>
 					</StaggerItem>
-					<StaggerItem>
+					<StaggerItem className="h-full">
 						<ServiceCard
 							title="Chauffeur hailing"
 							description="Enjoy the quality of a traditional chauffeur, with the convenience of riding within minutes of booking."
@@ -113,7 +113,7 @@ export function ServicesSection() {
 							isNew
 						/>
 					</StaggerItem>
-					<StaggerItem>
+					<StaggerItem className="h-full">
 						<ServiceCard
 							title="Airport transfers"
 							description="With additional wait time and flight tracking in case of delays, our service is optimized to make every airport transfer a breeze."
@@ -121,7 +121,7 @@ export function ServicesSection() {
 							redirectUrl="/services/airport-transfer"
 						/>
 					</StaggerItem>
-					<StaggerItem>
+					<StaggerItem className="h-full">
 						<ServiceCard
 							title="Hourly and full day hire"
 							description="For by-the-hour bookings or daily chauffeur hire, choose one of our tailored services for total flexibility, reliability and comfort."

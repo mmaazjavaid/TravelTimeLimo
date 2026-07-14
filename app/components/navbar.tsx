@@ -81,7 +81,9 @@ export function Navbar() {
 		<header
 			ref={headerRef}
 			className={cn(
-				'fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300',
+				// Scoped to color/shadow only — "transition-all" would also catch the
+				// GSAP entrance tween's transform, fighting it and causing a stutter.
+				'fixed top-0 left-0 right-0 z-50 border-b transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300',
 				scrolled
 					? 'border-white/10 glass-nav shadow-soft'
 					: 'border-transparent bg-ink/90 backdrop-blur-md'
