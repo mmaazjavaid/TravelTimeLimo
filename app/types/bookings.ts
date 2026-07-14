@@ -8,7 +8,6 @@ export interface Step {
 export interface StepperProps {
 	steps: Step[];
 	activeStep: number;
-	setActiveStep: (step: number) => void;
 }
 
 /* Service Class */

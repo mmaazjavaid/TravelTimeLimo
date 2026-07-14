@@ -35,6 +35,7 @@ export function BookForSomeoneForm() {
 					</Label>
 					<DropDown
 						options={titles}
+						searchable={false}
 						value={passengerInfo?.title}
 						onChange={value =>
 							globalStateController.updateState({

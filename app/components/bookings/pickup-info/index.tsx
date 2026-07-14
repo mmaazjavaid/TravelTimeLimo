@@ -1,3 +1,4 @@
+import { Clock } from 'lucide-react';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -52,23 +53,26 @@ export function PickupInfo() {
 						{/* Flight Arrival Time */}
 						<div className="space-y-2">
 							<Label htmlFor="flight-arrival-time">Flight arrival time</Label>
-							<Input
-								id="flight-arrival-time"
-								type="time"
-								className="bg-surface"
-								value={pickUpInfo?.flightArrivalTime}
-								onChange={(e) =>
-									globalStateController.updateState({
-										stepperForm: {
-											...stepperValues?.stepperForm,
-											pickUpInfo: {
-												...pickUpInfo,
-												flightArrivalTime: e.target.value,
+							<div className="relative">
+								<Clock className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gold" />
+								<Input
+									id="flight-arrival-time"
+									type="time"
+									className="dark-picker bg-surface pl-10"
+									value={pickUpInfo?.flightArrivalTime}
+									onChange={(e) =>
+										globalStateController.updateState({
+											stepperForm: {
+												...stepperValues?.stepperForm,
+												pickUpInfo: {
+													...pickUpInfo,
+													flightArrivalTime: e.target.value,
+												},
 											},
-										},
-									})
-								}
-							/>
+										})
+									}
+								/>
+							</div>
 							<p className="text-sm text-muted-foreground">
 								Enter your scheduled arrival time to help coordinate your pickup.
 							</p>

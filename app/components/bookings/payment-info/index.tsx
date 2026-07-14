@@ -124,34 +124,34 @@ export function PaymentInfo() {
 						</div>
 
 						<div className="space-y-2">
-							<Label>
-								Card number <span className="text-red-500">*</span>
-							</Label>
-							<div className="relative">
-								<Input
-									id="cardNumber"
-									value={paymentInfo.cardNumber}
-									onChange={(e) =>
-										globalStateController.updateState({
-											stepperForm: {
-												...stepperValues?.stepperForm,
-												paymentInfo: {
-													...paymentInfo,
-													cardNumber: formatCardNumber(e.target.value),
-												},
-											},
-										})
-									}
-									className="bg-surface"
-									maxLength={19}
-									required
-								/>
-								<div className="absolute right-3 top-1/2 -translate-y-1/2 space-x-1">
-									<img src="/master-card.svg" alt="Mastercard" className="inline-block h-6 w-auto" />
-									<img src="/visa-card.svg" alt="Visa" className="inline-block h-6 w-auto" />
-									<img src="/american-express.svg" alt="American Express" className="inline-block h-6 w-auto" />
+							<div className="flex items-center justify-between">
+								<Label>
+									Card number <span className="text-red-500">*</span>
+								</Label>
+								<div className="flex items-center gap-1.5">
+									<img src="/master-card.svg" alt="Mastercard" className="h-5 w-auto" />
+									<img src="/visa-card.svg" alt="Visa" className="h-5 w-auto" />
+									<img src="/american-express.svg" alt="American Express" className="h-5 w-auto" />
 								</div>
 							</div>
+							<Input
+								id="cardNumber"
+								value={paymentInfo.cardNumber}
+								onChange={(e) =>
+									globalStateController.updateState({
+										stepperForm: {
+											...stepperValues?.stepperForm,
+											paymentInfo: {
+												...paymentInfo,
+												cardNumber: formatCardNumber(e.target.value),
+											},
+										},
+									})
+								}
+								className="bg-surface"
+								maxLength={19}
+								required
+							/>
 						</div>
 
 						<div className="grid gap-4 sm:grid-cols-2">

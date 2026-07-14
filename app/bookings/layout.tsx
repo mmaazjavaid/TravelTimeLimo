@@ -1,5 +1,5 @@
 'use client';
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { STEPS } from '@/lib/constants';
 import BookingDetails from '@/components/bookings/BookingDetail';
@@ -12,10 +12,11 @@ function Layout({ children }: { children: ReactNode }) {
 	const router = useRouter();
 	const pathname = usePathname();
 	const prefersReducedMotion = useReducedMotion();
-	const [activeStep, setActiveStep] = useState<number>(() => {
-		const index = STEPS.findIndex(step => step.link === pathname);
-		return index === -1 ? 0 : index;
-	});
+	// Derived from the URL (not local state) so the stepper can never drift out
+	// of sync with the actual route — including when a user clicks a previous
+	// step and the browser navigates there directly.
+	const stepIndex = STEPS.findIndex(step => step.link === pathname);
+	const activeStep = stepIndex === -1 ? 0 : stepIndex;
 
 	const saveBooking = async (stepperForm: any) => {
 		try {
@@ -87,7 +88,6 @@ function Layout({ children }: { children: ReactNode }) {
 		}
 
 		if (activeStep < STEPS.length - 1 && isStepValidated()) {
-			setActiveStep(prev => prev + 1);
 			router.push(STEPS[activeStep + 1].link);
 		}
 	};
@@ -95,7 +95,7 @@ function Layout({ children }: { children: ReactNode }) {
 	return (
 		<div className="section-padding bg-surface">
 			<div className="section-container mx-auto max-w-3xl">
-				<Stepper steps={STEPS} activeStep={activeStep} setActiveStep={setActiveStep} />
+				<Stepper steps={STEPS} activeStep={activeStep} />
 				<BookingDetails />
 				<div className="overflow-hidden rounded-xl border border-border/60 bg-white p-6 shadow-soft md:p-8">
 					<AnimatePresence mode="wait" initial={false}>

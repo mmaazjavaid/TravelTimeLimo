@@ -21,6 +21,9 @@ interface DropDownProps {
 	value?: string;
 	disabled?: boolean;
 	className?: string;
+	/** Set false for short, fixed option lists (e.g. a title picker) where a
+	 * search field only adds height without helping the user find anything. */
+	searchable?: boolean;
 }
 
 export function DropDown({
@@ -31,6 +34,7 @@ export function DropDown({
 	value,
 	disabled = false,
 	className,
+	searchable = true,
 }: DropDownProps) {
 	const [open, setOpen] = React.useState(false);
 
@@ -50,7 +54,7 @@ export function DropDown({
 			</PopoverTrigger>
 			<PopoverContent className="w-[var(--radix-popover-trigger-width)] min-w-[200px] p-0 shadow-lift">
 				<Command>
-					<CommandInput placeholder={placeholder} />
+					{searchable && <CommandInput placeholder={placeholder} />}
 					<CommandEmpty>{emptyMessage}</CommandEmpty>
 					<CommandGroup>
 						{options.map(option => (
