@@ -229,10 +229,17 @@ export function BookingForm() {
 	};
 
 	const tabTriggerClass =
-		'relative z-10 flex-1 rounded-lg px-4 py-2.5 text-xs font-semibold uppercase tracking-wide text-white/60 transition-colors duration-200 data-[state=active]:text-ink';
+		'relative z-10 flex-1 rounded-lg px-4 py-2.5 text-xs font-semibold uppercase tracking-wide text-white/60 transition-colors duration-200 data-[state=active]:text-ink data-[state=active]:!bg-transparent data-[state=active]:!shadow-none';
 	const fieldClass =
 		"dark-picker h-12 w-full rounded-lg border-white/15 bg-white/5 pl-10 pr-3 text-sm font-medium text-white shadow-sm focus-visible:border-gold/60 focus-visible:ring-gold/40 mobile-min-width";
 	const dateTimeIconClass = 'pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gold';
+
+	const waitTimeNote = (
+		<p className="flex items-center justify-center gap-1.5 text-xs text-gold">
+			<Clock className="h-3.5 w-3.5" />
+			Chauffeur waits {isAirport ? "60" : "15"} minutes free of charge.
+		</p>
+	);
 
 	return (
 		<Card className="glass-panel w-[92vw] max-w-[400px] rounded-2xl shadow-2xl">
@@ -243,16 +250,25 @@ export function BookingForm() {
 				</div>
 				<Tabs value={activeTab} onValueChange={handleTabChange} className="flex-grow">
 					<TabsList className="relative mb-4 flex w-full gap-1 rounded-xl border border-white/10 bg-black/25 p-1">
-						<motion.div
-							className="absolute inset-y-1 w-[calc(50%-0.125rem)] rounded-lg bg-gold"
-							animate={{ left: activeTab === 'one-way' ? '0.25rem' : 'calc(50% + 0.125rem)' }}
-							transition={{ type: 'spring', stiffness: 400, damping: 34 }}
-						/>
 						<TabsTrigger value="one-way" className={tabTriggerClass}>
-							One Way
+							{activeTab === 'one-way' && (
+								<motion.div
+									layoutId="booking-tab-pill"
+									className="absolute inset-0 rounded-lg bg-gold"
+									transition={{ type: 'spring', stiffness: 400, damping: 34 }}
+								/>
+							)}
+							<span className="relative z-10">One Way</span>
 						</TabsTrigger>
 						<TabsTrigger value="hourly" className={tabTriggerClass}>
-							Hourly
+							{activeTab === 'hourly' && (
+								<motion.div
+									layoutId="booking-tab-pill"
+									className="absolute inset-0 rounded-lg bg-gold"
+									transition={{ type: 'spring', stiffness: 400, damping: 34 }}
+								/>
+							)}
+							<span className="relative z-10">Hourly</span>
 						</TabsTrigger>
 					</TabsList>
 					<TabsContent value="one-way" className="flex-grow">
@@ -294,10 +310,7 @@ export function BookingForm() {
 									onChange={(e) => updateTime(e.target.value)}
 								/>
 							</div>
-							<p className="flex items-center justify-center gap-1.5 text-xs text-gold">
-								<Clock className="h-3.5 w-3.5" />
-								Chauffeur waits {isAirport ? "60" : "15"} minutes free of charge.
-							</p>
+							{waitTimeNote}
 
 							<Button
 								onClick={() => handleGetQuote('oneWay')}
@@ -387,6 +400,7 @@ export function BookingForm() {
 									}}
 								/>
 							</div>
+							{waitTimeNote}
 							<Button
 								onClick={() => handleGetQuote('hourly')}
 								disabled={isSubmitting}
